@@ -1,69 +1,36 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" href="css/stylesheet.css">
+<title>Insert title here</title>
 </head>
 <body th:fragment="header">
-
-<!-- 	<div class="topnav" id="myTopnav"> -->
-<!-- 		<a class= "logo"> LOGO PRIVACY LITERACY </a> -->
-<!-- 		<a > -->
-<!-- 			<div class= "menu-navbar"> -->
-<!-- 				<a> FAVOLE</a> -->
-<!-- 				<a> ARTICOLI</a> -->
-<!-- 				<a> STUDIA CON NOI</a> -->
-<!-- 				<div class="dropdown"> -->
-<!-- 			<button class="dropbtn"> Dropdown <i class="fa fa-caret-down"></i> </button> -->
-<!-- 			<div class="dropdown-content">  -->
-<!-- 				<a href="#">Link 1</a>  -->
-<!-- 				<a href="#">Link 2</a>  -->
-<!-- 				<a href="#">Link 3</a> -->
-<!-- 			</div> -->
-<!-- 			</div> -->
-<!-- 		</a> -->
+<div class="container">
+	<div class="header">
+		<div class="logo-container">	
+		<img class="logo" th:src="@{/images/logobuono.png}" alt="logo" >
+		</div>
 		
+		<div class="center-container">
+		<div class="titolo"> PRIVACY FOR YOU </div>
+		<div class="header-menu">
+			<a href="#">Home</a>
+			<a href="#">Articoli & News</a>
+			<a href="#">Favole</a>
+			<a href="#">Studia con noi</a>
+		</div>
+		</div>
 		
-<!-- 		</div> -->
-		
-<!-- 		<a href="javascript:void(0);" style="font-size: 15px;" class="icon" onclick="myFunction()">&#9776;</a> -->
-<!-- 	</div> -->
-
-
-<nav class="navbar"> 
-	
-	<div class="logo">  
-		<div id="rectangle"></div>
-	</div>
-	<div class="navbar-menu">
-		<div class="titolo"> QUI CI VA IL TITOLO  </div>
-		
-		<ul class="categorie">
-			<li> <p>Home</p> </li>
-			<li> <p>Articoli & News</p> </li>
-			<li> <p>Studia con noi</p> </li>
-			<li> <p>Favole</p> </li>
-		</ul>
-
-	</div>
-	<div class="icon-space"> 
-		<div class="login"><button class="button" > LOGIN </button></div>
+		<div class="header-icons">
+			<div class="login"><button class="button" ><a href="login"> LOGIN </a></button></div>
 		
 		<div class="search-bar">
   			<input type="text" placeholder="Cerca...">
  		</div>
-	
+		</div>
 	</div>
-
-</nav>
-
+</div>
 
 </body>
-
 </html>
-
-
-
