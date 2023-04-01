@@ -11,33 +11,31 @@
 <div th:insert="fragments/header::header-block"></div>
 	<br>
 	<br>
-	<form method="post" action="registrazione" modelAttribute="registrati">
+	<form method="post" action="registrazione" modelAttribute="registrazione">
 		<div class="container">
 			<h1 class="titolo">Registrati</h1>
 			<p style="text-align: center;">Inserisci i tuoi dati personali ed
 				registrati alla piattaforma</p>
 			<hr>
 
-			<label for="email"><b>Email</b></label> <input type="text"
-				placeholder="Inserisci Email" name="email" id="email" autocomplete="off"
-                   onkeyup="checkEmail()"><br>
-            <span id="rsEmail"></span><br>>
-
-			<label for="psw"><b>Password</b></label> <input type="password"
-				placeholder="Inserisci Password" name="password" id="password" autocomplete="off" onkeyup="checkPassword()"> 
-				 <label
-				for="nome"><b>Nome</b></label> <input type="text"
-				placeholder="Inserisci nome" name="nome" id="nome" autocomplete="off" onkeyup="checkNome()">
-
-			<label for="cognome"><b>Cognome</b></label> <input type="text"
-				placeholder="Inserisci cognome" name="cognome" id="cognome" autocomplete="off" onkeyup="checkCognome()">
-
-			<label for="dataNascita"><b>Data di nascita</b></label> <input
-				type="text" placeholder=" Inserisci la tua data di nascita" name="dataNascita" id="dataNascita" required>
-			<hr>
-			<button type="submit" onclick="checkEmail(); checkPassword()">Registrati</button>
-
-		</div>
+			<label for="email"><b>Email</b></label> 
+				<input type="text"	placeholder="Inserisci Email" name="email" id="email" autocomplete="off" onkeyup="checkEmail()">
+			<label for="psw"><b>Password</b></label> 
+				<input type="password"	placeholder="Inserisci Password" name="password" id="password" autocomplete="off" onkeyup="checkPassword()"> 
+			<label for="nome"><b>Nome</b></label> 
+				<input type="text" placeholder="Inserisci nome" name="nome" id="nome" autocomplete="off" onkeyup="checkNome()">
+			<label for="cognome"><b>Cognome</b></label> 
+				<input type="text"	placeholder="Inserisci cognome" name="cognome" id="cognome" autocomplete="off" onkeyup="checkCognome()">
+			<label for="dataNascita"><b>Data di nascita</b></label> 
+				<input type="text" placeholder=" Inserisci la tua data di nascita" name="dataNascita" id="dataNascita" required>
+			</div>
+			<div class="form-button"> 
+				<input type="button" value ="Registrati" onclick="checkEmail(); checkPassword()">
+			</div>
+			<div class="back">
+				<a href="homepage">Torna alla Home</a>
+			</div>
+			</form>
 </body>
 
 </html>
