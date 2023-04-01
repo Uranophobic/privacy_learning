@@ -1,8 +1,6 @@
 package com.privacy.web.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -73,8 +71,6 @@ public class Utente {
 	public void setDataNascita(String dataNascita) {
 		this.dataNascita = dataNascita;
 	}
-
-	
 	
 	public int getPercentuale() {
 		return percentuale;

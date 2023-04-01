@@ -300,3 +300,104 @@ body {
 	margin: 25px;
 	font-size: 16px;
 }
+
+/*LOGIN*/
+
+.components {
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    margin-top: 10px;
+}
+
+.components input {
+    width: 90%;
+    margin: 15px 5% 25px 5%;
+    text-align: center;
+    font-size: 25px;
+    height: 35px;
+    color: #1E1E24; /*Raisin Black*/
+    border: none;
+    border-bottom: 2px solid;
+    background-color: rgba(0, 0, 0, .0);
+}
+
+.components input::placeholder {
+    color: #1E1E24; /*Raisin Black*/
+    opacity: 1;
+    font-size: 30px;
+}
+
+input:focus {
+    outline: none;
+}
+
+.components a {
+    font-size: 22px;
+    text-decoration: none;
+    border-bottom: solid #1E1E24 2px; /*Raisin Black*/
+    color: #1E1E24; /*Raisin Black*/
+}
+
+.components a:hover {
+    font-weight: bold;
+}
+
+.components-button {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 30px;
+}
+
+.components-button input {
+    width: 100px;
+    height: 40px;
+    font-size: 22px;
+    font-family: -webkit-pictograph;
+    color: black;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.wrapper {	
+	margin-top: 80px;
+  margin-bottom: 80px;
+}
+
+.form-signin {
+  max-width: 380px;
+  padding: 15px 35px 45px;
+  margin: 0 auto;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,0.1);  
+}
+  .form-signin-heading,
+	.checkbox {
+	  margin-bottom: 30px;
+  }
+
+	.checkbox {
+	  font-weight: normal;
+	}
+
+	.form-control {
+	  position: relative;
+	  font-size: 16px;
+	  height: auto;
+	  padding: 10px;
+	  box-sizing:border-box;
+	  z-index: 2;
+	}
+
+	input[type="text"] {
+	  margin-bottom: -1px;
+	  border-bottom-left-radius: 0;
+	  border-bottom-right-radius: 0;
+	}
+
+	input[type="password"] {
+	  margin-bottom: 20px;
+	  border-top-left-radius: 0;
+	  border-top-right-radius: 0;
+	}

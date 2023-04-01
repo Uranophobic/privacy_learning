@@ -2,11 +2,32 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
+<script type="text/javascript" src="../js/ConvalidazioneCampi.js"></script>
 <link rel="stylesheet" href="css/stylesheet.css">
+<link rel="icon" type="image/png" href="img/logo.png"/>
 <title>Privacy Literacy - Login</title>
 </head>
 <body>
 	 <div th:insert="fragments/header::header"></div>
-	 <h1> CIAO !!</h1>
+	   <div class="wrapper">
+    <form class="form-signin">
+    	<div class="login">
+    		<img th:src="@{images/user.png}" alt="login" width=60px height=60px>  
+    		<h2 class="form-signin-heading"> login</h2>
+    	</div>  
+     <div>
+      <input  type="text" class="form-control" name="username" placeholder="Email" autofocus="autofocus" required="required" onkeyup="checkEmail()" /><br>
+      <span id="rsEmail"></span><br>
+      <input type="password" class="form-control" name="password" placeholder="Password" required="required" onkeyup="checkPassword()"/>      
+      <span id="rsPassword"></span>
+     </div>
+      <div class="components-button">
+         <a href="registrazione"> 
+         	<input  style="background-color: #33cc33" type="button" value="Registrati">
+         </a>
+           <input type="submit" value="Accedi" id="Accedi" onclick="checkEmail(); checkPassword()">
+     </div>    
+  </form>
+  </div>
 </body>
 </html>

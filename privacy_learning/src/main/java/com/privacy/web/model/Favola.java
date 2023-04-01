@@ -52,7 +52,7 @@ public class Favola {
 	}
 
 	public void setTesto(String testo) {
-		this.testo_favola = testo_favola;
+		this.testo_favola = testo;
 	}
 
 	public String getImg() {
@@ -60,7 +60,7 @@ public class Favola {
 	}
 
 	public void setImg(String img) {
-		this.image_path = image_path;
+		this.image_path = img;
 	}
 
 	public String getMetaInfo() {
@@ -68,7 +68,7 @@ public class Favola {
 	}
 
 	public void setMetaInfo(String metaInfo) {
-		this.meta_info = meta_info;
+		this.meta_info = metaInfo;
 	}
 
 	@Override
