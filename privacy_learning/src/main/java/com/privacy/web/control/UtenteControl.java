@@ -25,8 +25,8 @@ public class UtenteControl {
 	private UtenteRepository utRep; // oggetto utenteRepository
 
 	@GetMapping("/registrati")
-	public ModelAndView registrati() {
-		return new ModelAndView("registrazione", "registrazione", new Utente());
+	public ModelAndView registrati() throws ServletException, IOException{
+		return new ModelAndView("Registrazione", "registrazione", new Utente());
 	}
 
 	@PostMapping("/registrazione")
