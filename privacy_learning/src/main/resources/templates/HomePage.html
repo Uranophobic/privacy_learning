@@ -1,23 +1,92 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <link rel="stylesheet" href="css/stylesheet.css">
 <title>Privacy Literacy</title>
 </head>
 
 <body>
 <div th:insert="fragments/header::header"></div>
- 
- <div class="quadrato"> <p id="testo-prova"> Sezione Benvenuto </p> </div>
- 
- <div class="quadrato"> <p id="testo-prova"> Sezione Test </p></div>
- 
- <div class="quadrato"> <p id="testo-prova"> Sezione Argomenti </p></div>
- 
- <div class="quadrato"> <p id="testo-prova"> Sezione Favole </p></div>
- 
- <div class="quadrato"> <p id="testo-prova"> Sezione News </p></div>
+ 	<div class="container-home">
+
+	 	<div class="container-sezioni">   <!-- sezione benvenuto (senza login) -->
+	 			<div class="testo"> Benvenuto sul <br>portale della privacy
+	 			<p> Parlaci un po' di te!</p>
+	 			<br>
+	 			<p><a>Iscriviti e compila il tuo primo questionario ></a></p>
+	 			</div>
+	 			
+	 			<div class="image"> IMMAGINE </div>
+	 	</div>
+	 
+	    <div> <!-- sezione test privacy (senza login) -->
+		 	<div class="titolo"> Quanto ne sai di privacy? </div>
+		 	
+		 	<div class="container-sezioni">
+					<div class="testo"> Mettiti alla prova!
+			 			<br>
+			 			<p>Abbiamo realizzato 3 quiz valutativi <br>
+			 			per testare il tuo livello di conoscenza <br>
+			 			sui vasti argomenti che riguardano la privacy!</p>
+			 			<button class="button-test"> Compila il tuo primo test</button>
+		 			</div>
+		 			
+		 			<div class="image"> IMMAGINE </div>
+		 	</div>
+	     </div>
+	 
+	     <div> <!-- sezione argomenti (senza login) -->
+	 			<div class="titolo"> Migliora il tuo livello di conoscenza <br>
+	 			attraverso i nostri studi </div>
+		 	
+		 		<div class="container-sezioni">
+					<div class="testo"> Mettiti alla prova!
+			 			<br>
+			 			<p>Abbiamo realizzato 3 quiz valutativi <br>
+			 			per testare il tuo livello di conoscenza <br>
+			 			sui vasti argomenti che riguardano la privacy!</p>
+			 			<button class="button-test"> Compila il tuo primo test</button>
+		 			</div>
+		 			
+		 			<div class="image"> IMMAGINE </div>
+		 		</div>
+	     </div> 
+	 
+	 	 <div> <!-- sezione favole (senza login) -->
+	 			<div class="titolo"> Insegna l'importanza della privacy<br>
+	 			anche ai più piccoli </div>
+		 	
+		 		<div class="container-sezioni">
+					<div class="testo"> Mettiti alla prova!
+			 			<br>
+			 			<p>Abbiamo realizzato 3 quiz valutativi <br>
+			 			per testare il tuo livello di conoscenza <br>
+			 			sui vasti argomenti che riguardano la privacy!</p>
+			 			<button class="button-test"> Compila il tuo primo test</button>
+		 			</div>
+		 			
+		 			<div class="image"> IMMAGINE </div>
+		 		</div>
+	     </div> 
+	 
+		  <div> <!-- sezione argomenti (senza login) -->
+	 			<div class="titolo"> Articoli di attualità, <br>
+	 			notizie nel mondo </div>
+		 	
+		 		<div class="container-sezioni">
+					<div class="testo"> Mettiti alla prova!
+			 			<br>
+			 			<p>Abbiamo realizzato 3 quiz valutativi <br>
+			 			per testare il tuo livello di conoscenza <br>
+			 			sui vasti argomenti che riguardano la privacy!</p>
+			 			<button class="button-test"> Compila il tuo primo test</button>
+		 			</div>
+		 			
+		 			<div class="image"> IMMAGINE </div>
+		 		</div>
+	     </div> 
+ </div>
  
 <!--  <div th:insert="fragments/footer::footer"></div>  DEVO ANCORA CREARLO -->
 </body>

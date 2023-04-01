@@ -42,9 +42,10 @@ body {
 	height: 130px;
 	width: 100%;
 	display: flex;
-	scroll-behavior: smooth;
+	/* scroll-behavior: smooth; */
 	background-color: #D7D6D6;
 	padding: 0 30px;
+	margin-bottom: 30px;
 }
 
 .logo {
@@ -56,8 +57,8 @@ body {
 	align-items: center;
 	height: 115px;
 	width: 100%;
-	white-space: nowrap;
-	flex-shrink: 0;
+ 	white-space: nowrap; 
+	flex-shrink: 0; 
 	font-weight: 600;
 	font-size: 15px;
 	border-bottom: 1px solid rgba(44, 45, 42, 0.25);
@@ -65,7 +66,7 @@ body {
 	top: 0;
 	left: 0;
 	background-color: #D7D6D6;
-	z-index: 6;
+	z-index: 600;
 }
 
 
@@ -80,7 +81,6 @@ body {
 
 
 
-
 .titolo {
 	width: 50%;
 	margin: auto;
@@ -88,8 +88,8 @@ body {
 	padding: 10px;
 	color: #45779C;
 	font-size: 25px;
+	font-weight: 600;
 }
-
 .logo-container {
 	width: 25%;
 	margin: auto;
@@ -143,7 +143,7 @@ body {
 }
 
 .button {
-	width: 50%;
+	
 	padding: 5px;
 	background-color: #45779C;
 	border: none;
@@ -214,24 +214,49 @@ body {
 
 /* ----------------------- HOMEPAGE ----------------------- */
 
-.quadrato {
-
+.container-home {
 	border-radius: 4px;
-	height: 130px;
-	width: 100%;
-	display: flex;
-	scroll-behavior: smooth;
+	/* scroll-behavior: smooth;*/
 	background-color: #D7D6D6;
 	padding: 0 30px;
+	margin-bottom: 30px;
+	width: auto;
+}
+
+.container-sezioni {
+	display: flex;
+	/* align-items: center; */
+	width: 100%;
+	/* white-space: pre-line; */
+	/* flex-shrink: 0; */
+	font-weight: 600;
+	font-size: 15px;
+	border-bottom: 1px solid rgba(44, 45, 42, 0.25);
+	/* position: sticky; */
+	top: 0;
+	left: 0;
+	background-color: #D7D6D6;
+	padding: 20px;
+}
+.testo {
+	color: #2c2d2a;
+	width: 50%;
+	text-align: center;
+	font-size: 25px;
+}
+
+
+.testo p {
+	font-size: 18px;
+	font-weight: 400;
+	margin: 0;
 	margin-top: 20px;
 }
 
-.sezione-test{
-	border-color: black;
-	height: 200px;
-	border-style: solid;
-	border-width: 1px;
-	margin: 15px;
+.testo a{
+	font-size: 15px;
+	font-weight: 400;
+	margin-top: 5px;
 }
 
 .sezione-argomenti{
@@ -258,6 +283,20 @@ body {
 	margin: 15px;
 }
 
-#testo-prova{
-	text-align: center;
+.image {
+	width: 50%;
+	height: 200px;
+	background: #2c2d2a;
+}
+
+.button-test {
+	padding: 5px;
+	background-color: #45779C;
+	border: none;
+	border-radius: 4px;
+	width: 200px;
+	height: 35px;
+	font-size: 15px;
+	margin: 25px;
+	font-size: 16px;
 }
