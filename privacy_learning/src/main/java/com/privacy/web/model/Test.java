@@ -5,52 +5,25 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.Setter;
 
 @Entity
 @Table(name = "test")
+@Data //crea i metodi hashCode, equals e toString, getter e setter senza renderli visibili nella classe
+@NoArgsConstructor //crea il costruttore vuoto senza renderlo visibile nella classe
+@AllArgsConstructor //crea il costruttore con paramentri senza renderlo visibile nella classe
 public class Test {
 
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
-	private int idTest;
-	
+	private int idTest;	
 	private String tipo;
-	
-	
-	
-	public Test() {	}
 
-	public Test(int idTest, String tipo) {
-		this.idTest = idTest;
+	public Test(@NonNull String tipo) {
 		this.tipo = tipo;
 	}
-
-
-	public int getIdTest() {
-		return idTest;
-	}
-
-
-	public void setIdTest(int idTest) {
-		this.idTest = idTest;
-	}
-	public String getTipo() {
-		return tipo;
-	}
-
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
-
-	@Override
-	public String toString() {
-		return "Test [idTest=" + idTest + ", tipologia test=" + tipo + ","+ "]";
-	}
-
-
-	
-	
-	
-	
-
 }

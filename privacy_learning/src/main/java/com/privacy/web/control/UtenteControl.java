@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -17,9 +18,13 @@ import com.privacy.web.utils.Check;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Controller
 @RequestMapping("/utente")
+@Setter
 public class UtenteControl {
 	@Autowired
 	private UtenteRepository utRep; // oggetto utenteRepository
@@ -30,7 +35,7 @@ public class UtenteControl {
 	}
 
 	@PostMapping("/registrazione")
-	public ModelAndView registrati(@ModelAttribute("registrazione") Utente user, HttpServletRequest request,
+	public ModelAndView registrati(@ModelAttribute("registrazione") @RequestBody Utente user, HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		if (Check.checkName(request.getParameter("nome")) && Check.checkSurname(request.getParameter("cognome"))
 				&& Check.checkEmail(request.getParameter("email"))) {

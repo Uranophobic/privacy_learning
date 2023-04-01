@@ -5,9 +5,16 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "favola")
+@Data //crea i metodi hashCode, equals e toString, getter e setter senza renderli visibili nella classe
+@NoArgsConstructor //crea il costruttore vuoto senza renderlo visibile nella classe
 public class Favola {
 
 	@Id
@@ -20,61 +27,11 @@ public class Favola {
 	private String image_path;
 	private String meta_info;
 
-	public Favola() {
-	}
-
 	public Favola(String titolo_favola, String testo_favola, String image_path, String meta_info) {
-		super();
+		
 		this.titolo_favola = titolo_favola;
 		this.testo_favola = testo_favola;
 		this.image_path = image_path;
 		this.meta_info = meta_info;
 	}
-
-	public int getIdfavola() {
-		return idfavola;
-	}
-
-	public void setIdfavola(int idfavola) {
-		this.idfavola = idfavola;
-	}
-
-	public String getTitolo() {
-		return titolo_favola;
-	}
-
-	public void setTitolo(String titolo) {
-		this.titolo_favola = titolo_favola;
-	}
-
-	public String getTesto() {
-		return testo_favola;
-	}
-
-	public void setTesto(String testo) {
-		this.testo_favola = testo;
-	}
-
-	public String getImg() {
-		return image_path;
-	}
-
-	public void setImg(String img) {
-		this.image_path = img;
-	}
-
-	public String getMetaInfo() {
-		return meta_info;
-	}
-
-	public void setMetaInfo(String metaInfo) {
-		this.meta_info = metaInfo;
-	}
-
-	@Override
-	public String toString() {
-		return "favola [idfavola=" + idfavola + ", titolo_favola=" + titolo_favola + ", testo_favola=" + testo_favola
-				+ ", image_path=" + image_path + ", meta_info=" + meta_info + "]";
-	}
-
 }
