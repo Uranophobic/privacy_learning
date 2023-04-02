@@ -24,7 +24,7 @@ public class Suggerimento {
 	private String argSuggerito;
 	private boolean argStudiato;
 	
-	public Suggerimento(@NonNull String email, @NonNull int idTest, @NonNull String argSuggerito,@NonNull boolean argStudiato) {
+	public Suggerimento(@NonNull String email, int idTest, @NonNull String argSuggerito, boolean argStudiato) {
 		this.email = email;
 		this.idTest = idTest;
 		this.argSuggerito = argSuggerito;
