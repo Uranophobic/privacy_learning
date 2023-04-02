@@ -30,8 +30,8 @@ public class Check {
             return false;
         }
         //String regular = "^.*(?=.*[a-z A-Z])(?=.*\\d)(?=.*[!#$%&? \"]).*$";
-        String regularSimple = "^[A-Za-z0-9]{3,16}$";
-        return pwd.matches(regularSimple);
+        String regular = "^[A-Za-z0-9]{3,16}$";
+        return pwd.matches(regular);
     }
 
     /**

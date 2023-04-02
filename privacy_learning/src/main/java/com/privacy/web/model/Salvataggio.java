@@ -1,16 +1,15 @@
 package com.privacy.web.model;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.NonNull;
 
 @Entity
 @Table(name = "salvataggio_risposte")
@@ -21,8 +20,13 @@ public class Salvataggio {
 	
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private int idSalvataggio;
-	
 	private int idTest;
 	private String email_utente;
 	private String risposta;
+	
+	public Salvataggio(int idTest, @NonNull String email_utente, @NonNull String risposta) {
+		this.idTest=idTest;
+		this.email_utente=email_utente;
+		this.risposta=risposta;
+	}
 }

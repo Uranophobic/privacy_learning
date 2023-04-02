@@ -19,12 +19,10 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 @Controller
 @RequestMapping("/utente")
-@Setter
+@Data
 public class UtenteControl {
 	@Autowired
 	private UtenteRepository utRep; // oggetto utenteRepository
