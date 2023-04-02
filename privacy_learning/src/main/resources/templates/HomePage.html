@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="css/stylesheet.css">
@@ -7,87 +8,246 @@
 </head>
 
 <body>
-<div th:insert="fragments/header::header"></div>
- 	<div class="container-home">
+	<div th:insert="fragments/header::header"></div>
+	<div class="container-home">
 
-	 	<div class="container-sezioni">   <!-- sezione benvenuto (senza login) -->
-	 			<div class="testo"> Benvenuto sul <br>portale della privacy
-	 			<p> Parlaci un po' di te!</p>
-	 			<br>
-	 			<p><a>Iscriviti e compila il tuo primo questionario ></a></p>
-	 			</div>
-	 			
-	 			<div class="image"> IMMAGINE </div>
-	 	</div>
-	 
-	    <div> <!-- sezione test privacy (senza login) -->
-		 	<div class="titolo"> Quanto ne sai di privacy? </div>
-		 	
-		 	<div class="container-sezioni">
-					<div class="testo"> Mettiti alla prova!
-			 			<br>
-			 			<p>Abbiamo realizzato 3 quiz valutativi <br>
-			 			per testare il tuo livello di conoscenza <br>
-			 			sui vasti argomenti che riguardano la privacy!</p>
-			 			<button class="button-test"> Compila il tuo primo test</button>
-		 			</div>
-		 			
-		 			<div class="image"> IMMAGINE </div>
-		 	</div>
-	     </div>
-	 
-	     <div> <!-- sezione argomenti (senza login) -->
-	 			<div class="titolo"> Migliora il tuo livello di conoscenza <br>
-	 			attraverso i nostri studi </div>
-		 	
-		 		<div class="container-sezioni">
-					<div class="testo"> Mettiti alla prova!
-			 			<br>
-			 			<p>Abbiamo realizzato 3 quiz valutativi <br>
-			 			per testare il tuo livello di conoscenza <br>
-			 			sui vasti argomenti che riguardano la privacy!</p>
-			 			<button class="button-test"> Compila il tuo primo test</button>
-		 			</div>
-		 			
-		 			<div class="image"> IMMAGINE </div>
-		 		</div>
-	     </div> 
-	 
-	 	 <div> <!-- sezione favole (senza login) -->
-	 			<div class="titolo"> Insegna l'importanza della privacy<br>
-	 			anche ai più piccoli </div>
-		 	
-		 		<div class="container-sezioni">
-					<div class="testo"> Mettiti alla prova!
-			 			<br>
-			 			<p>Abbiamo realizzato 3 quiz valutativi <br>
-			 			per testare il tuo livello di conoscenza <br>
-			 			sui vasti argomenti che riguardano la privacy!</p>
-			 			<button class="button-test"> Compila il tuo primo test</button>
-		 			</div>
-		 			
-		 			<div class="image"> IMMAGINE </div>
-		 		</div>
-	     </div> 
-	 
-		  <div> <!-- sezione argomenti (senza login) -->
-	 			<div class="titolo"> Articoli di attualità, <br>
-	 			notizie nel mondo </div>
-		 	
-		 		<div class="container-sezioni">
-					<div class="testo"> Mettiti alla prova!
-			 			<br>
-			 			<p>Abbiamo realizzato 3 quiz valutativi <br>
-			 			per testare il tuo livello di conoscenza <br>
-			 			sui vasti argomenti che riguardano la privacy!</p>
-			 			<button class="button-test"> Compila il tuo primo test</button>
-		 			</div>
-		 			
-		 			<div class="image"> IMMAGINE </div>
-		 		</div>
-	     </div> 
- </div>
- 
-<!--  <div th:insert="fragments/footer::footer"></div>  DEVO ANCORA CREARLO -->
+		<div class="container-sezioni">
+			<!-- sezione benvenuto (senza login) -->
+			<div class="testo">
+				Benvenuto sul <br>portale della privacy
+				<p>Parlaci un po' di te!</p>
+				<br>
+				<p>
+					<a>Iscriviti e compila il tuo primo questionario ></a>
+				</p>
+			</div>
+
+			<div class="image">IMMAGINE</div>
+		</div>
+
+		<div>
+			<!-- sezione test privacy (senza login) -->
+			<div class="titolo">Quanto ne sai di privacy?</div>
+
+			<div class="container-sezioni">
+				<div class="testo">
+					Mettiti alla prova! <br>
+					<p>
+						Abbiamo realizzato 3 quiz valutativi <br> per testare il tuo
+						livello di conoscenza <br> sui vasti argomenti che riguardano
+						la privacy!
+					</p>
+					<button class="button-test">Compila il tuo primo test</button>
+				</div>
+
+				<div class="image">IMMAGINE</div>
+			</div>
+		</div>
+
+		<div>
+			<!-- sezione argomenti (senza login) -->
+			<div class="titolo">
+				Migliora il tuo livello di conoscenza <br> attraverso i nostri
+				studi
+			</div>
+
+			<div class="container-sezioni">
+				<div class="testo">
+					Mettiti alla prova! <br>
+					<p>
+						Abbiamo realizzato 3 quiz valutativi <br> per testare il tuo
+						livello di conoscenza <br> sui vasti argomenti che riguardano
+						la privacy!
+					</p>
+					<button class="button-test">Compila il tuo primo test</button>
+				</div>
+
+				<div class="image">IMMAGINE</div>
+			</div>
+		</div>
+
+		<div>
+			<!-- sezione favole (senza login) -->
+			<div class="titolo">
+				Insegna l'importanza della privacy<br> anche ai più piccoli
+			</div>
+
+			<div class="container-sezioni">
+				<div style="padding: 3%">
+					<div style="background-color: grey; border: 5%;">
+						IMMAGINE
+						<div class="testo">
+							<h3>Titolo fiaba</h3>
+							<p class="title">contenuto fiaba</p>
+						</div>
+						<p>
+							<button>continua...</button>
+						</p>
+					</div>
+				</div>
+				<div style="padding: 3%">
+					<div style="background-color: grey; border: 5%;">
+						IMMAGINE
+						<div class="testo">
+							<h3>Titolo fiaba</h3>
+							<p class="title">contenuto fiaba</p>
+						</div>
+						<p>
+							<button>continua...</button>
+						</p>
+					</div>
+				</div>
+				<div style="padding: 3%">
+					<div style="background-color: grey; border: 5%;">
+						IMMAGINE
+						<div class="testo">
+							<h3>Titolo fiaba</h3>
+							<p class="title">contenuto fiaba</p>
+						</div>
+						<p>
+							<button>continua...</button>
+						</p>
+					</div>
+				</div>
+				<div style="padding: 3%">
+					<div style="background-color: grey; border: 5%;">
+						IMMAGINE
+						<div class="testo">
+							<h3>Titolo fiaba</h3>
+							<p class="title">contenuto fiaba</p>
+						</div>
+						<p>
+							<button>continua...</button>
+						</p>
+					</div>
+				</div>
+				<div style="padding: 3%">
+					<div style="background-color: grey; border: 5%;">
+						IMMAGINE
+						<div class="testo">
+							<h3>Titolo fiaba</h3>
+							<p class="title">contenuto fiaba</p>
+						</div>
+						<p>
+							<button>continua...</button>
+						</p>
+					</div>
+				</div>
+				<div style="padding: 3%">
+					<div style="background-color: grey; border: 5%;">
+						IMMAGINE
+						<div class="testo">
+							<h3>Titolo fiaba</h3>
+							<p class="title">contenuto fiaba</p>
+						</div>
+						<p>
+							<button>continua...</button>
+						</p>
+					</div>
+				</div>
+				<a href="fiabe"> vedi altro...</a>
+			</div>
+		</div>
+
+		<div>
+			<!-- sezione argomenti (senza login) -->
+			<div class="titolo">
+				Articoli di attualità, <br> notizie nel mondo
+			</div>
+
+			<div class="container-sezioni">
+				<div style="padding: 3%">
+					<div style="background-color: grey; border: 5%;">
+						IMMAGINE
+						<div class="testo">
+							<br>
+							<p>metainfo</p>
+							<h3>Titolo articolo</h3>
+							<p class="title">contenuto articolo</p>
+						</div>
+						<p>
+							<button>continua...</button>
+						</p>
+					</div>
+				</div>
+				<div style="padding: 3%">
+					<div style="background-color: grey; border: 5%;">
+						IMMAGINE
+						<div class="testo">
+							<br>
+							<p>metainfo</p>
+							<h3>Titolo articolo</h3>
+							<p class="title">contenuto articolo</p>
+						</div>
+						<p>
+							<button>continua...</button>
+						</p>
+					</div>
+				</div>
+				<div style="padding: 3%">
+					<div style="background-color: grey; border: 5%;">
+						IMMAGINE
+						<div class="testo">
+							<br>
+							<p>metainfo</p>
+							<h3>Titolo articolo</h3>
+							<p class="title">contenuto articolo</p>
+						</div>
+						<p>
+							<button>continua...</button>
+						</p>
+					</div>
+				</div>
+				<div style="padding: 3%">
+					<div style="background-color: grey; border: 5%;">
+						IMMAGINE
+						<div class="testo">
+							<br>
+							<p>metainfo</p>
+							<h3>Titolo articolo</h3>
+							<p class="title">contenuto articolo</p>
+						</div>
+						<p>
+							<button>continua...</button>
+						</p>
+					</div>
+				</div>
+				<div style="padding: 3%">
+					<div style="background-color: grey; border: 5%;">
+						IMMAGINE
+						<div class="testo">
+							<br>
+							<p>metainfo</p>
+							<h3>Titolo articolo</h3>
+							<p class="title">contenuto articolo</p>
+						</div>
+						<p>
+							<button>continua...</button>
+						</p>
+					</div>
+				</div>
+				<div style="padding: 3%">
+					<div style="background-color: grey; border: 5%;">
+						IMMAGINE
+						<div class="testo">
+							<br>
+							<p>metainfo</p>
+							<h3>Titolo articolo</h3>
+							<p class="title">contenuto articolo</p>
+						</div>
+						<p>
+							<button>continua...</button>
+						</p>
+					</div>
+				</div>
+				<a href="articoli"> vedi altro...</a>
+			</div>
+		</div>
+
+	</div>
+	</div>
+
+	<!--  <div th:insert="fragments/footer::footer"></div>  DEVO ANCORA CREARLO -->
 </body>
+
 </html>
