@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @Data //crea i metodi hashCode, equals e toString, getter e setter senza renderli visibili nella classe
 @NoArgsConstructor //crea il costruttore vuoto senza renderlo visibile nella classe
 @AllArgsConstructor //crea il costruttore con paramentri senza renderlo visibile nella classe
+
 public class Utente {
 	
 	@Id 
