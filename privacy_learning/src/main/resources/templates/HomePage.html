@@ -9,8 +9,8 @@
 
 <body>
 	<div th:insert="fragments/header::header"></div>
+	<br>
 	<div class="container-home">
-
 		<div class="container-sezioni">
 			<!-- sezione benvenuto (senza login) -->
 			<div class="testo">
@@ -22,7 +22,7 @@
 				</p>
 			</div>
 
-			<div class="image">IMMAGINE</div>
+			<div class="image-box"><img class="image1" th:src="@{/images/questionario.webp}" alt="" ></div>
 		</div>
 
 		<div>
@@ -40,7 +40,7 @@
 					<button class="button-test">Compila il tuo primo test</button>
 				</div>
 
-				<div class="image">IMMAGINE</div>
+				<div class="image"></div>
 			</div>
 		</div>
 

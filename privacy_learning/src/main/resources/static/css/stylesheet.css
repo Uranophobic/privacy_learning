@@ -17,15 +17,15 @@
 }
 
 
-.back button {
-    padding: 15px;
-    text-decoration: none;
-    margin-top: 50px;
-    font-size: 30px;
-    font-family: -webkit-pictograph;
-    border-radius: 1rem;
-    background-color: #c5e4fa;
-}
+/*.back button {*/
+/*    padding: 15px;*/
+/*    text-decoration: none;*/
+/*    margin-top: 50px;*/
+/*    font-size: 30px;*/
+/*    font-family: -webkit-pictograph;*/
+/*    border-radius: 1rem;*/
+/*    background-color: #c5e4fa;*/
+/*}*/
 
 
 a {
@@ -41,11 +41,11 @@ h3 {
 
 body {
 	font-family: var(--body-font);
-	background-color: #1d1e20;
-	padding: 15px;
+	background-color: #FFFFFF;
+	/* padding: 15px; */
 	color: var(--body-color);
+	margin: 0;
 }
-
 
 .container {
 	border-radius: 4px;
@@ -53,9 +53,10 @@ body {
 	width: 100%;
 	display: flex;
 	/* scroll-behavior: smooth; */
-	background-color: #D7D6D6;
+	background-color: #FFFFFF;
 	padding: 0 30px;
 	margin-bottom: 30px;
+	position: fixed;
 }
 
 .logo {
@@ -75,7 +76,7 @@ body {
 	position: sticky;
 	top: 0;
 	left: 0;
-	background-color: #D7D6D6;
+	background-color: #FFFFFF;
 	z-index: 600;
 }
 
@@ -201,7 +202,9 @@ body {
 
 
 @media screen and (max-width: 930px) {
-
+.container {
+	position: fixed;
+}
 }
 
 
@@ -226,11 +229,14 @@ body {
 
 .container-home {
 	border-radius: 4px;
-	/* scroll-behavior: smooth;*/
-	background-color: #D7D6D6;
+	/* scroll-behavior: smooth; */
+	background-color: white;
 	padding: 0 30px;
 	margin-bottom: 30px;
 	width: auto;
+	/* position: relative; */
+	/* display: block; */
+	margin-top: 125px;
 }
 
 .container-sezioni {
@@ -241,21 +247,22 @@ body {
 	/* flex-shrink: 0; */
 	font-weight: 600;
 	font-size: 15px;
-	border-bottom: 1px solid rgba(44, 45, 42, 0.25);
+	/* border-bottom: 1px solid rgba(44, 45, 42, 0.25); */
 	/* position: sticky; */
 	top: 0;
 	left: 0;
 	background-color: #D7D6D6;
 	padding: 20px;
+	border-radius: 4px;
 }
 .testo {
 	color: #2c2d2a;
 	width: 50%;
 	text-align: center;
 	font-size: 25px;
+	/* border-bottom: 1px solid; */
+	border-bottom: 1px solid rgba(44, 45, 42, 0.25);
 }
-
-
 .testo p {
 	font-size: 18px;
 	font-weight: 400;
@@ -293,11 +300,16 @@ body {
 	margin: 15px;
 }
 
-.image {
-	width: 50%;
-	height: 200px;
-	background: #2c2d2a;
+.image-box {
+	width: 20%;
+	/* height: 200px; */
+	/* background: #2c2d2a; */
+	margin: auto;
 }
+
+.image1{
+	width: 500px;
+margin: auto;}
 
 .button-test {
 	padding: 5px;
