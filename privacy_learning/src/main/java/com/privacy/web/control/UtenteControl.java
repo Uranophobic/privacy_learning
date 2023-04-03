@@ -15,7 +15,6 @@ import com.privacy.web.model.Utente;
 import com.privacy.web.repository.UtenteRepository;
 import com.privacy.web.utils.Check;
 
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.Data;
@@ -28,28 +27,26 @@ public class UtenteControl {
 	private UtenteRepository utRep; // oggetto utenteRepository
 
 	@GetMapping("/registrati")
-	public ModelAndView registrati() throws ServletException, IOException{
-		return new ModelAndView("Registrazione", "registrazione", new Utente());
+	public ModelAndView registrati() throws IOException{
+		return new ModelAndView("registrazione", "registrazione", new Utente());
 	}
 
 	@PostMapping("/registrazione")
-	public ModelAndView registrati(@ModelAttribute("registrazione") @RequestBody Utente user, HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		if (Check.checkName(request.getParameter("nome")) && Check.checkSurname(request.getParameter("cognome"))
-				&& Check.checkEmail(request.getParameter("email"))) {
+	public ModelAndView registrati(@ModelAttribute("registrazione") @RequestBody Utente user, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		if (Check.checkName(request.getParameter("nome")) && Check.checkSurname(request.getParameter("cognome")) && Check.checkEmail(request.getParameter("email"))) {
 			user.setNome(request.getParameter("nome"));
 			user.setCognome(request.getParameter("cognome"));
 			user.setEmail(request.getParameter("email"));
 			user.setPassword(request.getParameter("pwd"));
 		} else {
 			if (!Check.checkName(request.getParameter("nome"))) {
-				response.getWriter().write("1"); // nome non corretto
+				response.getWriter().write("1: nome non corretto"); 
 			}
 			if (!Check.checkSurname(request.getParameter("cognome"))) {
-				response.getWriter().write("2"); // cognome non corretto
+				response.getWriter().write("2: cognome non corretto"); 
 			}
 			if (!Check.checkEmail(request.getParameter("email"))) {
-				response.getWriter().write("3"); // email non corretto
+				response.getWriter().write("3: email non corretta"); 
 			}
 			String descrizione = "Siamo spiacenti si è verificato un errore con la registrazione. Riprova!";
 			response.sendRedirect(descrizione);
@@ -57,4 +54,5 @@ public class UtenteControl {
 		utRep.save(user);
 		return new ModelAndView("login", "registrazione", new Utente());
 	}
+	
 }

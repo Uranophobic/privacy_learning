@@ -18,7 +18,7 @@ public class HomeControl {
 	}
 	
 	@GetMapping("/registrati")
-	public String registrazione()
+	public String registrazione(Model model)
 	{
 		return "redirect:/utente/registrazione";
 	}
