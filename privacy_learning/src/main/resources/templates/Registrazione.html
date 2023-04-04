@@ -3,7 +3,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <script type="text/javascript" src="../js/ConvalidazioneCampi.js"></script>
-<link rel="stylesheet" href="css/stylesheet.css">
+<link rel="stylesheet" href="../css/stylesheet.css">
 <link rel="icon" type="image/png" href="img/logo.png"/>
 <title>Privacy Literacy - Registrazione</title>
 </head>
@@ -17,7 +17,6 @@
 			<p style="text-align: center;">Inserisci i tuoi dati personali ed
 				registrati alla piattaforma</p>
 			<hr>
-
 			<label for="email"><b>Email</b></label> 
 				<input type="text"	placeholder="Inserisci Email" name="email" id="email" autocomplete="off" onkeyup="checkEmail()">
 			<label for="psw"><b>Password</b></label> 
@@ -27,13 +26,10 @@
 			<label for="cognome"><b>Cognome</b></label> 
 				<input type="text"	placeholder="Inserisci cognome" name="cognome" id="cognome" autocomplete="off" onkeyup="checkCognome()">
 			<label for="dataNascita"><b>Data di nascita</b></label> 
-				<input type="text" placeholder=" Inserisci la tua data di nascita" name="dataNascita" id="dataNascita" required>
+				<input type="date" placeholder=" Inserisci la tua data di nascita" name="dataNascita" id="dataNascita" required>
 			</div>
 			<div class="form-button"> 
-				<input type="button" value ="Registrati" onclick="checkEmail(); checkPassword()">
-			</div>
-			<div class="back">
-				<a href="homepage">Torna alla Home</a>
+				<input type="button" value ="Registrati" onclick="checkRegistrationSubmit()">
 			</div>
 			</form>
 </body>

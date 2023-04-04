@@ -8,7 +8,8 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class DataSourceConfig {
-    @Bean
+  
+	@Bean
     DataSource getDataSource() {
         return DataSourceBuilder.create()
           .driverClassName("com.mysql.cj.jdbc.Driver")
