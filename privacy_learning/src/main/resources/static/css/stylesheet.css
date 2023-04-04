@@ -255,6 +255,15 @@ body {
 	padding: 20px;
 	border-radius: 4px;
 }
+
+
+.container-sezioni fieldset {
+
+	
+	width: 25%;
+	margin: auto;
+}
+
 .testo {
 	color: #2c2d2a;
 	width: 50%;
@@ -274,6 +283,15 @@ body {
 	font-size: 15px;
 	font-weight: 400;
 	margin-top: 5px;
+}
+
+.box-titolo{
+	margin-top:25px;
+}
+
+.background {
+	background-color: #D7D6D6;
+	border-radius: 4px;
 }
 
 .sezione-argomenti{

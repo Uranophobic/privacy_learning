@@ -11,7 +11,9 @@
 	<div th:insert="fragments/header::header"></div>
 	<br>
 	<div class="container-home">
-		<div class="container-sezioni">
+		
+		<div >
+			<div class="container-sezioni">
 			<!-- sezione benvenuto (senza login) -->
 			<div class="testo">
 				Benvenuto sul <br>portale della privacy
@@ -21,14 +23,15 @@
 					<a>Iscriviti e compila il tuo primo questionario ></a>
 				</p>
 			</div>
-
 			<div class="image-box"><img class="image1" th:src="@{/images/questionario.webp}" alt="" ></div>
+			</div>
 		</div>
 
-		<div>
+		<div class="background" >
 			<!-- sezione test privacy (senza login) -->
+			<div class="box-titolo">
 			<div class="titolo">Quanto ne sai di privacy?</div>
-
+			</div>
 			<div class="container-sezioni">
 				<div class="testo">
 					Mettiti alla prova! <br>
@@ -44,13 +47,12 @@
 			</div>
 		</div>
 
-		<div>
-			<!-- sezione argomenti (senza login) -->
-			<div class="titolo">
-				Migliora il tuo livello di conoscenza <br> attraverso i nostri
-				studi
+		<div class="background" >
+			<!-- sezione argomenti(senza login) -->
+			<div class="box-titolo">
+			<div class="titolo">Migliora il tuo livello di conoscenza <br> attraverso i nostri
+				studi</div>
 			</div>
-
 			<div class="container-sezioni">
 				<div class="testo">
 					Mettiti alla prova! <br>
@@ -66,157 +68,78 @@
 			</div>
 		</div>
 
-		<div>
+		<div class="background" >
 			<!-- sezione favole (senza login) -->
+			<div class="box-titolo">
 			<div class="titolo">
 				Insegna l'importanza della privacy<br> anche ai più piccoli
 			</div>
-			<a href="fiabe"> vedi altro...</a>
-			<div class="container-sezioni">
-				<fieldset style="margin: 5% 2% 5% 2%;">
-					<legend>
-						<strong>meta info</strong>
-					</legend>
-					<div>
-						<div style="background-color: grey;">
-							<br>
-							<br> IMMAGINE <br>
-							<br>
-						</div>
-						<div class="testo">
-							<h3>Titolo</h3>
-							<p class="title">contenuto</p>
-						</div>
-						<button>continua...</button>
-					</div>
-				</fieldset>
-				<fieldset style="margin: 5% 2% 5% 2%;">
-					<legend>
-						<strong>meta info</strong>
-					</legend>
-					<div>
-						<div style="background-color: grey;">
-							<br>
-							<br> IMMAGINE <br>
-							<br>
-						</div>
-						<div class="testo">
-							<h3>Titolo</h3>
-							<p class="title">contenuto</p>
-						</div>
-						<button>continua...</button>
-					</div>
-				</fieldset>
-				<fieldset style="margin: 5% 2% 5% 2%;">
-					<legend>
-						<strong>meta info</strong>
-					</legend>
-					<div>
-						<div style="background-color: grey;">
-							<br>
-							<br> IMMAGINE <br>
-							<br>
-						</div>
-						<div class="testo">
-							<h3>Titolo</h3>
-							<p class="title">contenuto</p>
-						</div>
-						<button>continua...</button>
-					</div>
-				</fieldset>
-				<fieldset style="margin: 5% 2% 5% 2%;">
-					<legend>
-						<strong>meta info</strong>
-					</legend>
-					<div>
-						<div style="background-color: grey;">
-							<br>
-							<br> IMMAGINE <br>
-							<br>
-						</div>
-						<div class="testo">
-							<h3>Titolo</h3>
-							<p class="title">contenuto</p>
-						</div>
-						<button>continua...</button>
-					</div>
-				</fieldset>
-				<fieldset style="margin: 5% 2% 5% 2%;">
-					<legend>
-						<strong>meta info</strong>
-					</legend>
-					<div>
-						<div style="background-color: grey;">
-							<br>
-							<br> IMMAGINE <br>
-							<br>
-						</div>
-						<div class="testo">
-							<h3>Titolo</h3>
-							<p class="title">contenuto</p>
-						</div>
-						<button>continua...</button>
-					</div>
-				</fieldset>
-				<fieldset style="margin: 5% 2% 5% 2%;">
-					<legend>
-						<strong>meta info</strong>
-					</legend>
-					<div>
-						<div style="background-color: grey;">
-							<br>
-							<br> IMMAGINE <br>
-							<br>
-						</div>
-						<div class="testo">
-							<h3>Titolo</h3>
-							<p class="title">contenuto</p>
-						</div>
-						<button>continua...</button>
-					</div>
-				</fieldset>
-				<fieldset style="margin: 5% 2% 5% 2%;">
-					<legend>
-						<strong>meta info</strong>
-					</legend>
-					<div>
-						<div style="background-color: grey;">
-							<br>
-							<br> IMMAGINE <br>
-							<br>
-						</div>
-						<div class="testo">
-							<h3>Titolo</h3>
-							<p class="title">contenuto</p>
-						</div>
-						<button>continua...</button>
-					</div>
-				</fieldset>
-				<fieldset style="margin: 5% 2% 5% 2%;">
-					<legend>
-						<strong>meta info</strong>
-					</legend>
-					<div>
-						<div style="background-color: grey;">
-							<br>
-							<br> IMMAGINE <br>
-							<br>
-						</div>
-						<div class="testo">
-							<h3>Titolo</h3>
-							<p class="title">contenuto</p>
-						</div>
-						<button>continua...</button>
-					</div>
-				</fieldset>
 			</div>
-		</div>
-		<div>
+			<div class="container-sezioni">
+				<fieldset>
+					<legend>
+						<strong>meta info</strong>
+					</legend>
+					<div>
+						<div>
+							<br>
+							<br> IMMAGINE <br>
+							<br>
+						</div>
+						<div class="testo">
+							<h3>Titolo</h3>
+							<p class="title">contenuto</p>
+						</div>
+						<button>continua...</button>
+					</div>
+				</fieldset>
+				<fieldset>
+					<legend>
+						<strong>meta info</strong>
+					</legend>
+					<div>
+						<div style="background-color: grey;">
+							<br>
+							<br> IMMAGINE <br>
+							<br>
+						</div>
+						<div class="testo">
+							<h3>Titolo</h3>
+							<p class="title">contenuto</p>
+						</div>
+						<button>continua...</button>
+					</div>
+				</fieldset>
+				<fieldset>
+					<legend>
+						<strong>meta info</strong>
+					</legend>
+					<div>
+						<div style="background-color: grey;">
+							<br>
+							<br> IMMAGINE <br>
+							<br>
+						</div>
+						<div class="testo">
+							<h3>Titolo</h3>
+							<p class="title">contenuto</p>
+						</div>
+						<button>continua...</button>
+					</div>
+				</fieldset>
+		
+			</div>
+			<a href="fiabe"> vedi altro...</a>
+			</div>
+			
+			
+		<div class="background">
 			<!-- sezione argomenti (senza login) -->
+			<div class="box-titolo">
 			<div class="titolo">
 				Articoli di attualità, <br> notizie nel mondo
 			</div>
-
+</div>
 			<div class="container-sezioni">
 				<div style="padding: 3%">
 					<div style="background-color: grey; border: 5%;">

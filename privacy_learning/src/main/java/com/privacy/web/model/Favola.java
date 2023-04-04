@@ -15,7 +15,7 @@ public class Favola {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int idfavola;
+	private int id_favola;
 
 	private String titolo_favola;
 	private String testo_favola;
