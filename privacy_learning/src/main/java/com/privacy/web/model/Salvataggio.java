@@ -19,8 +19,8 @@ import lombok.NonNull;
 public class Salvataggio {
 	
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
-	private int idSalvataggio;
-	private int idTest;
+	private int idSalvataggio; //auto
+	private int idTest; 
 	private String email_utente;
 	private String risposta;
 	

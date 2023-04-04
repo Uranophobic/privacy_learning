@@ -1,7 +1,7 @@
 package com.privacy.web.control;
 
 import java.io.IOException;
-import java.sql.SQLException;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.privacy.web.model.Salvataggio;
 import com.privacy.web.model.Utente;
+import com.privacy.web.repository.SalvataggioRepository;
+import com.privacy.web.repository.TestRepository;
 import com.privacy.web.repository.UtenteRepository;
 import com.privacy.web.utils.Check;
 
@@ -28,39 +30,59 @@ import lombok.Data;
 public class UtenteControl {
 	@Autowired
 	private UtenteRepository utRep; // oggetto utenteRepository
+	@Autowired
+	private SalvataggioRepository salvataggioRep; //oggetto SalvataggioRepository
+	@Autowired
+	private TestRepository testRep;
+	
+	/**
+     * Questo metodo richiama il metodo post
+     *
+     * @param model, variabile model
+     * @param user , variabile utente
+     * @throws IOException      errore input output
+     */
 
 	@GetMapping("/registrati")
 	public ModelAndView registrati(Model model) throws IOException{
 		return new ModelAndView("registrazione", "registrazione", new Utente());
 	}
-
+	/**
+     * Questo metodo controlla le operazioni per effettuare una registrazione
+     *
+     * @param request  , request
+     * @param response , response
+     * @param user	   , variabile utente
+     * @throws IOException      errore input output
+     * @return ModelAndView un modello con parametri: nome della View da renderizzare, nome del modello, oggetto utente creato
+     */
 	@PostMapping("/registrazione")
-	public ModelAndView registrati(@ModelAttribute("registrazione") @RequestBody Utente user, @RequestBody Salvataggio salvataggio, HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public ModelAndView registrati(@ModelAttribute("registrazione") @RequestBody Utente user, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
 		if (Check.checkName(request.getParameter("nome")) && Check.checkSurname(request.getParameter("cognome")) && Check.checkEmail(request.getParameter("email"))) {
-			
 			user.setNome(request.getParameter("nome"));
 			user.setCognome(request.getParameter("cognome"));
 			user.setEmail(request.getParameter("email"));
 			user.setPassword(request.getParameter("pwd"));
 			try {
-				Utente utente= utRep.login(user.getEmail(), user.getPassword());
-				boolean risultato= utRep.existsById(request.getParameter("email"));
-				System.out.println("ho il risultato di esistenza ed è: " +utente);
-				if(risultato=false) {
-					request.getSession().setAttribute("user", utente);
-					 response.getWriter().write("5"); //registrazione avvenuta con successo
+				if(utRep.existsById(request.getParameter("email"))==false) {
+					ArrayList<String> risposteArrayList= new ArrayList<>();
+					for(int i=1;i<=testRep.findNDomandeById(4);i++) { //popolo l'array di risposte date con id_test 4("conoscitivo")
+						risposteArrayList.add(request.getParameter("r"+i)); //id della risposta i
+				}
+					for(int i=0;i<risposteArrayList.size();i++) {
+						salvataggioRep.save(new Salvataggio(4, user.getEmail(), risposteArrayList.get(i)));
+					}
+					response.getWriter().write("5"); //registrazione avvenuta con successo
 				} else {
                     response.getWriter().write("4"); // errore nella registrazione
                     String error = "Esiste già un utente con questa e-mail";
                     response.sendRedirect("./templates/Registrazione.html?error=" + error);
                 }
-            } catch (SQLException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-			salvataggio.setEmail_utente(request.getParameter("email"));
-			salvataggio.setIdTest(4); //sono test conoscitivo con id 4
-			salvataggio.setRisposta(request.getParameter("risposta"));
+			
 		} else {
 			if (!Check.checkName(request.getParameter("nome"))) {
 				response.getWriter().write("1: nome non corretto"); 
@@ -75,8 +97,6 @@ public class UtenteControl {
 			response.sendRedirect(descrizione);
 		}
 		utRep.save(user);
-		
-		
 		return new ModelAndView("login", "registrazione", new Utente());
 	}
 	

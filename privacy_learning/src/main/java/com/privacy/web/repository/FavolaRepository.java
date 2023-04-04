@@ -13,4 +13,5 @@ import com.privacy.web.model.Favola;
 
 	 @Query(value = "SELECT * FROM FAVOLA", nativeQuery = true)
 	  public List<Favola> findAll();
+	 
 }
