@@ -43,12 +43,10 @@ public class UtenteControl {
 			user.setCognome(request.getParameter("cognome"));
 			user.setEmail(request.getParameter("email"));
 			user.setPassword(request.getParameter("pwd"));
-			System.out.println(user.getEmail());
 			try {
 				Utente utente= utRep.login(user.getEmail(), user.getPassword());
 				boolean risultato= utRep.existsById(request.getParameter("email"));
-				
-				System.out.println("ho il risultato di esistenza ed è: " +risultato);
+				System.out.println("ho il risultato di esistenza ed è: " +utente);
 				if(risultato=false) {
 					request.getSession().setAttribute("user", utente);
 					 response.getWriter().write("5"); //registrazione avvenuta con successo
