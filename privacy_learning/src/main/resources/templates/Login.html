@@ -9,25 +9,70 @@
 </head>
 <body>
 	 <div th:insert="fragments/header::header"></div>
-	   <div class="wrapper">
-    <form class="form-signin">
-    	<div class="login">
-    		<img th:src="@{images/user.png}" alt="login" width=60px height=60px>  
-    		<h2 class="form-signin-heading"> login</h2>
-    	</div>  
-     <div>
-      <input  type="text" class="form-control" name="username" placeholder="Email" autofocus="autofocus" required="required" onkeyup="checkEmail()" /><br>
-      <span id="rsEmail"></span><br>
-      <input type="password" class="form-control" name="password" placeholder="Password" required="required" onkeyup="checkPassword()"/>      
-      <span id="rsPassword"></span>
-     </div>
-      <div class="components-button">
-         <a href="registrazione"> 
-         	<input style="background-color: #33cc33" type="button" value="Registrati">
-         </a>
-           <input type="submit" value="Accedi" id="Accedi" onclick="checkEmail(); checkPassword()">
-     </div>    
-  </form>
-  </div>
+	 <div class="container-login">
+	 <div class="background" >
+			<!-- sezione test privacy (senza login) -->
+			<div class="box-titolo">
+						<div class="titolo-login">Accedi al portale della privacy</div>
+			</div>
+			<div class="container-sezioni">
+				<div class="text-login">
+		        	<img class="image3" th:src="@{/images/image-login.jpg}" alt="logo">
+				
+				<form class="form-signin">
+					
+					 <div class="input-login">
+					 <input  type="text" class="form-control" name="username" placeholder="Email" autofocus="autofocus" required="required" onkeyup="checkEmail()" /><br>
+ 				
+					 <input type="password" class="form-control" name="password" placeholder="Password" required="required" onkeyup="checkPassword()"/>     
+					 
+					
+			         </div> 
+			          <div class="components-button">
+			        
+			         <button class="button" type="submit" onclick="checkEmail(); checkPassword()"> Accedi </button> 
+<!--			         <button class="button" type="submit" onclick="registrazione"> Registrati </button> -->
+<!--			         <a href="registrazione"> -->
+<!--			       	 <input style="background-color: #33cc33" type="button" value="Registrati">-->
+<!--			         </a>-->
+<br>
+<br>
+<br>
+					<div class="rigaSx"></div>  <a> oppure</a>  <div class="rigaDx"></div> 
+				<br>
+<br>
+<br>
+						<a href="registrazione">Clicca qui per registrarti</a>
+				
+
+
+
+			         </div>  
+			    </form>
+				</div> 
+			</div>
+		</div>
+	 </div>
+	 
+<!--	   <div class="wrapper">-->
+<!--    <form class="form-signin">-->
+<!--    	<div class="login">-->
+<!--    		<img th:src="@{images/user.png}" alt="login" width=60px height=60px>  -->
+<!--    		<h2 class="form-signin-heading"> login</h2>-->
+<!--    	</div>  -->
+<!--     <div>-->
+<!--      <input  type="text" class="form-control" name="username" placeholder="Email" autofocus="autofocus" required="required" onkeyup="checkEmail()" /><br>-->
+<!--      <span id="rsEmail"></span><br>-->
+<!--      <input type="password" class="form-control" name="password" placeholder="Password" required="required" onkeyup="checkPassword()"/>      -->
+<!--      <span id="rsPassword"></span>-->
+<!--     </div>-->
+<!--      <div class="components-button">-->
+<!--         <a href="registrazione"> -->
+<!--         	<input style="background-color: #33cc33" type="button" value="Registrati">-->
+<!--         </a>-->
+<!--           <input type="submit" value="Accedi" id="Accedi" onclick="checkEmail(); checkPassword()">-->
+<!--     </div>    -->
+<!--  </form>-->
+<!--  </div>-->
 </body>
 </html>

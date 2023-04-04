@@ -43,7 +43,7 @@
 					<button class="button-test">Compila il tuo primo test</button>
 				</div>
 
-				<div class="image"></div>
+				<div class="image-box"><img class="image2" th:src="@{/images/test-home.png}" alt="" ></div>
 			</div>
 		</div>
 
@@ -52,22 +52,34 @@
 			<div class="box-titolo">
 			<div class="titolo">Migliora il tuo livello di conoscenza <br> attraverso i nostri
 				studi</div>
-			</div>
 			<div class="container-sezioni">
-				<div class="testo">
-					Mettiti alla prova! <br>
-					<p>
-						Abbiamo realizzato 3 quiz valutativi <br> per testare il tuo
-						livello di conoscenza <br> sui vasti argomenti che riguardano
-						la privacy!
-					</p>
-					<button class="button-test">Compila il tuo primo test</button>
-				</div>
-
-				<div class="image">IMMAGINE</div>
+			<fieldset><legend>Meta-Info</legend>
+					<div class="box-argomento">
+						<h3>Titolo Argomento</h3>
+							<p>contenuto</p>
+					</div>
+					<button class="button">Continua</button>
+			</fieldset>
+			<fieldset><legend>Meta-Info</legend>
+					<div class="box-argomento">
+						<h3>Titolo Argomento</h3>
+							<p>contenuto</p>
+					</div>
+					<button class="button">Continua</button>
+			</fieldset>
+			<fieldset><legend>Meta-Info</legend>
+					<div class="box-argomento">
+						<h3>Titolo Argomento</h3>
+							<p>contenuto</p>
+					</div>
+					<button class="button">Continua</button>
+			</fieldset>
 			</div>
 		</div>
-
+			<br>
+				<p class="altro">  <a href="">Vedi altro ></a></p>
+				<br>
+</div>
 		<div class="background" >
 			<!-- sezione favole (senza login) -->
 			<div class="box-titolo">
@@ -76,157 +88,78 @@
 			</div>
 			</div>
 			<div class="container-sezioni">
-				<fieldset>
-					<legend>
-						<strong>meta info</strong>
-					</legend>
-					<div>
-						<div>
-							<br>
-							<br> IMMAGINE <br>
-							<br>
-						</div>
-						<div class="testo">
-							<h3>Titolo</h3>
-							<p class="title">contenuto</p>
-						</div>
-						<button>continua...</button>
+				<fieldset><legend>Meta-Info</legend>
+					<div class="box-argomento">
+						<h3>Titolo Favola</h3>
+							<p> Contenuto piccolo della favola</p>
 					</div>
-				</fieldset>
-				<fieldset>
-					<legend>
-						<strong>meta info</strong>
-					</legend>
-					<div>
-						<div style="background-color: grey;">
-							<br>
-							<br> IMMAGINE <br>
-							<br>
-						</div>
-						<div class="testo">
-							<h3>Titolo</h3>
-							<p class="title">contenuto</p>
-						</div>
-						<button>continua...</button>
+					<button class="button">Continua</button>
+			</fieldset>
+			<fieldset><legend>Meta-Info</legend>
+					<div class="box-argomento">
+						<h3>Titolo Favola</h3>
+							<p> Contenuto piccolo della favola</p>
 					</div>
-				</fieldset>
-				<fieldset>
-					<legend>
-						<strong>meta info</strong>
-					</legend>
-					<div>
-						<div style="background-color: grey;">
-							<br>
-							<br> IMMAGINE <br>
-							<br>
-						</div>
-						<div class="testo">
-							<h3>Titolo</h3>
-							<p class="title">contenuto</p>
-						</div>
-						<button>continua...</button>
+					<button class="button">Continua</button>
+			</fieldset>
+			<fieldset><legend>Meta-Info</legend>
+					<div class="box-argomento">
+						<h3>Titolo Favola</h3>
+							<p> Contenuto piccolo della favola</p>
 					</div>
-				</fieldset>
-		
+					<button class="button">Continua</button>
+			</fieldset>
 			</div>
-			<a href="fiabe"> vedi altro...</a>
+		
+				<br>
+				<p class="altro">  <a href="">Vedi altro ></a></p>
+				<br>
 			</div>
 			
 			
 		<div class="background">
-			<!-- sezione argomenti (senza login) -->
+			<!-- sezione a (senza login) -->
 			<div class="box-titolo">
 			<div class="titolo">
 				Articoli di attualità, <br> notizie nel mondo
 			</div>
-</div>
+		</div>
 			<div class="container-sezioni">
-				<div style="padding: 3%">
-					<div style="background-color: grey; border: 5%;">
-						IMMAGINE
-						<div class="testo">
+				<div class="box-articolo">
+						<div class="testo-articolo">
 							<br>
-							<p>metainfo</p>
 							<h3>Titolo articolo</h3>
-							<p class="title">contenuto articolo</p>
+							<p>metainfo</p>
+							<p>Contenuto articolo</p>
 						</div>
 						<p>
-							<button>continua...</button>
+							<button class="button">Continua</button>
 						</p>
 					</div>
-				</div>
-				<div style="padding: 3%">
-					<div style="background-color: grey; border: 5%;">
-						IMMAGINE
-						<div class="testo">
+			
+				<div class="box-articolo">
+						<div class="testo-articolo">
 							<br>
-							<p>metainfo</p>
 							<h3>Titolo articolo</h3>
-							<p class="title">contenuto articolo</p>
+							<p>metainfo</p>
+							<p>Contenuto articolo</p>
 						</div>
 						<p>
-							<button>continua...</button>
+							<button class="button">Continua</button>
 						</p>
 					</div>
-				</div>
-				<div style="padding: 3%">
-					<div style="background-color: grey; border: 5%;">
-						IMMAGINE
-						<div class="testo">
+					
+				<div class="box-articolo">
+						<div class="testo-articolo">
 							<br>
-							<p>metainfo</p>
 							<h3>Titolo articolo</h3>
-							<p class="title">contenuto articolo</p>
+							<p>metainfo</p>
+							<p>Contenuto articolo</p>
 						</div>
 						<p>
-							<button>continua...</button>
+							<button class="button">Continua</button>
 						</p>
-					</div>
 				</div>
-				<div style="padding: 3%">
-					<div style="background-color: grey; border: 5%;">
-						IMMAGINE
-						<div class="testo">
-							<br>
-							<p>metainfo</p>
-							<h3>Titolo articolo</h3>
-							<p class="title">contenuto articolo</p>
-						</div>
-
-						<p>
-							<button>continua...</button>
-						</p>
-					</div>
-				</div>
-				<div style="padding: 3%">
-					<div style="background-color: grey; border: 5%;">
-						IMMAGINE
-						<div class="testo">
-							<br>
-							<p>metainfo</p>
-							<h3>Titolo articolo</h3>
-							<p class="title">contenuto articolo</p>
-						</div>
-						<p>
-							<button>continua...</button>
-						</p>
-					</div>
-				</div>
-				<div style="padding: 3%">
-					<div style="background-color: grey; border: 5%;">
-						IMMAGINE
-						<div class="testo">
-							<br>
-							<p>metainfo</p>
-							<h3>Titolo articolo</h3>
-							<p class="title">contenuto articolo</p>
-						</div>
-						<p>
-							<button>continua...</button>
-						</p>
-					</div>
-				</div>
-				<a href="articoli"> vedi altro...</a>
 			</div>
 		</div>
 

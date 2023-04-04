@@ -49,7 +49,7 @@ body {
 
 .container {
 	border-radius: 4px;
-	height: 130px;
+	/* height: 130px; */
 	width: 100%;
 	display: flex;
 	/* scroll-behavior: smooth; */
@@ -57,8 +57,8 @@ body {
 	padding: 0 30px;
 	margin-bottom: 30px;
 	position: fixed;
+	top: 0;
 }
-
 .logo {
 	width: 120px;
 }
@@ -154,14 +154,19 @@ body {
 }
 
 .button {
-	
 	padding: 5px;
 	background-color: #45779C;
 	border: none;
 	border-radius: 4px;
 	width: 150px;
-	height: 25px;
+	/* height: 25px; */
 	font-size: 15px;
+	color: white;
+	font-weight: bold;
+}
+
+.button a{
+	color: white;
 }
 
 .login{
@@ -169,6 +174,7 @@ body {
 	margin: auto;
 	text-align: center;
 	padding: 10px;
+	color: white;
 }
 
 
@@ -238,32 +244,27 @@ body {
 	/* display: block; */
 	margin-top: 125px;
 }
-
 .container-sezioni {
 	display: flex;
-	/* align-items: center; */
 	width: 100%;
-	/* white-space: pre-line; */
-	/* flex-shrink: 0; */
 	font-weight: 600;
 	font-size: 15px;
-	/* border-bottom: 1px solid rgba(44, 45, 42, 0.25); */
-	/* position: sticky; */
 	top: 0;
 	left: 0;
 	background-color: #D7D6D6;
 	padding: 20px;
 	border-radius: 4px;
+	/* padding: 0; */
+	/* padding-top: 0; */
+	margin-bottom: 20px;
 }
 
 
 .container-sezioni fieldset {
-
-	
 	width: 25%;
 	margin: auto;
+	text-align: center;
 }
-
 .testo {
 	color: #2c2d2a;
 	width: 50%;
@@ -285,64 +286,112 @@ body {
 	margin-top: 5px;
 }
 
-.box-titolo{
-	margin-top:25px;
-}
+/*.box-titolo{*/
+/*	margin-top:25px;*/
+/*}*/
 
 .background {
 	background-color: #D7D6D6;
 	border-radius: 4px;
+	margin-bottom: 20px;
+}
+.altro {
+	/* float: right; */
+	right: 0;
+	width: 50%;
+	margin: auto;
+	align-content: start;
+	text-align: center;
 }
 
-.sezione-argomenti{
-	border-color: black;
-	height: 200px;
-	border-style: solid;
-	border-width: 1px;
-	margin: 15px;
+.box-articolo {
+	width: 25%;
+	text-align: center;
+	border: 1px black solid;
+	margin: auto;
 }
 
-.sezione-favole{
-	border-color: black;
-	height: 200px;
-	border-style: solid;
-	border-width: 1px;
-	margin: 15px;
+.testo {
+	color: #2c2d2a;
+	text-align: center;
+	font-size: 25px;
+	/* border-bottom: 1px solid; */
+	border-bottom: 1px solid rgba(44, 45, 42, 0.25);
 }
 
-.sezione-news{
-	border-color: black;
-	height: 200px;
-	border-style: solid;
-	border-width: 1px;
-	margin: 15px;
+.testo-articolo p {
+	font-size: 18px;
+	font-weight: 400;
+	margin: 0;
+	margin-top: 20px;
 }
 
+.testo-articolo a{
+	font-size: 15px;
+	font-weight: 400;
+	margin-top: 5px;
+}
 .image-box {
 	width: 20%;
-	/* height: 200px; */
-	/* background: #2c2d2a; */
 	margin: auto;
 }
 
 .image1{
 	width: 500px;
-margin: auto;}
+margin: auto;
+}
+
+.image2 {
+	width: 500px;
+	margin: auto;
+	height: 230px;
+}
 
 .button-test {
 	padding: 5px;
 	background-color: #45779C;
 	border: none;
 	border-radius: 4px;
-	width: 200px;
-	height: 35px;
-	font-size: 15px;
+	width: 250px;
 	margin: 25px;
 	font-size: 16px;
+	color: white;
+	font-weight: bold;
 }
-
 /*LOGIN*/
 
+.container-login {
+	border-radius: 4px;
+	/* scroll-behavior: smooth; */
+	background-color: white;
+	padding: 0 30px;
+	/* margin-bottom: 30px; */
+	/* width: 50%; */
+	/* position: relative; */
+	/* display: block; */
+	margin-top: 125px;
+	/* margin: auto; */
+}
+
+.text-login{
+	margin:auto;
+}
+
+.image3{
+	border-radius: 4px;
+}
+
+.titolo-login {
+	/* width: 50%; */
+	margin: auto;
+	text-align: center;
+	padding: 10px;
+	color: #45779C;
+	font-size: 25px;
+	font-weight: 600;
+	/* margin-top: 20px; */
+	padding: 20px;
+}
 .components {
     margin-left: auto;
     margin-right: auto;
@@ -356,14 +405,14 @@ margin: auto;}
     text-align: center;
     font-size: 25px;
     height: 35px;
-    color: #1E1E24; /*Raisin Black*/
+    color: #1E1E24;
     border: none;
     border-bottom: 2px solid;
     background-color: rgba(0, 0, 0, .0);
 }
 
 .components input::placeholder {
-    color: #1E1E24; /*Raisin Black*/
+    color: #1E1E24;
     opacity: 1;
     font-size: 30px;
 }
@@ -375,8 +424,8 @@ input:focus {
 .components a {
     font-size: 22px;
     text-decoration: none;
-    border-bottom: solid #1E1E24 2px; /*Raisin Black*/
-    color: #1E1E24; /*Raisin Black*/
+    border-bottom: solid #1E1E24 2px; 
+    color: #1E1E24; 
 }
 
 .components a:hover {
@@ -400,48 +449,56 @@ input:focus {
     border-radius: 10px;
 }
 
-.wrapper {	
-	margin-top: 80px;
-  margin-bottom: 80px;
+	.rigaSx {
+	height: 1px;
+	background: rgba(0, 0, 0, .2);
+	width: 35%;
+	margin: auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	float: left;
 }
+
+.rigaDx {
+	height: 1px;
+	background: rgba(0, 0, 0, .2);
+	width: 35%;
+	margin: auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	float: right;
+}
+
+
 
 .form-signin {
-  max-width: 380px;
-  padding: 15px 35px 45px;
-  margin: 0 auto;
-  background-color: #fff;
-  border: 1px solid rgba(0,0,0,0.1);  
+	/* max-width: 380px; */
+	padding: 15px 35px 45px;
+	/* margin: 0 auto; */
+	background-color: white;
+	/* border: 1px solid rgba(0,0,0,0.1); */
+	border-radius: 4px;
 }
-  .form-signin-heading,
-	.checkbox {
-	  margin-bottom: 30px;
-  }
+ 
 
-	.checkbox {
-	  font-weight: normal;
-	}
+.form-control {
+	position: relative;
+	box-sizing: border-box;
+}
 
-	.form-control {
-	  position: relative;
-	  font-size: 16px;
-	  height: auto;
-	  padding: 10px;
-	  box-sizing:border-box;
-	  z-index: 2;
-	}
+.input-login {
+	width: 50%;
+	margin: auto;
+	display: grid;
+}
 
-	input[type="text"] {
-	  margin-bottom: -1px;
-	  border-bottom-left-radius: 0;
-	  border-bottom-right-radius: 0;
-	}
-
-	input[type="password"] {
-	  margin-bottom: 20px;
-	  border-top-left-radius: 0;
-	  border-top-right-radius: 0;
-	}
-	
+.input-login input {
+	align-items: center;
+	width: 70%;
+	margin: auto;
+	margin-bottom: 15px;
+	font-size: 16px;
+}
 /*REGISTRAZIONE*/
 
 .reg-block h1 {
@@ -492,6 +549,25 @@ input:focus {
     background-color: white;
     margin-top: 20px;
     border-radius: 10px;
+}
+
+.text-reg {
+	margin: auto;
+	width: 100%;
+}
+
+.input-reg {
+	/* width: 50%; */
+	margin: auto;
+	text-align: center;
+	/* align-items: center; */
+	/* align-self: center; */
+}
+
+
+.input-reg input {
+	width: 30%;
+	margin: 10px;
 }
 
 #logo {

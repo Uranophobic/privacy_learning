@@ -1,37 +1,82 @@
 <!DOCTYPE html>
 <html xmlns:th="http//www.thymeleaf.org">
+
 <head>
-<meta charset="ISO-8859-1">
-<script type="text/javascript" src="../js/ConvalidazioneCampi.js"></script>
-<link rel="stylesheet" href="../css/stylesheet.css">
-<link rel="icon" type="image/png" href="img/logo.png"/>
-<title>Privacy Literacy - Registrazione</title>
+	<meta charset="ISO-8859-1">
+	<script type="text/javascript" src="../js/ConvalidazioneCampi.js"></script>
+	<link rel="stylesheet" href="../css/stylesheet.css">
+	<link rel="icon" type="image/png" href="img/logo.png" />
+	<title>Privacy Literacy - Registrazione</title>
 </head>
+
 <body>
-<div th:insert="fragments/header::header"></div>
-	<br>
-	<br>
+	<div th:insert="fragments/header::header"></div>
+
 	<form method="POST" action="registrazione" modelAttribute="registrazione">
-		<div class="container">
-			<h1 class="titolo">Registrati</h1>
-			<p style="text-align: center;">Inserisci i tuoi dati personali ed
-				registrati alla piattaforma</p>
-			<hr>
-			<label for="email"><b>Email</b></label> 
-				<input type="text"	placeholder="Inserisci Email" name="email" id="email" autocomplete="off" onkeyup="checkEmail()">
-			<label for="psw"><b>Password</b></label> 
-				<input type="password"	placeholder="Inserisci Password" name="password" id="password" autocomplete="off" onkeyup="checkPassword()"> 
-			<label for="nome"><b>Nome</b></label> 
-				<input type="text" placeholder="Inserisci nome" name="nome" id="nome" autocomplete="off" onkeyup="checkNome()">
-			<label for="cognome"><b>Cognome</b></label> 
-				<input type="text"	placeholder="Inserisci cognome" name="cognome" id="cognome" autocomplete="off" onkeyup="checkCognome()">
-			<label for="dataNascita"><b>Data di nascita</b></label> 
-				<input type="date" placeholder=" Inserisci la tua data di nascita" name="dataNascita" id="dataNascita" required>
+		<div class="container-login">
+			<div class="background">
+				<!-- sezione test privacy (senza login) -->
+				<div class="box-titolo">
+					<div class="titolo-login">Inserisci i tuoi dati personali per registrarti</div>
+				</div>
+				<div class="container-sezioni">
+					<div class="text-reg">
+						<form class="form-signin">
+							<div class="input-reg">
+								<label><b>Email</b></label> <br>
+								<input type="text" placeholder="Inserisci Email" name="email" 
+									autocomplete="off" onkeyup="checkEmail()"><br>
+								<label><b>Password</b> <br>
+								</label><input type="password" placeholder="Inserisci Password" name="password"
+									autocomplete="off" onkeyup="checkPassword()"><br>
+								<label><b>Nome</b></label><br>
+								<input type="text" placeholder="Inserisci nome" name="nome" 
+								autocomplete="off" onkeyup="checkNome()"> <br>
+								<label><b>Cognome</b></label> <br>
+								<input type="text" placeholder="Inserisci cognome" name="cognome" 
+								autocomplete="off" onkeyup="checkCognome()"><br>
+								<label><b>Cognome</b></label><br>
+								<input type="date" placeholder=" Inserisci la tua data di nascita"
+								 name="dataNascita" required>
+
+							</div>
+							<div class="components-button">
+
+								<button class="button" type="submit" onclick="checkRegistrationSubmit()"> Registrati
+								</button>
+
+
+							</div>
+						</form>
+					</div>
+				</div>
 			</div>
-			<div class="form-button"> 
-				<input type="button" value ="Registrati" onclick="checkRegistrationSubmit()">
-			</div>
-			</form>
+		</div>
+	</form>
+
+
+
+
+	<!--		<div class="container">-->
+	<!--			<h1 class="titolo">Registrati</h1>-->
+	<!--			<p style="text-align: center;">Inserisci i tuoi dati personali ed-->
+	<!--				registrati alla piattaforma</p>-->
+	<!--			<hr>-->
+	<!--			<label for="email"><b>Email</b></label> -->
+	<!--				<input type="text"	placeholder="Inserisci Email" name="email" id="email" autocomplete="off" onkeyup="checkEmail()">-->
+	<!--			<label for="psw"><b>Password</b></label> -->
+	<!--				<input type="password"	placeholder="Inserisci Password" name="password" id="password" autocomplete="off" onkeyup="checkPassword()"> -->
+	<!--			<label for="nome"><b>Nome</b></label> -->
+	<!--				<input type="text" placeholder="Inserisci nome" name="nome" id="nome" autocomplete="off" onkeyup="checkNome()">-->
+	<!--			<label for="cognome"><b>Cognome</b></label> -->
+	<!--				<input type="text"	placeholder="Inserisci cognome" name="cognome" id="cognome" autocomplete="off" onkeyup="checkCognome()">-->
+	<!--			<label for="dataNascita"><b>Data di nascita</b></label> -->
+	<!--				<input type="date" placeholder=" Inserisci la tua data di nascita" name="dataNascita" id="dataNascita" required>-->
+	<!--			</div>-->
+	<!--			<div class="form-button"> -->
+	<!--				<input type="button" value ="Registrati" onclick="checkRegistrationSubmit()">-->
+	<!--			</div>-->
+
 </body>
 
 </html>

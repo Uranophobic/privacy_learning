@@ -4,26 +4,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.privacy.web.repository.FavolaRepository;
 
-@Controller		
-public class HomeControl {
-
-	@GetMapping("/homepage")
+@Controller
+@RequestMapping("/favole")
+public class FavolaControl {
+	@Autowired
+	private FavolaRepository favRep;
+	
+	
+	
+	@GetMapping("/leggi-una-favola") //pagina in cui ci sono tutte le favole
 	public String home(Model model) {
-
-		return "HomePage";
+		System.out.println(favRep.findAll());
+		return "Favola";
 	}
 	
-	@GetMapping("/login")
-	public String login(Model model) {
-		return "Login";
-	}
 	
-	@GetMapping("/registrazione")
-	public String registrazione(Model model)
-	{
-		return  "forward:/utente/registrati";
-	}
 }
