@@ -26,14 +26,15 @@
 				
 				
 			</thead>
-			<tbody th:each="user : ${allUtenti}">
-			
-				<tr th:text="${user.nome}">nome</tr> 
-				<tr th:text="${user.cognome}">cognome</tr> 
-				<tr th:text="${user.email}">email</tr> 
-				<tr th:text="${user.password}">password</tr> 
-				<tr th:text="${user.dataNascita}"></tr> 
+			<tbody >
+			<tr th:each="user : ${allUtenti}" >
+				<td th:text="${user.nome}">nome</td> 
+				<td th:text="${user.cognome}">cognome</td> 
+				<td th:text="${user.email}">email</td> 
+				<td th:text="${user.password}">password</td> 
+				<td th:text="${user.dataNascita}"></td> 
 				<br>
+			</tr>
 			</tbody>
 		</table>
 		
