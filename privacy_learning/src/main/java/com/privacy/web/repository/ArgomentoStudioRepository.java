@@ -10,6 +10,6 @@ import com.privacy.web.model.ArgomentoStudio;
 
 public interface ArgomentoStudioRepository extends CrudRepository<ArgomentoStudio, Integer> {
 
-	@Query(value = "SELECT * FROM ArgomentoStudio", nativeQuery = true)
+	@Query(value = "SELECT * FROM argomento_studio", nativeQuery = true)
 	  public List<ArgomentoStudio> findAll();
 }
