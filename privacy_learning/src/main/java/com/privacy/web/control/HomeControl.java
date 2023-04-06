@@ -5,27 +5,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.privacy.web.service.ArgomentoStudioService;
-import com.privacy.web.service.ArticoloService;
-import com.privacy.web.service.FavolaService;
+import com.privacy.web.repository.ArgomentoStudioRepository;
+import com.privacy.web.repository.FavolaRepository;
 import com.privacy.web.service.UtenteService;
 
 @Controller		
 public class HomeControl {
 @Autowired
-private UtenteService utSer;
-@Autowired
-private FavolaService favSer;	
-@Autowired
-private ArgomentoStudioService argSer;
-@Autowired
-private ArticoloService artSer;
-
-
+private UtenteService utRep;
 	@GetMapping("/prova")
 	public String prova(Model model) {
-		model.addAttribute("allUtenti", utSer.findAll());
-		System.out.println(utSer.findAll());
+		model.addAttribute("allUtenti", utRep.findAll());
+		System.out.println(utRep.findAll());
 		return "prova";
 	}
 	
@@ -34,17 +25,18 @@ private ArticoloService artSer;
 		return "Login";
 	}
 	
-	@GetMapping("/registrazione")
-	public String registrazione(Model model)
-	{
-		return  "forward:/utente/registrati";
-	}
+//	@GetMapping("/registrazione")
+//	public String registrazione(Model model)
+//	{
+//		return  "forward:/utente/registrati";
+//	}
+	
 
+@Autowired
+private ArgomentoStudioRepository argRep;
 	@GetMapping("/homepage")
 	public String argomenti(Model model) {
-		model.addAttribute("argomentiView", argSer.findAllArgomenti());
-		model.addAttribute("tutteFavole", favSer.findAllFavole());
-		model.addAttribute("tuttiArticoli", artSer.findAllArticoli());
-		return "homepage";
+		//System.out.println(argRep.findAll());
+		return "HomePage";
 	}
 }

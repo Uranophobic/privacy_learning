@@ -21,33 +21,20 @@
 				</div>
 				<div class="container-sezioni">
 					<div class="text-reg">
-						<form class="form-signin">
-							<div class="input-reg">
-								<label><b>Email</b></label> <br>
-								<input type="text" placeholder="Inserisci Email" name="email" autocomplete="off"
-									onkeyup="checkEmail()"><br>
-								<label><b>Password</b> <br>
-								</label><input type="password" placeholder="Inserisci Password" name="password"
-									autocomplete="off" onkeyup="checkPassword()"><br>
-								<label><b>Nome</b></label><br>
-								<input type="text" placeholder="Inserisci nome" name="nome" autocomplete="off"
-									onkeyup="checkNome()"> <br>
-								<label><b>Cognome</b></label> <br>
-								<input type="text" placeholder="Inserisci cognome" name="cognome" autocomplete="off"
-									onkeyup="checkCognome()"><br>
-								<label><b>Data di nascita</b></label><br>
-								<input type="date" placeholder=" Inserisci la tua data di nascita" name="dataNascita"
-									required>
+							<form th:action="@{/users/all}" th:object="${user}" method="POST">
+			<label> NOME:</label>
+			<input type="text"  name="nome"  th:field="*{nome}"  placeholder="Inserisci il nome" />
+			<label> COGNOME:</label>
+			<input type="text" name="cognome"  th:field="*{cognome}"  placeholder="Inserisci il cognome" />
+			<label> EMAIL:</label>
+			<input type="text"  name="email"  th:field="*{email}"  placeholder="Inserisci il email" />
+			<label> PASSWORD:</label>
+			<input type="text"  name="password"  th:field="*{password}"  placeholder="Inserisci il password" />
 
-							</div>
-							<div class="components-button">
+			<button type="submit"> REGISTRATI</button>
 
-								<button class="button" type="submit" onclick="checkRegistrationSubmit()"> Registrati
-								</button>
+		</form>
 
-
-							</div>
-						</form>
 					</div>
 				</div>
 			</div>

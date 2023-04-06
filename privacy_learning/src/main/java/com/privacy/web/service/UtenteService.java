@@ -9,13 +9,10 @@ import com.privacy.web.model.Utente;
 import com.privacy.web.repository.UtenteRepository;
 
 @Service
-public class UtenteService {
+public interface UtenteService {
 
-	@Autowired
-	private UtenteRepository utRep;
-
-	public List<Utente> findAll() {
-		return (List<Utente>) this.utRep.findAll();
-	}
-
+	
+	List<Utente> findAll();
+	Utente saveUser(Utente user);
+	 
 }

@@ -21,7 +21,7 @@ public class SalvataggioService {
 		return (List<Salvataggio>) salvRep.findAll();
 	}
 	
-	List<Salvataggio> findAllByEmail(String email){
-		return salvRep.findAllByEmail(email);
-	}
+//	List<Salvataggio> findAllByEmail(String email){
+//		return salvRep.findAllByEmail(email);
+//	}
 }

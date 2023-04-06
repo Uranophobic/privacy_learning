@@ -18,20 +18,23 @@ import lombok.NonNull;
 @NoArgsConstructor // crea il costruttore vuoto senza renderlo visibile nella classe
 @AllArgsConstructor
 public class Salvataggio {
-	@Column(name = "id_salvataggio")
+	//@Column(name = "id_salvataggio")
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int idSalvataggio; // auto
-	@Column(name = "id_test")
-	private int idTest;
-	@Column(name = "email_utente")
+	private int id_salvataggio; // auto
+	
+	//@Column(name = "id_test")
+	private int id_test;
+	
+	//@Column(name = "email_utente")
 	private String email_utente;
-	@Column(name = "risposte")
-	private String risposta;
+	
+	//@Column(name = "risposte")
+	private String risposte;
 
-	public Salvataggio(int idTest, @NonNull String email_utente, @NonNull String risposta) {
-		this.idTest = idTest;
+	public Salvataggio(int id_test, @NonNull String email_utente, @NonNull String risposte) {
+		this.id_test = id_test;
 		this.email_utente = email_utente;
-		this.risposta = risposta;
+		this.risposte = risposte;
 	}
 }
