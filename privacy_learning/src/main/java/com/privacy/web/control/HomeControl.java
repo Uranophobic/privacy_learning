@@ -48,4 +48,12 @@ private ArgomentoStudioServiceImpl argRep;
 		//System.out.println(argRep.findAll());
 		return "HomePage";
 	}
+	
+	
+	@GetMapping("/profilo")
+	public String profilo (Model model) {
+		return "profilo";
+	}
+	
+	
 }
