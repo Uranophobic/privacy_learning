@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.privacy.web.model.Favola;
 import com.privacy.web.service.FavolaService;
+import com.privacy.web.serviceImpl.FavolaServiceImpl;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -20,7 +21,7 @@ import jakarta.servlet.http.HttpServletResponse;
 @RequestMapping("/favole")
 public class FavolaControl {
 	@Autowired
-	private FavolaService favSer;
+	private FavolaServiceImpl favSer;
 	
 	
 	

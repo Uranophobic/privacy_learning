@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.privacy.web.model.ArgomentoStudio;
 
 import com.privacy.web.service.ArgomentoStudioService;
+import com.privacy.web.serviceImpl.ArgomentoStudioServiceImpl;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -23,7 +24,7 @@ import jakarta.servlet.http.HttpServletResponse;
 @RequestMapping("/argomenti")
 public class ArgomentoStudioControl {
 	@Autowired
-	private ArgomentoStudioService argService;
+	private ArgomentoStudioServiceImpl argService;
 	
 	
 	

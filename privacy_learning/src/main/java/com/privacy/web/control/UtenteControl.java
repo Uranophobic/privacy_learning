@@ -24,6 +24,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.Data;
 import com.privacy.web.service.UtenteService;
+import com.privacy.web.serviceImpl.UtenteServiceImpl;
 import com.privacy.web.service.UtenteService;
 
 @Controller
@@ -37,11 +38,11 @@ public class UtenteControl {
 	@Autowired
 	private TestRepository testRep;
 	@Autowired
-	private UtenteService utServ;
+	private UtenteServiceImpl utServ;
 	
 	
 	public UtenteControl(UtenteRepository utRep, SalvataggioRepository salvataggioRep, TestRepository testRep,
-			UtenteService utServ) {
+			UtenteServiceImpl utServ) {
 		super();
 		this.utRep = utRep;
 		this.salvataggioRep = salvataggioRep;
