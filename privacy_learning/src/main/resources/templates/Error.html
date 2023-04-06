@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<!-- non so come fare questo in thymelef
+<%
+    String descrizione = request.getParameter("descrizione");
+    Utente user = (Utente) request.getSession().getAttribute("user");
+%>
+
+<c:set var="error" value="<%=descrizione%>"/>
+
+ -->
+
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" href="css/stylesheet.css">
+    <title>Error</title>
+</head>
+<body>
+<div class="error">
+    <div>
+        <div th:if="${descrizione==null}">
+           <p> Funzionalità in sviluppo</p>
+        </div>
+        <p th:text="${descrizione}">
+        </p>
+    </div>
+    <div>
+        <div th:if="${user!=null}">
+            <div class="back">
+                <a th:href="@{/login}">
+                    <button>Torna al Login</button>
+                </a>
+            </div>
+        </div>
+        <div>
+            <div class="back">
+                <a th:href="@{/homepage}">
+                    <button>Torna alla Home</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

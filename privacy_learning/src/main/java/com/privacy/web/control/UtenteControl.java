@@ -24,6 +24,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.Data;
 import com.privacy.web.service.UtenteService;
+import com.privacy.web.serviceImpl.SalvataggioServiceImpl;
+import com.privacy.web.serviceImpl.TestServiceImpl;
 import com.privacy.web.serviceImpl.UtenteServiceImpl;
 import com.privacy.web.service.UtenteService;
 
@@ -32,22 +34,18 @@ import com.privacy.web.service.UtenteService;
 @Data
 public class UtenteControl {
 	@Autowired
-	private UtenteRepository utRep; // oggetto utenteRepository
+	private SalvataggioServiceImpl salvataggioRep; //oggetto SalvataggioRepository
 	@Autowired
-	private SalvataggioRepository salvataggioRep; //oggetto SalvataggioRepository
-	@Autowired
-	private TestRepository testRep;
+	private TestServiceImpl testRep;
 	@Autowired
 	private UtenteServiceImpl utServ;
 	
 	
-	public UtenteControl(UtenteRepository utRep, SalvataggioRepository salvataggioRep, TestRepository testRep,
-			UtenteServiceImpl utServ) {
+	public UtenteControl(UtenteServiceImpl utServ, SalvataggioServiceImpl salvataggioRep, TestServiceImpl testRep) {
 		super();
-		this.utRep = utRep;
+		this.utServ = utServ;
 		this.salvataggioRep = salvataggioRep;
 		this.testRep = testRep;
-		this.utServ = utServ;
 	}
 	
 	//metodo che prende la lista di tutti gli utenti e ritorna una model and view 
@@ -68,8 +66,40 @@ public class UtenteControl {
 	}
 	
 	@PostMapping("/all")
-	public String saveUtente(@ModelAttribute("user") Utente user) {
+	public String saveUtente(@ModelAttribute("user") Utente user, HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+		if (Check.checkName(request.getParameter("nome")) 
+				&& Check.checkSurname(request.getParameter("cognome")) 
+				&& Check.checkEmail(request.getParameter("email"))) {
+			user.setNome(request.getParameter("nome"));
+			user.setCognome(request.getParameter("cognome"));
+			user.setEmail(request.getParameter("email"));
+			user.setPassword(request.getParameter("pwd"));
+			try {
+				if(utServ.existsById(request.getParameter("email"))) {
+                    response.getWriter().write("4 // errore nella registrazione");
+                    String error = "Esiste già un utente con questa e-mail";
+                    model.addAttribute("descrizione", error);
+                    return "redirect:/error";
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 		utServ.saveUser(user);
+			
+	} else {
+		if (!Check.checkName(request.getParameter("nome"))) {
+				response.getWriter().write("1: nome non corretto"); 
+			}
+			if (!Check.checkSurname(request.getParameter("cognome"))) {
+				response.getWriter().write("2: cognome non corretto"); 
+			}
+			if (!Check.checkEmail(request.getParameter("email"))) {
+				response.getWriter().write("3: email non corretta"); 
+			}
+			String descrizione = "Siamo spiacenti si è verificato un errore con la registrazione. Riprova!";
+			model.addAttribute("descrizione", descrizione);
+			return "redirect:/error";
+		}
 		return "redirect:/homepage";
 	}
 	

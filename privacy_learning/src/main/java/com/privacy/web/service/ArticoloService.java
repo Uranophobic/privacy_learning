@@ -11,6 +11,6 @@ import com.privacy.web.repository.ArticoloRepository;
 @Service
 public interface ArticoloService {
 
-	
+
 	public List<Articolo> findAllArticoli();
 }
