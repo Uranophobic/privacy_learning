@@ -9,19 +9,8 @@ import com.privacy.web.model.Salvataggio;
 import com.privacy.web.repository.SalvataggioRepository;
 
 @Service
-public class SalvataggioService {
-	@Autowired
-	private SalvataggioRepository salvRep;
+public interface  SalvataggioService {
 	
-	void save(Salvataggio s) {
-		salvRep.save(s);
-	}
-	
-	List<Salvataggio> findAllSalvataggio(){
-		return (List<Salvataggio>) salvRep.findAll();
-	}
-	
-//	List<Salvataggio> findAllByEmail(String email){
-//		return salvRep.findAllByEmail(email);
-//	}
+	void save(Salvataggio s);
+	List<Salvataggio> findAllSalvataggio();
 }

@@ -9,11 +9,8 @@ import com.privacy.web.model.Articolo;
 import com.privacy.web.repository.ArticoloRepository;
 
 @Service
-public class ArticoloService {
-	@Autowired
-	ArticoloRepository artRep;
+public interface ArticoloService {
+
 	
-	public List<Articolo> findAllArticoli(){
-		return (List<Articolo>) artRep.findAll();
-	}
+	public List<Articolo> findAllArticoli();
 }

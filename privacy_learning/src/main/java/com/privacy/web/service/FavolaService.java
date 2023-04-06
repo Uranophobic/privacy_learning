@@ -7,11 +7,7 @@ import com.privacy.web.model.Favola;
 import com.privacy.web.repository.FavolaRepository;
 
 @Service
-public class FavolaService {
-	@Autowired
-	private FavolaRepository favolaRep;
+public interface FavolaService {
 	
-	public List<Favola> findAllFavole(){
-		return (List<Favola>) favolaRep.findAll();
-	}
+	public List<Favola> findAllFavole();
 }
