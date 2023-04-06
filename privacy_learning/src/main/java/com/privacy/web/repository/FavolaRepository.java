@@ -11,7 +11,7 @@ import com.privacy.web.model.Favola;
 @EnableJpaRepositories
  public interface FavolaRepository extends CrudRepository<Favola,Integer> {
 
-	 @Query(value = "SELECT * FROM FAVOLA", nativeQuery = true)
+	 @Query(value = "SELECT * FROM Favola", nativeQuery = true)
 	  public List<Favola> findAll();
 	 
 }

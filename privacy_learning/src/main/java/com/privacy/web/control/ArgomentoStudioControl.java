@@ -1,6 +1,6 @@
 package com.privacy.web.control;
 
-import java.io.IOException;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.privacy.web.model.ArgomentoStudio;
-import com.privacy.web.model.Utente;
-import com.privacy.web.repository.ArgomentoStudioRepository;
+
+import com.privacy.web.service.ArgomentoStudioService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -23,19 +23,22 @@ import jakarta.servlet.http.HttpServletResponse;
 @RequestMapping("/argomenti")
 public class ArgomentoStudioControl {
 	@Autowired
-	private ArgomentoStudioRepository argRep;
+	private ArgomentoStudioService argService;
 	
 	
 	
 	@GetMapping("/studia-con-noi") //pagina in cui ci sono tutti gli argomenti studio
 	public String argomenti(Model model) {
-		System.out.println(argRep.findAll());
+		model.addAttribute(argService.findAllArgomenti());
 		return "argomento";
 	}
 	
 	@GetMapping("/argomentiHome")
-	public ModelAndView visualizzaArgomenti(@ModelAttribute("listaArgomenti") ArgomentoStudio argomento, HttpServletRequest request, HttpServletResponse resp) {
-		List<ArgomentoStudio> argomentiHome = argRep.findAll();
-	return new ModelAndView("HomePage", "listaArgomenti", argomentiHome );
+	public ModelAndView visualizzaArgomenti(@ModelAttribute("listaArgomenti") HttpServletRequest request, HttpServletResponse resp) {
+		List<ArgomentoStudio> argomentiHome = argService.findAllArgomenti();
+		for(ArgomentoStudio list : argomentiHome) {
+			if(list.getIdStudio() > 3) argomentiHome.remove(list);
+		}
+	return new ModelAndView("HomePage", "listaArgomenti", argomentiHome);
 }
 }

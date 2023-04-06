@@ -10,13 +10,12 @@ import com.privacy.web.repository.UtenteRepository;
 
 @Service
 public class UtenteService {
-	
+
 	@Autowired
 	private UtenteRepository utRep;
-	
-	public List<Utente> findAll(){
+
+	public List<Utente> findAll() {
 		return (List<Utente>) this.utRep.findAll();
 	}
-	
-	 
+
 }

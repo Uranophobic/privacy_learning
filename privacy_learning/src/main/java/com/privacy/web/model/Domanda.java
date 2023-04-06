@@ -1,5 +1,6 @@
 package com.privacy.web.model;
 
+import jakarta.persistence.Column;
 
 /*
  * Entity per le domande
@@ -15,20 +16,38 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "domanda")
-@Data //crea i metodi hashCode, equals e toString, getter e setter senza renderli visibili nella classe
-@NoArgsConstructor //crea il costruttore vuoto senza renderlo visibile nella classe
+@Data // crea i metodi hashCode, equals e toString, getter e setter senza renderli
+		// visibili nella classe
+@NoArgsConstructor // crea il costruttore vuoto senza renderlo visibile nella classe
 
 public class Domanda {
-
-	@Id @GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id_domanda")
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idDomanda;
+	
+	@Column(name = "id_test")
 	private int idTest;
+	
+	@Column(name = "testo")
 	private String testo;
+	
+	@Column(name = "risposta_corretta")
 	private String risposta_corretta;
+	
+	@Column(name = "meta_info")
 	private String meta_info;
+	
+	@Column(name = "risposta1")
 	private String risposta1;
+	
+	@Column(name = "risposta2")
 	private String risposta2;
+	
+	@Column(name = "risposta3")
 	private String risposta3;
+	
+	@Column(name = "risposta4")
 	private String risposta4;
 
 	public Domanda(int idTest, String meta_info, String testo, String risposta_corretta, String risposta1,
@@ -40,14 +59,7 @@ public class Domanda {
 		this.risposta2 = risposta2;
 		this.risposta3 = risposta3;
 		this.risposta4 = risposta4;
-		this.meta_info= meta_info;
+		this.meta_info = meta_info;
 	}
-
-
-
-
-
-
-
 
 }

@@ -5,18 +5,27 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.privacy.web.repository.ArgomentoStudioRepository;
-import com.privacy.web.repository.FavolaRepository;
+import com.privacy.web.service.ArgomentoStudioService;
+import com.privacy.web.service.ArticoloService;
+import com.privacy.web.service.FavolaService;
 import com.privacy.web.service.UtenteService;
 
 @Controller		
 public class HomeControl {
 @Autowired
-private UtenteService utRep;
+private UtenteService utSer;
+@Autowired
+private FavolaService favSer;	
+@Autowired
+private ArgomentoStudioService argSer;
+@Autowired
+private ArticoloService artSer;
+
+
 	@GetMapping("/prova")
 	public String prova(Model model) {
-		model.addAttribute("allUtenti", utRep.findAll());
-		System.out.println(utRep.findAll());
+		model.addAttribute("allUtenti", utSer.findAll());
+		System.out.println(utSer.findAll());
 		return "prova";
 	}
 	
@@ -30,13 +39,12 @@ private UtenteService utRep;
 	{
 		return  "forward:/utente/registrati";
 	}
-	
 
-@Autowired
-private ArgomentoStudioRepository argRep;
 	@GetMapping("/homepage")
 	public String argomenti(Model model) {
-		System.out.println(argRep.findAll());
-		return "HomePage";
+		model.addAttribute("argomentiView", argSer.findAllArgomenti());
+		model.addAttribute("tutteFavole", favSer.findAllFavole());
+		model.addAttribute("tuttiArticoli", artSer.findAllArticoli());
+		return "homepage";
 	}
 }

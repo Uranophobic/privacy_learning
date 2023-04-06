@@ -1,5 +1,6 @@
 package com.privacy.web.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -15,14 +16,19 @@ import lombok.NoArgsConstructor;
 
 public class Utente {
 	
-	@Id 
+	@Id @Column(name="email")
 	private String email;
-	
+	@Column(name="password")
 	private String password;
+	@Column(name="nome")
 	private String nome;
+	@Column(name="cognome")
 	private String cognome;
+	@Column(name="data_nascita")
 	private String dataNascita;
+	@Column(name="percentuale")
 	private int percentuale;
+	@Column(name="livello")
 	private String livello;
 
 }

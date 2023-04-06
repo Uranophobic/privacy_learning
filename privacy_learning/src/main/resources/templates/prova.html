@@ -8,36 +8,37 @@
 	<link rel="icon" type="image/png" href="img/logo.png" />
 	<title>Privacy Literacy - Registrazione</title>
 </head>
+
 <body>
-	<div class="utentelist" >
-		
+	<div class="utentelist">
+
 		<h2 th:text="#{title.list}"> lista degli utenti </h2>
-		
-		<table >
+
+		<table>
 			<thead>
 				<tr>
-				<th > nome</th>
-				<th > cognome</th>
-				<th > email</th>
-				<th> password</th>
-				<th > data</th>
-				
+					<th> nome</th>
+					<th> cognome</th>
+					<th> email</th>
+					<th> password</th>
+					<th> data</th>
+
 				</tr>
-				
-				
+
+
 			</thead>
-			<tbody >
-			<tr th:each="user : ${allUtenti}" >
-				<td th:text="${user.nome}">nome</td> 
-				<td th:text="${user.cognome}">cognome</td> 
-				<td th:text="${user.email}">email</td> 
-				<td th:text="${user.password}">password</td> 
-				<td th:text="${user.dataNascita}"></td> 
-				<br>
-			</tr>
+			<tbody>
+				<tr th:each="user : ${allUtenti}">
+					<td th:text="${user.nome}">nome</td>
+					<td th:text="${user.cognome}">cognome</td>
+					<td th:text="${user.email}">email</td>
+					<td th:text="${user.password}">password</td>
+					<td th:text="${user.dataNascita}"></td>
+
+				</tr>
 			</tbody>
 		</table>
-		
-		
-	</divclass>
+
+
+	</div>
 </body>
