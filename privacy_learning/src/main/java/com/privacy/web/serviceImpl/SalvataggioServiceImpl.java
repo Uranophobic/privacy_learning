@@ -23,4 +23,9 @@ public class SalvataggioServiceImpl implements SalvataggioService {
 		return (List<Salvataggio>) salRep.findAll();
 	}
 
+	@Override
+	public List<Salvataggio> findAllByEmail(String email) {
+		return salRep.findAllByEmail(email);
+	}
+
 }

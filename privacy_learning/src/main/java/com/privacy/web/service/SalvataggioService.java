@@ -9,8 +9,9 @@ import com.privacy.web.model.Salvataggio;
 import com.privacy.web.repository.SalvataggioRepository;
 
 @Service
-public interface  SalvataggioService {
+public interface SalvataggioService {
 	
 	void save(Salvataggio s);
 	List<Salvataggio> findAllSalvataggio();
+	List<Salvataggio> findAllByEmail(String email);
 }

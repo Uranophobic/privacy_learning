@@ -9,9 +9,7 @@ import com.privacy.web.service.TestService;
 
 @Service
 public class TestServiceImpl implements TestService {
-
 	@Autowired
 	private TestRepository testRep;
-	
 
 }
