@@ -16,4 +16,5 @@ public interface UtenteService {
 	List<Utente> findAll();
 	Utente saveUser(Utente user) throws Exception;
 	boolean existsById(String id);
+	Utente findUtenteByEmail (String email);
 }

@@ -85,6 +85,12 @@ public class UtenteServiceImpl implements UtenteService {
 	public boolean existsById(String id) {
 		return utenteRep.existsById((String) id);
 	}
+
+	@Override
+	public Utente findUtenteByEmail(String email) {
+		return	utenteRep.findUtenteByEmail(email);
+	}
+
 	
 	
 }

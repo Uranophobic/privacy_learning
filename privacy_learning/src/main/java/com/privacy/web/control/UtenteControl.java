@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.privacy.web.model.Salvataggio;
@@ -19,6 +20,7 @@ import com.privacy.web.utils.Check;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.Data;
 
 import com.privacy.web.service.DomandaService;
@@ -68,21 +70,21 @@ public class UtenteControl {
 
 	@PostMapping("/all")
 	public String saveUtente(@ModelAttribute("user") Utente user, HttpServletRequest request,
-			HttpServletResponse response, Model model) throws Exception {
+			HttpServletResponse response, Model model, HttpSession userSession) throws Exception {
 		if (Check.checkName(request.getParameter("nome")) 
 				&& Check.checkSurname(request.getParameter("cognome"))
 				&& Check.checkEmail(request.getParameter("email"))) {
 			user.setNome(request.getParameter("nome"));
 			user.setCognome(request.getParameter("cognome"));
 			user.setEmail(request.getParameter("email"));
-			user.setPassword(request.getParameter("pwd"));
+			user.setPassword(request.getParameter("password"));
 			try {
 				if (utServ.existsById(request.getParameter("email"))) {
 					response.getWriter().write("4 // errore nella registrazione");
 					String error = "Esiste già un utente con questa e-mail";
 					model.addAttribute("descrizione", error);
 					return "redirect:/error";
-				} else {
+	/*			} else {
 					ArrayList<String> risposteArrayList = new ArrayList<>();
 					for (int i = 1; i <= domServ.countDomandeByIdTest(4); i++) {
 						if (request.getParameter("r" + i).isEmpty()) {
@@ -94,13 +96,14 @@ public class UtenteControl {
 					}
 					for (int i = 0; i < risposteArrayList.size(); i++) {
 						salvataggioServ.save(new Salvataggio(4, user.getEmail(), risposteArrayList.get(i)));
-					}
+					} */
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			utServ.saveUser(user);
-
+			userSession.setAttribute("userSession", user.getEmail());
+			
 		} else {
 			if (!Check.checkName(request.getParameter("nome"))) {
 				response.getWriter().write("1: nome non corretto");
@@ -115,9 +118,41 @@ public class UtenteControl {
 			model.addAttribute("descrizione", descrizione);
 			return "redirect:/error";
 		}
+		
 		return "redirect:/homepage";
 	}
 
+	@PostMapping("/session")
+	public String sessioneUtente(@ModelAttribute("user") Utente user, HttpServletRequest request,
+			HttpServletResponse response, Model model, HttpSession userSession) throws Exception {
+	
+			if(user.getEmail().equals("")) {
+		
+			//nel caso che inserisce un email che non esiste, non so se si fa cosi, con errroe
+			return "/homepage";
+			//infatti fatto cosi non funziona
+		} else  {
+		
+		
+		System.out.println("sono in session.");
+		user.setEmail(request.getParameter("email"));
+		user.setPassword(request.getParameter("password"));
+		System.out.println("emial:" + request.getParameter("email"));
+		System.out.println("password:" + request.getParameter("password"));
+		user = utServ.findUtenteByEmail(request.getParameter("email"));
+		System.out.println("utente:" + user.toString());
+		
+	
+	
+		
+	
+		
+		userSession.setAttribute("userSession", user);
+		return "redirect:/profilo";
+		}
+	}
+
+	
 	/**
 	 * Questo metodo richiama il metodo post
 	 *

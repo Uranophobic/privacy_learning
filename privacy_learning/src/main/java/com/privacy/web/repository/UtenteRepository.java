@@ -10,7 +10,11 @@ import com.privacy.web.model.Utente;
 
 public interface UtenteRepository extends CrudRepository<Utente, String> { 
 	
-	@Query(value = "SELECT * FROM Utente u WHERE u.email=?1 and u.password=?2",nativeQuery=true)
+	@Query(value = "SELECT Utente u FROM Utente WHERE u.email=?1 and u.password=?2", nativeQuery=true)
 	public Utente login(String email, String password) throws SQLException;
+	
+	
+	
+	public Utente findUtenteByEmail (String email);
 
 }

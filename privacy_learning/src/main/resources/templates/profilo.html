@@ -32,7 +32,15 @@
 							<div class="column">1
 								<div class="tile is-parent is-vertical">
 									<article class="tile is-child notification is-primary">
-										<p class="title"> Infomrazioni personali </p>
+										
+										<p  th:text="${session.userSession.email}" class="title"> Infomrazioni personali </p>
+										<p  th:text="${session.userSession.password}" class="title"> Infomrazioni personali </p>
+										<p  th:text="${session.userSession.nome}" class="title"> Infomrazioni personali </p>
+										<p  th:text="${session.userSession.cognome}" class="title"> Infomrazioni personali </p>
+										<p  th:text="${session.userSession.dataNascita}" class="title"> Infomrazioni personali </p>
+										
+										
+										
 										<p class="subtitle">Nome e Cognome</p>
 										<p class="subtitle">Email e Password Censurata </p>
 										<p class="subtitle">Data Nascita </p>
