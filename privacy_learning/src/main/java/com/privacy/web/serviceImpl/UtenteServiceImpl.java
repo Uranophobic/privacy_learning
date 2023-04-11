@@ -1,14 +1,13 @@
 package com.privacy.web.serviceImpl;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-import org.yaml.snakeyaml.events.Event.ID;
 
 import com.privacy.web.model.Utente;
 import com.privacy.web.repository.UtenteRepository;
 import com.privacy.web.service.UtenteService;
-import com.privacy.web.utils.Check;
 
 @Service
 public class UtenteServiceImpl implements UtenteService {
@@ -89,6 +88,18 @@ public class UtenteServiceImpl implements UtenteService {
 	@Override
 	public Utente findUtenteByEmail(String email) {
 		return	utenteRep.findUtenteByEmail(email);
+	}
+
+	@Override
+	public Utente login(String email, String password) throws SQLException {
+		
+		return utenteRep.login(email, password);
+	}
+
+	@Override
+	public Utente findUtenteByEmailAndPassword(String email, String password) {
+		
+		return utenteRep.findUtenteByEmailAndPassword(email, password);
 	}
 
 	

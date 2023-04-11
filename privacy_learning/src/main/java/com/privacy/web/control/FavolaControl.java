@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.privacy.web.model.Favola;
-import com.privacy.web.service.FavolaService;
 import com.privacy.web.serviceImpl.FavolaServiceImpl;
 
 import jakarta.servlet.http.HttpServletRequest;

@@ -21,14 +21,14 @@
 <body>
 <div class="error">
     <div>
-        <div th:if="${descrizione==null}">
+        <div th:if="${param.descrizione==null}">
            <p> Funzionalità in sviluppo</p>
         </div>
-        <p th:text="${descrizione}">
+        <p th:text="${param.descrizione}">
         </p>
     </div>
     <div>
-        <div th:if="${user!=null}">
+        <div th:if="${session.user!=null}">
             <div class="back">
                 <a th:href="@{/login}">
                     <button>Torna al Login</button>

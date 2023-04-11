@@ -1,7 +1,5 @@
 package com.privacy.web.control;
 
-import java.io.IOException;
-import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,12 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.privacy.web.model.Salvataggio;
 import com.privacy.web.model.Utente;
 import com.privacy.web.utils.Check;
 
@@ -68,7 +62,7 @@ public class UtenteControl {
 		return "create_user";
 	}
 
-	@PostMapping("/all")
+	@PostMapping("/registrati")
 	public String saveUtente(@ModelAttribute("user") Utente user, HttpServletRequest request,
 			HttpServletResponse response, Model model, HttpSession userSession) throws Exception {
 		if (Check.checkName(request.getParameter("nome")) 
@@ -83,14 +77,14 @@ public class UtenteControl {
 					response.getWriter().write("4 // errore nella registrazione");
 					String error = "Esiste già un utente con questa e-mail";
 					model.addAttribute("descrizione", error);
-					return "redirect:/error";
+					return "redirect:/error?descrizione= "+error;
 	/*			} else {
 					ArrayList<String> risposteArrayList = new ArrayList<>();
 					for (int i = 1; i <= domServ.countDomandeByIdTest(4); i++) {
 						if (request.getParameter("r" + i).isEmpty()) {
 							String error = "mancata risposta alla domanda n: " + i;
 							model.addAttribute("descrizione", error);
-							return "redirect:/registrazione";
+							return "redirect:/registrazione?error=";
 						}
 						risposteArrayList.add(request.getParameter("r" + i));// id della risposta i
 					}
@@ -122,34 +116,40 @@ public class UtenteControl {
 		return "redirect:/homepage";
 	}
 
-	@PostMapping("/session")
+	@PostMapping("/login")
 	public String sessioneUtente(@ModelAttribute("user") Utente user, HttpServletRequest request,
 			HttpServletResponse response, Model model, HttpSession userSession) throws Exception {
-	
-			if(user.getEmail().equals("")) {
 		
-			//nel caso che inserisce un email che non esiste, non so se si fa cosi, con errroe
-			return "/homepage";
-			//infatti fatto cosi non funziona
-		} else  {
-		
-		
-		System.out.println("sono in session.");
-		user.setEmail(request.getParameter("email"));
-		user.setPassword(request.getParameter("password"));
-		System.out.println("emial:" + request.getParameter("email"));
-		System.out.println("password:" + request.getParameter("password"));
-		user = utServ.findUtenteByEmail(request.getParameter("email"));
-		System.out.println("utente:" + user.toString());
-		
-	
-	
-		
-	
-		
-		userSession.setAttribute("userSession", user);
-		return "redirect:/profilo";
+		if(userSession.getAttribute("user")!=null) {//"sessione già esistente"
+			return "forward:/profilo";
 		}
+		String email=request.getParameter("email");
+		String pwd= request.getParameter("password");
+		if (email != null && pwd != null) {
+            if (email.trim().length() == 0) {
+                response.getWriter().write("1"); //email vuota
+            }
+            if (pwd.trim().length() == 0) {
+                response.getWriter().write("2"); //password vuota
+            }
+      try {
+    	  user = utServ.findUtenteByEmailAndPassword(email, pwd);
+		if (user!=null) {
+			userSession.setAttribute("userSession", user);
+			return "redirect:/profilo";
+		}
+		else  {
+		response.getWriter().write("4: utente non valido");
+		String error = "Email o password errata";
+		model.addAttribute("descrizione", error);
+		return "redirect:/error?descrizione= "+error;
+		}
+      } catch (Exception e) {
+		e.printStackTrace();
+	}
+		}
+		String error="email o password null";
+    	  return "redirect:/login?errorDesc="+error; 
 	}
 
 	
