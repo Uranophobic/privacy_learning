@@ -10,4 +10,6 @@ import com.privacy.web.model.Domanda;
 public interface DomandaService {
 	int countDomandeByIdTest(int id_test);
 	List<Domanda> findByIdTest(int idTest);
+	
+	
 }

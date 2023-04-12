@@ -24,10 +24,10 @@ public class Domanda {
 	@Column(name = "id_domanda")
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int idDomanda;
+	private int id_domanda;
 	
 	@Column(name = "id_test")
-	private int idTest;
+	private int id_test;
 	
 	@Column(name = "testo")
 	private String testo;
@@ -50,11 +50,11 @@ public class Domanda {
 	@Column(name = "risposta4")
 	private String risposta4;
 
-	public Domanda(int idTest, String meta_info, String testo, String risposta_corretta, String risposta1,
+	public Domanda(int id_test, String meta_info, String testo, String risposta_corretta, String risposta1,
 			String risposta2, String risposta3, String risposta4) {
 		this.testo = testo;
 		this.risposta_corretta = risposta_corretta;
-		this.idTest = idTest;
+		this.id_test = id_test;
 		this.risposta1 = risposta1;
 		this.risposta2 = risposta2;
 		this.risposta3 = risposta3;

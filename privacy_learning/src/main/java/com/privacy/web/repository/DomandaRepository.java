@@ -8,6 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 import com.privacy.web.model.Domanda;
 
 public interface DomandaRepository extends CrudRepository<Domanda,Integer> {
+	
 	@Query(value="SELECT (COUNT) * FROM Domanda d WHERE d.id_test=?1", nativeQuery=true)
 	int countDomandeByIdTest(int id_test);
 	
@@ -15,5 +16,5 @@ public interface DomandaRepository extends CrudRepository<Domanda,Integer> {
 	List<Domanda> findByIdTest(int idTest);
 
 	
-
+	
 }
