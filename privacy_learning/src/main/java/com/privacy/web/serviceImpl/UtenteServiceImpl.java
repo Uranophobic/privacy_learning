@@ -102,6 +102,11 @@ public class UtenteServiceImpl implements UtenteService {
 		return utenteRep.findUtenteByEmailAndPassword(email, password);
 	}
 
+	@Override
+	public void deleteById(String email) {
+		utenteRep.deleteByEmail(email);
+	}
+
 	
 	
 }

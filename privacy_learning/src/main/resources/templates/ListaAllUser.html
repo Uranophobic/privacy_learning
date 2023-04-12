@@ -29,9 +29,11 @@
 				<th > nome</th>
 				<th > cognome</th>
 				<th > email</th>
-				<th> password</th>
 				<th > data</th>
-				
+				<th > percentuale</th>
+				<th > livello</th>
+				<th > azioni</th>
+				<!-- livello, punteggio vogliamo metterlo? vogliamo inserire anche "azioni" dove ci saranno bottoni per modificare ed eliminare l'utente?-->
 				</tr>
 				
 				
@@ -40,9 +42,13 @@
 			<tr th:each="user : ${utenti}" >
 				<td th:text="${user.nome}">nome</td> 
 				<td th:text="${user.cognome}">cognome</td> 
-				<td th:text="${user.email}">email</td> 
-				<td th:text="${user.password}">password</td> 
-				<td th:text="${user.dataNascita}"></td> 
+				<td th:text="${user.email}">email</td>
+				<td th:text="${user.dataNascita}">data di nascita</td> 
+				<td th:text="${user.percentuale}">percentuale</td>
+				<td th:text="${user.livello}">livello</td> 
+				<td >
+				<a th:href="@{/users/{id}(id=${user.email})}" class=""> Elimina </a>
+				</td>
 				<br>
 			</tr>
 			</tbody>
