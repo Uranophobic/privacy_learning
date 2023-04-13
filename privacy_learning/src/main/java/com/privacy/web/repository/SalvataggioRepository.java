@@ -14,5 +14,5 @@ public interface SalvataggioRepository  extends CrudRepository<Salvataggio,Integ
 	 * nativeQuery = true) List<Salvataggio> findAllByEmail(String email);
 	 */
 	
-	Salvataggio save(Salvataggio s);
+	public Salvataggio save(Salvataggio s);
 }

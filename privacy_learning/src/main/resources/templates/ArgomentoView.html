@@ -11,9 +11,7 @@
 	<div th:insert="~{fragments/header::header}"></div>
 	<br>
 	<div class="container-home">
-		<form
-			th:action="@{argomenti/detail/{id}(id=${argomento.getId_studio()})}"
-			th:object="argomento" method=get>
+		<form th:action="@{details/{id} (id=${argomento.id_studio})}" th:object="${argomento}" method=post>
 			<div class="background">
 				<div class="box-titolo">
 					<div class="titolo" th:text="${argomento.titolo}">titolo

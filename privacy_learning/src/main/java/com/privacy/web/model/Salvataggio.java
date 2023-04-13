@@ -19,7 +19,6 @@ import lombok.NonNull;
 public class Salvataggio {
 	//@Column(name = "id_salvataggio")
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id_salvataggio; // auto
 	
 	//@Column(name = "id_test")

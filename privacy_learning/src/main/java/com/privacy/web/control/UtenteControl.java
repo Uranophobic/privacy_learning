@@ -40,8 +40,6 @@ public class UtenteControl {
 	@Autowired
 	private DomandaService domServ;
 
-
-
 	public UtenteControl(UtenteService utServ, SalvataggioService salvataggioRep, TestService testServ) {
 		super();
 		this.utServ = utServ;
@@ -55,7 +53,7 @@ public class UtenteControl {
 		model.addAttribute("utenti", utServ.findAll());
 		return "ListaAllUser";
 	}
-
+/*--------REGISTRAZIONE--------*/
 	// metodo che crea un nuovo utente
 	@GetMapping("/registrazione")
 	public String newUser(Model model) {
@@ -64,6 +62,84 @@ public class UtenteControl {
 		Utente user = new Utente();
 		model.addAttribute("user", user);
 		return "create_user";
+	}
+
+	@GetMapping("/regprova") // qui ci dovrebbe andasre il link della registrazioe ma non sono sicura
+	public String prova(Model model) {
+		List<Domanda> questionario = domServ.findByIdTest(4);
+		List<Domanda> prima = split(questionario);
+		List<Domanda> seconda = split2(questionario);
+
+		// System.out.println(prima);
+		// System.out.println(seconda);
+
+		Utente user = new Utente();
+
+		model.addAttribute("user", user);
+		model.addAttribute("questionario1", prima);
+		model.addAttribute("questionario2", seconda);
+		return "registrazione";
+	}
+
+	@PostMapping("/regprova")
+	public String provarisposte(@ModelAttribute("user") Utente user, HttpServletRequest request,
+			HttpServletResponse response, Model model, HttpSession userSession) throws Exception {
+		if (Check.checkName(request.getParameter("nome")) && Check.checkSurname(request.getParameter("cognome"))
+				&& Check.checkEmail(request.getParameter("email"))) {
+			user.setNome(request.getParameter("nome"));
+			user.setCognome(request.getParameter("cognome"));
+			user.setEmail(request.getParameter("email"));
+			user.setPassword(request.getParameter("password"));
+			user.setDataNascita(request.getParameter("dataNascita"));
+			try {
+				if (utServ.existsById(request.getParameter("email"))) {
+					response.getWriter().write("4 // errore nella registrazione");
+					String error = "Esiste già un utente con questa e-mail";
+					model.addAttribute("descrizione", error);
+					return "redirect:/error?descrizione= " + error;
+
+				} else {
+					utServ.saveUser(user);
+					userSession.setAttribute("userSession", user);
+					List<Domanda> questionario = domServ.findByIdTest(4);
+
+					ArrayList<String> risposte = new ArrayList<>();
+					for (int i = 0; i < domServ.findByIdTest(4).size(); i++) {
+						risposte.add(request.getParameter("valore" + questionario.get(i).getId_domanda()));
+
+					}
+					System.out.println(user.getEmail());
+					Salvataggio s = new Salvataggio();
+					s.setEmail_utente(user.getEmail());
+					s.setId_test(4);
+					int ultimo = salvataggioServ.findAllSalvataggio().size() + 1;
+					for (int i = 0; i < risposte.size(); i++) {
+						s.setId_salvataggio(ultimo + i);
+						s.setRisposte(risposte.get(i));
+						System.out.println(s);
+						salvataggioServ.save(s);
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		} else {
+			if (!Check.checkName(request.getParameter("nome"))) {
+				response.getWriter().write("1: nome non corretto");
+			}
+			if (!Check.checkSurname(request.getParameter("cognome"))) {
+				response.getWriter().write("2: cognome non corretto");
+			}
+			if (!Check.checkEmail(request.getParameter("email"))) {
+				response.getWriter().write("3: email non corretta");
+			}
+			String descrizione = "Siamo spiacenti si è verificato un errore con la registrazione. Riprova!";
+			model.addAttribute("descrizione", descrizione);
+			return "redirect:/error";
+		}
+		
+		return "redirect:/profilo";
 	}
 
 	@PostMapping("/all")
@@ -81,58 +157,6 @@ public class UtenteControl {
 	@GetMapping("/privacy")
 	public String privacy(Model model) {
 		return "privacy";
-	}
-
-	@PostMapping("/registrati")
-	public String saveUtente(@ModelAttribute("user") Utente user, HttpServletRequest request,
-			HttpServletResponse response, Model model, HttpSession userSession) throws Exception {
-		if (Check.checkName(request.getParameter("nome")) && Check.checkSurname(request.getParameter("cognome"))
-				&& Check.checkEmail(request.getParameter("email"))) {
-			user.setNome(request.getParameter("nome"));
-			user.setCognome(request.getParameter("cognome"));
-			user.setEmail(request.getParameter("email"));
-			user.setPassword(request.getParameter("password"));
-			try {
-				if (utServ.existsById(request.getParameter("email"))) {
-					response.getWriter().write("4 // errore nella registrazione");
-					String error = "Esiste già un utente con questa e-mail";
-					model.addAttribute("descrizione", error);
-					return "redirect:/error?descrizione= " + error;
-					/*
-					 * } else { ArrayList<String> risposteArrayList = new ArrayList<>(); for (int i
-					 * = 1; i <= domServ.countDomandeByIdTest(4); i++) { //potrebbe non servire se
-					 * si inserisce il required nella pagina html if
-					 * (request.getParameter("valore").isEmpty()) { String error =
-					 * "mancata risposta alla domanda n: " + i; model.addAttribute("descrizione",
-					 * error); return "redirect:/registrazione?error="; }
-					 * risposteArrayList.add(request.getParameter("valore"));// id della risposta i
-					 * } for (int i = 0; i < risposteArrayList.size(); i++) {
-					 * salvataggioServ.save(new Salvataggio(4, user.getEmail(),
-					 * risposteArrayList.get(i))); }
-					 */
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			utServ.saveUser(user);
-			userSession.setAttribute("userSession", user.getEmail());
-
-		} else {
-			if (!Check.checkName(request.getParameter("nome"))) {
-				response.getWriter().write("1: nome non corretto");
-			}
-			if (!Check.checkSurname(request.getParameter("cognome"))) {
-				response.getWriter().write("2: cognome non corretto");
-			}
-			if (!Check.checkEmail(request.getParameter("email"))) {
-				response.getWriter().write("3: email non corretta");
-			}
-			String descrizione = "Siamo spiacenti si è verificato un errore con la registrazione. Riprova!";
-			model.addAttribute("descrizione", descrizione);
-			return "redirect:/error";
-		}
-
-		return "redirect:/homepage";
 	}
 
 	@PostMapping("/login")
@@ -180,59 +204,6 @@ public class UtenteControl {
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/homepage";
-	}
-
-	@GetMapping("/regprova") // qui ci dovrebbe andasre il link della registrazioe ma non sono sicura
-	public String prova(Model model) {
-		List<Domanda> questionario = domServ.findByIdTest(4);
-		List<Domanda> prima = split(questionario);
-		List<Domanda> seconda = split2(questionario);
-
-		// System.out.println(prima);
-		// System.out.println(seconda);
-
-		Utente user = new Utente();
-
-		model.addAttribute("user", user);
-		model.addAttribute("questionario1", prima);
-		model.addAttribute("questionario2", seconda);
-		return "registrazione";
-	}
-
-	@PostMapping("/regprova")
-	public String provarisposte(@ModelAttribute("user") Utente user, HttpServletRequest request,
-			HttpServletResponse response, Model model, HttpSession userSession) throws Exception {
-
-		user.setNome(request.getParameter("nome"));
-		user.setCognome(request.getParameter("cognome"));
-		user.setEmail(request.getParameter("email"));
-		user.setPassword(request.getParameter("password"));
-		user.setDataNascita(request.getParameter("dataNascita"));
-		utServ.saveUser(user);
-		userSession.setAttribute("userSession", user);
-
-		List<Domanda> questionario = domServ.findByIdTest(4);
-
-		ArrayList<String> risposte = new ArrayList<>();
-		for (int i = 0; i < domServ.findByIdTest(4).size(); i++) {
-			risposte.add(request.getParameter("valore" + questionario.get(i).getId_domanda()));
-																										
-		}
-		Salvataggio s = new Salvataggio();
-		s.setEmail_utente(user.getEmail());
-		s.setId_test(4);
-		for (int i = 1; i < risposte.size(); i++) {
-			s.setRisposte(risposte.get(i));
-			System.out.println("email" + user.getEmail() + "/n" + "risposte" + risposte.get(i));
-
-		}
-
-		salvataggioServ.save(s);
-
-		System.out.println("Utente:" + user.toString());
-		System.out.println("risposte" + risposte);
-
-		return "redirect:/profilo";
 	}
 
 	// Metodo che prende solo la prima parte delle domande del questionario utente

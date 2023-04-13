@@ -46,14 +46,14 @@ public class ArgomentoStudioControl {
 	//metodo che visualizza l'articolo nel dettaglio
 	@GetMapping("/detail/{id}")
 	public String detailArgomento(@PathVariable("id") int idStudio, Model model) {
-		System.out.println(idStudio);
 		model.addAttribute("argomento", argService.findById(idStudio));
-		return "redirect:/argomenti/ArgomentoView";
+		return "redirect:/ArgomentoView";
 	}
 	
-	@PostMapping("/detail/{id}")
+	@PostMapping("/details/{id}")
 	public String argomentoView(@PathVariable int id_studio, @ModelAttribute("argomento") ArgomentoStudio a, Model model) {
-		model.addAttribute("argomento", a);
-		return "redirect:/argomenti/ArgomentoView";
+		System.out.println(id_studio);
+		model.addAttribute("argomento", argService.findById(id_studio));
+		return "redirect:/ArgomentoView";
 	}
 }

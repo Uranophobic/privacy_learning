@@ -2,32 +2,35 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" href="css/stylesheet.css">
-	<title>Privacy Literacy</title>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/stylesheet.css">
+<title>Privacy Literacy</title>
 </head>
 
 <body>
 	<div th:insert="~{fragments/header::header}"></div>
 	<br>
 	<div class="container-home">
-		<div>
-			<div class="container-sezioni">
-				<!-- sezione benvenuto (senza login) -->
-				<div class="testo">
-					Benvenuto sul <br>portale della privacy
-					<p>Parlaci un po' di te!</p>
-					<br>
-					<p>
-						<a th:href=@{/registrazione} target="_top">Iscriviti e compila il tuo primo questionario ></a>
-					</p>
-				</div>
-				<div class="image-box">
-					<img class="image1" th:src="@{/images/questionario.webp}" alt="">
+		<th:block th:if="${session.isEmpty()}">
+			<div>
+
+				<div class="container-sezioni">
+					<!-- sezione benvenuto (senza login) -->
+					<div class="testo">
+						Benvenuto sul <br>portale della privacy
+						<p>Parlaci un po' di te!</p>
+						<br>
+						<p>
+							<a th:href=@{/registrazione} target="_top">Iscriviti e
+								compila il tuo primo questionario ></a>
+						</p>
+					</div>
+					<div class="image-box">
+						<img class="image1" th:src="@{/images/questionario.webp}" alt="">
+					</div>
 				</div>
 			</div>
-		</div>
-
+		</th:block>
 		<div class="background">
 			<!-- sezione test privacy (senza login) -->
 			<div class="box-titolo">
@@ -42,7 +45,12 @@
 						la privacy!
 					</p>
 					<!-- far riferimento al login è logout, altrimenti far riferimento alla pagina test -->
-					<button class="button-test">Compila il tuo primo test</button>
+					<th:block th:if="${session.isEmpty()}">
+					<a th:href="@{/login}" class="button-test">Compila il tuo primo test</a>
+					</th:block>
+					<th:block th:if="${!session.isEmpty()}">
+					<a th:href="@{/test}" class="button-test">Compila il tuo primo test</a>
+					</th:block>
 				</div>
 
 				<div class="image-box">
@@ -61,14 +69,19 @@
 					studi
 				</div>
 				<div class="container-sezioni">
-					<th:block th:each="arg : ${argomentiView}" th:if="${arg.getId_studio()>(argomentiView.size()-3)}">
+					<th:block th:each="arg : ${argomentiView}"
+						th:if="${arg.getId_studio()>(argomentiView.size()-3)}">
 						<fieldset>
 							<legend th:text="${arg.meta_info}">Meta-Info</legend>
 							<div class="box-argomento">
 								<h3 th:text="${arg.titolo}">Titolo Argomento</h3>
-								<p th:text="${arg.getDescrizione().substring(0,200).concat('...')}">contenuto</p>
+								<p
+									th:text="${arg.getDescrizione().substring(0,200).concat('...')}">contenuto</p>
 							</div>
-							<button class="button"><a th:href="@{/detail/{id}(id=${arg.getId_studio()})}" th:text="Continua"></a></button>
+							<button class="button">
+								<a th:href="@{/detail/{id}(id=${arg.getId_studio()})}"
+									th:text="Continua"></a>
+							</button>
 						</fieldset>
 					</th:block>
 				</div>
@@ -90,26 +103,28 @@
 				</div>
 			</div>
 			<div class="container-sezioni">
-				<th:block th:each="favola : ${tutteFavole}" th:if="${favola.getId_favola() > tutteFavole.size()-3}">
+				<th:block th:each="favola : ${tutteFavole}"
+					th:if="${favola.getId_favola() > tutteFavole.size()-3}">
 					<fieldset>
 						<legend th:text="${favola.meta_info}">Meta-Info</legend>
 						<div class="box-argomento">
-							<h3 style="font-family: 'Tempus Sans ITC'; color:purple;" th:text="${favola.titolo_favola}">
-								Titolo Favola</h3>
-							<p style="font-family: 'Segoe Print'; font-size:x-small;"
-								th:text="${favola.getTesto_favola().substring(0,200).concat('...')}"> Contenuto piccolo
-								della favola</p>
+							<h3 style="font-family: 'Tempus Sans ITC'; color: purple;"
+								th:text="${favola.titolo_favola}">Titolo Favola</h3>
+							<p style="font-family: 'Segoe Print'; font-size: x-small;"
+								th:text="${favola.getTesto_favola().substring(0,200).concat('...')}">
+								Contenuto piccolo della favola</p>
 						</div>
-						<button class="button" type="submit" th:href="@{/favole/details/{id}(id=${favola.id_favola})}">Continua</button>
+						<button class="button" type="submit"
+							th:href="@{/favole/details/{id}(id=${favola.id_favola})}">Continua</button>
 					</fieldset>
 				</th:block>
 			</div>
-				<br>
-				<p class="altro">
-					<a href="/favole/leggi-una-favola">Vedi altro ></a>
-				</p>
-				<br>
-			
+			<br>
+			<p class="altro">
+				<a href="/favole/leggi-una-favola">Vedi altro ></a>
+			</p>
+			<br>
+
 		</div>
 
 		<div class="background">
@@ -120,25 +135,26 @@
 				</div>
 			</div>
 			<div class="container-sezioni">
-				<th:block th:each="art : ${tuttiArticoli}" th:if="${art.getIdArticolo() > (tuttiArticoli.size()-3)}">
+				<th:block th:each="art : ${tuttiArticoli}"
+					th:if="${art.getId_articolo() > (tuttiArticoli.size()-3)}">
 					<div class="box-articolo">
 						<div class="testo-articolo">
 							<br>
 							<h3 th:text="${art.getTitolo()}">Titolo articolo</h3>
 							<p th:text="${art.getMetaInfo()}">metainfo</p>
-							<br>
-							<a target="_blank" style="color: blue;" th:href="${art.getLink()}"
-								th:value="${art.getLink()}">Contenuto articolo</a>
+							<br> <a target="_blank" style="color: blue;"
+								th:href="${art.getLink()}" th:value="${art.getLink()}">Contenuto
+								articolo</a>
 						</div>
 					</div>
 				</th:block>
 			</div>
-				<p class="altro">
-					<a th:href="@{/article/leggi-un-articolo}">Vedi altro ></a>
-				</p>
-				<br>
-			</div>
-		
+			<p class="altro">
+				<a th:href="@{/article/leggi-un-articolo}">Vedi altro ></a>
+			</p>
+			<br>
+		</div>
+
 	</div>
 	<!--  <div th:insert="fragments/footer::footer"></div>  DEVO ANCORA CREARLO -->
 </body>

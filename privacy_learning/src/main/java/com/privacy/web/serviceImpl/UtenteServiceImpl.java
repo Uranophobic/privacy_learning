@@ -3,6 +3,7 @@ package com.privacy.web.serviceImpl;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.privacy.web.model.Utente;
@@ -11,7 +12,7 @@ import com.privacy.web.service.UtenteService;
 
 @Service
 public class UtenteServiceImpl implements UtenteService {
-
+	@Autowired
 	private UtenteRepository utenteRep;
 
 	public UtenteServiceImpl(UtenteRepository utenteRep) {

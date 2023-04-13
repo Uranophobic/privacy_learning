@@ -2,7 +2,7 @@ package com.privacy.web.serviceImpl;
 
 import java.util.List;
 
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.privacy.web.model.Salvataggio;
@@ -12,7 +12,7 @@ import com.privacy.web.service.SalvataggioService;
 @Service
 public class SalvataggioServiceImpl implements SalvataggioService {
 
-
+	@Autowired
 	private SalvataggioRepository salRep;
 	
 	@Override
