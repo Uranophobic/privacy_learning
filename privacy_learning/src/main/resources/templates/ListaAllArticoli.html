@@ -12,7 +12,30 @@
 		<div class="background">
 			<!-- CONTROLLO SE L'UTENTE SIA ADMIN -->
 			<th:block
-				th:if="${!session.isEmpty()} and (${session.userSession.email.equals('admin@gmail.com')})">
+				th:if="${!session.isEmpty()} and (${session.userSession.email.equals('admin@gmail.com')})" th:each="art : ${tuttiArticoli}">
+				<fieldset>
+					<div class="testo-articolo">
+						<br>
+						<h3 th:text="${art.getTitolo()}">Titolo articolo</h3>
+						<p th:text="${art.getMetaInfo()}">metainfo</p>
+						<br> <a target="_blank" style="color: blue;"
+							th:href="${art.getLink()}" th:value="${art.getLink()}">Contenuto
+							articolo</a>
+							<br> <br>
+						<button class=button type="submit">
+							<a th:href="@{/fixedArticolo/{id}(id=${art.getIdArticolo()})}">Modifica</a>
+						</button>
+						<button class=button type="submit">
+							<a th:href="@{/deleteArticolo/{id}(id=${art.getIdArticolo()})}">Elimina</a>
+						</button>
+					</div>
+
+				</fieldset>
+			</th:block>
+
+			<!--  ALTRIMENTI -->
+			<th:block
+				th:if="${session.isEmpty()} or ${!(session.userSession.email.equals('admin@gmail.com'))}">
 				<div class="grid-container">
 					<th:block th:each="art : ${tuttiArticoli}">
 						<div class="grid-item">
@@ -25,32 +48,10 @@
 										th:href="${art.getLink()}" th:value="${art.getLink()}">Contenuto
 										articolo</a>
 								</div>
-								<button class=button type="submit">
-									<a th:href="@{/fixedArticolo/{id}(id=${art.getIdArticolo()})}">Modifica</a>
-								</button>
-								<button class=button type="submit">
-									<a th:href="@{/deleteArticolo/{id}(id=${art.getIdArticolo()})}">Elimina</a>
-								</button>
 							</fieldset>
 						</div>
 					</th:block>
 				</div>
-			</th:block>
-
-			<!--  ALTRIMENTI -->
-			<th:block
-				th:if="${session.isEmpty()} or ${!(session.userSession.email.equals('admin@gmail.com'))}"
-				th:each="art : ${tuttiArticoli}">
-				<fieldset>
-					<div class="testo-articolo">
-						<br>
-						<h3 th:text="${art.getTitolo()}">Titolo articolo</h3>
-						<p th:text="${art.getMetaInfo()}">metainfo</p>
-						<br> <a target="_blank" style="color: blue;"
-							th:href="${art.getLink()}" th:value="${art.getLink()}">Contenuto
-							articolo</a>
-					</div>
-				</fieldset>
 			</th:block>
 		</div>
 	</div>
