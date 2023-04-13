@@ -1,5 +1,7 @@
 package com.privacy.web.control;
 
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.privacy.web.model.Domanda;
 import com.privacy.web.model.Utente;
 import com.privacy.web.utils.Check;
 
@@ -22,9 +25,7 @@ import com.privacy.web.service.DomandaService;
 import com.privacy.web.service.SalvataggioService;
 import com.privacy.web.service.TestService;
 import com.privacy.web.service.UtenteService;
-import com.privacy.web.serviceImpl.SalvataggioServiceImpl;
-import com.privacy.web.serviceImpl.TestServiceImpl;
-import com.privacy.web.serviceImpl.UtenteServiceImpl;
+
 
 @Controller
 @RequestMapping("/users")
@@ -39,7 +40,9 @@ public class UtenteControl {
 	@Autowired
 	private DomandaService domServ;
 
-	public UtenteControl(UtenteServiceImpl utServ, SalvataggioServiceImpl salvataggioRep, TestServiceImpl testServ) {
+	List <String> risposte;
+	
+	public UtenteControl(UtenteService utServ, SalvataggioService salvataggioRep, TestService testServ) {
 		super();
 		this.utServ = utServ;
 		this.salvataggioServ = salvataggioRep;
@@ -61,6 +64,17 @@ public class UtenteControl {
 		Utente user = new Utente();
 		model.addAttribute("user", user);
 		return "create_user";
+	}
+	
+	@PostMapping("/all")
+	public String saveUtente(@ModelAttribute("user") Utente user) {
+		try {
+			utServ.saveUser(user);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "redirect:/homepage";
 	}
 
 	//metodo che inoltra alla pagina privacy
@@ -171,4 +185,91 @@ public class UtenteControl {
 		session.invalidate();
 		return "redirect:/homepage";
 	}
+	
+	@GetMapping("/regprova") // qui ci dovrebbe andasre il link della registrazioe ma non sono sicura
+	public String prova(Model model) {
+		List<Domanda> questionario = domServ.findByIdTest(4);
+		List<Domanda> prima = split(questionario);
+		List<Domanda> seconda = split2(questionario);
+		
+		//System.out.println(prima);
+		//System.out.println(seconda);
+		
+		Utente user = new Utente();
+		
+		model.addAttribute("user", user);
+		model.addAttribute("questionario1", prima);
+		model.addAttribute("questionario2", seconda);
+		return "registrazione";
+	}
+	
+	
+	@PostMapping("/regprova")
+	public String provarisposte (@ModelAttribute("user") Utente user, HttpServletRequest request,
+			HttpServletResponse response, Model model, HttpSession userSession) throws Exception{
+		
+		user.setNome(request.getParameter("nome"));
+		user.setCognome(request.getParameter("cognome"));
+		user.setEmail(request.getParameter("email"));
+		user.setPassword(request.getParameter("password"));
+		user.setDataNascita(request.getParameter("dataNascita"));
+		utServ.saveUser(user);
+		userSession.setAttribute("userSession", user);
+		
+		List<Domanda> questionario = domServ.findByIdTest(4);
+		
+		for(int i=0; i<questionario.size(); i++) {
+			//la lista ho dovuto crearla nel costruttore
+			//risposte.add(request.getParameter("valore"+questionario.get(i)));
+			System.out.println(request.getParameter("valore"+questionario.get(i)));
+		}
+		
+		System.out.println("Utente:" + user.toString());
+		System.out.println("risposte" + risposte);
+		
+		return "redirect:/profilo";
+	}
+
+	// Metodo che prende solo la prima parte delle domande del questionario utente
+	public static List<Domanda> split(List<Domanda> list) {
+		// crea due liste vuote
+		List<Domanda> first = new ArrayList<Domanda>();
+
+		// ottieni la dimensione dell'elenco
+		int size = list.size();
+
+		// elabora ogni elemento dell'elenco e lo aggiunge al primo elenco
+		// o secondo elenco in base alla sua posizione
+		for (int i = 0; i < size; i++) {
+			if (i < (size + 1) / 2) {
+				first.add(list.get(i));
+			}
+
+		}
+		// restituisce un array di elenchi per contenere entrambi gli elenchi
+		return first;
+	}
+
+	
+	// Metodo che prende solo la seconda parte delle domande del questionario utente
+	public static List<Domanda> split2(List<Domanda> list) {
+		// crea due liste vuote
+		List<Domanda> second = new ArrayList<Domanda>();
+
+		// ottieni la dimensione dell'elenco
+		int size = list.size();
+
+		// elabora ogni elemento dell'elenco e lo aggiunge al primo elenco
+		// o secondo elenco in base alla sua posizione
+		for (int i = 0; i < size; i++) {
+			if (i >= (size + 1) / 2) {
+				second.add(list.get(i));
+			}
+
+		}
+		// restituisce un array di elenchi per contenere entrambi gli elenchi
+		return second;
+	}
 }
+	
+	
