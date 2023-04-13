@@ -4,26 +4,15 @@
 <head>
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="../css/stylesheet.css">
-<style>
-.grid-container {
-  display: grid;
-  grid-template-columns: auto auto auto;
-}
-.grid-item {
-  padding: 20px;
-  text-align: center;
-}
-</style>
 <title>Privacy Literacy</title>
 </head>
 
 <body>
 	<div th:insert="~{fragments/header::header}"></div>
+	<!-- CONTROLLO SE L'UTENTE SIA ADMIN -->
 	<div class="container-home">
 		<div class="background">
-			<div class="grid-container">
-				<th:block th:each="arg : ${argomentiView}">
-					<div class="grid-item">
+			<th:block th:if="${!session.isEmpty()} and ${session.userSession.email.equals('admin@gmail.com')}" th:each="arg : ${argomentiView}">
 					<fieldset>
 						<legend th:text="${arg.meta_info}">Meta-Info</legend>
 						<div class="box-argomento">
@@ -32,11 +21,35 @@
 								th:text="${arg.getDescrizione().substring(0,200).concat('...')}">contenuto</p>
 						</div>
 						<button class="button">Continua</button>
-					</fieldset>
+					<button class=button type="submit">
+						<a th:href="@{/fixedArgomento/{id}(id=${arg.getId_studio()})}">Modifica</a>
+					</button>
+					<button class=button type="submit">
+						<a th:href="@{/deleteArgomento/{id}(id=${arg.getId_studio()})}">Elimina</a>
+					</button>
+				</fieldset>
+		</th:block>
+		<!--  ALTRIMENTI -->
+		<th:block
+			th:if="${session.isEmpty()} or ${!(session.userSession.email.equals('admin@gmail.com'))}">
+			<div class="grid-container">
+				<th:block th:each="arg : ${argomentiView}">
+					<div class="grid-item">
+						<fieldset>
+							<legend th:text="${arg.meta_info}">Meta-Info</legend>
+							<div class="box-argomento">
+								<h3 th:text="${arg.titolo}">Titolo Argomento</h3>
+								<p
+									th:text="${arg.getDescrizione().substring(0,200).concat('...')}">contenuto</p>
+							</div>
+							<button class="button">Continua</button>
+						</fieldset>
 					</div>
 				</th:block>
 			</div>
-		</div>
+		</th:block>
 	</div>
+	</div>
+
 </body>
 </html>

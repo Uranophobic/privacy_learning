@@ -20,7 +20,7 @@ import lombok.NonNull;
 public class ArgomentoStudio {
 	@Column(name = "id_studio")
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
-	private int idStudio;
+	private int id_studio;
 	@Column(name = "titolo")
 	private String titolo;
 	@Column(name = "descrizione")

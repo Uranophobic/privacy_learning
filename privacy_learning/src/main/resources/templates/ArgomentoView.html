@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/stylesheet.css">
+<title>Privacy Literacy</title>
+</head>
+
+<body>
+	<div th:insert="~{fragments/header::header}"></div>
+	<br>
+	<div class="container-home">
+		<form
+			th:action="@{argomenti/detail/{id}(id=${argomento.getId_studio()})}"
+			th:object="argomento" method=get>
+			<div class="background">
+				<div class="box-titolo">
+					<div class="titolo" th:text="${argomento.titolo}">titolo
+						argomento</div>
+				</div>
+				<fieldset>
+					<legend th:text="${argomento.meta_info}">Meta-Info</legend>
+					<div class="box-argomento">
+						<p th:text="${argomento.descrizione}">contenuto</p>
+					</div>
+				</fieldset>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

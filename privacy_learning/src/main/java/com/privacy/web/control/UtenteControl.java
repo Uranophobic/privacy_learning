@@ -166,4 +166,9 @@ public class UtenteControl {
 		return "redirect:/users/all";
 	}
 
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/homepage";
+	}
 }

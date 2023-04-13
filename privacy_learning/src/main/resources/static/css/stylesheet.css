@@ -177,6 +177,15 @@ body {
 	color: white;
 }
 
+.grid-container {
+	display: grid;
+	grid-template-columns: auto auto auto;
+}
+
+.grid-item {
+	padding: 20px;
+	text-align: center;
+}
 
 
 @media (max-width: 480px) {

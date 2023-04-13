@@ -1,6 +1,5 @@
 package com.privacy.web.control;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -17,27 +18,42 @@ import com.privacy.web.serviceImpl.ArgomentoStudioServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-
 @Controller
 @RequestMapping("/argomenti")
 public class ArgomentoStudioControl {
 	@Autowired
 	private ArgomentoStudioServiceImpl argService;
-	
-	
-	//pagina in cui ci sono tutti gli argomenti studio
-	@GetMapping("/studia-con-noi") 
+
+	// pagina in cui ci sono tutti gli argomenti studio
+	@GetMapping("/studia-con-noi")
 	public String argomenti(Model model) {
 		model.addAttribute("argomentiView", argService.findAllArgomenti());
 		return "ListaAllArgomenti";
 	}
-	
+
 	@GetMapping("/argomentiHome")
-	public ModelAndView visualizzaArgomenti(@ModelAttribute("listaArgomenti") HttpServletRequest request, HttpServletResponse resp) {
+	public ModelAndView visualizzaArgomenti(@ModelAttribute("listaArgomenti") HttpServletRequest request,
+			HttpServletResponse resp) {
 		List<ArgomentoStudio> argomentiHome = argService.findAllArgomenti();
-		for(ArgomentoStudio list : argomentiHome) {
-			if(list.getIdStudio() > 3) argomentiHome.remove(list);
+		for (ArgomentoStudio list : argomentiHome) {
+			if (list.getId_studio() > 3)
+				
+				argomentiHome.remove(list);
 		}
-	return new ModelAndView("HomePage", "listaArgomenti", argomentiHome);
-}
+		return new ModelAndView("HomePage", "listaArgomenti", argomentiHome);
+	}
+	
+	//metodo che visualizza l'articolo nel dettaglio
+	@GetMapping("/detail/{id}")
+	public String detailArgomento(@PathVariable("id") int idStudio, Model model) {
+		System.out.println(idStudio);
+		model.addAttribute("argomento", argService.findById(idStudio));
+		return "redirect:/argomenti/ArgomentoView";
+	}
+	
+	@PostMapping("/detail/{id}")
+	public String argomentoView(@PathVariable int id_studio, @ModelAttribute("argomento") ArgomentoStudio a, Model model) {
+		model.addAttribute("argomento", a);
+		return "redirect:/argomenti/ArgomentoView";
+	}
 }

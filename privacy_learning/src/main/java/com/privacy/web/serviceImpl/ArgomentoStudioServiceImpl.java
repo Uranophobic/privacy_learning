@@ -20,4 +20,10 @@ public class ArgomentoStudioServiceImpl implements ArgomentoStudioService{
 		return (List<ArgomentoStudio>) argRep.findAll();
 	}
 
+	@Override
+	public ArgomentoStudio findById(int id) {
+		// TODO Auto-generated method stub
+		return argRep.findArgomentoById(id);
+	}
+
 }

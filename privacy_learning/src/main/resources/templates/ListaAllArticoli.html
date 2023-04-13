@@ -3,17 +3,6 @@
 <head>
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="../css/stylesheet.css">
-<style>
-.grid-container {
-	display: grid;
-	grid-template-columns: auto auto auto;
-}
-
-.grid-item {
-	padding: 20px;
-	text-align: center;
-}
-</style>
 <title>Privacy Literacy</title>
 </head>
 
@@ -21,12 +10,13 @@
 	<div th:insert="~{fragments/header::header}"></div>
 	<div class="container-home">
 		<div class="background">
-
-			<div class="grid-container">
-				<th:block th:each="art : ${tuttiArticoli}">
-					<div class="grid-item">
-						<fieldset>
-							
+			<!-- CONTROLLO SE L'UTENTE SIA ADMIN -->
+			<th:block
+				th:if="${!session.isEmpty()} and (${session.userSession.email.equals('admin@gmail.com')})">
+				<div class="grid-container">
+					<th:block th:each="art : ${tuttiArticoli}">
+						<div class="grid-item">
+							<fieldset>
 								<div class="testo-articolo">
 									<br>
 									<h3 th:text="${art.getTitolo()}">Titolo articolo</h3>
@@ -35,11 +25,33 @@
 										th:href="${art.getLink()}" th:value="${art.getLink()}">Contenuto
 										articolo</a>
 								</div>
-							
-						</fieldset>
+								<button class=button type="submit">
+									<a th:href="@{/fixedArticolo/{id}(id=${art.getIdArticolo()})}">Modifica</a>
+								</button>
+								<button class=button type="submit">
+									<a th:href="@{/deleteArticolo/{id}(id=${art.getIdArticolo()})}">Elimina</a>
+								</button>
+							</fieldset>
+						</div>
+					</th:block>
+				</div>
+			</th:block>
+
+			<!--  ALTRIMENTI -->
+			<th:block
+				th:if="${session.isEmpty()} or ${!(session.userSession.email.equals('admin@gmail.com'))}"
+				th:each="art : ${tuttiArticoli}">
+				<fieldset>
+					<div class="testo-articolo">
+						<br>
+						<h3 th:text="${art.getTitolo()}">Titolo articolo</h3>
+						<p th:text="${art.getMetaInfo()}">metainfo</p>
+						<br> <a target="_blank" style="color: blue;"
+							th:href="${art.getLink()}" th:value="${art.getLink()}">Contenuto
+							articolo</a>
 					</div>
-				</th:block>
-			</div>
+				</fieldset>
+			</th:block>
 		</div>
 	</div>
 </body>

@@ -5,6 +5,6 @@ import org.springframework.stereotype.Service;
 import com.privacy.web.model.ArgomentoStudio;
 @Service
 public interface ArgomentoStudioService {
-	
+	public ArgomentoStudio findById(int id);
 	public List<ArgomentoStudio> findAllArgomenti();
 }
