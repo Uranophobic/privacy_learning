@@ -42,10 +42,10 @@
 		}
 
 		.spaceradio {
-			display: ruby;
-			margin: 5px;
-			font-weight: 200;
-		}
+	display: inline-flex;
+	margin: 5px;
+	font-weight: 200;
+}
 
 		.containerReg .form-outer {
 			width: 100%;
@@ -371,21 +371,21 @@
 									<p class="domanda" th:text="${dom.testo}"></p>
 								</div>
 								<div class="spaceradio">
-									<input type="radio" th:name="'valore'+${dom.id_domanda}" id="mai" value="perniente"
+									<input type="radio" th:name="'valore'+${dom.id_domanda}" id="mai" value="mai"
 										placeholder="perniente" required />
 									<p th:text="${dom.risposta1}"></p>
 								</div>
 								<div class="spaceradio">
-									<input type="radio" th:name="'valore'+${dom.id_domanda}" id="raramente" value="poco" placeholder="poco" required />
+									<input type="radio" th:name="'valore'+${dom.id_domanda}" id="raramente" value="raramente" placeholder="poco" required />
 									<p th:text="${dom.risposta2}"></p>
 								</div>
 								<div class="spaceradio">
-									<input type="radio" th:name="'valore'+${dom.id_domanda}" id="spesso" value="abbastanza"
+									<input type="radio" th:name="'valore'+${dom.id_domanda}" id="spesso" value="spesso"
 										placeholder="abbastanza" required />
 									<p th:text="${dom.risposta3}"></p>
 								</div>
 								<div class="spaceradio">
-									<input type="radio" th:name="'valore'+${dom.id_domanda}" id="sempre" value="tanto" placeholder="tanto" required/>
+									<input type="radio" th:name="'valore'+${dom.id_domanda}" id="sempre" value="sempre" placeholder="tanto" required/>
 									<p th:text="${dom.risposta4}"></p>
 								</div>
 							</div>
@@ -412,21 +412,21 @@
 									<p class="domanda" th:text="${dom.testo}"></p>
 								</div>
 								<div class="spaceradio">
-									<input type="radio" th:name="'valore'+${dom.id_domanda}" id="mai" value="perniente"
+									<input type="radio" th:name="'valore'+${dom.id_domanda}" id="mai" value="mai"
 										placeholder="perniente" required />
 									<p th:text="${dom.risposta1}"></p>
 								</div>
 								<div class="spaceradio">
-									<input type="radio" th:name="'valore'+${dom.id_domanda}" id="raramente" value="poco" placeholder="poco" required />
+									<input type="radio" th:name="'valore'+${dom.id_domanda}" id="raramente" value="raramente" placeholder="poco" required />
 									<p th:text="${dom.risposta2}"></p>
 								</div>
 								<div class="spaceradio">
-									<input type="radio" th:name="'valore'+${dom.id_domanda}" id="spesso" value="abbastanza"
+									<input type="radio" th:name="'valore'+${dom.id_domanda}" id="spesso" value="spesso"
 										placeholder="abbastanza" required />
 									<p th:text="${dom.risposta3}"></p>
 								</div>
 								<div class="spaceradio">
-									<input type="radio" th:name="'valore'+${dom.id_domanda}" id="sempre" value="tanto" placeholder="tanto" required/>
+									<input type="radio" th:name="'valore'+${dom.id_domanda}" id="sempre" value="sempre" placeholder="tanto" required/>
 									<p th:text="${dom.risposta4}"></p>
 								</div>
 							</div>

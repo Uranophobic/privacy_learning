@@ -9,7 +9,7 @@ import com.privacy.web.model.Salvataggio;
 @Service
 public interface SalvataggioService {
 	
-	void save(Salvataggio s);
+	Salvataggio save(Salvataggio s) throws Exception;
 	List<Salvataggio> findAllSalvataggio();
-	List<Salvataggio> findAllByEmail(String email);
+	/* List<Salvataggio> findAllByEmail(String email); */
 }

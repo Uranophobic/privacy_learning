@@ -16,14 +16,17 @@ public class DomandaServiceImpl implements DomandaService {
 	@Autowired
 	private DomandaRepository domRep;
 
-	@Override
-	public int countDomandeByIdTest(int id_test) {
-		return domRep.countDomandeByIdTest(id_test);
-	}
 
 	@Override
 	public List<Domanda> findByIdTest(int idTest) {
 		return domRep.findByIdTest(idTest);
+	}
+
+
+	@Override
+	public int countDomandeByIdTest(int id_test) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.privacy.web.model.Domanda;
+import com.privacy.web.model.Salvataggio;
 import com.privacy.web.model.Utente;
 import com.privacy.web.utils.Check;
 
@@ -25,7 +26,6 @@ import com.privacy.web.service.DomandaService;
 import com.privacy.web.service.SalvataggioService;
 import com.privacy.web.service.TestService;
 import com.privacy.web.service.UtenteService;
-
 
 @Controller
 @RequestMapping("/users")
@@ -40,8 +40,8 @@ public class UtenteControl {
 	@Autowired
 	private DomandaService domServ;
 
-	List <String> risposte;
-	
+
+
 	public UtenteControl(UtenteService utServ, SalvataggioService salvataggioRep, TestService testServ) {
 		super();
 		this.utServ = utServ;
@@ -65,7 +65,7 @@ public class UtenteControl {
 		model.addAttribute("user", user);
 		return "create_user";
 	}
-	
+
 	@PostMapping("/all")
 	public String saveUtente(@ModelAttribute("user") Utente user) {
 		try {
@@ -77,17 +77,16 @@ public class UtenteControl {
 		return "redirect:/homepage";
 	}
 
-	//metodo che inoltra alla pagina privacy
+	// metodo che inoltra alla pagina privacy
 	@GetMapping("/privacy")
 	public String privacy(Model model) {
 		return "privacy";
 	}
-	
+
 	@PostMapping("/registrati")
 	public String saveUtente(@ModelAttribute("user") Utente user, HttpServletRequest request,
 			HttpServletResponse response, Model model, HttpSession userSession) throws Exception {
-		if (Check.checkName(request.getParameter("nome")) 
-				&& Check.checkSurname(request.getParameter("cognome"))
+		if (Check.checkName(request.getParameter("nome")) && Check.checkSurname(request.getParameter("cognome"))
 				&& Check.checkEmail(request.getParameter("email"))) {
 			user.setNome(request.getParameter("nome"));
 			user.setCognome(request.getParameter("cognome"));
@@ -98,28 +97,26 @@ public class UtenteControl {
 					response.getWriter().write("4 // errore nella registrazione");
 					String error = "Esiste già un utente con questa e-mail";
 					model.addAttribute("descrizione", error);
-					return "redirect:/error?descrizione= "+error;
-	/*			} else {
-					ArrayList<String> risposteArrayList = new ArrayList<>();
-					for (int i = 1; i <= domServ.countDomandeByIdTest(4); i++) {
-						//potrebbe non servire se si inserisce il required nella pagina  html
-						if (request.getParameter("valore").isEmpty()) {
-							String error = "mancata risposta alla domanda n: " + i;
-							model.addAttribute("descrizione", error);
-							return "redirect:/registrazione?error=";
-						}
-						risposteArrayList.add(request.getParameter("valore"));// id della risposta i
-					}
-					for (int i = 0; i < risposteArrayList.size(); i++) {
-						salvataggioServ.save(new Salvataggio(4, user.getEmail(), risposteArrayList.get(i)));
-					} */
+					return "redirect:/error?descrizione= " + error;
+					/*
+					 * } else { ArrayList<String> risposteArrayList = new ArrayList<>(); for (int i
+					 * = 1; i <= domServ.countDomandeByIdTest(4); i++) { //potrebbe non servire se
+					 * si inserisce il required nella pagina html if
+					 * (request.getParameter("valore").isEmpty()) { String error =
+					 * "mancata risposta alla domanda n: " + i; model.addAttribute("descrizione",
+					 * error); return "redirect:/registrazione?error="; }
+					 * risposteArrayList.add(request.getParameter("valore"));// id della risposta i
+					 * } for (int i = 0; i < risposteArrayList.size(); i++) {
+					 * salvataggioServ.save(new Salvataggio(4, user.getEmail(),
+					 * risposteArrayList.get(i))); }
+					 */
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			utServ.saveUser(user);
 			userSession.setAttribute("userSession", user.getEmail());
-			
+
 		} else {
 			if (!Check.checkName(request.getParameter("nome"))) {
 				response.getWriter().write("1: nome non corretto");
@@ -134,46 +131,45 @@ public class UtenteControl {
 			model.addAttribute("descrizione", descrizione);
 			return "redirect:/error";
 		}
-		
+
 		return "redirect:/homepage";
 	}
 
 	@PostMapping("/login")
 	public String sessioneUtente(@ModelAttribute("user") Utente user, HttpServletRequest request,
 			HttpServletResponse response, Model model, HttpSession userSession) throws Exception {
-		
-		if(userSession.getAttribute("user")!=null) {//"sessione già esistente"
+
+		if (userSession.getAttribute("user") != null) {// "sessione già esistente"
 			return "forward:/profilo";
 		}
-		String email=request.getParameter("email");
-		String pwd= request.getParameter("password");
+		String email = request.getParameter("email");
+		String pwd = request.getParameter("password");
 		if (email != null && pwd != null) {
-            if (email.trim().length() == 0) {
-                response.getWriter().write("1"); //email vuota
-            }
-            if (pwd.trim().length() == 0) {
-                response.getWriter().write("2"); //password vuota
-            }
-      try {
-    	  user = utServ.findUtenteByEmailAndPassword(email, pwd);
-		if (user!=null) {
-			userSession.setAttribute("userSession", user);
-			return "redirect:/profilo";
+			if (email.trim().length() == 0) {
+				response.getWriter().write("1"); // email vuota
+			}
+			if (pwd.trim().length() == 0) {
+				response.getWriter().write("2"); // password vuota
+			}
+			try {
+				user = utServ.findUtenteByEmailAndPassword(email, pwd);
+				if (user != null) {
+					userSession.setAttribute("userSession", user);
+					return "redirect:/profilo";
+				} else {
+					response.getWriter().write("4: utente non valido");
+					String error = "Email o password errata";
+					model.addAttribute("descrizione", error);
+					return "redirect:/error?descrizione= " + error;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-		else  {
-		response.getWriter().write("4: utente non valido");
-		String error = "Email o password errata";
-		model.addAttribute("descrizione", error);
-		return "redirect:/error?descrizione= "+error;
-		}
-      } catch (Exception e) {
-		e.printStackTrace();
+		String error = "email o password null";
+		return "redirect:/login?errorDesc=" + error;
 	}
-		}
-		String error="email o password null";
-    	  return "redirect:/login?errorDesc="+error; 
-	}
-	
+
 	@GetMapping("/users/{id}")
 	public String eliminaUtente(@PathVariable String email, Model model) {
 		utServ.deleteById(email);
@@ -185,29 +181,28 @@ public class UtenteControl {
 		session.invalidate();
 		return "redirect:/homepage";
 	}
-	
+
 	@GetMapping("/regprova") // qui ci dovrebbe andasre il link della registrazioe ma non sono sicura
 	public String prova(Model model) {
 		List<Domanda> questionario = domServ.findByIdTest(4);
 		List<Domanda> prima = split(questionario);
 		List<Domanda> seconda = split2(questionario);
-		
-		//System.out.println(prima);
-		//System.out.println(seconda);
-		
+
+		// System.out.println(prima);
+		// System.out.println(seconda);
+
 		Utente user = new Utente();
-		
+
 		model.addAttribute("user", user);
 		model.addAttribute("questionario1", prima);
 		model.addAttribute("questionario2", seconda);
 		return "registrazione";
 	}
-	
-	
+
 	@PostMapping("/regprova")
-	public String provarisposte (@ModelAttribute("user") Utente user, HttpServletRequest request,
-			HttpServletResponse response, Model model, HttpSession userSession) throws Exception{
-		
+	public String provarisposte(@ModelAttribute("user") Utente user, HttpServletRequest request,
+			HttpServletResponse response, Model model, HttpSession userSession) throws Exception {
+
 		user.setNome(request.getParameter("nome"));
 		user.setCognome(request.getParameter("cognome"));
 		user.setEmail(request.getParameter("email"));
@@ -215,18 +210,28 @@ public class UtenteControl {
 		user.setDataNascita(request.getParameter("dataNascita"));
 		utServ.saveUser(user);
 		userSession.setAttribute("userSession", user);
-		
+
 		List<Domanda> questionario = domServ.findByIdTest(4);
-		
-		for(int i=0; i<questionario.size(); i++) {
-			//la lista ho dovuto crearla nel costruttore
-			//risposte.add(request.getParameter("valore"+questionario.get(i)));
-			System.out.println(request.getParameter("valore"+questionario.get(i)));
+
+		ArrayList<String> risposte = new ArrayList<>();
+		for (int i = 0; i < domServ.findByIdTest(4).size(); i++) {
+			risposte.add(request.getParameter("valore" + questionario.get(i).getId_domanda()));
+																										
 		}
-		
+		Salvataggio s = new Salvataggio();
+		s.setEmail_utente(user.getEmail());
+		s.setId_test(4);
+		for (int i = 1; i < risposte.size(); i++) {
+			s.setRisposte(risposte.get(i));
+			System.out.println("email" + user.getEmail() + "/n" + "risposte" + risposte.get(i));
+
+		}
+
+		salvataggioServ.save(s);
+
 		System.out.println("Utente:" + user.toString());
 		System.out.println("risposte" + risposte);
-		
+
 		return "redirect:/profilo";
 	}
 
@@ -250,7 +255,6 @@ public class UtenteControl {
 		return first;
 	}
 
-	
 	// Metodo che prende solo la seconda parte delle domande del questionario utente
 	public static List<Domanda> split2(List<Domanda> list) {
 		// crea due liste vuote
@@ -271,5 +275,3 @@ public class UtenteControl {
 		return second;
 	}
 }
-	
-	
