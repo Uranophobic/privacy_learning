@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" href="../css/stylesheet.css">
+<style>
+.grid-container {
+	display: grid;
+	grid-template-columns: auto auto auto;
+}
+
+.grid-item {
+	padding: 20px;
+	text-align: center;
+}
+</style>
+<title>Privacy Literacy</title>
+</head>
+
+<body>
+	<div th:insert="~{fragments/header::header}"></div>
+	<div class="container-home">
+		<div class="background">
+
+			<div class="grid-container">
+				<th:block th:each="art : ${tuttiArticoli}">
+					<div class="grid-item">
+						<fieldset>
+							
+								<div class="testo-articolo">
+									<br>
+									<h3 th:text="${art.getTitolo()}">Titolo articolo</h3>
+									<p th:text="${art.getMetaInfo()}">metainfo</p>
+									<br> <a target="_blank" style="color: blue;"
+										th:href="${art.getLink()}" th:value="${art.getLink()}">Contenuto
+										articolo</a>
+								</div>
+							
+						</fieldset>
+					</div>
+				</th:block>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

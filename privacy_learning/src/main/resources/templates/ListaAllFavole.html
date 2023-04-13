@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" href="../css/stylesheet.css">
+<title>Privacy Literacy</title>
+</head>
+
+<body>
+	<div th:insert="~{fragments/header::header}"></div>
+	<div class="container-home">
+		 <th:block th:each="favola : ${tutteFavole}">
+				<fieldset>
+					<legend th:text="${favola.meta_info}">Meta-Info</legend>
+					<div class="box-argomento">
+					
+						<h3 style="font-family: 'Tempus Sans ITC'; color: purple;"
+							th:text="${favola.titolo_favola}">Titolo Favola</h3>
+						<p style="font-family: 'Segoe Print'; font-size: x-small;"
+							th:text="${favola.getTesto_favola().substring(0,200).concat('...')}">
+							Contenuto piccolo della favola</p>
+					</div>
+					<button class="button" type="submit">Continua</button>
+				</fieldset>
+			</th:block>
+	</div>
+</body>
+</html>

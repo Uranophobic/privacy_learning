@@ -19,7 +19,7 @@ public class TestControl {
 	@Autowired
 	private DomandaService domServ;
 	
-	@GetMapping("/regprova")  //qui ci dovrebbe andasre il link della registrazioe ma non sono sicura
+	@GetMapping("/regprova")  //qui ci dovrebbe andasre il link della registrazione ma non sono sicura
 	public String prova(Model model) {
 		List<Domanda> questionario = domServ.findByIdTest(4);
 		model.addAttribute("questionario", questionario);

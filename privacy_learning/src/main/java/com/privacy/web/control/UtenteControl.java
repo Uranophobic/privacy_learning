@@ -63,6 +63,12 @@ public class UtenteControl {
 		return "create_user";
 	}
 
+	//metodo che inoltra alla pagina privacy
+	@GetMapping("/privacy")
+	public String privacy(Model model) {
+		return "privacy";
+	}
+	
 	@PostMapping("/registrati")
 	public String saveUtente(@ModelAttribute("user") Utente user, HttpServletRequest request,
 			HttpServletResponse response, Model model, HttpSession userSession) throws Exception {
@@ -82,12 +88,13 @@ public class UtenteControl {
 	/*			} else {
 					ArrayList<String> risposteArrayList = new ArrayList<>();
 					for (int i = 1; i <= domServ.countDomandeByIdTest(4); i++) {
-						if (request.getParameter("r" + i).isEmpty()) {
+						//potrebbe non servire se si inserisce il required nella pagina  html
+						if (request.getParameter("valore").isEmpty()) {
 							String error = "mancata risposta alla domanda n: " + i;
 							model.addAttribute("descrizione", error);
 							return "redirect:/registrazione?error=";
 						}
-						risposteArrayList.add(request.getParameter("r" + i));// id della risposta i
+						risposteArrayList.add(request.getParameter("valore"));// id della risposta i
 					}
 					for (int i = 0; i < risposteArrayList.size(); i++) {
 						salvataggioServ.save(new Salvataggio(4, user.getEmail(), risposteArrayList.get(i)));
@@ -154,7 +161,7 @@ public class UtenteControl {
 	}
 	
 	@GetMapping("/users/{id}")
-	public String eliminaUtente(@PathVariable String email) {
+	public String eliminaUtente(@PathVariable String email, Model model) {
 		utServ.deleteById(email);
 		return "redirect:/users/all";
 	}

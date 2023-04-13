@@ -8,4 +8,5 @@ import com.privacy.web.model.Favola;
 public interface FavolaService {
 	
 	public List<Favola> findAllFavole();
+	Favola findById(int id);
 }

@@ -20,4 +20,12 @@ public class FavolaServiceImpl implements FavolaService {
 		return favRep.findAll();
 	}
 
+	@Override
+	public Favola findById(int id) {
+		if(favRep.existsById(id)==true) {
+			return findById(id);
+		}
+		return null;
+	}
+
 }

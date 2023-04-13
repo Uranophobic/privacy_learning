@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -26,10 +27,15 @@ public class FavolaControl {
 	
 	@GetMapping("/leggi-una-favola") //pagina in cui ci sono tutte le favole
 	public String home(Model model) {
-		model.addAttribute(favSer.findAllFavole());
-		return "Favola";
+		model.addAttribute("tutteFavole",favSer.findAllFavole());
+		return "ListaAllFavole";
 	}
 	
+	@GetMapping("/favola/{id}")
+	public String favolaSingola(@PathVariable int id_favola, Model model) {
+		model.addAttribute("favola", favSer.findById(id_favola));
+		return "redirect:/favolaDetail";
+	}
 	@GetMapping("/favoleHome")
 	public ModelAndView visualizzaArgomenti(@ModelAttribute("listaFavoleHome") HttpServletRequest request, HttpServletResponse resp) {
 		List<Favola> favoleHome= favSer.findAllFavole();

@@ -25,11 +25,11 @@ public class ArgomentoStudioControl {
 	private ArgomentoStudioServiceImpl argService;
 	
 	
-	
-	@GetMapping("/studia-con-noi") //pagina in cui ci sono tutti gli argomenti studio
+	//pagina in cui ci sono tutti gli argomenti studio
+	@GetMapping("/studia-con-noi") 
 	public String argomenti(Model model) {
-		model.addAttribute(argService.findAllArgomenti());
-		return "argomento";
+		model.addAttribute("argomentiView", argService.findAllArgomenti());
+		return "ListaAllArgomenti";
 	}
 	
 	@GetMapping("/argomentiHome")
