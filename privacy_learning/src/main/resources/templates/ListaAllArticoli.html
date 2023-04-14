@@ -10,6 +10,9 @@
 	<div th:insert="~{fragments/header::header}"></div>
 	<br>
 	<div class="container-home">
+		<div class="box-titolo">
+				<div class="titolo">Curiosità e Novità</div>
+			</div>
 	 <a class="button" th:if="${!session.isEmpty()} and ${session.userSession.email.equals('admin@gmail.com')}"  th:href="@{/admin/createArticolo}"> Aggiungi </a>
 		<div class="background">
 		<br>
