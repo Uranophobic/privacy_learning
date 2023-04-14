@@ -19,9 +19,9 @@ import lombok.NonNull;
 @AllArgsConstructor //crea il costruttore con paramentri senza renderlo visibile nella classe
 public class Test {
 @Column(name="id_test")
-	@Id @GeneratedValue(strategy = GenerationType.AUTO)
-	private int idTest;	
-@Column(name="tipo_test")
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id_test;	
+	@Column(name="tipo_test")
 	private String tipo;
 
 	public Test(@NonNull String tipo) {

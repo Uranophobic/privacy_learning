@@ -1,5 +1,6 @@
 package com.privacy.web.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,14 +18,14 @@ import lombok.NonNull;
 @NoArgsConstructor // crea il costruttore vuoto senza renderlo visibile nella classe
 @AllArgsConstructor
 public class Salvataggio {
-	//@Column(name = "id_salvataggio")
-	@Id
+	@Column(name = "id_salvataggio")
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_salvataggio; // auto
 	
-	//@Column(name = "id_test")
+	@Column(name = "id_test")
 	private int id_test;
 	
-	//@Column(name = "email_utente")
+	@Column(name = "email_utente")
 	private String email_utente;
 	
 	//@Column(name = "risposte")

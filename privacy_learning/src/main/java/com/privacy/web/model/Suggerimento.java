@@ -17,7 +17,7 @@ import lombok.NonNull;
 @NoArgsConstructor // crea il costruttore vuoto senza renderlo visibile nella classe
 public class Suggerimento {
 	@Column(name = "id_suggerimento")
-	@Id @GeneratedValue(strategy = GenerationType.AUTO)
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idSuggerimento;
 	
 	@Column(name = "email")

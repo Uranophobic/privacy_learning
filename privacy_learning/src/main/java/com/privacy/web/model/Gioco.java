@@ -16,8 +16,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor // crea il costruttore vuoto senza renderlo visibile nella classe
 public class Gioco {
 	@Column(name = "id_gioco")
-	@Id @GeneratedValue(strategy = GenerationType.AUTO)
-	private int idGioco;
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id_gioco;
 	@Column(name = "titolo")
 	private String titolo;
 	@Column(name = "descrizione")

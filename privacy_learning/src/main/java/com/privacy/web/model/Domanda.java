@@ -22,8 +22,7 @@ import lombok.NoArgsConstructor;
 
 public class Domanda {
 	@Column(name = "id_domanda")
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_domanda;
 	
 	@Column(name = "id_test")
