@@ -12,6 +12,7 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script type="text/javascript" src="../js/ConvalidazioneCampi.js"></script>
+<link rel="stylesheet" href="../css/stylesheet.css">
 
 <title>Privacy Literacy - Registrazione</title>
 
@@ -27,7 +28,7 @@
 	font-family: 'Poppins', sans-serif;
 }
 
-body {
+.corpoReg {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -46,14 +47,19 @@ body {
 	font-size: 35px;
 	font-weight: 600;
 	margin: 0 0 30px 0;
+	text-align: center;
 }
-
 .spaceradio {
 	display: inline-flex;
-	margin: 5px;
-	font-weight: 200;
+	/* margin: 5px; */
+	font-weight: 300;
 }
 
+.prova {
+	width: 90%;
+	padding: 10px;
+	margin: auto;
+}
 .containerReg .form-outer {
 	width: 100%;
 	overflow: hidden;
@@ -67,37 +73,38 @@ body {
 .form-outer .form .page {
 	width: 25%;
 	transition: margin-left .3s ease-in-out;
+	height: 600px;
 }
 
 .form-outer .form .page .title {
-	text-align: left;
+	/* text-align: left; */
 	font-size: 25px;
 	font-weight: 500;
+	text-align: center;
 }
 
 .form-outer .form .page .field {
 	height: 50px;
 	/* width: 400px; */
-	margin: 50px 0;
+	/* margin: 35px 0; */
 	position: relative;
 	display: flex;
 }
 
-.form-outer .form .page .field .label {
+/*.form-outer .form .page .field .label {
 	position: absolute;
 	top: -30px;
 	/*font-weight: 500;*/
-	width: 100%;
-	/* margin: ; */
+	/*width: 100%;
+	/* margin: ; 
 	display: flex;
-}
+}*/
 
 .idDomanda, .domanda {
-	font-weight: 400;
-	font-size: 16px;
-	/* margin: 15px; */
-	padding: 5px;
-	margin-bottom: 10px;
+  font-weight: 400;
+  font-size: 16px;
+  padding: 5px;
+
 }
 
 .label {
@@ -107,12 +114,10 @@ body {
 .box-domande {
 	padding: 5px;
 	/* margin: 5px; */
-	margin-top: 25px;
-	margin-bottom: 25px;
-}
 
+}
 .field2 {
-	height: 650px;
+	height: 500px;
 }
 
 .inputRegistrazione {
@@ -148,7 +153,7 @@ body {
 }
 
 .form-outer .form .page .field button:hover {
-	background-color: #0f0c29;
+	background-color: #45779C;
 }
 
 .form-outer .form .page .field .btns button {
@@ -262,6 +267,10 @@ body {
 </head>
 
 <body>
+<!--	<div th:insert="~{fragments/header::header}"></div>-->
+
+<div class="corpoReg">
+	<br>
 	<form th:action="@{/users/all}" th:object="${user}" method="POST">
 		<div class="containerReg">
 			<p class="titReg">Registrazione</p>
@@ -320,35 +329,35 @@ body {
 
 						<div class="field2">
 
-							<div class="field">
+							<div class="prova">
 								<div class="label">Email</div>
 								<input class="inputRegistrazione" type="text" name="email"
 									id="name" placeholder="Email" autocomplete="off"
 									onkeyup="checkEmail()" required>
 							</div>
 
-							<div class="field">
+							<div class="prova">
 								<div class="label">Password</div>
 								<input class="inputRegistrazione" type="text" name="password"
 									id="password" placeholder="Password" autocomplete="off"
 									onkeyup="checkPassword()" required>
 							</div>
 
-							<div class="field">
+							<div class="prova">
 								<div class="label">Nome</div>
 								<input class="inputRegistrazione" type="text" name="nome"
 									id="nome" placeholder="Nome" autocomplete="off"
 									onkeyup="checkNome()" required>
 							</div>
 
-							<div class="field">
+							<div class="prova">
 								<div class="label">Cognome</div>
 								<input class="inputRegistrazione" type="text" name="cognome"
 									id="cognome" placeholder="Cognome" autocomplete="off"
 									onkeyup="checkCognome()" required>
 							</div>
 
-							<div class="field">
+							<div class="prova">
 								<div class="label">Data di nascita</div>
 								<input class="inputRegistrazione" type="date" name="dataNascita"
 									id="data-Nascita" placeholder="Data di Nascita" required>
@@ -356,7 +365,7 @@ body {
 						</div>
 
 						<div class="field nextBtn">
-							<button type="button">Next</button>
+							<button type="button" autofocus>Next</button>
 						</div>
 
 					</div>
@@ -369,8 +378,9 @@ body {
 
 
 						<div class="field2">
-							<div class="box-domande">
-								<th:block th:each="dom : ${questionario1}">
+						
+								<th:block th:each="dom : ${questionario1}">	
+									<div class="box-domande">
 									<div class="label">
 										<p class="idDomanda" th:text="${dom.id_domanda} + ')'"></p>
 										<p class="domanda" th:text="${dom.testo}"></p>
@@ -394,9 +404,9 @@ body {
 										<input type="radio" th:name="'valore'+${dom.id_domanda}"
 											id="sempre" value="sempre" placeholder="tanto" required />
 										<p th:text="${dom.risposta4}"></p>
-									</div>
+									</div></div>
 								</th:block>
-							</div>
+							
 						</div>
 
 
@@ -414,36 +424,33 @@ body {
 						<div class="field2">
 							<div class="box-domande">
 								<th:block th:each="dom : ${questionario2}">
-
+								<th:block th:if="${dom.id_domanda} < '10' ">
 									<div class="label">
 										<p class="idDomanda" th:text="${dom.id_domanda} + ')'"></p>
 										<p class="domanda" th:text="${dom.testo}"></p>
 									</div>
-									<!-- AGGIUNGO UN TEXTAREA SE SI TRATTA DELLA DOMANDA 10 -->
-									<th:block th:if="${dom.id_domanda} == '10'" >
-										<textarea th:name="'valore'+${dom.id_domanda}" rows="6" cols="50" required="required"></textarea>
-									</th:block>
+									
 									
 									<!-- ALRIMENTI DOMANDE CON LE 4 RISPOSTE -->	
-									<th:block th:if="${dom.id_domanda} != '10' ">
+								
 										<div class="spaceradio">
 											<input type="radio" th:name="'valore'+${dom.id_domanda}"
-												id="mai" value="mai" placeholder="perniente" required />
+												id="mai" value="mai" placeholder="mai" required />
 											<p th:text="${dom.risposta1}"></p>
 										</div>
 										<div class="spaceradio">
 											<input type="radio" th:name="'valore'+${dom.id_domanda}"
-												id="raramente" value="raramente" placeholder="poco" required />
+												id="raramente" value="raramente" placeholder="raramente" required />
 											<p th:text="${dom.risposta2}"></p>
 										</div>
 										<div class="spaceradio">
 											<input type="radio" th:name="'valore'+${dom.id_domanda}"
-												id="spesso" value="spesso" placeholder="abbastanza" required />
+												id="spesso" value="spesso" placeholder="spessp" required />
 											<p th:text="${dom.risposta3}"></p>
 										</div>
 										<div class="spaceradio">
 											<input type="radio" th:name="'valore'+${dom.id_domanda}"
-												id="sempre" value="sempre" placeholder="tanto" required />
+												id="sempre" value="sempre" placeholder="sempre" required />
 											<p th:text="${dom.risposta4}"></p>
 										</div>
 									</th:block>
@@ -460,13 +467,39 @@ body {
 					<div class="page">
 						<div class="title">Completa la registrazione</div>
 						<div class="field2">
+							<div class="box-domande">
+								
+								<th:block th:each="dom : ${questionario2}">
+									
+								<!-- AGGIUNGO UN TEXTAREA SE SI TRATTA DELLA DOMANDA 10 -->
+									<th:block th:if="${dom.id_domanda} == '10'" >
+										<div class="label">
+										<p class="idDomanda" th:text="${dom.id_domanda} + ')'"></p>
+										<p class="domanda" th:text="${dom.testo}"></p>
+									</div>
+										<div class="spaceradio">
+											<input type="radio" th:name="'valore'+${dom.id_domanda}"
+												id="si" value="si" placeholder="si" required />
+											<p th:text="${dom.risposta1}"></p>
+										</div>
+										<div class="spaceradio">
+											<input type="radio" th:name="'valore'+${dom.id_domanda}"
+												id="no" value="no" placeholder="no" required />
+											<p th:text="${dom.risposta2}"></p>
+										</div>
+										<p> Se si, raccontaci la tua esperienza:</p>
+										<textarea th:name="'valore'+${dom.id_domanda}" style="font-size: 14px; font-weight:300 ;"></textarea>
+									</th:block>
+								</th:block>
+							</div>
+							<p> Per completare la tua registrazione leggi le condizioni:</p>
 							<input type="checkbox"> Accetta la <a target="_blank" href="/privacy"> privacy policy</a>
 						</div>
 
 						<div class="field btns">
 							<button class="prev-3 prev">Previous</button>
 							<button type="submit" formaction="/users/regprova"
-								formmethod="post" onclick="checkRegistrationSubmit()" autofocus>Registrati</button>
+								formmethod="post" onclick="checkRegistrationSubmit()">Registrati</button>
 						</div>
 					</div>
 
@@ -477,7 +510,7 @@ body {
 
 	</form>
 
-
+</div>
 	<script>
 		const slidePage = document.querySelector(".slidePage")
 		const firstNextBtn = document.querySelector(".nextBtn")
