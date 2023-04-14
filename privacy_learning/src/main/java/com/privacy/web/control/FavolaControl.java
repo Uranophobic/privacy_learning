@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -31,11 +32,12 @@ public class FavolaControl {
 		return "ListaAllFavole";
 	}
 	
-	@GetMapping("/favola/{id}")
-	public String favolaSingola(@PathVariable int id_favola, Model model) {
-		model.addAttribute("favola", favSer.findById(id_favola));
-		return "redirect:/favolaDetail";
+	@GetMapping("/favolaView/{id}")
+	public String favolaSingola(@PathVariable int id, Model model) {
+		model.addAttribute("vediFavola", favSer.findById(id));
+		return "Favola";
 	}
+	
 	@GetMapping("/favoleHome")
 	public ModelAndView visualizzaArgomenti(@ModelAttribute("listaFavoleHome") HttpServletRequest request, HttpServletResponse resp) {
 		List<Favola> favoleHome= favSer.findAllFavole();

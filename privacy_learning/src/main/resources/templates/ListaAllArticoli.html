@@ -28,8 +28,8 @@
 							th:href="${art.getLink()}" th:value="${art.getLink()}">Contenuto
 							articolo</a>
 							<br> <br>
-							<a class=button th:href="@{/fixedArticolo/{id}(id=${art.getId_articolo()})}">Modifica</a>
-							<a class=button th:href="@{/deleteArticolo/{id}(id=${art.getId_articolo()})}">Elimina</a>
+							<a class=button th:href="@{admin/fixedArticolo/{id}(id=${art.getId_articolo()})}">Modifica</a>
+							<a class=button th:href="@{admin/deleteArticolo/{id}(id=${art.getId_articolo()})}">Elimina</a>
 					</div>
 				</fieldset>
 			</th:block>

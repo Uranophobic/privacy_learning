@@ -44,16 +44,9 @@ public class ArgomentoStudioControl {
 	}
 	
 	//metodo che visualizza l'articolo nel dettaglio
-	@GetMapping("/detail/{id}")
-	public String detailArgomento(@PathVariable("id") int idStudio, Model model) {
-		model.addAttribute("argomento", argService.findById(idStudio));
-		return "redirect:/ArgomentoView";
-	}
-	
-	@PostMapping("/details/{id}")
-	public String argomentoView(@PathVariable int id_studio, @ModelAttribute("argomento") ArgomentoStudio a, Model model) {
-		System.out.println(id_studio);
-		model.addAttribute("argomento", argService.findById(id_studio));
-		return "redirect:/ArgomentoView";
+	@GetMapping("/argomentoView/{id}")
+	public String favolaSingola(@PathVariable int id, Model model) {
+		model.addAttribute("vediArgomento", argService.findById(id));
+		return "Argomento";
 	}
 }

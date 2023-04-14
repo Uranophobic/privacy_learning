@@ -86,10 +86,7 @@
 								<p
 									th:text="${arg.getDescrizione().substring(0,200).concat('...')}">contenuto</p>
 							</div>
-							<button class="button">
-								<a th:href="@{/detail/{id}(id=${arg.getId_studio()})}"
-									th:text="Continua"></a>
-							</button>
+							<a class="button" type="submit" th:href="@{/argomenti/argomentoView/{id}(id=${arg.id_studio})}">Continua</a>
 						</fieldset>
 					</th:block>
 				</div>
@@ -124,8 +121,7 @@
 								th:text="${favola.getTestofavola().substring(0,200).concat('...')}">
 								Contenuto piccolo della favola</p>
 						</div>
-						<button class="button" type="submit"
-							th:href="@{/favole/details/{id}(id=${favola.id_favola})}">Continua</button>
+						<a class="button" type="submit" th:href="@{/favole/favolaView/{id}(id=${favola.id_favola})}">Continua</a>
 					</fieldset>
 				</th:block>
 			</div>

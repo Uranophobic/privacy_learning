@@ -14,7 +14,7 @@ public class FavolaServiceImpl implements FavolaService {
 
 	@Autowired
 	private FavolaRepository favRep;
-	
+
 	@Override
 	public List<Favola> findAllFavole() {
 		return favRep.findAll();
@@ -22,10 +22,7 @@ public class FavolaServiceImpl implements FavolaService {
 
 	@Override
 	public Favola findById(int id) {
-		if(favRep.existsById(id)==true) {
-			return findById(id);
-		}
-		return null;
+		return favRep.findByIdFavola(id);
 	}
 
 	@Override
@@ -46,6 +43,11 @@ public class FavolaServiceImpl implements FavolaService {
 	@Override
 	public boolean existsByTitolo(String titolo) {
 		return favRep.existsByTitolofavola(titolo);
+	}
+
+	@Override
+	public void deleteById(int id) {
+		favRep.deleteById(id);
 	}
 
 }

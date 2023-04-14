@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -29,6 +30,7 @@ public class AmministratoreControl {
 	@Autowired
 	FavolaService favServ;
 
+	/*-----------------------------------CREAZIONE--------------------------------------------*/
 	@GetMapping("/createArticolo")
 	public String addArticolo(Model model) {
 		return "createArticolo";
@@ -57,12 +59,11 @@ public class AmministratoreControl {
 				model.addAttribute("descrizione", error);
 				return "redirect:/error?descrizione= " + error;
 			} else {
-				Articolo ar=new Articolo();
-				ar.setLink(request.getParameter("link"));
-				ar.setMetaInfo(request.getParameter("metainfo"));
-				ar.setTitolo(request.getParameter("titolo"));
-				System.out.println(ar.toString());
-				artServ.save(ar);
+				a.setLink(request.getParameter("link"));
+				a.setMetaInfo(request.getParameter("metainfo"));
+				a.setTitolo(request.getParameter("titolo"));
+				System.out.println(a.toString());
+				artServ.save(a);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -71,7 +72,7 @@ public class AmministratoreControl {
 	}
 	
 	@PostMapping("/addArgomento")
-	public String createArgomento(@ModelAttribute("argomento") ArgomentoStudio a, HttpServletRequest request,
+	public String createArgomento(@ModelAttribute("argomento") ArgomentoStudio argomento, HttpServletRequest request,
 			HttpServletResponse response, Model model) {
 		try {
 			if (argServ.existsByTitolo(request.getParameter("titolo"))) {
@@ -87,7 +88,6 @@ public class AmministratoreControl {
 				model.addAttribute("descrizione", error);
 				return "redirect:/error?descrizione= " + error;
 			}else {
-				ArgomentoStudio argomento= new ArgomentoStudio();
 				argomento.setLinkvideo(request.getParameter("link"));
 				argomento.setMeta_info(request.getParameter("metainfo"));
 				argomento.setTitolo(request.getParameter("titolo"));
@@ -102,7 +102,7 @@ public class AmministratoreControl {
 	}
 
 	@PostMapping("/addFavola")
-	public String createFavola(@ModelAttribute("favola") Favola a, HttpServletRequest request,
+	public String createFavola(@ModelAttribute("favola") Favola f, HttpServletRequest request,
 			HttpServletResponse response, Model model) {
 		try {
 			if (favServ.existsByTitolo(request.getParameter("titolo"))) {
@@ -114,7 +114,6 @@ public class AmministratoreControl {
 				model.addAttribute("descrizione", error);
 				return "redirect:/error?descrizione= " + error;
 			} else {
-				Favola f=new Favola();
 				f.setTestofavola(request.getParameter("testo"));
 				f.setMeta_info(request.getParameter("metainfo"));
 				f.setTitolofavola(request.getParameter("titolo"));
@@ -127,5 +126,27 @@ public class AmministratoreControl {
 		}
 		return "redirect:/favole/leggi-una-favola";
 	}
-
+	
+	/*---------------------------------ELIMINAZIONE----------------------------------------------*/
+	@GetMapping("/deleteFavola/{id}")
+	public String eliminaFavola(@PathVariable int id, Model model) {
+		favServ.deleteById(id);
+		return "redirect:/favole/leggi-una-favola";
+	}
+	
+	@GetMapping("/deleteArgomento/{id}")
+	public String eliminaArgomento(@PathVariable int id, Model model) {
+		favServ.deleteById(id);
+		return "redirect:/argomenti/studia-con-noi";
+	}
+	
+	@GetMapping("/deleteArticolo/{id}")
+	public String eliminaArticolo(@PathVariable int id, Model model) {
+		favServ.deleteById(id);
+		return "redirect:/article/leggi-un-articolo";
+	}
+	
+	/*-----------------------------------MODIFICA--------------------------------------------*/
+	
+	
 }

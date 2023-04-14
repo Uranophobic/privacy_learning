@@ -194,11 +194,12 @@ public class UtenteControl {
 		return "redirect:/login?errorDesc=" + error;
 	}
 
-	@GetMapping("/users/{id}")
-	public String eliminaUtente(@PathVariable String email, Model model) {
-		utServ.deleteById(email);
+	@GetMapping("/delete/{id}")
+	public String eliminaUtente(@PathVariable String id, Model model) {
+		utServ.deleteById(id);
 		return "redirect:/users/all";
 	}
+	
 
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {

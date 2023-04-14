@@ -105,7 +105,7 @@ public class UtenteServiceImpl implements UtenteService {
 
 	@Override
 	public void deleteById(String email) {
-		utenteRep.deleteByEmail(email);
+		utenteRep.deleteById(email);
 	}
 
 	

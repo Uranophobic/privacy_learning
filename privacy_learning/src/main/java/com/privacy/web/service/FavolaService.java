@@ -12,4 +12,5 @@ public interface FavolaService {
 	void save(Favola a);
 	boolean existsByTesto(String testo);
 	boolean existsByTitolo(String titolo);
+	void deleteById(int id);
 }

@@ -40,9 +40,9 @@
 				<td th:text="${user.percentuale}">percentuale</td>
 				<td th:text="${user.livello}">livello</td> 
 				<td >
-				<a th:href="@{/users/users/{id}(id=${user.email})}" class=""> Elimina </a>
+				<a th:href="@{/users/delete/{id}(id=${user.email})}" class="button"> Elimina </a>
 				</td>
-				<br>
+				
 			</tr>
 			</tbody>
 		</table>
