@@ -12,9 +12,10 @@
 	<br>
 	
 	<div class="container-home">
+		
+		
 		<th:block th:if="${session.isEmpty()}">
-			<div>
-
+			
 				<div class="container-sezioni">
 					<!-- sezione benvenuto (senza login) -->
 					<div class="testo">
@@ -26,17 +27,21 @@
 								compila il tuo primo questionario ></a>
 						</p>
 					</div>
+					
 					<div class="image-box">
 						<img class="image1" th:src="@{/images/questionario.webp}" alt="">
 					</div>
 				</div>
-			</div>
+		
 		</th:block>
+		
+<br>			
 		<div class="background">
 			<!-- sezione test privacy (senza login) -->
 			<div class="box-titolo">
 				<div class="titolo">Quanto ne sai di privacy?</div>
 			</div>
+			
 			<div class="container-sezioni">
 				<div class="testo">
 					Mettiti alla prova! <br>
@@ -58,9 +63,10 @@
 					<img class="image2" th:src="@{/images/test-home.png}" alt="">
 				</div>
 			</div>
+			
 		</div>
 
-
+<br>	
 		<div class="background">
 			<!-- sezione argomenti(senza login) -->
 
@@ -68,7 +74,8 @@
 				<div class="titolo">
 					Migliora il tuo livello di conoscenza <br> attraverso i nostri
 					studi
-				</div>
+			</div>
+				
 				<div class="container-sezioni">
 					<th:block th:each="arg : ${argomentiView}"
 						th:if="${arg.getId_studio()>(argomentiView.size()-3)}">
@@ -86,6 +93,7 @@
 						</fieldset>
 					</th:block>
 				</div>
+				
 			</div>
 
 			<br>
@@ -95,7 +103,7 @@
 			<br>
 		</div>
 
-
+<br>
 		<div class="background">
 			<!-- sezione favole (senza login) -->
 			<div class="box-titolo">
@@ -103,6 +111,7 @@
 					Insegna l'importanza della privacy<br> anche ai più piccoli
 				</div>
 			</div>
+		
 			<div class="container-sezioni">
 				<th:block th:each="favola : ${tutteFavole}"
 					th:if="${favola.getId_favola() > tutteFavole.size()-3}">
@@ -120,6 +129,7 @@
 					</fieldset>
 				</th:block>
 			</div>
+			
 			<br>
 			<p class="altro">
 				<a href="/favole/leggi-una-favola">Vedi altro ></a>
@@ -127,14 +137,16 @@
 			<br>
 
 		</div>
-
+<br>
 		<div class="background">
 			<!-- sezione a (senza login) -->
+			
 			<div class="box-titolo">
 				<div class="titolo">
 					Articoli di attualità, <br> notizie nel mondo
 				</div>
 			</div>
+			
 			<div class="container-sezioni">
 				<th:block th:each="art : ${tuttiArticoli}"
 					th:if="${art.getId_articolo() > (tuttiArticoli.size()-3)}">
@@ -150,6 +162,7 @@
 					</div>
 				</th:block>
 			</div>
+			
 			<p class="altro">
 				<a th:href="@{/article/leggi-un-articolo}">Vedi altro ></a>
 			</p>

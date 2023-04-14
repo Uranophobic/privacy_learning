@@ -2,26 +2,67 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hello Bulma!</title>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-<link rel="stylesheet" href="css/pie.css">
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="css/stylesheet.css">
+	<title>Privacy Literacy</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </head>
-<style>
-.tile.is-8 {
-	flex: none;
-	width: 100%;
-}
-</style>
+
 
 <body>
-	<!-- <div th:insert="~{fragments/header::header}"></div> -->
+	<div th:insert="~{fragments/header::header}"></div>
 	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<p class="titolo">Benvenuto sul tuo profilo personale</p>
 
-	<section class="section">
+	<div class="background">
+		<div class="box-profilo">
+			<div class="personal-info">
+				<fieldset>
+					<legend>Informazioni personali</legend>
+					<div class="infoUtente">
+						<label>Email:</label>
+						<p th:text="${session.userSession.email}" class="title"></p>
+					</div>
+					<div class="infoUtente">
+						<label>Password:</label>
+						<p th:text="${session.userSession.password}" class="title"></p>
+					</div>
+					<div class="infoUtente">
+						<label>Nome:</label>
+						<p th:text="${session.userSession.nome}" class="title"></p>
+					</div>
+					<div class="infoUtente">
+						<label>Cognome:</label>
+						<p th:text="${session.userSession.cognome}" class="title"></p>
+					</div>
+					<div class="infoUtente">
+						<label>Data di nascita:</label>
+						<p th:text="${session.userSession.dataNascita}" class="title"></p>
+					</div>
+
+				</fieldset>
+			</div>
+
+			<div class="progresso">
+				<fieldset>
+					<legend>Il tuo progresso</legend>
+					
+					<p> non hai ancora effettuato nessun test, Per sbloccare questa parte
+					 effettua il test valutativo sulla privacy
+						
+					</p>
+				</fieldset>
+
+			</div>
+		</div>
+	</div>
+
+	<!--<section class="section">
 		<div class="container">
 			<div class="columns is-mobile">
 
@@ -68,35 +109,35 @@
 
 
 
-										<!-- GRAFICO A TORTA -->
+										 GRAFICO A TORTA 
 
 
 										<canvas id="myChart" style="width: 100%; max-width: 600px"></canvas>
 
 										<script>
-											var xValues = [ "Studiati",
-													"Da Studiare" ];
-											var yValues = [ 89, 11 ]; // qui bisognerà mettere la percentuale di ogni utente 
-											var barColors = [ "#b91d47", //i colori delle due sezioni
-											"#00aba9" ];
+											var xValues = ["Studiati",
+												"Da Studiare"];
+											var yValues = [89, 11]; // qui bisognerà mettere la percentuale di ogni utente 
+											var barColors = ["#b91d47", //i colori delle due sezioni
+												"#00aba9"];
 
 											new Chart(
-													"myChart",
-													{
-														type : "doughnut",
-														data : {
-															labels : xValues,
-															datasets : [ {
-																backgroundColor : barColors,
-																data : yValues
-															} ]
-														},
-														options : {
-															title : {
-																display : true,
-															}
+												"myChart",
+												{
+													type: "doughnut",
+													data: {
+														labels: xValues,
+														datasets: [{
+															backgroundColor: barColors,
+															data: yValues
+														}]
+													},
+													options: {
+														title: {
+															display: true,
 														}
-													});
+													}
+												});
 										</script>
 
 
@@ -113,7 +154,7 @@
 			</div>
 
 		</div>
-	</section>
+	</section>-->
 </body>
 
 </html>

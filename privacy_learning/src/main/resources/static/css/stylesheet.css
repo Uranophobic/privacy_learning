@@ -262,17 +262,17 @@ body {
 }
 .container-sezioni {
 	display: flex;
-	width: 100%;
-	font-weight: 600;
+	width: 80%;
 	font-size: 15px;
 	top: 0;
 	left: 0;
 	background-color: #D7D6D6;
 	padding: 20px;
-	border-radius: 4px;
+	border-radius: 5px;
 	/* padding: 0; */
 	/* padding-top: 0; */
 	margin-bottom: 20px;
+	margin: auto;
 }
 
 
@@ -294,8 +294,8 @@ body {
 	font-weight: 400;
 	margin: 0;
 	margin-top: 20px;
+	margin-bottom: 20px;
 }
-
 .testo a{
 	font-size: 15px;
 	font-weight: 400;
@@ -308,8 +308,10 @@ body {
 
 .background {
 	background-color: #D7D6D6;
-	border-radius: 4px;
-	margin-bottom: 20px;
+	border-radius: 5px;
+	margin: auto;
+	width: 80%;
+	padding: 20px;
 }
 .altro {
 	/* float: right; */
@@ -364,15 +366,17 @@ margin: auto;
 }
 
 .button-test {
-	padding: 5px;
+	padding: 10px;
 	background-color: #45779C;
 	border: none;
-	border-radius: 4px;
-	width: 250px;
-	margin: 25px;
+	border-radius: 5px;
+	/* width: 250px; */
+	/* margin: 53px; */
 	font-size: 16px;
 	color: white;
 	font-weight: bold;
+	/* position: absolute; */
+	/* bottom: 0; */
 }
 /**********************************************************LOGIN****************************************************************************/
 
@@ -833,4 +837,35 @@ input:focus {
 .progress-bar .step .check.active {
 	display: block;
 	color: #fff;
+}
+
+/**********************************************************PROFILO****************************************************************************/
+.box-profilo{
+	display: flex;
+	width: 100%;
+}
+
+.personal-info{
+	width: 50%;
+}
+
+.personal-info fieldset{
+	width: 50%;
+}
+
+.personal-info label{
+	font-weight: bold;
+}
+.progresso{
+	width:50%;
+} 
+
+.infoUtente {
+	display: inline-flex;
+	width: 100%;
+		padding:5px;
+}
+
+.infoUtente p{
+ margin-left: 5px;
 }
