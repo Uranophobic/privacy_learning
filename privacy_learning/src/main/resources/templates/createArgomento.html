@@ -9,6 +9,42 @@
 
 <body>
 	<div th:insert="~{fragments/header::header}"></div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	
+	<div class="box-titolo">
+				<p class="titAdmin">CREA UN NUOVO ARGOMENTO</p>
+	</div>
+	
+	<div class="background">
+		
+		<div class="boxArg">
+		
+		<fieldset><legend>Titolo</legend>
+			<input type="text" name="titolo" placeholder="Inscrisci il titolo dell'arogmento studio"  maxlength="60" >
+		</fieldset>
+		<fieldset><legend>Descrizione</legend>
+			<textarea type="text" name="descrizione" placeholder="Inserisci il testo dell'argomento studio (max 5000)" maxlength="5000"></textarea>
+		</fieldset>
+		<fieldset><legend>Meta-Info</legend>
+			<select name="metainfo" id="metainfo">
+				<th:block th:each="meta : ${metainfo}">
+				 <option th:value="${meta.keyword}" th:text="${meta.keyword}"></option></th:block>
+			</select>
+		</fieldset>
+		<fieldset><legend>Link-Video</legend>
+			<input type="text" name="titolo" placeholder="Inscrisci il link del video dell'arogmento studio (FACOLTATIVO)">
+		</fieldset>
+		</div>
+		<div class="buttonArg">
+			<button class="button"> Conferma </button>
+		</div>
+	</div>
+	
 	
 </body>
 </html>

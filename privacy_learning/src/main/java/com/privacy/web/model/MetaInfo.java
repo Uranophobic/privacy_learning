@@ -14,15 +14,15 @@ import lombok.NoArgsConstructor;
 
 public class MetaInfo {
 	
-	@Column(name="meta_info") @Id
-	private String meta_info;
+	@Column(name="keyword") @Id
+	private String keyword;
 
 	/**
 	 * @param meta_info
 	 */
-	public MetaInfo(String meta_info) {
+	public MetaInfo(String keyword) {
 		super();
-		this.meta_info = meta_info;
+		this.keyword = keyword;
 	}
 
 	

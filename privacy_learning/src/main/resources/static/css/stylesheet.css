@@ -61,7 +61,7 @@ body {
 	display: flex;
 	/* scroll-behavior: smooth; */
 	background-color: #FFFFFF;
-	padding: 0 30px;
+	/* padding: 0 30px; */
 	margin-bottom: 30px;
 	position: fixed;
 	top: 0;
@@ -888,4 +888,33 @@ input:focus {
 
 .infoUtente p {
 	margin-left: 5px;
+}
+
+
+
+/**********************************************************ADMIN****************************************************************************/
+.titAdmin{
+	color: black;
+	text-align: center;
+	font-size: 20px;
+}
+
+.boxArg{
+	width: 75%;
+margin: auto;
+padding: 10px;
+}
+
+.boxArg input, select, textarea{
+	padding: 5px;
+	margin: 15px;
+	font-size: 16px;
+}
+
+.buttonArg{
+	/* width: auto; */
+	margin: auto;
+	/* align-content: center; */
+	display: table;
+
 }
