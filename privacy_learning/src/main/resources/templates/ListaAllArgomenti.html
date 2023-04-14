@@ -23,7 +23,7 @@
 							<p
 								th:text="${arg.getDescrizione().substring(0,200).concat('...')}">contenuto</p>
 						</div>
-						<button class="button">Continua</button>
+						<a class="button">Continua</a>
 						<a class=button th:href="@{/fixedArgomento/{id}(id=${arg.getId_studio()})}">Modifica</a>
 						<a class=button th:href="@{/deleteArgomento/{id}(id=${arg.getId_studio()})}">Elimina</a>
 				</fieldset>
@@ -41,7 +41,7 @@
 								<p
 									th:text="${arg.getDescrizione().substring(0,200).concat('...')}">contenuto</p>
 							</div>
-							<button class="button">Continua</button>
+							<a class="button">Continua</a>
 						</fieldset>
 					</div>
 				</th:block>
