@@ -19,4 +19,18 @@ public class ArticoloServiceImpl implements ArticoloService {
 		return (List<Articolo>) artRep.findAll();
 	}
 
+	@Override
+	public boolean existsByTitolo(String titolo) {
+		return artRep.existsByTitolo(titolo);
+	}
+
+	@Override
+	public void save(Articolo a) {
+		artRep.save(a);
+	}
+
+	@Override
+	public int findByLastId() {
+		return artRep.findByLastId();
+	}
 }

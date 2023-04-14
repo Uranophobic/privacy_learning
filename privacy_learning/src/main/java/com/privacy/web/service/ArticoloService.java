@@ -8,7 +8,8 @@ import com.privacy.web.model.Articolo;
 
 @Service
 public interface ArticoloService {
-
-
+	public boolean existsByTitolo(String titolo);
 	public List<Articolo> findAllArticoli();
+	public void save(Articolo a);
+	int findByLastId();
 }

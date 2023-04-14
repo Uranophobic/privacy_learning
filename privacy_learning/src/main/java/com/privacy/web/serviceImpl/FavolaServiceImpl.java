@@ -28,4 +28,24 @@ public class FavolaServiceImpl implements FavolaService {
 		return null;
 	}
 
+	@Override
+	public int findByLastId() {
+		return favRep.findByLastId();
+	}
+
+	@Override
+	public void save(Favola a) {
+		favRep.save(a);
+	}
+
+	@Override
+	public boolean existsByTesto(String testo) {
+		return favRep.existsByTesto_favola(testo);
+	}
+
+	@Override
+	public boolean existsByTitolo(String titolo) {
+		return favRep.existsByTitolo_favola(titolo);
+	}
+
 }

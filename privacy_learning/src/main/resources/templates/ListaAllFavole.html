@@ -9,8 +9,11 @@
 
 <body>
 	<div th:insert="~{fragments/header::header}"></div>
+	<br>
 	<div class="container-home">
+	 <a type="button" th:if="${!session.isEmpty()} and ${session.userSession.email.equals('admin@gmail.com')}" class="button" th:href="@{/admin/createFavola}"> Aggiungi </a>
 		<div class="background">
+		<br>
 			<!-- CONTROLLO SE L'UTENTE SIA ADMIN -->
 			<th:block th:if="${!session.isEmpty()} and ${session.userSession.email.equals('admin@gmail.com')}" th:each="favola : ${tutteFavole}">
 				<fieldset>

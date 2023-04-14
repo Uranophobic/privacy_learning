@@ -22,8 +22,33 @@ public class ArgomentoStudioServiceImpl implements ArgomentoStudioService{
 
 	@Override
 	public ArgomentoStudio findById(int id) {
-		// TODO Auto-generated method stub
 		return argRep.findArgomentoById(id);
+	}
+
+	@Override
+	public int findByLastId() {
+		return argRep.findByLastId();
+	}
+
+	@Override
+	public boolean existsByTitolo(String titolo) {
+		return argRep.existsByTitolo(titolo);
+	}
+
+	@Override
+	public void save(ArgomentoStudio a) {
+		argRep.save(a);		
+	}
+
+	@Override
+	public boolean existsByDescrizione(String descrizione) {
+		return argRep.existsByDescrizione(descrizione);
+	}
+
+	@Override
+	public boolean existsByLink(String link) {
+		
+		return argRep.existsByLink_video(link);
 	}
 
 }

@@ -8,12 +8,15 @@
 
 <body>
 	<div th:insert="~{fragments/header::header}"></div>
+	<br>
 	<div class="container-home">
+	 <a class="button" th:if="${!session.isEmpty()} and ${session.userSession.email.equals('admin@gmail.com')}"  th:href="@{/admin/createArticolo}"> Aggiungi </a>
 		<div class="background">
+		<br>
 			<!-- CONTROLLO SE L'UTENTE SIA ADMIN -->
 			<th:block
 				th:if="${!session.isEmpty()} and (${session.userSession.email.equals('admin@gmail.com')})" th:each="art : ${tuttiArticoli}">
-				<fieldset>
+				<fieldset style="margin:2% 15% 2% 15%;">
 					<div class="testo-articolo">
 						<br>
 						<h3 th:text="${art.getTitolo()}">Titolo articolo</h3>
@@ -22,14 +25,9 @@
 							th:href="${art.getLink()}" th:value="${art.getLink()}">Contenuto
 							articolo</a>
 							<br> <br>
-						<button class=button type="submit">
-							<a th:href="@{/fixedArticolo/{id}(id=${art.getIdArticolo()})}">Modifica</a>
-						</button>
-						<button class=button type="submit">
-							<a th:href="@{/deleteArticolo/{id}(id=${art.getIdArticolo()})}">Elimina</a>
-						</button>
+							<a class=button th:href="@{/fixedArticolo/{id}(id=${art.getId_articolo()})}">Modifica</a>
+							<a class=button th:href="@{/deleteArticolo/{id}(id=${art.getId_articolo()})}">Elimina</a>
 					</div>
-
 				</fieldset>
 			</th:block>
 

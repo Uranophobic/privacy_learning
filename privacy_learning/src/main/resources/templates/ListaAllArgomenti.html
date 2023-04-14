@@ -9,9 +9,12 @@
 
 <body>
 	<div th:insert="~{fragments/header::header}"></div>
-	<!-- CONTROLLO SE L'UTENTE SIA ADMIN -->
+	<br>
 	<div class="container-home">
+	 <a type="button" th:if="${!session.isEmpty()} and ${session.userSession.email.equals('admin@gmail.com')}" class="button"th:href="@{/admin/createArgomento}"> Aggiungi </a>
 		<div class="background">
+		<br>
+		<!-- CONTROLLO SE L'UTENTE SIA ADMIN -->
 			<th:block th:if="${!session.isEmpty()} and ${session.userSession.email.equals('admin@gmail.com')}" th:each="arg : ${argomentiView}">
 					<fieldset>
 						<legend th:text="${arg.meta_info}">Meta-Info</legend>
@@ -21,12 +24,8 @@
 								th:text="${arg.getDescrizione().substring(0,200).concat('...')}">contenuto</p>
 						</div>
 						<button class="button">Continua</button>
-					<button class=button type="submit">
-						<a th:href="@{/fixedArgomento/{id}(id=${arg.getId_studio()})}">Modifica</a>
-					</button>
-					<button class=button type="submit">
-						<a th:href="@{/deleteArgomento/{id}(id=${arg.getId_studio()})}">Elimina</a>
-					</button>
+						<a class=button th:href="@{/fixedArgomento/{id}(id=${arg.getId_studio()})}">Modifica</a>
+						<a class=button th:href="@{/deleteArgomento/{id}(id=${arg.getId_studio()})}">Elimina</a>
 				</fieldset>
 		</th:block>
 		<!--  ALTRIMENTI -->
