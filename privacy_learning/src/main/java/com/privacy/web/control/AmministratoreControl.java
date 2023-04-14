@@ -96,7 +96,7 @@ public class AmministratoreControl {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/users/studia-con-noi";
+		return "redirect:/argomenti/studia-con-noi";
 	}
 
 	@PostMapping("/addFavola")
@@ -122,7 +122,7 @@ public class AmministratoreControl {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/users/leggi-una-favola";
+		return "redirect:/favole/leggi-una-favola";
 	}
 
 }
