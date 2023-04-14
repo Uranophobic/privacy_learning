@@ -26,14 +26,14 @@ public class ArgomentoStudio {
 	@Column(name = "descrizione")
 	private String descrizione;
 	@Column(name = "link_video")
-	private String link_video;
+	private String linkvideo;
 	@Column(name = "meta_info")
 	private String meta_info;
 	
 	public ArgomentoStudio(@NonNull String titolo,@NonNull String descrizione,@NonNull String link_video,@NonNull String meta_info) {
 		this.titolo = titolo;
 		this.descrizione = descrizione;
-		this.link_video = link_video;
+		this.linkvideo = link_video;
 		this.meta_info = meta_info;
 	}
 	

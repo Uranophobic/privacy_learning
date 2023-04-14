@@ -27,7 +27,7 @@ public class ArgomentoStudioServiceImpl implements ArgomentoStudioService{
 
 	@Override
 	public int findByLastId() {
-		return argRep.findByLastId();
+		return 0;
 	}
 
 	@Override
@@ -48,7 +48,7 @@ public class ArgomentoStudioServiceImpl implements ArgomentoStudioService{
 	@Override
 	public boolean existsByLink(String link) {
 		
-		return argRep.existsByLink_video(link);
+		return argRep.existsByLinkvideo(link);
 	}
 
 }

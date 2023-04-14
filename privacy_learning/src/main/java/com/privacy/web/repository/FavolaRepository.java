@@ -9,12 +9,13 @@ import org.springframework.data.repository.CrudRepository;
 import com.privacy.web.model.Favola;
 
 @EnableJpaRepositories
- public interface FavolaRepository extends CrudRepository<Favola,Integer> {
-	@Query(name = "Select Last(id_favola) as LastId FROM Favola", nativeQuery = true)
-	int findByLastId();
-	 @Query(value = "SELECT * FROM Favola", nativeQuery = true)
-	  public List<Favola> findAll();
-	 boolean existsByTesto_favola(String testo);
-	 boolean existsByTitolo_favola(String titolo);
-	 
+public interface FavolaRepository extends CrudRepository<Favola, Integer> {
+/*	@Query(name = "Select LAST(id_favola) FROM Favola ORDER BY id_favola ASC", nativeQuery = true)
+	int returnLastId();
+*/
+	@Query(value = "SELECT * FROM Favola", nativeQuery = true)
+	public List<Favola> findAll();
+	boolean existsByTestofavola(String testo);
+	boolean existsByTitolofavola(String titolo);
+
 }

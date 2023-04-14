@@ -30,7 +30,7 @@ public class FavolaServiceImpl implements FavolaService {
 
 	@Override
 	public int findByLastId() {
-		return favRep.findByLastId();
+		return 0;
 	}
 
 	@Override
@@ -40,12 +40,12 @@ public class FavolaServiceImpl implements FavolaService {
 
 	@Override
 	public boolean existsByTesto(String testo) {
-		return favRep.existsByTesto_favola(testo);
+		return favRep.existsByTestofavola(testo);
 	}
 
 	@Override
 	public boolean existsByTitolo(String titolo) {
-		return favRep.existsByTitolo_favola(titolo);
+		return favRep.existsByTitolofavola(titolo);
 	}
 
 }

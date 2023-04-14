@@ -31,6 +31,6 @@ public class ArticoloServiceImpl implements ArticoloService {
 
 	@Override
 	public int findByLastId() {
-		return artRep.findByLastId();
+		return 0;
 	}
 }

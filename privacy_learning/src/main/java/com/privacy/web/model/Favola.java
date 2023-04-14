@@ -18,9 +18,9 @@ public class Favola {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id_favola;
 	@Column(name="titolo_favola")
-	private String titolo_favola;
+	private String titolofavola;
 	@Column(name="testo_favola")
-	private String testo_favola;
+	private String testofavola;
 	@Column(name="image_path")
 	private String image_path;
 	@Column(name="meta_info")
@@ -28,8 +28,8 @@ public class Favola {
 
 	public Favola(String titolo_favola, String testo_favola, String image_path, String meta_info) {
 		
-		this.titolo_favola = titolo_favola;
-		this.testo_favola = testo_favola;
+		this.titolofavola = titolo_favola;
+		this.testofavola = testo_favola;
 		this.image_path = image_path;
 		this.meta_info = meta_info;
 	}

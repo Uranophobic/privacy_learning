@@ -57,11 +57,12 @@ public class AmministratoreControl {
 				model.addAttribute("descrizione", error);
 				return "redirect:/error?descrizione= " + error;
 			} else {
-				a.setId_articolo(artServ.findByLastId() + 1);
-				a.setLink(request.getParameter("link"));
-				a.setMetaInfo(request.getParameter("metainfo"));
-				a.setTitolo(request.getParameter("titolo"));
-				artServ.save(a);
+				Articolo ar=new Articolo();
+				ar.setLink(request.getParameter("link"));
+				ar.setMetaInfo(request.getParameter("metainfo"));
+				ar.setTitolo(request.getParameter("titolo"));
+				System.out.println(ar.toString());
+				artServ.save(ar);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -86,12 +87,13 @@ public class AmministratoreControl {
 				model.addAttribute("descrizione", error);
 				return "redirect:/error?descrizione= " + error;
 			}else {
-				a.setId_studio(argServ.findByLastId() + 1);
-				a.setLink_video(request.getParameter("link"));
-				a.setMeta_info(request.getParameter("metainfo"));
-				a.setTitolo(request.getParameter("titolo"));
-				a.setDescrizione(request.getParameter("descrizione"));
-				argServ.save(a);
+				ArgomentoStudio argomento= new ArgomentoStudio();
+				argomento.setLinkvideo(request.getParameter("link"));
+				argomento.setMeta_info(request.getParameter("metainfo"));
+				argomento.setTitolo(request.getParameter("titolo"));
+				argomento.setDescrizione(request.getParameter("descrizione"));
+				System.out.println(argomento.toString());
+				argServ.save(argomento);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -112,12 +114,13 @@ public class AmministratoreControl {
 				model.addAttribute("descrizione", error);
 				return "redirect:/error?descrizione= " + error;
 			} else {
-				a.setId_favola(favServ.findByLastId() +1);
-				a.setTesto_favola(request.getParameter("testo"));
-				a.setMeta_info(request.getParameter("metainfo"));
-				a.setTitolo_favola(request.getParameter("titolo"));
-				a.setImage_path(request.getParameter("path"));
-				favServ.save(a);
+				Favola f=new Favola();
+				f.setTestofavola(request.getParameter("testo"));
+				f.setMeta_info(request.getParameter("metainfo"));
+				f.setTitolofavola(request.getParameter("titolo"));
+				f.setImage_path(request.getParameter("path"));
+				System.out.println(f.toString());
+				favServ.save(f);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
