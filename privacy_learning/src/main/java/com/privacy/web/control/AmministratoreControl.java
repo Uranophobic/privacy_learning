@@ -49,51 +49,53 @@ public class AmministratoreControl {
 	@PostMapping("/addArticolo")
 	public String createArticolo(@ModelAttribute("articolo") Articolo a, HttpServletRequest request,
 			HttpServletResponse response, Model model) {
+		Articolo art = new Articolo();
+		art.setLink(request.getParameter("link"));
+		art.setMetaInfo(request.getParameter("metainfo"));
+		art.setTitolo(request.getParameter("titolo"));
 		try {
-			if (artServ.existsByTitolo(request.getParameter("titolo"))) {
+			if (artServ.existsByTitolo(a.getTitolo())) {
 				String error = "Esiste già un articolo con questo titolo";
 				model.addAttribute("descrizione", error);
 				return "redirect:/error?descrizione= " + error;
-			} else if (artServ.existsByTitolo(request.getParameter("link"))) {
+			} else if (artServ.existsByTitolo(a.getLink())) {
 				String error = "Esiste già un articolo con questo link";
 				model.addAttribute("descrizione", error);
 				return "redirect:/error?descrizione= " + error;
 			} else {
-				a.setLink(request.getParameter("link"));
-				a.setMetaInfo(request.getParameter("metainfo"));
-				a.setTitolo(request.getParameter("titolo"));
+
 				System.out.println(a.toString());
-				artServ.save(a);
+				artServ.save(art);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return "redirect:/users/leggi-un-articolo";
 	}
-	
+
 	@PostMapping("/addArgomento")
 	public String createArgomento(@ModelAttribute("argomento") ArgomentoStudio argomento, HttpServletRequest request,
 			HttpServletResponse response, Model model) {
 		try {
-			if (argServ.existsByTitolo(request.getParameter("titolo"))) {
+			if (argServ.existsByTitolo(argomento.getTitolo())) {
 				String error = "Esiste già un argomento con questo titolo";
 				model.addAttribute("descrizione", error);
 				return "redirect:/error?descrizione= " + error;
-			} else if (argServ.existsByLink(request.getParameter("link"))) {
+			} else if (argServ.existsByLink(argomento.getLinkvideo())) {
 				String error = "Esiste già un argomento con questo link";
 				model.addAttribute("descrizione", error);
 				return "redirect:/error?descrizione= " + error;
-			} else if (argServ.existsByDescrizione(request.getParameter("Descrizione"))) {
+			} else if (argServ.existsByDescrizione(argomento.getDescrizione())) {
 				String error = "Esiste già un argomento con questa descrizione";
 				model.addAttribute("descrizione", error);
 				return "redirect:/error?descrizione= " + error;
-			}else {
-				argomento.setLinkvideo(request.getParameter("link"));
-				argomento.setMeta_info(request.getParameter("metainfo"));
-				argomento.setTitolo(request.getParameter("titolo"));
-				argomento.setDescrizione(request.getParameter("descrizione"));
-				System.out.println(argomento.toString());
-				argServ.save(argomento);
+			} else {
+				ArgomentoStudio a = new ArgomentoStudio();
+				a.setLinkvideo(request.getParameter("link"));
+				a.setMeta_info(request.getParameter("metainfo"));
+				a.setTitolo(request.getParameter("titolo"));
+				a.setDescrizione(request.getParameter("descrizione"));
+				argServ.save(a);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -102,22 +104,24 @@ public class AmministratoreControl {
 	}
 
 	@PostMapping("/addFavola")
-	public String createFavola(@ModelAttribute("favola") Favola f, HttpServletRequest request,
+	public String createFavola(@ModelAttribute("favola") Favola fav, HttpServletRequest request,
 			HttpServletResponse response, Model model) {
+		Favola f = new Favola();
+		f.setTestofavola(request.getParameter("testo"));
+		f.setMeta_info(request.getParameter("metainfo"));
+		f.setTitolofavola(request.getParameter("titolo"));
+		f.setImage_path(request.getParameter("path"));
 		try {
-			if (favServ.existsByTitolo(request.getParameter("titolo"))) {
+			if (favServ.existsByTitolo(fav.getTitolofavola())) {
 				String error = "Esiste già un articolo con questo titolo";
 				model.addAttribute("descrizione", error);
 				return "redirect:/error?descrizione= " + error;
-			} else if (favServ.existsByTesto(request.getParameter("testo"))) {
+			} else if (favServ.existsByTesto(fav.getTestofavola())) {
 				String error = "Questa favola esiste già";
 				model.addAttribute("descrizione", error);
 				return "redirect:/error?descrizione= " + error;
 			} else {
-				f.setTestofavola(request.getParameter("testo"));
-				f.setMeta_info(request.getParameter("metainfo"));
-				f.setTitolofavola(request.getParameter("titolo"));
-				f.setImage_path(request.getParameter("path"));
+
 				System.out.println(f.toString());
 				favServ.save(f);
 			}
@@ -126,27 +130,123 @@ public class AmministratoreControl {
 		}
 		return "redirect:/favole/leggi-una-favola";
 	}
-	
+
 	/*---------------------------------ELIMINAZIONE----------------------------------------------*/
-	@GetMapping("/deleteFavola/{id}")
-	public String eliminaFavola(@PathVariable int id, Model model) {
-		favServ.deleteById(id);
-		return "redirect:/favole/leggi-una-favola";
-	}
-	
-	@GetMapping("/deleteArgomento/{id}")
-	public String eliminaArgomento(@PathVariable int id, Model model) {
-		favServ.deleteById(id);
-		return "redirect:/argomenti/studia-con-noi";
-	}
-	
+
 	@GetMapping("/deleteArticolo/{id}")
 	public String eliminaArticolo(@PathVariable int id, Model model) {
 		favServ.deleteById(id);
 		return "redirect:/article/leggi-un-articolo";
 	}
-	
+
+	@GetMapping("/deleteArgomento/{id}")
+	public String eliminaArgomento(@PathVariable int id, Model model) {
+		favServ.deleteById(id);
+		return "redirect:/argomenti/studia-con-noi";
+	}
+
+	@GetMapping("/deleteFavola/{id}")
+	public String eliminaFavola(@PathVariable int id, Model model) {
+		favServ.deleteById(id);
+		return "redirect:/favole/leggi-una-favola";
+	}
 	/*-----------------------------------MODIFICA--------------------------------------------*/
-	
-	
+
+//----------------ARTICOLO
+	@GetMapping("/fixedArticolo/{id}")
+	public String editArticolo(@PathVariable int id, Model model) {
+		model.addAttribute("articolo", artServ.findByIdArticolo(id));
+		return "editArticolo";
+	}
+
+	@PostMapping("/modificaArticolo/{id}")
+	public String updateArticolo(@PathVariable int id, @ModelAttribute("articolo") Articolo a, Model model) {
+		Articolo artExist = artServ.findByIdArticolo(id);
+		artExist.setLink(a.getLink());
+		artExist.setMetaInfo(a.getMetaInfo());
+		artExist.setTitolo(a.getTitolo());
+
+		try {
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		artServ.save(artExist);
+		return "redirect:/article/leggi-un-articolo";
+	}
+
+//----------------ARGOMENTO
+	@GetMapping("/fixedArgomento/{id}")
+	public String editArgomento(@PathVariable int id, Model model) {
+		model.addAttribute("argomento", argServ.findById(id));
+		return "editArgomento";
+	}
+
+	@PostMapping("/modificaArgomento/{id}")
+	public String updateArgomento(@PathVariable int id, @ModelAttribute("argomento") ArgomentoStudio a, Model model) {
+		ArgomentoStudio argExist = argServ.findById(id);
+
+		argExist.setDescrizione(a.getDescrizione());
+		argExist.setLinkvideo(a.getLinkvideo());
+		argExist.setMeta_info(a.getMeta_info());
+		argExist.setTitolo(a.getTitolo());
+
+		try {
+			if (argServ.existsByTitolo(argExist.getTitolo())) {
+				String error = "Esiste già un argomento con questo titolo";
+				model.addAttribute("descrizione", error);
+				return "redirect:/error?descrizione= " + error;
+			} else if (argServ.existsByLink(argExist.getLinkvideo())) {
+				String error = "Esiste già un argomento con questo link";
+				model.addAttribute("descrizione", error);
+				return "redirect:/error?descrizione= " + error;
+			} else if (argServ.existsByDescrizione(argExist.getDescrizione())) {
+				String error = "Esiste già un argomento con questa descrizione";
+				model.addAttribute("descrizione", error);
+				return "redirect:/error?descrizione= " + error;
+			} else {
+				argServ.save(argExist);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "redirect:/argomenti/studia-con-noi";
+	}
+
+//----------------FAVOLA
+	@GetMapping("/fixedFavola/{id}")
+	public String editFavola(@PathVariable int id, Model model) {
+		model.addAttribute("favola", favServ.findById(id));
+		return "editFavola";
+	}
+
+	@PostMapping("/modificaFavola/{id}")
+	public String updateFavola(@PathVariable int id, @ModelAttribute("articolo") Favola f, Model model) {
+		Favola favExist = favServ.findById(id);
+
+		favExist.setImage_path(f.getImage_path());
+		favExist.setMeta_info(f.getMeta_info());
+		favExist.setTestofavola(f.getTestofavola());
+		favExist.setTitolofavola(f.getTitolofavola());
+
+		try {
+			if (favServ.existsByTesto(favExist.getTestofavola())) {
+				String error = "Esiste già un articolo con questo titolo";
+				model.addAttribute("descrizione", error);
+				return "redirect:/error?descrizione= " + error;
+			} else if (favServ.existsByTitolo(favExist.getTitolofavola())) {
+				String error = "Questa favola esiste già";
+				model.addAttribute("descrizione", error);
+				return "redirect:/error?descrizione= " + error;
+			} else {
+				favServ.save(favExist);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "redirect:/favole/leggi-una-favola";
+	}
+
 }

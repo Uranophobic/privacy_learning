@@ -34,10 +34,9 @@ public class FavolaControl {
 	
 	@GetMapping("/favolaView/{id}")
 	public String favolaSingola(@PathVariable int id, Model model) {
-		model.addAttribute("vediFavola", favSer.findById(id));
+		model.addAttribute("favola", favSer.findById(id));
 		return "Favola";
 	}
-	
 	@GetMapping("/favoleHome")
 	public ModelAndView visualizzaArgomenti(@ModelAttribute("listaFavoleHome") HttpServletRequest request, HttpServletResponse resp) {
 		List<Favola> favoleHome= favSer.findAllFavole();

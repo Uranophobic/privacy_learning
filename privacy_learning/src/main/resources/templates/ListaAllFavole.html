@@ -28,8 +28,8 @@
 							Contenuto piccolo della favola</p>
 					</div>
 						<a class="button" type="submit" th:href="@{/favole/favolaView/{id}(id=${favola.id_favola})}">Continua</a>
-						<a class=button type="submit" th:href="@{admin/fixedFavola/{id}(id=${favola.getId_favola()})}">Modifica</a>
-						<a class=button type="submit" th:href="@{admin/deleteFavola/{id}(id=${favola.getId_favola()})}">Elimina</a>
+						<a class=button type="submit" th:href="@{/admin/fixedFavola/{id}(id=${favola.getId_favola()})}">Modifica</a>
+						<a class=button type="submit" th:href="@{/admin/deleteFavola/{id}(id=${favola.getId_favola()})}">Elimina</a>
 				</fieldset>
 			</th:block>
 

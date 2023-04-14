@@ -11,5 +11,5 @@ public interface ArticoloService {
 	public boolean existsByTitolo(String titolo);
 	public List<Articolo> findAllArticoli();
 	public void save(Articolo a);
-	int findByLastId();
+	public Articolo findByIdArticolo(int id);
 }

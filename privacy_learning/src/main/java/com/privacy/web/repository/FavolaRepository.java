@@ -10,7 +10,7 @@ import com.privacy.web.model.Favola;
 
 @EnableJpaRepositories
 public interface FavolaRepository extends CrudRepository<Favola, Integer> {
-/*	@Query(name = "Select LAST(id_favola) FROM Favola ORDER BY id_favola ASC", nativeQuery = true)
+/*	@Query(value = "Select LAST(id_favola) FROM Favola ORDER BY id_favola ASC", nativeQuery = true)
 	int returnLastId();
 */
 	@Query(value = "SELECT * FROM Favola", nativeQuery = true)

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<script type="text/javascript" src="../js/ConvalidazioneCampi.js"></script>
+<link rel="stylesheet" href="/css/stylesheet.css">
+<link rel="icon" type="image/png" href="img/logo.png" />
+<title>Privacy Literacy - Login</title>
+</head>
+<body>
+	<div th:insert="~{fragments/header::header}"></div>
+	<br>
+	<div class="container-home">
+		<h1>QUESTA PAGINA VISUALIZZA IL FORM PER MODIFICARE L' ARTICOLO</h1>
+		<form th:action="@{/modificaArticolo/{id} (id=${articolo.id_articolo})}" th:object="${articolo}" method="post">
+
+
+			<button type="button" class="button">Modifica</button>
+			<a type="submit" class="button"	th:href="@{/article/leggi-un-articolo}"> Annulla </a>
+		</form>
+	</div>
+</body>
+</html>
