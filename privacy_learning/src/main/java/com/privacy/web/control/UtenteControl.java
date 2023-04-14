@@ -64,7 +64,7 @@ public class UtenteControl {
 		return "create_user";
 	}
 
-	@GetMapping("/regprova") // qui ci dovrebbe andasre il link della registrazioe ma non sono sicura
+	@GetMapping("/reg") // qui ci dovrebbe andasre il link della registrazioe ma non sono sicura
 	public String prova(Model model) {
 		List<Domanda> questionario = domServ.findByIdTest(4);
 		List<Domanda> prima = split(questionario);
@@ -81,7 +81,7 @@ public class UtenteControl {
 		return "registrazione";
 	}
 
-	@PostMapping("/regprova")
+	@PostMapping("/reg")
 	public String provarisposte(@ModelAttribute("user") Utente user, HttpServletRequest request,
 			HttpServletResponse response, Model model, HttpSession userSession) throws Exception {
 		if (Check.checkName(request.getParameter("nome")) && Check.checkSurname(request.getParameter("cognome"))
