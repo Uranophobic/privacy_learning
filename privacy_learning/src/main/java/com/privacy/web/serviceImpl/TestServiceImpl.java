@@ -20,4 +20,16 @@ public class TestServiceImpl implements TestService {
 		return (List<Test>) testRep.findAll();
 	}
 
+	@Override
+	public Test findById(int id) {
+		return (Test) testRep.findByIdTest(id);
+	}
+
+	@Override
+	public String returnTipoById(int id) {
+		// TODO Auto-generated method stub
+		return testRep.findTipoById(id);
+	}
+
+	
 }

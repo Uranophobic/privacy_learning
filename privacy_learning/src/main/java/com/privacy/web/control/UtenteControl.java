@@ -48,7 +48,7 @@ public class UtenteControl {
 		this.testServ = testServ;
 	}
 
-	// metodo che prende la lista di tutti gli utenti e ritorna una model and view
+	// metodo che prende la lista di tutti gli utenti e restituisce la view
 	@GetMapping("/all") // tutti gli utenti
 	public String listUser(Model model) {
 		model.addAttribute("utenti", utServ.findAll());
@@ -113,7 +113,7 @@ public class UtenteControl {
 					System.out.println(user.getEmail());
 					Salvataggio s = new Salvataggio();
 					s.setEmail_utente(user.getEmail());
-					s.setId_test(4);
+					s.setIdTest(4);
 					int ultimo = salvataggioServ.findAllSalvataggio().size() + 1;
 					for (int i = 0; i < risposte.size(); i++) {
 						s.setId_salvataggio(ultimo + i);

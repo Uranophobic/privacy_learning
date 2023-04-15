@@ -16,13 +16,30 @@ public class SalvataggioServiceImpl implements SalvataggioService {
 	private SalvataggioRepository salRep;
 	
 	@Override
-	public Salvataggio save(Salvataggio s) {
-		return salRep.save(s);
+	public void save(Salvataggio s) {
+		salRep.save(s);
 	}
 
 	@Override
 	public List<Salvataggio> findAllSalvataggio() {
 		return (List<Salvataggio>) salRep.findAll();
+	}
+
+	@Override
+	public List<Salvataggio> findByEmailAndIdTest(String email, int id) {
+		
+		return salRep.findByEmailAndIdTest(email, id);
+	}
+
+	@Override
+	public void deleteByEmailAndIdTest(String email, int test) {
+		salRep.deleteByEmailAndIdTest(email, test);
+	}
+
+	@Override
+	public int returnLastIdtestByEmail(String email) {
+		// TODO Auto-generated method stub
+		return salRep.returnLastIdtestByEmail(email);
 	}
 
 

@@ -39,7 +39,7 @@
 				<!-- AL MOMENTO NON LO METTO IL CONTROLLO DELLA SESSIONE DELL'ADMIN PERCHè DEVO PRIMA VEDERE SE FUNZIONA-->
 				<!--th:if="${!session.isEmpty()} and ${session.userSession.email.equals('admin@gmail.com')}" -->
 			</thead>
-			<tbody ><a type="button"  class="button"th:href="@{/admin/createDomanda}"> Aggiungi </a>
+			<tbody> <a type="button"  class="button" th:href="@{/admin/createDomanda}"> Aggiungi </a>
 			<tr th:each="dom : ${domande}" >
 				
 					
