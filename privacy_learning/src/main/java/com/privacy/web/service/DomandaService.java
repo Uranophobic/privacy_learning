@@ -12,6 +12,8 @@ public interface DomandaService {
 	List<Domanda> findByIdTest(int idTest);
 	Domanda findById(int id);
 	void deleteById(int id);
+	void save(Domanda domExist);
+	boolean existsByTesto(String testo);
 	
 	
 }

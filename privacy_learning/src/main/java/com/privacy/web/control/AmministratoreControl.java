@@ -44,6 +44,7 @@ public class AmministratoreControl {
 	TestService testServ;
 
 	/*-----------------------------------CREAZIONE--------------------------------------------*/
+//-----------------------METODI GET
 	@GetMapping("/createArticolo")
 	public String addArticolo(Model model) {
 		model.addAttribute("metainfo", metaServ.findAll());
@@ -69,6 +70,7 @@ public class AmministratoreControl {
 		return "createDomanda";
 	}
 
+//-----------------------METODI POST
 	@PostMapping("/addArticolo")
 	public String createArticolo(@ModelAttribute("articolo") Articolo a, HttpServletRequest request,
 			HttpServletResponse response, Model model) {
@@ -157,6 +159,21 @@ public class AmministratoreControl {
 		return "redirect:/favole/leggi-una-favola";
 	}
 
+	@PostMapping("/addDomanda")
+	public String createDomanda(@ModelAttribute("domanda") Domanda dom, Model model) {
+		try {
+			if (domServ.existsByTesto(dom.getTesto()) ) {
+				String error = "titolo esistente";
+				model.addAttribute("descrizione", error);
+				return "redirect:/error?descrizione= " + error;
+			} else {
+				domServ.save(dom);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/admin/allDomande";
+	}
 	/*---------------------------------ELIMINAZIONE----------------------------------------------*/
 
 	@GetMapping("/deleteArticolo/{id}")
@@ -175,6 +192,12 @@ public class AmministratoreControl {
 	public String eliminaFavola(@PathVariable int id, Model model) {
 		favServ.deleteById(id);
 		return "redirect:/favole/leggi-una-favola";
+	}
+	
+	@GetMapping("/deleteDomanda/{id}")
+	public String eliminaDomanda(@PathVariable int id, Model model) {
+		domServ.deleteById(id);
+		return "redirect:/admin/AllDomande";
 	}
 	/*-----------------------------------MODIFICA--------------------------------------------*/
 
@@ -298,33 +321,29 @@ public class AmministratoreControl {
 	@PostMapping("/modificaDomanda/{id}")
 	public String updateFavola(@PathVariable int id, @ModelAttribute("domanda") Domanda d, Model model) {
 		Domanda domExist = domServ.findById(id);
+		
 		domExist.setId_domanda(d.getId_domanda());
 		domExist.setId_test(d.getId_test());
 		domExist.setMeta_info(d.getMeta_info());
+		domExist.setTesto(d.getTesto());
 		domExist.setRisposta1(d.getRisposta1());
 		domExist.setRisposta2(d.getRisposta2());
 		domExist.setRisposta3(d.getRisposta3());
 		domExist.setRisposta4(d.getRisposta4());
 		domExist.setRisposta_corretta(d.getRisposta_corretta());
 		
-		
 		domServ.deleteById(id);
-/*		try {
-			if (favServ.existsByTesto(favExist.getTestofavola()) ) {
+		try {
+			if (domServ.existsByTesto(domExist.getTesto()) ) {
 				String error = "titolo esistente";
 				model.addAttribute("descrizione", error);
 				return "redirect:/error?descrizione= " + error;
-			} else if (favServ.existsByTitolo(favExist.getTitolofavola())) {
-				String error = "favola già esiste";
-				model.addAttribute("descrizione", error);
-				return "redirect:/error?descrizione= " + error;
 			} else {
-				favServ.save(favExist);
+				domServ.save(domExist);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-*/
-		return "redirect:/favole/leggi-una-favola";
+		return "redirect:/domande/allDomande";
 	}
 }

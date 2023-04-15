@@ -43,6 +43,19 @@ public class DomandaServiceImpl implements DomandaService {
 		domRep.deleteById(id);
 	}
 
+
+	@Override
+	public void save(Domanda d) {
+		// TODO Auto-generated method stub
+		domRep.save(d);
+	}
+
+
+	@Override
+	public boolean existsByTesto(String testo) {
+		return domRep.existsByTesto(testo);
+	}
+
 	
 
 	

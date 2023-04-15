@@ -17,6 +17,8 @@ public interface DomandaRepository extends CrudRepository<Domanda,Integer> {
 	@Query(value="SELECT * FROM Domanda d WHERE d.id_domanda=?1", nativeQuery=true)
 	Domanda findDomandaById(int id);
 
+	boolean existsByTesto(String testo);
+
 	
 	
 }
