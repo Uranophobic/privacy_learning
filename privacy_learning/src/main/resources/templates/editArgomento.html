@@ -11,14 +11,23 @@
 	<div th:insert="~{fragments/header::header}"></div>
 	<br>
 	<div class="container-home">
+	
+	<!-- CONTROLLO CHE L'UTENTE SIA ADMIN -->
+	<th:block th:if="${!session.isEmpty()} and (${session.userSession.email.equals('admin@gmail.com')})">
 		<h1>QUESTA PAGINA VISUALIZZA IL FORM PER MODIFICARE L' ARGOMENTO</h1>
 		<form th:action="@{/modificaArgomento/{id} (id=${argomento.id_studio})}" th:object="${argomento}" method="post">
 
 
+
 			<a type="submit" class="button" th:href="@{/modificaArgomento/{id} (id=${argomento.id_studio})}"> Modifica </a>
-			
 		</form>
 		<a type="submit" class="button"	th:href="@{/argomenti/studia-con-noi}"> Annulla </a>
+	</th:block>
+	
+	<!-- SE NON SI TRATTA DELL' UTENTE ADMIN -->
+			<th:block th:if="${session.isEmpty()} or ${!(session.userSession.email.equals('admin@gmail.com'))}">
+			<h1>NON HAI L'AUTORIZZAZIONE PER MODIFICARE QUESTO UTENTE</h1>
+		</th:block>
 	</div>
 </body>
 </html>

@@ -27,8 +27,8 @@
 								th:text="${arg.getDescrizione().substring(0,200).concat('...')}">contenuto</p>
 						</div>
 						<a class="button" type="submit" th:href="@{/argomenti/argomentoView/{id}(id=${arg.id_studio})}">Continua</a>
-						<a class=button th:href="@{admin/fixedArgomento/{id}(id=${arg.getId_studio()})}">Modifica</a>
-						<a class=button th:href="@{admin/deleteArgomento/{id}(id=${arg.getId_studio()})}">Elimina</a>
+						<a class=button th:href="@{/admin/fixedArgomento/{id}(id=${arg.getId_studio()})}">Modifica</a>
+						<a class=button th:href="@{/admin/deleteArgomento/{id}(id=${arg.getId_studio()})}">Elimina</a>
 				</fieldset>
 		</th:block>
 		<!--  ALTRIMENTI -->

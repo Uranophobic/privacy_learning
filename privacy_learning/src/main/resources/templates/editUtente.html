@@ -5,20 +5,27 @@
 <script type="text/javascript" src="../js/ConvalidazioneCampi.js"></script>
 <link rel="stylesheet" href="/css/stylesheet.css">
 <link rel="icon" type="image/png" href="img/logo.png" />
-<title>Privacy Literacy - Login</title>
+<title>Privacy Literacy</title>
 </head>
 <body>
 	<div th:insert="~{fragments/header::header}"></div>
 	<br>
 	<div class="container-home">
-		<h1>QUESTA PAGINA VISUALIZZA IL FORM PER MODIFICARE L' UTENTE</h1>
-		<form th:action="@{/modificaUtente/{email} (id=${utente.email})}" th:object="${utente}" method="post">
+		<th:block th:if="${utente.getEmail()} == ${session.userSession.email}">
+			<h1>QUESTA PAGINA VISUALIZZA IL FORM PER MODIFICARE L' UTENTE <a th:text="${utente.getEmail()}"></a></h1>
+			<form th:action="@{/modificaUtente/{email} (id=${utente.email})}" th:object="${utente}" method="post">
 
 
-			<a type="submit" class="button" th:href="@{/modificaUtente/{email} (id=${utente.email})}"> Modifica </a>
-			
-		</form>
-		<a type="submit" class="button"	th:href="@{/profilo}"> Annulla </a>
+				<a type="submit" class="button"	th:href="@{/users/modificaUtente/{email} (id=${utente.email})}"> Modifica </a>
+
+			</form>
+			<a type="submit" class="button" th:href="@{/profilo}"> Annulla </a>
+		</th:block>
+
+		<th:block th:if="${utente.getEmail()} != ${session.userSession.email}">
+			<h1>NON HAI L'AUTORIZZAZIONE PER MODIFICARE QUESTO UTENTE</h1>
+		</th:block>
+
 	</div>
 </body>
 </html>

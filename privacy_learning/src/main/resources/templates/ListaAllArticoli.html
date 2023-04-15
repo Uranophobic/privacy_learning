@@ -11,7 +11,7 @@
 	<br>
 	<div class="container-home">
 		<div class="box-titolo">
-				<div class="titolo">Curiosit√† e Novit√†</div>
+				<div class="titolo">Curiosit&agrave;† e Novit&agrave;†</div>
 			</div>
 	 <a class="button" th:if="${!session.isEmpty()} and ${session.userSession.email.equals('admin@gmail.com')}"  th:href="@{/admin/createArticolo}"> Aggiungi </a>
 		<div class="background">
@@ -28,8 +28,8 @@
 							th:href="${art.getLink()}" th:value="${art.getLink()}">Contenuto
 							articolo</a>
 							<br> <br>
-							<a class=button th:href="@{admin/fixedArticolo/{id}(id=${art.getId_articolo()})}">Modifica</a>
-							<a class=button th:href="@{admin/deleteArticolo/{id}(id=${art.getId_articolo()})}">Elimina</a>
+							<a class=button th:href="@{/admin/fixedArticolo/{id}(id=${art.getId_articolo()})}">Modifica</a>
+							<a class=button th:href="@{/admin/deleteArticolo/{id}(id=${art.getId_articolo()})}">Elimina</a>
 					</div>
 				</fieldset>
 			</th:block>

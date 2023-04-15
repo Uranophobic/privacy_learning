@@ -1,13 +1,17 @@
 package com.privacy.web.control;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.privacy.web.model.MetaInfo;
 import com.privacy.web.repository.MetaInfoRepository;
+import com.privacy.web.service.MetaInfoService;
 
 
 @Controller
@@ -15,13 +19,16 @@ import com.privacy.web.repository.MetaInfoRepository;
 public class MetaInfoControl {
 	
 	@Autowired
-	public MetaInfoRepository metaRep;
+	public MetaInfoService metaServ;
 	
 	@GetMapping ("/all-meta")
-	public String tutte (Model model) {
-	
-		System.out.println(metaRep.findAll());
-		model.addAttribute("metainfo", metaRep.findAll());
-		return "createArgomento"; ///boh
+	public List<ModelAndView> tutte (Model model) {
+		List<ModelAndView> mov = null;
+		mov.add(new ModelAndView("createArgomento", "metainfo",metaServ.findAll()));
+		mov.add(new ModelAndView("editArgomento", "metainfo",metaServ.findAll()));
+		mov.add(new ModelAndView("editArticolo", "metainfo",metaServ.findAll()));
+		
+		return mov; ///boh
+		
 	}
 }

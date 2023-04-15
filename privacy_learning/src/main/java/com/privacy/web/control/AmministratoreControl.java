@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.privacy.web.model.ArgomentoStudio;
 import com.privacy.web.model.Articolo;
 import com.privacy.web.model.Favola;
+import com.privacy.web.repository.MetaInfoRepository;
 import com.privacy.web.service.ArgomentoStudioService;
 import com.privacy.web.service.ArticoloService;
 import com.privacy.web.service.FavolaService;
+import com.privacy.web.service.MetaInfoService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -31,20 +33,25 @@ public class AmministratoreControl {
 	ArgomentoStudioService argServ;
 	@Autowired
 	FavolaService favServ;
+	@Autowired
+	public MetaInfoService metaServ;
 
 	/*-----------------------------------CREAZIONE--------------------------------------------*/
 	@GetMapping("/createArticolo")
 	public String addArticolo(Model model) {
+		model.addAttribute("metainfo", metaServ.findAll());
 		return "createArticolo";
 	}
 
 	@GetMapping("/createArgomento")
 	public String addArgomento(Model model) {
+		model.addAttribute("metainfo", metaServ.findAll());
 		return "createArgomento";
 	}
 
 	@GetMapping("/createFavola")
 	public String addFavola(Model model) {
+		model.addAttribute("metainfo", metaServ.findAll());
 		return "createFavola";
 	}
 
@@ -65,8 +72,6 @@ public class AmministratoreControl {
 				model.addAttribute("descrizione", error);
 				return "redirect:/error?descrizione= " + error;
 			} else {
-
-				System.out.println(a.toString());
 				artServ.save(art);
 			}
 		} catch (Exception e) {
@@ -163,6 +168,7 @@ public class AmministratoreControl {
 	@GetMapping("/fixedArticolo/{id}")
 	public String editArticolo(@PathVariable int id, Model model) {
 		model.addAttribute("articolo", artServ.findByIdArticolo(id));
+		model.addAttribute("metainfo", metaServ.findAll());
 		return "editArticolo";
 	}
 
@@ -196,6 +202,8 @@ public class AmministratoreControl {
 	@GetMapping("/fixedArgomento/{id}")
 	public String editArgomento(@PathVariable int id, Model model) {
 		model.addAttribute("argomento", argServ.findById(id));
+		model.addAttribute("metainfo", metaServ.findAll());
+		System.out.println(metaServ.findAll());
 		return "editArgomento";
 	}
 
@@ -207,7 +215,7 @@ public class AmministratoreControl {
 		argExist.setLinkvideo(a.getLinkvideo());
 		argExist.setMeta_info(a.getMeta_info());
 		argExist.setTitolo(a.getTitolo());
-
+		
 		try {
 			argServ.deleteById(id);
 			if (argServ.existsByDescrizione(argExist.getTitolo())) {
