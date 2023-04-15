@@ -1,9 +1,12 @@
 package com.privacy.web.serviceImpl;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.privacy.web.model.Test;
 import com.privacy.web.repository.TestRepository;
 import com.privacy.web.service.TestService;
 
@@ -11,5 +14,10 @@ import com.privacy.web.service.TestService;
 public class TestServiceImpl implements TestService {
 	@Autowired
 	private TestRepository testRep;
+
+	@Override
+	public List<Test> findAllTest() {
+		return (List<Test>) testRep.findAll();
+	}
 
 }

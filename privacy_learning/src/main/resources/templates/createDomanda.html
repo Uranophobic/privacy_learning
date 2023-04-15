@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../css/stylesheet.css">
+<title>Privacy Literacy</title>
+</head>
+
+<body>
+	<div th:insert="~{fragments/header::header}"></div>
+	<th:block th:if="${!session.isEmpty()} and (${session.userSession.email.equals('admin@gmail.com')})">
+		<h1>QUESTA PAGINA VISUALIZZA IL FORM PER MODIFICARE L' ARGOMENTO</h1>
+		<form th:action="@{/creaDomanda/{id} (id=${domanda.id_domanda})}" th:object="${domanda}" method="post">
+
+
+
+			<a type="submit" class="button" th:href="@{/admin/modificaDomanda/{id} (id=${domanda.id_domanda})}"> Modifica </a>
+		</form>
+		<a type="submit" class="button"	th:href="@{/admin/domande/AllDomande}"> Annulla </a>
+	</th:block>
+</body>
+</html>

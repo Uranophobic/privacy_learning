@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<script type="text/javascript" src="../js/ConvalidazioneCampi.js"></script>
+<link rel="stylesheet" href="/css/stylesheet.css">
+<link rel="icon" type="image/png" href="img/logo.png" />
+<title>Privacy Literacy - Login</title>
+</head>
+<body>
+	<div th:insert="~{fragments/header::header}"></div>
+	<br>
+	<div class="container-home">
+		<!-- CONTROLLO CHE L'UTENTE SIA ADMIN -->
+	<th:block th:if="${!session.isEmpty()} and (${session.userSession.email.equals('admin@gmail.com')})">
+		<h1>QUESTA PAGINA VISUALIZZA IL FORM PER MODIFICARE LA DOMANDA</h1>
+		<form th:action="@{/modificaDomanda/{id} (id=${favola.id_domanda})}" th:object="${domanda}" method="post">
+
+
+			<a type="submit" class="button" th:href="@{/admin/modificaDomanda/{id} (id=${domanda.id_domanda})}"> Modifica </a>
+			<a type="submit" class="button" th:href="@{/domande/allDomande}">Annulla </a>
+		</form>
+		</th:block>
+	
+	<!-- SE NON SI TRATTA DELL' UTENTE ADMIN -->
+			<th:block th:if="${session.isEmpty()} or ${!(session.userSession.email.equals('admin@gmail.com'))}">
+			<h1>NON HAI L'AUTORIZZAZIONE PER MODIFICARE QUESTO UTENTE</h1>
+		</th:block>
+	</div>
+</body>
+</html>

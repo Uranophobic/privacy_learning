@@ -29,6 +29,20 @@ public class DomandaServiceImpl implements DomandaService {
 		return 0;
 	}
 
+
+	@Override
+	public Domanda findById(int id) {
+		// TODO Auto-generated method stub
+		return (Domanda) domRep.findDomandaById(id);
+	}
+
+
+	@Override
+	public void deleteById(int id) {
+		// TODO Auto-generated method stub
+		domRep.deleteById(id);
+	}
+
 	
 
 	

@@ -13,12 +13,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.privacy.web.model.ArgomentoStudio;
 import com.privacy.web.model.Articolo;
+import com.privacy.web.model.Domanda;
 import com.privacy.web.model.Favola;
 import com.privacy.web.repository.MetaInfoRepository;
 import com.privacy.web.service.ArgomentoStudioService;
 import com.privacy.web.service.ArticoloService;
+import com.privacy.web.service.DomandaService;
 import com.privacy.web.service.FavolaService;
 import com.privacy.web.service.MetaInfoService;
+import com.privacy.web.service.TestService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -34,7 +37,11 @@ public class AmministratoreControl {
 	@Autowired
 	FavolaService favServ;
 	@Autowired
-	public MetaInfoService metaServ;
+	MetaInfoService metaServ;
+	@Autowired
+	DomandaService domServ;
+	@Autowired
+	TestService testServ;
 
 	/*-----------------------------------CREAZIONE--------------------------------------------*/
 	@GetMapping("/createArticolo")
@@ -53,6 +60,14 @@ public class AmministratoreControl {
 	public String addFavola(Model model) {
 		model.addAttribute("metainfo", metaServ.findAll());
 		return "createFavola";
+	}
+	
+	@GetMapping("/createDomanda")
+	public String addDomanda(Model model) {
+		model.addAttribute("metainfo", metaServ.findAll());
+		model.addAttribute("metainfo", metaServ.findAll());
+		model.addAttribute("test", testServ.findAllTest());
+		return "createDomanda";
 	}
 
 	@PostMapping("/addArticolo")
@@ -240,6 +255,7 @@ public class AmministratoreControl {
 	@GetMapping("/fixedFavola/{id}")
 	public String editFavola(@PathVariable int id, Model model) {
 		model.addAttribute("favola", favServ.findById(id));
+		model.addAttribute("metainfo", metaServ.findAll());
 		return "editFavola";
 	}
 
@@ -271,4 +287,45 @@ public class AmministratoreControl {
 		return "redirect:/favole/leggi-una-favola";
 	}
 
+	//----------------DOMANDA
+	@GetMapping("/fixedFavola/{id}")
+	public String editDomanda(@PathVariable int id, Model model) {
+		model.addAttribute("domanda", domServ.findById(id));
+		model.addAttribute("metainfo", metaServ.findAll());
+		model.addAttribute("test", testServ.findAllTest());
+		return "editDomanda";
+	}
+
+	@PostMapping("/modificaDomanda/{id}")
+	public String updateFavola(@PathVariable int id, @ModelAttribute("domanda") Domanda d, Model model) {
+		Domanda domExist = domServ.findById(id);
+		domExist.setId_domanda(d.getId_domanda());
+		domExist.setId_test(d.getId_test());
+		domExist.setMeta_info(d.getMeta_info());
+		domExist.setRisposta1(d.getRisposta1());
+		domExist.setRisposta2(d.getRisposta2());
+		domExist.setRisposta3(d.getRisposta3());
+		domExist.setRisposta4(d.getRisposta4());
+		domExist.setRisposta_corretta(d.getRisposta_corretta());
+		
+		
+		domServ.deleteById(id);
+/*		try {
+			if (favServ.existsByTesto(favExist.getTestofavola()) ) {
+				String error = "titolo esistente";
+				model.addAttribute("descrizione", error);
+				return "redirect:/error?descrizione= " + error;
+			} else if (favServ.existsByTitolo(favExist.getTitolofavola())) {
+				String error = "favola già esiste";
+				model.addAttribute("descrizione", error);
+				return "redirect:/error?descrizione= " + error;
+			} else {
+				favServ.save(favExist);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+*/
+		return "redirect:/favole/leggi-una-favola";
+	}
 }
