@@ -24,14 +24,14 @@
 		
 		<div class="boxArg">
 		
-		<fieldset><legend>Titolo</legend>
-			<input type="text" name="titolo" placeholder="Inscrisci il titolo dell'arogmento studio"  maxlength="60" minlength="2">
+		<fieldset><legend>Titolo*</legend>
+			<input type="text" name="titolo" placeholder="Inscrisci il titolo dell'arogmento studio"  maxlength="60" min="2" required="required">
 		</fieldset>
-		<fieldset><legend>Descrizione</legend>
-			<textarea type="text" name="descrizione" placeholder="Inserisci il testo dell'argomento studio (max 5000)" maxlength="5000" minlength="2"></textarea>
+		<fieldset><legend>Descrizione*</legend>
+			<textarea name="descrizione" placeholder="Inserisci il testo dell'argomento studio (min 200, max 5000)" maxlength="5000" required="required"></textarea>
 		</fieldset>
-		<fieldset><legend>Meta-Info</legend>
-			<select name="metainfo" id="metainfo">
+		<fieldset><legend>Meta-Info*</legend>
+			<select name="metainfo" id="metainfo" required="required">
 				<th:block th:each="meta : ${metainfo}">
 				 <option th:value="${meta.keyword}" th:text="${meta.keyword}"></option></th:block>
 			</select>

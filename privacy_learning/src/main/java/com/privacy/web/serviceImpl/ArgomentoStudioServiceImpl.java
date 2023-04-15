@@ -51,4 +51,9 @@ public class ArgomentoStudioServiceImpl implements ArgomentoStudioService{
 		return argRep.existsByLinkvideo(link);
 	}
 
+	@Override
+	public void deleteById(int id) {
+		argRep.deleteById(id);
+	}
+
 }

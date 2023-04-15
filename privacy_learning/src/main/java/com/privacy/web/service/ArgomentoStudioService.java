@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import com.privacy.web.model.ArgomentoStudio;
 @Service
 public interface ArgomentoStudioService {
+	void deleteById(int id);
 	int findByLastId();
 	public ArgomentoStudio findById(int id);
 	public List<ArgomentoStudio> findAllArgomenti();

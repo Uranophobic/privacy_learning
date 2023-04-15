@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.privacy.web.model.Articolo;
 import com.privacy.web.model.Domanda;
 import com.privacy.web.model.Salvataggio;
 import com.privacy.web.model.Utente;
@@ -53,7 +54,8 @@ public class UtenteControl {
 		model.addAttribute("utenti", utServ.findAll());
 		return "ListaAllUser";
 	}
-/*--------REGISTRAZIONE--------*/
+
+	/*--------REGISTRAZIONE--------*/
 	// metodo che crea un nuovo utente
 	@GetMapping("/registrazione")
 	public String newUser(Model model) {
@@ -123,7 +125,7 @@ public class UtenteControl {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
+
 		} else {
 			if (!Check.checkName(request.getParameter("nome"))) {
 				response.getWriter().write("1: nome non corretto");
@@ -138,7 +140,7 @@ public class UtenteControl {
 			model.addAttribute("descrizione", descrizione);
 			return "redirect:/error";
 		}
-		
+
 		return "redirect:/profilo";
 	}
 
@@ -159,6 +161,7 @@ public class UtenteControl {
 		return "privacy";
 	}
 
+	/*-----------------------------------LOGIN------------------------------------------*/
 	@PostMapping("/login")
 	public String sessioneUtente(@ModelAttribute("user") Utente user, HttpServletRequest request,
 			HttpServletResponse response, Model model, HttpSession userSession) throws Exception {
@@ -199,7 +202,6 @@ public class UtenteControl {
 		utServ.deleteById(id);
 		return "redirect:/users/all";
 	}
-	
 
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
@@ -207,6 +209,49 @@ public class UtenteControl {
 		return "redirect:/homepage";
 	}
 
+/*----------------------------------MODIFICA------------------------------------------*/
+	@GetMapping("/fixedUtente/{email}")
+	public String editArgomento(@PathVariable String email, Model model) {
+		model.addAttribute("utente", utServ.findUtenteByEmail(email));
+		return "editUtente";
+	}
+
+	@PostMapping("/modificaArticolo/{email}")
+	public String updateArticolo(@PathVariable String email, @ModelAttribute("utente") Utente u, Model model,
+			HttpSession userSession) {
+		if (Check.checkName(u.getNome()) && Check.checkSurname(u.getCognome()) && Check.checkEmail(u.getEmail())) {
+
+			Utente ut = utServ.findUtenteByEmail(email);
+			ut.setNome(u.getNome());
+			ut.setCognome(u.getCognome());
+			ut.setEmail(u.getEmail());
+			ut.setPassword(u.getPassword());
+			utServ.deleteById(email);
+			
+			try {
+				if (utServ.existsById(ut.getEmail())) {
+					String error = "Esiste già un utente con questa e-mail";
+					model.addAttribute("descrizione", error);
+					return "redirect:/error?descrizione= " + error;
+
+				} else {
+					utServ.saveUser(ut);
+					userSession.setAttribute("userSession", ut);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} else {
+			String descrizione = "Siamo spiacenti si è verificato un errore con la registrazione. Riprova!";
+			model.addAttribute("descrizione", descrizione);
+			return "redirect:/error";
+		}
+		return "redirect:/profilo";
+	}
+
+
+/*------------------------------------METODI INTERNI-------------------------------*/
 	// Metodo che prende solo la prima parte delle domande del questionario utente
 	public static List<Domanda> split(List<Domanda> list) {
 		// crea due liste vuote

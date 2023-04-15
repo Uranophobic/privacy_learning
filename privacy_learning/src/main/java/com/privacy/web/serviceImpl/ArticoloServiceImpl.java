@@ -35,6 +35,12 @@ public class ArticoloServiceImpl implements ArticoloService {
 		return artRep.findArticoloById(id);
 	}
 
+	@Override
+	public void deleteById(int id) {
+		artRep.deleteById(id);
+		
+	}
+
 /*	@Override
 	public int findLastId() {
 		// TODO Auto-generated method stub

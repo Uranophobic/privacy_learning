@@ -11,14 +11,14 @@
 	<div th:insert="~{fragments/header::header}"></div>
 	<br>
 	<div class="container-home">
-		<h1>QUESTA PAGINA VISUALIZZA IL FORM PER MODIFICARE L' ARGOMENTO</h1>
-		<form th:action="@{/modificaArgomento/{id} (id=${argomento.id_studio})}" th:object="${argomento}" method="post">
+		<h1>QUESTA PAGINA VISUALIZZA IL FORM PER MODIFICARE L' UTENTE</h1>
+		<form th:action="@{/modificaUtente/{email} (id=${utente.email})}" th:object="${utente}" method="post">
 
 
-			<a type="submit" class="button" th:href="@{/modificaArgomento/{id} (id=${argomento.id_studio})}"> Modifica </a>
+			<a type="submit" class="button" th:href="@{/modificaUtente/{email} (id=${utente.email})}"> Modifica </a>
 			
 		</form>
-		<a type="submit" class="button"	th:href="@{/argomenti/studia-con-noi}"> Annulla </a>
+		<a type="submit" class="button"	th:href="@{/profilo}"> Annulla </a>
 	</div>
 </body>
 </html>
