@@ -12,4 +12,5 @@ public interface ArticoloService {
 	public List<Articolo> findAllArticoli();
 	public void save(Articolo a);
 	public Articolo findByIdArticolo(int id);
+//	public int findLastId();
 }

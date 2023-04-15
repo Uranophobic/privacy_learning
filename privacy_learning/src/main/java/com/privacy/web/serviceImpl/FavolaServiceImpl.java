@@ -27,7 +27,7 @@ public class FavolaServiceImpl implements FavolaService {
 
 	@Override
 	public int findByLastId() {
-		return 0;
+		return favRep.returnLastId();
 	}
 
 	@Override

@@ -27,7 +27,7 @@ public class ArgomentoStudioServiceImpl implements ArgomentoStudioService{
 
 	@Override
 	public int findByLastId() {
-		return 0;
+		return argRep.returnLastId();
 	}
 
 	@Override

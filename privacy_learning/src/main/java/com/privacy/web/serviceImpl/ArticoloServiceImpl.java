@@ -34,4 +34,11 @@ public class ArticoloServiceImpl implements ArticoloService {
 		// TODO Auto-generated method stub
 		return artRep.findArticoloById(id);
 	}
+
+/*	@Override
+	public int findLastId() {
+		// TODO Auto-generated method stub
+		return artRep.returnLastId();
+	}
+*/
 }

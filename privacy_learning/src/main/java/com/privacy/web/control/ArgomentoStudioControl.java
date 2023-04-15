@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -43,10 +42,11 @@ public class ArgomentoStudioControl {
 		return new ModelAndView("HomePage", "listaArgomenti", argomentiHome);
 	}
 	
-	//metodo che visualizza l'articolo nel dettaglio
+	//metodo che visualizza l'argomento nel dettaglio
 	@GetMapping("/argomentoView/{id}")
 	public String favolaSingola(@PathVariable int id, Model model) {
-		model.addAttribute("vediArgomento", argService.findById(id));
-		return "Argomento";
+		model.addAttribute("argomento", argService.findById(id));
+		model.addAttribute("ultimoId", argService.findByLastId());
+		return "ArgomentoView";
 	}
 }

@@ -35,7 +35,8 @@ public class FavolaControl {
 	@GetMapping("/favolaView/{id}")
 	public String favolaSingola(@PathVariable int id, Model model) {
 		model.addAttribute("favola", favSer.findById(id));
-		return "Favola";
+		model.addAttribute("ultimoId", favSer.findByLastId());
+		return "FavolaView";
 	}
 	@GetMapping("/favoleHome")
 	public ModelAndView visualizzaArgomenti(@ModelAttribute("listaFavoleHome") HttpServletRequest request, HttpServletResponse resp) {
