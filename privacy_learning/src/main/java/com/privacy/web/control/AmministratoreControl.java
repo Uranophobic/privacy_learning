@@ -15,6 +15,7 @@ import com.privacy.web.model.ArgomentoStudio;
 import com.privacy.web.model.Articolo;
 import com.privacy.web.model.Domanda;
 import com.privacy.web.model.Favola;
+import com.privacy.web.repository.DomandaRepository;
 import com.privacy.web.repository.MetaInfoRepository;
 import com.privacy.web.service.ArgomentoStudioService;
 import com.privacy.web.service.ArticoloService;
@@ -43,6 +44,8 @@ public class AmministratoreControl {
 	@Autowired
 	TestService testServ;
 
+	@Autowired
+	DomandaRepository domRep;
 	/*-----------------------------------CREAZIONE--------------------------------------------*/
 //-----------------------METODI GET
 	@GetMapping("/createArticolo")
@@ -67,8 +70,18 @@ public class AmministratoreControl {
 	public String addDomanda(Model model) {
 		model.addAttribute("metainfo", metaServ.findAll());
 		model.addAttribute("test", testServ.findAllTest());
+		System.out.println(testServ.findAllTest());
 		return "createDomanda";
 	}
+	
+	/* provvisorio*/
+	@GetMapping("/all-domande")
+	public String domande(Model model) {
+		model.addAttribute("domande", domRep.findAll());
+		System.out.println(domRep.findAll());
+		return "allDomande";
+	}
+	
 
 //-----------------------METODI POST
 	@PostMapping("/addArticolo")
@@ -160,14 +173,26 @@ public class AmministratoreControl {
 	}
 
 	@PostMapping("/addDomanda")
-	public String createDomanda(@ModelAttribute("domanda") Domanda dom, Model model) {
+	public String createDomanda(@ModelAttribute("domanda") Domanda dom, HttpServletRequest request,
+			HttpServletResponse response, Model model) {
+		Domanda d = new Domanda();
+		int id = Integer.parseInt(request.getParameter("idtest"));
+		d.setId_test(id);
+		d.setMeta_info(request.getParameter("metainfo"));
+		d.setTesto(request.getParameter("testo"));
+		d.setRisposta1(request.getParameter("risposta1"));
+		d.setRisposta2(request.getParameter("risposta2"));
+		d.setRisposta3(request.getParameter("risposta3"));
+		d.setRisposta4(request.getParameter("risposta4"));
+		d.setRisposta_corretta(request.getParameter("rispostaCorr"));
+		System.out.println(d);
 		try {
 			if (domServ.existsByTesto(dom.getTesto()) ) {
 				String error = "titolo esistente";
 				model.addAttribute("descrizione", error);
 				return "redirect:/error?descrizione= " + error;
 			} else {
-				domServ.save(dom);
+				domServ.save(d);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
