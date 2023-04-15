@@ -65,7 +65,6 @@ public class AmministratoreControl {
 	@GetMapping("/createDomanda")
 	public String addDomanda(Model model) {
 		model.addAttribute("metainfo", metaServ.findAll());
-		model.addAttribute("metainfo", metaServ.findAll());
 		model.addAttribute("test", testServ.findAllTest());
 		return "createDomanda";
 	}
@@ -92,7 +91,7 @@ public class AmministratoreControl {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/users/leggi-un-articolo";
+		return "redirect:/article/leggi-un-articolo";
 	}
 
 	@PostMapping("/addArgomento")
@@ -288,7 +287,7 @@ public class AmministratoreControl {
 	}
 
 	//----------------DOMANDA
-	@GetMapping("/fixedFavola/{id}")
+	@GetMapping("/fixedDomanda/{id}")
 	public String editDomanda(@PathVariable int id, Model model) {
 		model.addAttribute("domanda", domServ.findById(id));
 		model.addAttribute("metainfo", metaServ.findAll());
