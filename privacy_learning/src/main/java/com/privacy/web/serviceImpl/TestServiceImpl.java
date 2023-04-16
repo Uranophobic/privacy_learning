@@ -27,8 +27,12 @@ public class TestServiceImpl implements TestService {
 
 	@Override
 	public String returnTipoById(int id) {
-		// TODO Auto-generated method stub
 		return testRep.findTipoById(id);
+	}
+
+	@Override
+	public int returnIdByTipo(String tipo) {
+		return testRep.returnIdByTipo(tipo);
 	}
 
 	

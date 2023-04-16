@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.privacy.web.model.Domanda;
 import com.privacy.web.model.Salvataggio;
+import com.privacy.web.model.Suggerimento;
 import com.privacy.web.model.Utente;
 import com.privacy.web.service.DomandaService;
 import com.privacy.web.service.SalvataggioService;
+import com.privacy.web.service.SuggerimentoService;
 import com.privacy.web.service.TestService;
 import com.privacy.web.service.UtenteService;
 
@@ -37,49 +39,84 @@ public class TestControl {
 	UtenteService utServ;
 	@Autowired
 	TestService testServ;
-	
+	@Autowired
+	SuggerimentoService sugServ;
+
 	@GetMapping("/domandeTest/{id}") // tutti le domande di un determinato test
 	public String listUser(@PathVariable int id, @PathVariable String email, Model model) {
-		model.addAttribute("domandeTest", domServ.findByIdTest(id));
+		model.addAttribute("domande", domServ.findByIdTest(id));
 		return "DomandeView";
 	}
-	
-	//si può fare perché ho visto su StackOverflow
+
+	/*
+	 * Con questo metodo salvo le risposte date, i suggerimenti e setto il punteggio
+	 * preso ed il livello
+	 */
+
+	// si può fare perché ho visto su StackOverflow
+	// id è l'id test, email già sai
 	@PostMapping("/saveTest/{id}/{email}")
-	public String salvaRisposte(@PathVariable int id, @PathVariable String email, 
-			@ModelAttribute("domandeTest") Domanda domanda, 
-			Model model, HttpServletRequest req, HttpServletResponse res) {
-		
-		Utente u= utServ.findUtenteByEmail(email);
-		List<Domanda> dom= domServ.findByIdTest(id);
-		ArrayList<String> risposte=new ArrayList<>();
-		int count=0; 
-		ArrayList<String> errate= new ArrayList<String>();
-		
-		//controllo se non l'utente ha già fatto il test e lo elimino
-		if(!salvServ.findByEmailAndIdTest(email, id).isEmpty()) {salvServ.deleteByEmailAndIdTest(email, id);}
-		
-		//salvo le risposte
-		for(int i=0;i< dom.size();i++) {
-			risposte.add(req.getParameter("valore" + dom.get(i).getId_domanda()));
-			
-			//controllo se la risposta data sia corretta
-			if(dom.get(i).getRisposta_corretta().equalsIgnoreCase(req.getParameter("valore" + dom.get(i).getId_domanda()))) {
-				count++;
-			} else {
-				
-				//creo direttamente la lista delle metainfo
-				errate.add(dom.get(i).getMeta_info());
+	public String salvaRisposte(@PathVariable int id, @PathVariable String email,
+			@ModelAttribute("domandeTest") Domanda domanda, Model model, HttpServletRequest req,
+			HttpServletResponse res) {
+
+		Utente u = utServ.findUtenteByEmail(email);
+		List<Domanda> dom = domServ.findByIdTest(id);
+
+		int count = 0;
+		ArrayList<String> metaErrate = new ArrayList<String>();
+		try {
+			// controllo se non l'utente ha già fatto il test e lo elimino
+			if (!salvServ.findByEmailAndIdTest(email, id).isEmpty()) {
+				salvServ.deleteByEmailAndIdTest(email, id);
 			}
+			// creo il salvataggio (manca solo il settaggio della risposta)
+			Salvataggio s = new Salvataggio();
+			s.setEmail_utente(u.getEmail());
+			s.setIdTest(id);
+
+			// suggerimenti
+			Suggerimento sug = new Suggerimento();
+			sug.setEmail(u.getEmail());
+			sug.setArgStudiato(false);
+			sug.setIdTest(id);
+
+			for (int i = 0; i < dom.size(); i++) {
+				// salvo le risposte
+				s.setRisposte(req.getParameter("valore" + dom.get(i).getId_domanda()));
+				salvServ.save(s);
+				// controllo se la risposta data sia corretta
+				if (dom.get(i).getRisposta_corretta()
+						.equalsIgnoreCase(req.getParameter("valore" + dom.get(i).getId_domanda()))) {
+					count++;
+				} else {
+					// qui setto argomento a false se esiste già, ma se togliamo "argomento
+					// studiato", questo controllo non necessita
+					if (sugServ.findByEmailAndMeta(sug.getEmail(), dom.get(i).getMeta_info()) != null) {
+						sugServ.findByEmailAndMeta(sug.getEmail(), dom.get(i).getMeta_info()).setArgStudiato(false);
+						continue;
+					}
+					// salvo i suggerimenti
+					sug.setMetainfo(dom.get(i).getMeta_info());
+					sugServ.save(sug);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
-		//setto percentuale e livello ogni volta che creo un test
-		u.setPercentuale(count*100/domServ.findByIdTest(id).size());
-		u.setLivello(testServ.returnTipoById(id));
+		// setto percentuale e livello ogni volta che faccio un test di livello
+		// successivo
+		if (testServ.returnIdByTipo(u.getLivello()) == 4 || testServ.returnIdByTipo(u.getLivello()) < id) {
+			u.setLivello(testServ.returnTipoById(id));
+			u.setPercentuale(count * 100 / domServ.findByIdTest(id).size());
+		}
+
+		/*
+		 * SE VOGLIAMO SALVARCI I LIVELLI E LE PERCENTUALI DI TUTTI I TEST CHE FA UN UTENTE DOBBIAMO CREARE 
+		 * UNA NUOVA ENTITà 'PUNTEGGI' CON: id, email, livello(tipo_test o id_test), percentuale
+		 */
 		
-		model.addAttribute("suggerimentoMeta",errate);
-		
-		//dobbiamo vedere dove renderizzare
-		return "redirect:/testView";
+		return "redirect:/TestView";
 	}
 }

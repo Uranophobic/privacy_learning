@@ -10,9 +10,8 @@ import com.privacy.web.model.Utente;
 @Service
 public interface UtenteService {
 
-	
 	List<Utente> findAll();
-	Utente saveUser(Utente user) throws Exception;
+	Utente saveUser(Utente user);
 	boolean existsById(String id);
 	Utente findUtenteByEmail (String email);
 	Utente login(String email, String password) throws SQLException;

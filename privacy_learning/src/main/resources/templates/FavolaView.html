@@ -11,7 +11,6 @@
 	 <div th:insert="~{fragments/header::header}"></div>
 <br>
 	<div class="container-home">
-		<form th:action="@{details/{id} (id=${favola.id_favola})}" th:object="${favola}" method=post>
 			<div class="background">
 				<div class="box-titolo">
 					<div class="titolo" style="font-family: 'Tempus Sans ITC'; color: purple;" th:text="${favola.getTitolofavola()}">
@@ -27,7 +26,6 @@
 				<a class="button" type="submit" th:if="${favola.getId_favola()}< ${ultimoId}" th:href="@{/favole/favolaView/{id}(id=${favola.id_favola}+1)}"> next </a>
 				
 			</div>
-		</form>
 	</div>
 </body>
 </html>

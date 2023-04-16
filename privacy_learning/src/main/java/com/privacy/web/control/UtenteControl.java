@@ -51,6 +51,7 @@ public class UtenteControl {
 	// metodo che prende la lista di tutti gli utenti e restituisce la view
 	@GetMapping("/all") // tutti gli utenti
 	public String listUser(Model model) {
+		
 		model.addAttribute("utenti", utServ.findAll());
 		return "ListaAllUser";
 	}
@@ -149,7 +150,6 @@ public class UtenteControl {
 		try {
 			utServ.saveUser(user);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return "redirect:/homepage";
@@ -216,8 +216,8 @@ public class UtenteControl {
 		return "editUtente";
 	}
 
-	@PostMapping("/modificaArticolo/{email}")
-	public String updateArticolo(@PathVariable String email, @ModelAttribute("utente") Utente u, Model model,
+	@PostMapping("/modificaUtente/{email}")
+	public String updateUtente(@PathVariable String email, @ModelAttribute("utente") Utente u, Model model,
 			HttpSession userSession) {
 		if (Check.checkName(u.getNome()) && Check.checkSurname(u.getCognome()) && Check.checkEmail(u.getEmail())) {
 

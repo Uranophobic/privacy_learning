@@ -23,19 +23,24 @@ public class Suggerimento {
 	@Column(name = "email")
 	private String email;
 	
+	@Column(name = "meta_info")
+	private String metainfo;
+	
 	@Column(name = "id_test")
 	private int idTest;
-
+/*
 	@Column(name = "titolo_argomento")
-	private String argSuggerito;
-	
+	private String titoloSuggerito;
+*/	
+	//non so se toglierlo. vorrei eliminare la tupla una volta aperto un argomento con quella meta_info
 	@Column(name = "studiato")
 	private boolean argStudiato;
 
-	public Suggerimento(@NonNull String email, int idTest, @NonNull String argSuggerito, boolean argStudiato) {
+	public Suggerimento(@NonNull String email, String metainfo, int idTest, @NonNull String titArgSuggerito, boolean argStudiato) {
 		this.email = email;
-		this.idTest = idTest;
-		this.argSuggerito = argSuggerito;
+		this.metainfo=metainfo;
+		this.idTest= idTest;
 		this.argStudiato = argStudiato;
+		
 	}
 }

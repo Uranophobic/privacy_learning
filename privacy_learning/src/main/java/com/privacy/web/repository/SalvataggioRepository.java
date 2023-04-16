@@ -14,7 +14,7 @@ public interface SalvataggioRepository  extends CrudRepository<Salvataggio,Integ
 	 * nativeQuery = true) List<Salvataggio> findAllByEmail(String email);
 	 */
 	
-    
+	@Query(value = "Select * FROM Salvataggio s WHERE s.email_utente= ?1 and s.id_test=?2", nativeQuery = true)
 	List<Salvataggio> findByEmailAndIdTest(String email, int idTest);
 	@Query(value = "Delete * FROM Salvataggio s WHERE s.email_utente= ?1 and s.id_test=?2", nativeQuery = true)
 	void deleteByEmailAndIdTest(String email,int test);
