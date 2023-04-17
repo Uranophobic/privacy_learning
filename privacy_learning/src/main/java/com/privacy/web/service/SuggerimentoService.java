@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.privacy.web.model.Suggerimento;
+import com.privacy.web.model.ProgressoStudio;
 
 @Service
 public interface SuggerimentoService {
-	void save(Suggerimento s);
-	Suggerimento findByEmailAndMeta(String email, String m);
-	List<Suggerimento> findAllByEmail(String email);
+	void save(ProgressoStudio s);
+	ProgressoStudio findByEmailAndMeta(String email, String m);
+	List<ProgressoStudio> findAllByEmail(String email);
 }

@@ -15,7 +15,7 @@ import lombok.NonNull;
 @Data // crea i metodi hashCode, equals e toString, getter e setter senza renderli
 		// visibili nella classe
 @NoArgsConstructor // crea il costruttore vuoto senza renderlo visibile nella classe
-public class Suggerimento {
+public class ProgressoStudio {
 	@Column(name = "id_suggerimento")
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idSuggerimento;
@@ -36,7 +36,7 @@ public class Suggerimento {
 	@Column(name = "studiato")
 	private boolean argStudiato;
 
-	public Suggerimento(@NonNull String email, String metainfo, int idTest, @NonNull String titArgSuggerito, boolean argStudiato) {
+	public ProgressoStudio(@NonNull String email, String metainfo, int idTest, @NonNull String titArgSuggerito, boolean argStudiato) {
 		this.email = email;
 		this.metainfo=metainfo;
 		this.idTest= idTest;

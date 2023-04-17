@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.privacy.web.model.Domanda;
 import com.privacy.web.model.Salvataggio;
-import com.privacy.web.model.Suggerimento;
+import com.privacy.web.model.ProgressoStudio;
 import com.privacy.web.model.Utente;
 import com.privacy.web.service.DomandaService;
 import com.privacy.web.service.SalvataggioService;
@@ -76,7 +76,7 @@ public class TestControl {
 			s.setIdTest(id);
 
 			// suggerimenti
-			Suggerimento sug = new Suggerimento();
+			ProgressoStudio sug = new ProgressoStudio();
 			sug.setEmail(u.getEmail());
 			sug.setArgStudiato(false);
 			sug.setIdTest(id);

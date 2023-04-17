@@ -51,7 +51,7 @@ public class UtenteControl {
 	// metodo che prende la lista di tutti gli utenti e restituisce la view
 	@GetMapping("/all") // tutti gli utenti
 	public String listUser(Model model) {
-		
+
 		model.addAttribute("utenti", utServ.findAll());
 		return "ListaAllUser";
 	}
@@ -69,7 +69,7 @@ public class UtenteControl {
 
 	@GetMapping("/reg") // qui ci dovrebbe andasre il link della registrazioe ma non sono sicura
 	public String prova(Model model) {
-		List<Domanda> questionario = domServ.findByIdTest(4);
+		List<Domanda> questionario = domServ.findByIdTest(0);
 		List<Domanda> prima = split(questionario);
 		List<Domanda> seconda = split2(questionario);
 
@@ -197,7 +197,7 @@ public class UtenteControl {
 		return "redirect:/login?errorDesc=" + error;
 	}
 
-	@GetMapping("/delete/{id}")
+	@GetMapping("/delete/{id}") //// ??????? (alessia) non credo che questo debba stare qui
 	public String eliminaUtente(@PathVariable String id, Model model) {
 		utServ.deleteById(id);
 		return "redirect:/users/all";
@@ -209,7 +209,7 @@ public class UtenteControl {
 		return "redirect:/homepage";
 	}
 
-/*----------------------------------MODIFICA------------------------------------------*/
+	/*----------------------------------MODIFICA------------------------------------------*/
 	@GetMapping("/fixedUtente/{email}")
 	public String editArgomento(@PathVariable String email, Model model) {
 		model.addAttribute("utente", utServ.findUtenteByEmail(email));
@@ -227,7 +227,7 @@ public class UtenteControl {
 			ut.setEmail(u.getEmail());
 			ut.setPassword(u.getPassword());
 			utServ.deleteById(email);
-			
+
 			try {
 				if (utServ.existsById(ut.getEmail())) {
 					String error = "Esiste già un utente con questa e-mail";
@@ -250,45 +250,30 @@ public class UtenteControl {
 		return "redirect:/profilo";
 	}
 
-
-/*------------------------------------METODI INTERNI-------------------------------*/
+	/*------------------------------------METODI INTERNI-------------------------------*/
 	// Metodo che prende solo la prima parte delle domande del questionario utente
 	public static List<Domanda> split(List<Domanda> list) {
-		// crea due liste vuote
 		List<Domanda> first = new ArrayList<Domanda>();
-
-		// ottieni la dimensione dell'elenco
 		int size = list.size();
-
-		// elabora ogni elemento dell'elenco e lo aggiunge al primo elenco
-		// o secondo elenco in base alla sua posizione
 		for (int i = 0; i < size; i++) {
 			if (i < (size + 1) / 2) {
 				first.add(list.get(i));
 			}
-
 		}
-		// restituisce un array di elenchi per contenere entrambi gli elenchi
+		// restituisce un array che contiene la prima parte delle domande
 		return first;
 	}
 
 	// Metodo che prende solo la seconda parte delle domande del questionario utente
 	public static List<Domanda> split2(List<Domanda> list) {
-		// crea due liste vuote
 		List<Domanda> second = new ArrayList<Domanda>();
-
-		// ottieni la dimensione dell'elenco
 		int size = list.size();
-
-		// elabora ogni elemento dell'elenco e lo aggiunge al primo elenco
-		// o secondo elenco in base alla sua posizione
 		for (int i = 0; i < size; i++) {
 			if (i >= (size + 1) / 2) {
 				second.add(list.get(i));
 			}
-
 		}
-		// restituisce un array di elenchi per contenere entrambi gli elenchi
+		// restituisce un array con la seconda parte delle domande
 		return second;
 	}
 }

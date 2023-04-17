@@ -5,14 +5,14 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import com.privacy.web.model.Suggerimento;
+import com.privacy.web.model.ProgressoStudio;
 
-public interface SuggerimentoRepository  extends CrudRepository<Suggerimento,Integer>{
+public interface SuggerimentoRepository  extends CrudRepository<ProgressoStudio,Integer>{
 
 	@Query(value = "Select * FROM suggerimento s WHERE s.email=?1 AND s.meta_info=?2", nativeQuery = true)
-	Suggerimento findByEmailAndMeta(String email, String meta);
+	ProgressoStudio findByEmailAndMeta(String email, String meta);
 	
 	@Query(value = "Select * FROM suggerimento s WHERE s.email=?1", nativeQuery = true)
-	List<Suggerimento> findAllByEmail(String email);
+	List<ProgressoStudio> findAllByEmail(String email);
 
 }
