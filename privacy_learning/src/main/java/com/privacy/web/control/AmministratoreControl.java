@@ -46,6 +46,7 @@ public class AmministratoreControl {
 
 	@Autowired
 	DomandaRepository domRep;
+
 	/*-----------------------------------CREAZIONE--------------------------------------------*/
 //-----------------------METODI GET
 	@GetMapping("/createArticolo")
@@ -54,7 +55,7 @@ public class AmministratoreControl {
 		return "createArticolo";
 	}
 
-	@GetMapping("/createArgomento")
+	@GetMapping("/creaArg")
 	public String addArgomento(Model model) {
 		model.addAttribute("metainfo", metaServ.findAll());
 		return "createArgomento";
@@ -65,7 +66,7 @@ public class AmministratoreControl {
 		model.addAttribute("metainfo", metaServ.findAll());
 		return "createFavola";
 	}
-	
+
 	@GetMapping("/createDomanda")
 	public String addDomanda(Model model) {
 		model.addAttribute("metainfo", metaServ.findAll());
@@ -73,15 +74,14 @@ public class AmministratoreControl {
 		System.out.println(testServ.findAllTest());
 		return "createDomanda";
 	}
-	
-	/* provvisorio*/
+
+	/* provvisorio */
 	@GetMapping("/all-domande")
 	public String domande(Model model) {
 		model.addAttribute("domande", domRep.findAll());
 		System.out.println(domRep.findAll());
 		return "allDomande";
 	}
-	
 
 //-----------------------METODI POST
 	@PostMapping("/addArticolo")
@@ -113,20 +113,22 @@ public class AmministratoreControl {
 	public String createArgomento(@ModelAttribute("argomento") ArgomentoStudio argomento, HttpServletRequest request,
 			HttpServletResponse response, Model model) {
 		try {
-			
+
 			if (argServ.existsByTitolo(argomento.getTitolo())) {
 				String error = "Esiste già un argomento con questo titolo";
 				model.addAttribute("descrizione", error);
 				return "redirect:/error?descrizione= " + error;
-			} else if (argServ.existsByLink(argomento.getLinkvideo())) {
-				String error = "Esiste già un argomento con questo link";
-				model.addAttribute("descrizione", error);
-				return "redirect:/error?descrizione= " + error;
+			} else if (!(argomento.getLinkvideo() == null)) {
+				if (argServ.existsByLink(argomento.getLinkvideo())) {
+					String error = "Esiste già un argomento con questo link";
+					model.addAttribute("descrizione", error);
+					return "redirect:/error?descrizione= " + error;
+				}
 			} else if (argServ.existsByDescrizione(argomento.getDescrizione())) {
 				String error = "Esiste già un argomento con questa descrizione";
 				model.addAttribute("descrizione", error);
 				return "redirect:/error?descrizione= " + error;
-			}  else if(argomento.getDescrizione().length()<200) {
+			} else if (argomento.getDescrizione().length() < 200) {
 				String error = "argomento non inserito o troppo corto";
 				model.addAttribute("descrizione", error);
 				return "redirect:/error?descrizione= " + error;
@@ -187,7 +189,7 @@ public class AmministratoreControl {
 		d.setRisposta_corretta(request.getParameter("rispostaCorr"));
 		System.out.println(d);
 		try {
-			if (domServ.existsByTesto(dom.getTesto()) ) {
+			if (domServ.existsByTesto(dom.getTesto())) {
 				String error = "titolo esistente";
 				model.addAttribute("descrizione", error);
 				return "redirect:/error?descrizione= " + error;
@@ -218,7 +220,7 @@ public class AmministratoreControl {
 		favServ.deleteById(id);
 		return "redirect:/favole/leggi-una-favola";
 	}
-	
+
 	@GetMapping("/deleteDomanda/{id}")
 	public String eliminaDomanda(@PathVariable int id, Model model) {
 		domServ.deleteById(id);
@@ -277,7 +279,7 @@ public class AmministratoreControl {
 		argExist.setLinkvideo(a.getLinkvideo());
 		argExist.setMeta_info(a.getMeta_info());
 		argExist.setTitolo(a.getTitolo());
-		
+
 		try {
 			argServ.deleteById(id);
 			if (argServ.existsByDescrizione(argExist.getTitolo())) {
@@ -316,7 +318,7 @@ public class AmministratoreControl {
 		favExist.setTitolofavola(f.getTitolofavola());
 		favServ.deleteById(id);
 		try {
-			if (favServ.existsByTesto(favExist.getTestofavola()) ) {
+			if (favServ.existsByTesto(favExist.getTestofavola())) {
 				String error = "titolo esistente";
 				model.addAttribute("descrizione", error);
 				return "redirect:/error?descrizione= " + error;
@@ -334,7 +336,7 @@ public class AmministratoreControl {
 		return "redirect:/favole/leggi-una-favola";
 	}
 
-	//----------------DOMANDA
+	// ----------------DOMANDA
 	@GetMapping("/fixedDomanda/{id}")
 	public String editDomanda(@PathVariable int id, Model model) {
 		model.addAttribute("domanda", domServ.findById(id));
@@ -346,7 +348,7 @@ public class AmministratoreControl {
 	@PostMapping("/modificaDomanda/{id}")
 	public String updateFavola(@PathVariable int id, @ModelAttribute("domanda") Domanda d, Model model) {
 		Domanda domExist = domServ.findById(id);
-		
+
 		domExist.setId_domanda(d.getId_domanda());
 		domExist.setId_test(d.getId_test());
 		domExist.setMeta_info(d.getMeta_info());
@@ -356,10 +358,10 @@ public class AmministratoreControl {
 		domExist.setRisposta3(d.getRisposta3());
 		domExist.setRisposta4(d.getRisposta4());
 		domExist.setRisposta_corretta(d.getRisposta_corretta());
-		
+
 		domServ.deleteById(id);
 		try {
-			if (domServ.existsByTesto(domExist.getTesto()) ) {
+			if (domServ.existsByTesto(domExist.getTesto())) {
 				String error = "titolo esistente";
 				model.addAttribute("descrizione", error);
 				return "redirect:/error?descrizione= " + error;

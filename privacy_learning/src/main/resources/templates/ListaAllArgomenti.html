@@ -14,7 +14,7 @@
 		<div class="box-titolo">
 				<div class="titolo">Studia con noi</div>
 			</div>
-	 <a type="button" th:if="${!session.isEmpty()} and ${session.userSession.email.equals('admin@gmail.com')}" class="button"th:href="@{/admin/createArgomento}"> Aggiungi </a>
+	 <a type="button" th:if="${!session.isEmpty()} and ${session.userSession.email.equals('admin@gmail.com')}" class="button" th:href="@{/admin/creaArg}"> Aggiungi </a>
 		<div class="background">
 		<br>
 		<!-- CONTROLLO SE L'UTENTE SIA ADMIN -->
