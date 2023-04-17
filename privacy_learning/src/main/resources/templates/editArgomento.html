@@ -14,20 +14,40 @@
 	
 	<!-- CONTROLLO CHE L'UTENTE SIA ADMIN -->
 	<th:block th:if="${!session.isEmpty()} and (${session.userSession.email.equals('admin@gmail.com')})">
-		<h1>QUESTA PAGINA VISUALIZZA IL FORM PER MODIFICARE L' ARGOMENTO</h1>
-		<form th:action="@{/modificaArgomento/{id} (id=${argomento.id_studio})}" th:object="${argomento}" method="post">
-
-
-
-			<a type="submit" class="button" th:href="@{/modificaArgomento/{id} (id=${argomento.id_studio})}"> Modifica </a>
-		</form>
-		<a type="submit" class="button"	th:href="@{/argomenti/studia-con-noi}"> Annulla </a>
+			<div class="background">
+				<div class="box-titolo">
+				<div class="titolo">
+					<input name=titolo th:value="${argomento.titolo}">
+				</div>
+					</div>
+				<fieldset style="padding:1% 3% 1% 3%; margin:1% 10% 1% 10%;">
+					<legend > 
+					 <select name="metainfo" id="metainfo">
+					 	<option selected="selected" disabled="disabled" th:value="${argomento.getMeta_info()}" th:text="${argomento.meta_info}"></option>		
+					 	<th:block th:each="meta : ${metainfo}">
+					 		<option th:value="${meta.keyword}" th:text="${meta.keyword}"></option>
+					 	</th:block>
+					 </select>
+					</legend>
+					<div class="box-argomento">
+						<input  style="width: 100%;" name=descrizione  th:value="${argomento.descrizione}">
+					</div>
+					<br>
+				<a>Link Video:</a>
+					<input name=video th:value="${argomento.getLinkvideo()}">
+				</fieldset>
+				
+				<a type="submit" class="button" th:href="@{/modificaArgomento/{id} (id=${argomento.id_studio})}"> Modifica </a>
+				<a type="submit" class="button" th:href="@{/argomenti/studia-con-noi}"> Annulla </a>
+				
+			</div>	
 	</th:block>
 	
 	<!-- SE NON SI TRATTA DELL' UTENTE ADMIN -->
 			<th:block th:if="${session.isEmpty()} or ${!(session.userSession.email.equals('admin@gmail.com'))}">
 			<h1>NON HAI L'AUTORIZZAZIONE PER MODIFICARE QUESTO UTENTE</h1>
 		</th:block>
+	
 	</div>
 </body>
 </html>

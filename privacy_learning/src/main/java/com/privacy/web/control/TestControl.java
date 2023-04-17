@@ -1,6 +1,5 @@
 package com.privacy.web.control;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,16 +40,28 @@ public class TestControl {
 	TestService testServ;
 	@Autowired
 	SuggerimentoService sugServ;
-
-	@GetMapping("/domandeTest/{id}") // tutti le domande di un determinato test
+	
+	//bottone per andare in testView
+	@GetMapping("/testView/{email}")
+	public String redirect(@PathVariable String email, Model model) {
+		model.addAttribute("utente", utServ.findUtenteByEmail(email));
+		model.addAttribute("ultimoTest", salvServ.returnLastIdtestByEmail(email));
+		return "TestView";
+	}
+	
+	//NELLA PAGINA HTML BISOGNA CONTROLLARE PRIMA SE L'UTENTE LOGGATO E' LO STESSO E SE {ID} E' <= DI (ULTIMO TEST UTENTE) + 1
+	//IL CONTROLLO SERVE AD EVITARE CHE ALL'UTENTE BASTI CAMBIARE L'ID DALL'URL PER OTTENERE IL TEST SUCCESSIVO
+	
+	@GetMapping("/domandeTest/{email}/{id}") // tutti le domande di un determinato test
 	public String listUser(@PathVariable int id, @PathVariable String email, Model model) {
+		model.addAttribute("ultimoTestSalvato", salvServ.returnLastIdtestByEmail(email));
 		model.addAttribute("domande", domServ.findByIdTest(id));
-		return "DomandeView";
+ 		return "DomandeView";
 	}
 
+	
 	/*
-	 * Con questo metodo salvo le risposte date, i suggerimenti e setto il punteggio
-	 * preso ed il livello
+	 * Con questo metodo salvo le risposte date, i suggerimenti e setto il punteggio preso ed il livello
 	 */
 
 	// si può fare perché ho visto su StackOverflow
@@ -64,7 +75,6 @@ public class TestControl {
 		List<Domanda> dom = domServ.findByIdTest(id);
 
 		int count = 0;
-		ArrayList<String> metaErrate = new ArrayList<String>();
 		try {
 			// controllo se non l'utente ha già fatto il test e lo elimino
 			if (!salvServ.findByEmailAndIdTest(email, id).isEmpty()) {
@@ -85,16 +95,15 @@ public class TestControl {
 				// salvo le risposte
 				s.setRisposte(req.getParameter("valore" + dom.get(i).getId_domanda()));
 				salvServ.save(s);
+				
 				// controllo se la risposta data sia corretta
-				if (dom.get(i).getRisposta_corretta()
-						.equalsIgnoreCase(req.getParameter("valore" + dom.get(i).getId_domanda()))) {
+				if (dom.get(i).getRisposta_corretta().equalsIgnoreCase(req.getParameter("valore" + dom.get(i).getId_domanda()))) {
 					count++;
 				} else {
 					// qui setto argomento a false se esiste già, ma se togliamo "argomento
 					// studiato", questo controllo non necessita
 					if (sugServ.findByEmailAndMeta(sug.getEmail(), dom.get(i).getMeta_info()) != null) {
 						sugServ.findByEmailAndMeta(sug.getEmail(), dom.get(i).getMeta_info()).setArgStudiato(false);
-						continue;
 					}
 					// salvo i suggerimenti
 					sug.setMetainfo(dom.get(i).getMeta_info());
@@ -104,19 +113,11 @@ public class TestControl {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		// setto percentuale e livello ogni volta che faccio un test di livello
-		// successivo
-		if (testServ.returnIdByTipo(u.getLivello()) == 4 || testServ.returnIdByTipo(u.getLivello()) < id) {
+		// setto percentuale e livello ogni volta che faccio un test di livello successivo
+		if (testServ.returnIdByTipo(u.getLivello()) < id) {
 			u.setLivello(testServ.returnTipoById(id));
 			u.setPercentuale(count * 100 / domServ.findByIdTest(id).size());
-		}
-
-		/*
-		 * SE VOGLIAMO SALVARCI I LIVELLI E LE PERCENTUALI DI TUTTI I TEST CHE FA UN UTENTE DOBBIAMO CREARE 
-		 * UNA NUOVA ENTITà 'PUNTEGGI' CON: id, email, livello(tipo_test o id_test), percentuale
-		 */
-		
+		}		
 		return "redirect:/TestView";
 	}
 }

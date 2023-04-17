@@ -1,5 +1,6 @@
 package com.privacy.web.control;
 
+import java.net.http.HttpRequest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,7 +72,6 @@ public class AmministratoreControl {
 	public String addDomanda(Model model) {
 		model.addAttribute("metainfo", metaServ.findAll());
 		model.addAttribute("test", testServ.findAllTest());
-		System.out.println(testServ.findAllTest());
 		return "createDomanda";
 	}
 
@@ -79,7 +79,6 @@ public class AmministratoreControl {
 	@GetMapping("/all-domande")
 	public String domande(Model model) {
 		model.addAttribute("domande", domRep.findAll());
-		System.out.println(domRep.findAll());
 		return "allDomande";
 	}
 
@@ -165,7 +164,6 @@ public class AmministratoreControl {
 				return "redirect:/error?descrizione= " + error;
 			} else {
 
-				System.out.println(f.toString());
 				favServ.save(f);
 			}
 		} catch (Exception e) {
@@ -187,7 +185,7 @@ public class AmministratoreControl {
 		d.setRisposta3(request.getParameter("risposta3"));
 		d.setRisposta4(request.getParameter("risposta4"));
 		d.setRisposta_corretta(request.getParameter("rispostaCorr"));
-		System.out.println(d);
+		
 		try {
 			if (domServ.existsByTesto(dom.getTesto())) {
 				String error = "titolo esistente";
@@ -267,15 +265,13 @@ public class AmministratoreControl {
 	public String editArgomento(@PathVariable int id, Model model) {
 		model.addAttribute("argomento", argServ.findById(id));
 		model.addAttribute("metainfo", metaServ.findAll());
-		System.out.println(metaServ.findAll());
 		return "editArgomento";
 	}
 
 	@PostMapping("/modificaArgomento/{id}")
-	public String updateArgomento(@PathVariable int id, @ModelAttribute("argomento") ArgomentoStudio a, Model model) {
+	public String updateArgomento(@PathVariable int id, @ModelAttribute("argomento") ArgomentoStudio a, Model model, HttpServletRequest req) {
 		ArgomentoStudio argExist = argServ.findById(id);
-		argExist.setId_studio(id);
-		argExist.setDescrizione(a.getDescrizione());
+		argExist.setDescrizione(req.getParameter("descrizione"));
 		argExist.setLinkvideo(a.getLinkvideo());
 		argExist.setMeta_info(a.getMeta_info());
 		argExist.setTitolo(a.getTitolo());

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" href="/css/stylesheet.css">
+<link rel="icon" type="image/png" href="img/logo.png"/>
+<title>Privacy Literacy - Login</title>
+</head>
+<body>
+	<div th:insert="~{fragments/header::header}"></div>
+	<br>
+	<div class="container-home">
+	<th:block th:if="${utente.getEmail()} == ${session.userSession.email}">
+		<h1>QUESTA PAGINA VISUALIZZA IL FORM PER VISUALIZZARE I TEST DELL' UTENTE: <a th:text="${utente.getEmail()}"></a></h1>
+			
+			<div class="background" >
+					<div class="box-argomento" th:each="t: ${ultimoTest}">
+				 		<p th:text="'test ' + ${t} + ': '">contenuto</p>
+				 		<a th:href="@{/test/domandeTest/{id} (id=${t})">Riprova</a>
+					</div>
+				</div>
+				
+			</th:block>
+
+		<th:block th:if="${utente.getEmail()} != ${session.userSession.email}">
+			<h1>NON HAI L'AUTORIZZAZIONE PER VISUALIZZARE I TEST DI QUESTO UTENTE</h1>
+		</th:block>
+			
+	</div>
+</body>
+</html>
