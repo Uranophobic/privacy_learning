@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.privacy.web.service.ArgomentoStudioService;
 import com.privacy.web.service.ArticoloService;
 import com.privacy.web.service.FavolaService;
-import com.privacy.web.service.UtenteService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class HomeControl {
-	@Autowired
-	private UtenteService utServ;
+//	@Autowired
+//	private UtenteService utServ;
 	@Autowired
 	private FavolaService favServ;
 	@Autowired
@@ -25,8 +26,8 @@ public class HomeControl {
 	
 //	@GetMapping("/prova")
 //	public String prova(Model model) {
-////		model.addAttribute("allUtenti", utServ.findAll());
-////		System.out.println(utServ.findAll());
+//		model.addAttribute("allUtenti", utServ.findAll());
+//		System.out.println(utServ.findAll());
 //		return "niente";
 //	}
 
@@ -49,7 +50,7 @@ public class HomeControl {
 	
 
 	@GetMapping("/homepage")
-	public String argomenti(Model model) {
+	public String argomenti(Model model, HttpSession session) {
 		model.addAttribute("argomentiView", argRep.findAllArgomenti());
 		model.addAttribute("tutteFavole", favServ.findAllFavole());
 		model.addAttribute("tuttiArticoli", artServ.findAllArticoli());

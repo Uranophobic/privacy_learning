@@ -254,11 +254,8 @@ public class UtenteControl {
 	// Metodo che prende solo la prima parte delle domande del questionario utente
 	public static List<Domanda> split(List<Domanda> list) {
 		List<Domanda> first = new ArrayList<Domanda>();
-		int size = list.size();
-		for (int i = 0; i < size; i++) {
-			if (i < (size + 1) / 2) {
-				first.add(list.get(i));
-			}
+		for (int i = 0; i < (list.size() + 1)/2; i++) {
+				first.add(list.get(i));			
 		}
 		// restituisce un array che contiene la prima parte delle domande
 		return first;
@@ -267,11 +264,8 @@ public class UtenteControl {
 	// Metodo che prende solo la seconda parte delle domande del questionario utente
 	public static List<Domanda> split2(List<Domanda> list) {
 		List<Domanda> second = new ArrayList<Domanda>();
-		int size = list.size();
-		for (int i = 0; i < size; i++) {
-			if (i >= (size + 1) / 2) {
+		for (int i = ((list.size() + 1) / 2); i < list.size(); i++) {
 				second.add(list.get(i));
-			}
 		}
 		// restituisce un array con la seconda parte delle domande
 		return second;

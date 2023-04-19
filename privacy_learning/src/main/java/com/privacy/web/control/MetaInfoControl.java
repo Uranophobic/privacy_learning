@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.privacy.web.model.MetaInfo;
-import com.privacy.web.repository.MetaInfoRepository;
 import com.privacy.web.service.MetaInfoService;
 
 

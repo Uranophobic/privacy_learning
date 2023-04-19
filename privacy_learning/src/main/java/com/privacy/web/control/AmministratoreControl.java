@@ -1,7 +1,5 @@
 package com.privacy.web.control;
 
-import java.net.http.HttpRequest;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +15,6 @@ import com.privacy.web.model.Articolo;
 import com.privacy.web.model.Domanda;
 import com.privacy.web.model.Favola;
 import com.privacy.web.repository.DomandaRepository;
-import com.privacy.web.repository.MetaInfoRepository;
 import com.privacy.web.service.ArgomentoStudioService;
 import com.privacy.web.service.ArticoloService;
 import com.privacy.web.service.DomandaService;
