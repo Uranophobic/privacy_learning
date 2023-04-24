@@ -42,6 +42,18 @@ public class SalvataggioServiceImpl implements SalvataggioService {
 		return salRep.returnLastIdtestByEmail(email);
 	}
 
+	@Override
+	public List<Salvataggio> findByEmail(String email) {
+		return salRep.findByEmail(email);
+	}
+
+	@Override
+	public List<Salvataggio> findByMaxIdTest(String email_utente) {
+		return salRep.findByMaxIdTest(email_utente);
+	}
+
+	
+ 
 
 
 	/*

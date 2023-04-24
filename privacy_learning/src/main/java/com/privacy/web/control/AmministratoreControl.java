@@ -181,7 +181,7 @@ public class AmministratoreControl {
 		d.setRisposta2(request.getParameter("risposta2"));
 		d.setRisposta3(request.getParameter("risposta3"));
 		d.setRisposta4(request.getParameter("risposta4"));
-		d.setRisposta_corretta(request.getParameter("rispostaCorr"));
+		d.setRisposta_corretta( Integer.parseInt(request.getParameter("rispostaCorr")));
 		
 		try {
 			if (domServ.existsByTesto(dom.getTesto())) {

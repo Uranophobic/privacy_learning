@@ -45,22 +45,101 @@
 						<p th:text="${session.userSession.dataNascita}" class="title"></p>
 					</div>
 					<div>
-					<a type="submit" class="button" th:href="@{/users/fixedUtente/{email} (email=${session.userSession.email})}"> Modifica </a>
+						<a type="submit" class="button"
+							th:href="@{/users/fixedUtente/{email} (email=${session.userSession.email})}"> Modifica </a>
 					</div>
 				</fieldset>
 			</div>
+			<fieldset>
+				<legend>Il tuo progresso</legend>
+				<div th:switch="${session.userSession.livello}">
+					<div th:case="'Nessuno'">
 
-			<div class="progresso" th:if="${session.userSession.livello} == 'Nessuno' or ${session.userSession.livello} == null">
-				<fieldset>
-					<legend>Il tuo progresso</legend>
-					
-					<p> non hai ancora effettuato nessun test, Per sbloccare questa parte
-					 effettua il test valutativo sulla privacy
-						
-					</p>
-				</fieldset>
 
-			</div>
+						<p> non hai ancora effettuato nessun test, Per sbloccare questa parte
+							effettua il test valutativo sulla privacy
+
+						</p>
+
+					</div>
+					<div th:case="'null'">
+
+
+						<p> non hai ancora effettuato nessun test, Per sbloccare questa parte
+							effettua il test valutativo sulla privacy
+
+						</p>
+
+					</div>
+
+					<div th:case="'Base'">
+						<div class="infoUtente">
+							<label>Livello utlimo test effettuato:</label>
+							<p th:text="${session.userSession.livello}" class="title"></p>
+						</div>
+						<p> per controllare di nuovo i tuoi risultati clicca qui sotto</p>
+						<a type="submit" class="button"
+							th:href="@{/test/{email} (email=${session.userSession.email})}">Risultato ultimo test
+							effettuato</a>
+
+<!-- grafico a torta poi lo aggiusto
+	<p th:text="'PERCENTUALE: ' + ${perc}"></p>
+<p th:text="'DIFFERENZA: ' + ${diff}"></p>
+						<canvas id="myChart" style="width: 100%; max-width: 600px"></canvas>
+
+						<script>
+							var xValues = ["Studiati",
+								"Da Studiare"];
+							var yValues = [89, 11]; // qui bisognerà mettere la percentuale di ogni utente 
+							var barColors = ["#b91d47", //i colori delle due sezioni
+								"#00aba9"];
+
+							new Chart(
+								"myChart",
+								{
+									type: "doughnut",
+									data: {
+										labels: xValues,
+										datasets: [{
+											backgroundColor: barColors,
+											data: yValues
+										}]
+									},
+									options: {
+										title: {
+											display: true,
+										}
+									}
+								});
+						</script>-->
+
+					</div>
+
+					<div th:case="'Medio'">
+						<div class="infoUtente">
+							<label>Livello utlimo test effettuato:</label>
+							<p th:text="${session.userSession.livello}" class="title"></p>
+						</div>
+						<p> per controllare di nuovo i tuoi risultati clicca qui sotto</p>
+						<a type="submit" class="button"
+							th:href="@{/test/{email} (email=${session.userSession.email})}">Risultato ultimo test
+							effettuato</a>
+
+					</div>
+
+					<div th:case="'Alto'">
+						<div class="infoUtente">
+							<label>Livello utlimo test effettuato:</label>
+							<p th:text="${session.userSession.livello}" class="title"></p>
+						</div>
+						<p> per controllare di nuovo i tuoi risultati clicca qui sotto</p>
+						<a type="submit" class="button"
+							th:href="@{/test/{email} (email=${session.userSession.email})}">Risultato ultimo test
+							effettuato</a>
+					</div>
+				</div>
+			</fieldset>
+
 		</div>
 	</div>
 
@@ -114,33 +193,6 @@
 										 GRAFICO A TORTA 
 
 
-										<canvas id="myChart" style="width: 100%; max-width: 600px"></canvas>
-
-										<script>
-											var xValues = ["Studiati",
-												"Da Studiare"];
-											var yValues = [89, 11]; // qui bisognerà mettere la percentuale di ogni utente 
-											var barColors = ["#b91d47", //i colori delle due sezioni
-												"#00aba9"];
-
-											new Chart(
-												"myChart",
-												{
-													type: "doughnut",
-													data: {
-														labels: xValues,
-														datasets: [{
-															backgroundColor: barColors,
-															data: yValues
-														}]
-													},
-													options: {
-														title: {
-															display: true,
-														}
-													}
-												});
-										</script>
 
 
 

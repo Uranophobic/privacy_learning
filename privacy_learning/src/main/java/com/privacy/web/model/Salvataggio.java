@@ -19,21 +19,29 @@ import lombok.NonNull;
 @AllArgsConstructor
 public class Salvataggio {
 	@Column(name = "id_salvataggio")
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_salvataggio; // auto
 	
-	@Column(name = "id_test")
-	private int idTest;
-	
-	@Column(name = "email_utente")
+@Column(name = "email_utente")
 	private String email_utente;
-	
-	//@Column(name = "risposte")
-	private String risposte;
 
-	public Salvataggio(int id_test, @NonNull String email_utente, @NonNull String risposte) {
-		this.idTest = id_test;
-		this.email_utente = email_utente;
-		this.risposte = risposte;
-	}
+	@Column(name = "id_test")
+	private int id_test;
+
+	@Column(name = "id_domanda")
+	private int id_domanda;
+
+	@Column(name = "id_risposta")
+	private int id_risposta;
+	
+	@Column(name = "risposta_corretta")
+	private String risposta_corretta;
+	
+	@Column(name = "risposta_utente")
+	private String risposta_utente;
+	
+	@Column(name = "testo_domanda")
+	private String testo_domanda;
+
 }

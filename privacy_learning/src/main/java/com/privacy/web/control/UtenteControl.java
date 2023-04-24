@@ -102,7 +102,7 @@ public class UtenteControl {
 					return "redirect:/error?descrizione= " + error;
 
 				} else {
-					utServ.saveUser(user);
+					utServ.save(user);
 					userSession.setAttribute("userSession", user);
 					List<Domanda> questionario = domServ.findByIdTest(4);
 
@@ -114,11 +114,11 @@ public class UtenteControl {
 					System.out.println(user.getEmail());
 					Salvataggio s = new Salvataggio();
 					s.setEmail_utente(user.getEmail());
-					s.setIdTest(4);
+					s.setId_test(4);
 					int ultimo = salvataggioServ.findAllSalvataggio().size() + 1;
 					for (int i = 0; i < risposte.size(); i++) {
-						s.setId_salvataggio(ultimo + i);
-						s.setRisposte(risposte.get(i));
+						/* s.setId_salvataggio(ultimo + i); */
+						s.setId_risposta(Integer.parseInt(risposte.get(i)));
 						System.out.println(s);
 						salvataggioServ.save(s);
 					}
@@ -148,7 +148,7 @@ public class UtenteControl {
 	@PostMapping("/all")
 	public String saveUtente(@ModelAttribute("user") Utente user) {
 		try {
-			utServ.saveUser(user);
+			utServ.save(user);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -197,7 +197,7 @@ public class UtenteControl {
 		return "redirect:/login?errorDesc=" + error;
 	}
 
-	@GetMapping("/delete/{id}") //// ??????? (alessia) non credo che questo debba stare qui
+	@GetMapping("/delete/{id}") //// ??????? (commento di alessia) non credo che questo debba stare qui
 	public String eliminaUtente(@PathVariable String id, Model model) {
 		utServ.deleteById(id);
 		return "redirect:/users/all";
@@ -235,7 +235,7 @@ public class UtenteControl {
 					return "redirect:/error?descrizione= " + error;
 
 				} else {
-					utServ.saveUser(ut);
+					utServ.save(ut);
 					userSession.setAttribute("userSession", ut);
 				}
 			} catch (Exception e) {

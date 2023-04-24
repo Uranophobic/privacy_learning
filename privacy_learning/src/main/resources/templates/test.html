@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<link rel="stylesheet" href="/css/stylesheet.css">
+	<link rel="icon" type="image/png" href="img/logo.png" />
+	<title>Privacy Literacy - Login</title>
+</head>
+<!-- pagina test dalla homepage -->
+<style>
+	.domande {
+	
+	width: 80%;
+	margin: auto;
+
+	}
+	
+	.risposte {
+	display: flex;
+	padding: 5px;
+	margin: 5px;
+}
+
+.risposte p {
+	margin: 5px;
+}
+</style>
+<body>
+	<div th:insert="fragments/header::header"></div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<div class="utentelist">
+
+
+<form th:action="@{/test}" th:object="${testuser}" method="POST">
+		<!-- Controllo sessione vuota -->
+		<div th:if="${session.isEmpty()}">
+			<!-- Se la sessione è vuota vuol dire che non è stato fatto l'accesso  quindi non può fare il test  -->
+			<p> Per poter accedere a questa sezione effettua prima il login</p>
+			<div class="login"><a type="submit" class="button" th:href="@{/login}"> LOGIN </a></div>
+		</div>
+
+		<!-- Controllo sessione non vuota -->
+		<div th:if="${!session.isEmpty()}">
+
+			<!--<p th:text="${session.userSession.email}"></p>-->
+			<p th:text="'Il tuo attuale livello è: ' + ${session.userSession.livello}"></p>
+
+			<!-- A seconda del livello dell'utente visualizza le domande -->
+			<div th:switch="${session.userSession.livello}">	
+				
+				<!--Test Base -->
+				<div th:case="'Nessuno'">
+
+					<ol class="domande">
+						<th:block th:each="d: ${domBase}">
+						<li><p th:text="${d.testo}"></p> 
+							<div class="risposte">	<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="1"><p th:text="${d.risposta1}"></p></div>
+						<div class="risposte">	<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="2"><p th:text="${d.risposta2}"></p></div>
+							<div class="risposte"><input type="radio" th:name="'valore'+${d.id_domanda}" th:value="3"><p th:text="${d.risposta3}"></p></div>
+						<div class="risposte">	<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="4"><p th:text="${d.risposta4}"></p></div>
+						</li>
+						<th:block>
+					</ol>
+
+
+				</div>
+
+				<!--Test Medio -->
+				<div th:case="'Base'">
+						<ol class="domande">
+						<th:block th:each="d: ${domMedio}">
+						<li><p th:text="${d.testo}"></p> 
+							<div class="risposte">	<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="1"><p th:text="${d.risposta1}"></p></div>
+						<div class="risposte">	<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="2"><p th:text="${d.risposta2}"></p></div>
+							<div class="risposte"><input type="radio" th:name="'valore'+${d.id_domanda}" th:value="3"><p th:text="${d.risposta3}"></p></div>
+						<div class="risposte">	<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="4"><p th:text="${d.risposta4}"></p></div>
+						</li>
+						<th:block>
+					</ol>
+
+				</div>
+
+
+				<!--Test Alto -->
+				<div th:case="'Medio'">
+					<ol class="domande">
+						<th:block th:each="d: ${domAlto}">
+						<li><p th:text="${d.testo}"></p> 
+							<div class="risposte">	<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="1"><p th:text="${d.risposta1}"></p></div>
+						<div class="risposte">	<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="2"><p th:text="${d.risposta2}"></p></div>
+							<div class="risposte"><input type="radio" th:name="'valore'+${d.id_domanda}" th:value="3"><p th:text="${d.risposta3}"></p></div>
+						<div class="risposte">	<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="4"><p th:text="${d.risposta4}"></p></div>
+						</li>
+						<th:block>
+					</ol>
+
+				</div>
+
+			</div>
+
+					<button type="submit" th:formaction="@{/test/{email} (email=${session.userSession.email})}" formmethod="post">Conferma</button>
+
+		</div>
+	</form>
+	</div>
+
+</body>
+
+</html>

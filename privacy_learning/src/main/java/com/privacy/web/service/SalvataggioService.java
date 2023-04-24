@@ -11,8 +11,9 @@ public interface SalvataggioService {
 	
 	void save(Salvataggio s);
 	List<Salvataggio> findAllSalvataggio();
-	/* List<Salvataggio> findAllByEmail(String email); */
 	List<Salvataggio> findByEmailAndIdTest(String email, int id);
 	void deleteByEmailAndIdTest(String email,int test);
 	int returnLastIdtestByEmail(String email);
+	List<Salvataggio> findByEmail(String email);
+	List<Salvataggio> findByMaxIdTest(String email_utente);
 }

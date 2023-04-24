@@ -22,9 +22,7 @@ public class Test {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_test;	
 	@Column(name="tipo_test")
-	private String tipo;
+	private String tipo_test;
 
-	public Test(@NonNull String tipo) {
-		this.tipo = tipo;
-	}
+	
 }

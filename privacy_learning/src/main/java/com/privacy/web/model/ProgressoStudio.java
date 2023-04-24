@@ -16,31 +16,20 @@ import lombok.NonNull;
 		// visibili nella classe
 @NoArgsConstructor // crea il costruttore vuoto senza renderlo visibile nella classe
 public class ProgressoStudio {
-	@Column(name = "id_suggerimento")
+	@Column(name = "id_progresso")
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idSuggerimento;
+	private int id_progresso;
 	
-	@Column(name = "email")
-	private String email;
+	@Column(name = "email_utente")
+	private String email_utente;
 	
-	@Column(name = "meta_info")
-	private String metainfo;
-	
-	@Column(name = "id_test")
-	private int idTest;
-/*
-	@Column(name = "titolo_argomento")
-	private String titoloSuggerito;
-*/	
-	//non so se toglierlo. vorrei eliminare la tupla una volta aperto un argomento con quella meta_info
-	@Column(name = "studiato")
-	private boolean argStudiato;
+	@Column(name = "meta_info") ///ma a che serve??
+	private String meta_info;
 
-	public ProgressoStudio(@NonNull String email, String metainfo, int idTest, @NonNull String titArgSuggerito, boolean argStudiato) {
-		this.email = email;
-		this.metainfo=metainfo;
-		this.idTest= idTest;
-		this.argStudiato = argStudiato;
-		
-	}
+	@Column(name = "arg_studiati")
+	private String arg_studiati;
+
+	@Column(name = "arg_dastudiare")
+	private String arg_dastudiare;
+
 }

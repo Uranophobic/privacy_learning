@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<link rel="stylesheet" href="/css/stylesheet.css">
+	<link rel="icon" type="image/png" href="img/logo.png" />
+	<title>Privacy Literacy - Login</title>
+</head>
+<!-- pagina test dalla homepage -->
+<style>
+	table,
+	th,
+	td {
+		border: 1px solid black;
+	}
+
+	table {
+
+		width: 80%;
+		margin: 25px;
+
+	}
+</style>
+
+<body>
+	<div th:insert="fragments/header::header"></div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<div class="utentelist">
+
+
+		<form th:action="@{/test/{email}}" th:object="${testuser}" method="POST">
+
+			<div th:if="${session.isEmpty()}">
+				<!-- Se la sessione è vuota vuol dire che non è stato fatto l'accesso  quindi non può fare il test  -->
+				<p> Per poter accedere a questa sezione effettua prima il login</p>
+				<div class="login"><a type="submit" class="button" th:href="@{/login}"> LOGIN </a></div>
+			</div>
+
+
+			<div th:if="${!session.isEmpty()}">
+
+				<p th:text="'Hai completato con successo il test: ' + ${session.userSession.livello}"></p>
+
+				<p> Torna alla Home.</p>
+			</div>
+
+			<div>
+				<p> Qui sotto troverai una panoramica sull'andamento del test</p>
+
+				<br>
+				<p> Le domande a cui hai risposto correttamente: </p>
+
+
+				<table>
+					<tr>
+						<td>Domanda</td>
+						<td>Risposta Corretta</td>
+						<td>Risposta Utente</td>
+					</tr>
+					<th:block th:each="s: ${rispCorrette}">
+						<tr>
+
+							<td th:text="${s.testo_domanda}"></td>
+							<td th:text="${s.risposta_corretta}"></td>
+							<td th:text="${s.risposta_utente}"></td>
+						</tr>
+					</th:block>
+				</table>
+
+
+
+
+
+				<br>
+				<p> Le domande a cui hai NON risposto correttamente: </p>
+				<table>
+					<tr>
+						<td>Domanda</td>
+						<td>Risposta Corretta</td>
+						<td>Risposta Utente</td>
+					</tr>
+					<th:block th:each="s: ${rispInCorrette}">
+						<tr>
+
+							<td th:text="${s.testo_domanda}"></td>
+							<td th:text="${s.risposta_corretta}"></td>
+							<td th:text="${s.risposta_utente}"></td>
+						</tr>
+					</th:block>
+				</table>
+
+
+
+
+			</div>
+
+
+		</form>
+
+</body>
+
+</html>

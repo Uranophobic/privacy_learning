@@ -21,31 +21,44 @@ public class UtenteServiceImpl implements UtenteService {
 	}
 
 	@Override
-	public List<Utente> findAll() {	return (List<Utente>) utenteRep.findAll();}
+	public List<Utente> findAll() {
+		return (List<Utente>) utenteRep.findAll();
+	}
 
 	/**
 	 * Salva un utente preso in input
-	 *@param user utente da controllare
-	 *@return Utente salvato, null altrimenti
+	 * 
+	 * @param user utente da controllare
+	 * @return Utente salvato, null altrimenti
 	 */
 	@Override
-	public Utente saveUser(Utente user) {return utenteRep.save(user); }
+	public Utente save(Utente user) {
+		return utenteRep.save(user);
+	}
 
 	@Override
-	public boolean existsById(String id) { return utenteRep.existsById((String) id);}
+	public boolean existsById(String id) {
+		return utenteRep.existsById((String) id);
+	}
 
 	@Override
-	public Utente findUtenteByEmail(String email) {	return	utenteRep.findUtenteByEmail(email);}
+	public Utente findUtenteByEmail(String email) {
+		return utenteRep.findUtenteByEmail(email);
+	}
 
 	@Override
-	public Utente login(String email, String password) throws SQLException { return utenteRep.login(email, password);}
+	public Utente login(String email, String password) throws SQLException {
+		return utenteRep.login(email, password);
+	}
 
 	@Override
-	public Utente findUtenteByEmailAndPassword(String email, String password) {	return utenteRep.findUtenteByEmailAndPassword(email, password);}
+	public Utente findUtenteByEmailAndPassword(String email, String password) {
+		return utenteRep.findUtenteByEmailAndPassword(email, password);
+	}
 
 	@Override
-	public void deleteById(String email) {utenteRep.deleteById(email);}
+	public void deleteById(String email) {
+		utenteRep.deleteById(email);
+	}
 
-	
-	
 }
