@@ -61,10 +61,10 @@
 					<ol class="domande">
 						<th:block th:each="d: ${domBase}">
 						<li><p th:text="${d.testo}"></p> 
-							<div class="risposte">	<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="1"><p th:text="${d.risposta1}"></p></div>
-						<div class="risposte">	<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="2"><p th:text="${d.risposta2}"></p></div>
-							<div class="risposte"><input type="radio" th:name="'valore'+${d.id_domanda}" th:value="3"><p th:text="${d.risposta3}"></p></div>
-						<div class="risposte">	<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="4"><p th:text="${d.risposta4}"></p></div>
+							<div class="risposte">	<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="1" required><p th:text="${d.risposta1}"></p></div>
+						<div class="risposte">	<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="2" required><p th:text="${d.risposta2}"></p></div>
+							<div class="risposte"><input type="radio" th:name="'valore'+${d.id_domanda}" th:value="3" required><p th:text="${d.risposta3}"></p></div>
+						<div class="risposte">	<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="4" required><p th:text="${d.risposta4}"></p></div>
 						</li>
 						<th:block>
 					</ol>
@@ -77,10 +77,10 @@
 						<ol class="domande">
 						<th:block th:each="d: ${domMedio}">
 						<li><p th:text="${d.testo}"></p> 
-							<div class="risposte">	<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="1"><p th:text="${d.risposta1}"></p></div>
-						<div class="risposte">	<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="2"><p th:text="${d.risposta2}"></p></div>
-							<div class="risposte"><input type="radio" th:name="'valore'+${d.id_domanda}" th:value="3"><p th:text="${d.risposta3}"></p></div>
-						<div class="risposte">	<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="4"><p th:text="${d.risposta4}"></p></div>
+							<div class="risposte">	<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="1" required><p th:text="${d.risposta1}"></p></div>
+						<div class="risposte">	<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="2" required><p th:text="${d.risposta2}"></p></div>
+							<div class="risposte"><input type="radio" th:name="'valore'+${d.id_domanda}" th:value="3" required><p th:text="${d.risposta3}"></p></div>
+						<div class="risposte">	<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="4" required><p th:text="${d.risposta4}"></p></div>
 						</li>
 						<th:block>
 					</ol>
@@ -93,10 +93,10 @@
 					<ol class="domande">
 						<th:block th:each="d: ${domAlto}">
 						<li><p th:text="${d.testo}"></p> 
-							<div class="risposte">	<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="1"><p th:text="${d.risposta1}"></p></div>
-						<div class="risposte">	<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="2"><p th:text="${d.risposta2}"></p></div>
-							<div class="risposte"><input type="radio" th:name="'valore'+${d.id_domanda}" th:value="3"><p th:text="${d.risposta3}"></p></div>
-						<div class="risposte">	<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="4"><p th:text="${d.risposta4}"></p></div>
+							<div class="risposte">	<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="1" required><p th:text="${d.risposta1}"></p></div>
+						<div class="risposte">	<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="2" required><p th:text="${d.risposta2}"></p></div>
+							<div class="risposte"><input type="radio" th:name="'valore'+${d.id_domanda}" th:value="3" required><p th:text="${d.risposta3}"></p></div>
+						<div class="risposte">	<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="4" required><p th:text="${d.risposta4}"></p></div>
 						</li>
 						<th:block>
 					</ol>

@@ -9,14 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.privacy.web.model.Domanda;
 import com.privacy.web.model.Salvataggio;
 import com.privacy.web.model.Test;
 import com.privacy.web.model.ProgressoStudio;
 import com.privacy.web.model.Utente;
-import com.privacy.web.model.MetaInfo;
 import com.privacy.web.service.DomandaService;
 import com.privacy.web.service.ProgressoService;
 import com.privacy.web.service.SalvataggioService;
@@ -103,12 +101,13 @@ public class TestControl {
 		List<Domanda> domTest = domServ.findByIdTest(id);
 
 //		System.out.println("ECCO LE DOMANDE: " + domTest.size());
-
-		for (int i = 0; i < domTest.size(); i++) {
 			/// mi vado a salvare tutte le risposte che ha dato l'utente
-			Salvataggio s = new Salvataggio();
+		Salvataggio s = new Salvataggio();
 			s.setEmail_utente(u.getEmail());
 			s.setId_test(id);
+		for (int i = 0; i < domTest.size(); i++) {
+			
+			
 //			System.out.println("Id della domanda: " + domTest.get(i).getId_domanda());
 			s.setId_domanda(domTest.get(i).getId_domanda());
 //			System.out.println("Id della risposta: " +Integer.parseInt(request.getParameter("valore" + domTest.get(i).getId_domanda())) );
