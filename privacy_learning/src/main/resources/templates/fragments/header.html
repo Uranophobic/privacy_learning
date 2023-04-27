@@ -31,10 +31,14 @@
 		</th:block>
 		
 			<th:block th:unless="${session.isEmpty()}"> 
+		 <div  class="pulsanti">
+			<div class="login">
+			<a class="button" type="submit" th:href="@{/users/profilo}"> Profilo </a>
+			</div>
 			<div class="login">
 			<a class="button" type="submit" th:href="@{/users/logout}"> LOGOUT </a>
-			</div>  
-			
+			</div> 
+			</div>
 			</th:block>
 		
 		<div class="search-bar">

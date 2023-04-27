@@ -55,6 +55,12 @@ body {
 	margin: 0;
 }
 
+.pulsanti {
+	display: flex;
+	width: 50%;
+	margin: auto;
+}
+
 .container {
 	border-radius: 4px;
 	/* height: 130px; */

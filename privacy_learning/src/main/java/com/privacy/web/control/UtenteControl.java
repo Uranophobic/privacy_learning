@@ -56,6 +56,12 @@ public class UtenteControl {
 		return "ListaAllUser";
 	}
 
+	@GetMapping("/profilo")
+	public String profilo (Model model) {
+		return "profilo";
+		
+	}
+	
 	/*--------REGISTRAZIONE--------*/
 	// metodo che crea un nuovo utente
 	@GetMapping("/registrazione")
