@@ -1,8 +1,12 @@
 package com.privacy.web.control;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Date;
 
+import org.hibernate.internal.util.compare.CalendarComparator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,7 +37,7 @@ import com.privacy.web.service.UtenteService;
 @Data
 public class UtenteControl {
 	@Autowired
-	private SalvataggioService salvServ; 
+	private SalvataggioService salvServ;
 	@Autowired
 	private TestService testServ;
 	@Autowired
@@ -57,11 +61,11 @@ public class UtenteControl {
 	}
 
 	@GetMapping("/profilo")
-	public String profilo (Model model) {
+	public String profilo(Model model) {
 		return "profilo";
-		
+
 	}
-	
+
 	/*--------REGISTRAZIONE--------*/
 	// metodo che crea un nuovo utente
 	@GetMapping("/registrazione")
@@ -99,8 +103,16 @@ public class UtenteControl {
 			user.setCognome(request.getParameter("cognome"));
 			user.setEmail(request.getParameter("email"));
 			user.setPassword(request.getParameter("password"));
-			user.setDataNascita(request.getParameter("dataNascita"));
+			SimpleDateFormat dtf = new SimpleDateFormat("yyyy/MM/dd");
+			Date today = Calendar.getInstance().getTime();
 			try {
+				if (dtf.format(today).compareTo(request.getParameter("dataNascita")) >= 0) {
+					String descrizione = "La data inserita è invalida";
+					model.addAttribute("descrizione", descrizione);
+					return "redirect:/users/reg?error=" + descrizione;
+				} else {
+					user.setDataNascita(request.getParameter("dataNascita"));
+				}
 				if (utServ.existsById(request.getParameter("email"))) {
 					response.getWriter().write("4 // errore nella registrazione");
 					String error = "Esiste già un utente con questa e-mail";
@@ -108,11 +120,11 @@ public class UtenteControl {
 					return "redirect:/error?descrizione= " + error;
 
 				} else {
-					
+
 					List<Domanda> questionario = domServ.findByIdTest(0);
 
-					//System.out.println(questionario);
-					
+					// System.out.println(questionario);
+
 					/*
 					 * ArrayList<String> risposte = new ArrayList<>(); for (int i = 0; i
 					 * <questionario.size(); i++) { risposte.add(request.getParameter("valore" +
@@ -121,22 +133,21 @@ public class UtenteControl {
 					 * request.getParameter("valore" + questionario.get(i).getId_domanda())); }
 					 * System.out.println("utente che sto salvando le cose: " +user.getEmail());
 					 */
-					
-					
-					for(Domanda q : questionario) {
-						
+
+					for (Domanda q : questionario) {
+
 						Salvataggio s = new Salvataggio();
 						s.setEmail_utente(user.getEmail());
 						s.setId_test(0);
 						s.setId_domanda(q.getId_domanda());
 						String risp = request.getParameter("valore" + q.getId_domanda());
-						if(risp.equals("Mai")) {
+						if (risp.equals("Mai")) {
 							s.setId_risposta(1);
 						} else if (risp.equals("Raramente")) {
 							s.setId_risposta(2);
-						}else if (risp.equals("Spesso")) {
+						} else if (risp.equals("Spesso")) {
 							s.setId_risposta(3);
-						}else if (risp.equals("Sempre")) {
+						} else if (risp.equals("Sempre")) {
 							s.setId_risposta(4);
 						} else if (risp.equals("Si")) {
 							s.setId_risposta(1);
@@ -144,16 +155,14 @@ public class UtenteControl {
 							s.setId_risposta(2);
 						}
 
-						
 						s.setRisposta_corretta("0");
 						s.setRisposta_utente(risp);
 						s.setTesto_domanda(q.getTesto());
-					
+
 						salvServ.save(s);
 						System.out.println("salvataggio : " + s.toString());
 					}
-					
-				
+
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -288,8 +297,8 @@ public class UtenteControl {
 	// Metodo che prende solo la prima parte delle domande del questionario utente
 	public static List<Domanda> split(List<Domanda> list) {
 		List<Domanda> first = new ArrayList<Domanda>();
-		for (int i = 0; i < (list.size() + 1)/2; i++) {
-				first.add(list.get(i));			
+		for (int i = 0; i < (list.size() + 1) / 2; i++) {
+			first.add(list.get(i));
 		}
 		// restituisce un array che contiene la prima parte delle domande
 		return first;
@@ -299,7 +308,7 @@ public class UtenteControl {
 	public static List<Domanda> split2(List<Domanda> list) {
 		List<Domanda> second = new ArrayList<Domanda>();
 		for (int i = ((list.size() + 1) / 2); i < list.size(); i++) {
-				second.add(list.get(i));
+			second.add(list.get(i));
 		}
 		// restituisce un array con la seconda parte delle domande
 		return second;
