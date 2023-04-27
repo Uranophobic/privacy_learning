@@ -16,10 +16,11 @@
 	--arrow-fill: #333231;
 	--body-font: 'Poppins', sans-serif;
 	--italic-font: "EB Garamond", serif;
+	box-sizing: border-box;
 }
 
 /** {*/
-/*  box-sizing: border-box;*/
+/*  */
 /*  outline: none;*/
 /*}*/
 
@@ -49,7 +50,7 @@ h3 {
 body {
 	font-family: 'Poppins', sans-serif;
 	background-color: #FFFFFF;
-	/* padding: 15px; */
+	padding: 10px; 
 	color: var(--body-color);
 	margin: 0;
 }
@@ -61,7 +62,7 @@ body {
 	display: flex;
 	/* scroll-behavior: smooth; */
 	background-color: #FFFFFF;
-	/* padding: 0 30px; */
+	padding: 0 30px;
 	margin-bottom: 30px;
 	position: fixed;
 	top: 0;

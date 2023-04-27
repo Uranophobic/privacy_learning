@@ -25,14 +25,8 @@ public class Domanda {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_domanda;
 	
-	@Column(name = "id_test")
-	private int id_test;
-	
 	@Column(name = "testo")
 	private String testo;
-	
-	@Column(name = "risposta_corretta")
-	private int risposta_corretta;
 	
 	@Column(name = "meta_info")
 	private String meta_info;
@@ -48,7 +42,14 @@ public class Domanda {
 	
 	@Column(name = "risposta4")
 	private String risposta4;
+	
+	@Column(name = "risposta_corretta")
+	private int risposta_corretta;
 
+	@Column(name = "id_test")
+	private int id_test;
+	
+	
 	public Domanda(int id_test, String meta_info, String testo, int risposta_corretta, String risposta1,
 			String risposta2, String risposta3, String risposta4) {
 		this.testo = testo;

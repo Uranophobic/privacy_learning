@@ -102,11 +102,11 @@ public class TestControl {
 
 //		System.out.println("ECCO LE DOMANDE: " + domTest.size());
 			/// mi vado a salvare tutte le risposte che ha dato l'utente
-		Salvataggio s = new Salvataggio();
+		
+		for (int i = 0; i < domTest.size(); i++) {
+			Salvataggio s = new Salvataggio();
 			s.setEmail_utente(u.getEmail());
 			s.setId_test(id);
-		for (int i = 0; i < domTest.size(); i++) {
-			
 			
 //			System.out.println("Id della domanda: " + domTest.get(i).getId_domanda());
 			s.setId_domanda(domTest.get(i).getId_domanda());
@@ -130,24 +130,25 @@ public class TestControl {
 			
 			//mi vado a prendere anche il testo della risposta corretta cosi dopo posso ottenure un risultato più completo
 			//nella pagina risultati (solo con l'id potevo stampare il testo della domanda e risposta)
-			int idRispCorretta = domTest.get(i).getRisposta_corretta();
-			if(idRispCorretta==1) {
-				s.setRisposta_corretta(domTest.get(i).getRisposta1());
-			} else if(idRispCorretta==2) {
-				s.setRisposta_corretta(domTest.get(i).getRisposta2());
-			} else if (idRispCorretta==3) {
-				s.setRisposta_corretta(domTest.get(i).getRisposta3());
-			}else if (idRispCorretta==4){
-				s.setRisposta_corretta(domTest.get(i).getRisposta4());
+			String idRispCorretta = String.valueOf(domTest.get(i).getRisposta_corretta()).toString();	
+		//	System.out.println("vediamo se ha funzionato:" + idRispCorretta);
+			if (!idRispCorretta.equals("")) {  //se risp corretta non è vuoto allora succede questo
+				if (idRispCorretta.equals("1")) {
+					s.setRisposta_corretta(domTest.get(i).getRisposta1());
+				} else if (idRispCorretta.equals("2")) {
+					s.setRisposta_corretta(domTest.get(i).getRisposta2());
+				} else if (idRispCorretta.equals("3")) {
+					s.setRisposta_corretta(domTest.get(i).getRisposta3());
+				} else if (idRispCorretta.equals("4")) {
+					s.setRisposta_corretta(domTest.get(i).getRisposta4());
+				}
+			}else {
+				System.out.println("syso di prova: il valore è vuoto"+ idRispCorretta);
 			}
-			
 			salvServ.save(s);
 			//System.out.println("SALVATAGGIO CREATO: " + s.toString());
 		}
-		
 	
-		
-		
 		//ora vado a vedere effettivamente quante cose ha sbagliato l'utente
 		ArrayList<Salvataggio> rispCorrette = new ArrayList<>();
 		ArrayList<Salvataggio> rispInCorrette = new ArrayList<>();
@@ -174,7 +175,7 @@ public class TestControl {
 							p.setArg_dastudiare(domanda.getMeta_info());
 							progServ.save(p);
 							argDaStudiare.add(domanda.getMeta_info());
-							System.out.println("PROGRESSO STUDIO SALVATO:" + p.toString());
+							//System.out.println("PROGRESSO STUDIO SALVATO:" + p.toString());
 		
 						}
 					}

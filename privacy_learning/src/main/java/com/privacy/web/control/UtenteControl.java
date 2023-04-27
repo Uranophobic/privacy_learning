@@ -33,7 +33,7 @@ import com.privacy.web.service.UtenteService;
 @Data
 public class UtenteControl {
 	@Autowired
-	private SalvataggioService salvataggioServ; // oggetto SalvataggioRepository
+	private SalvataggioService salvServ; 
 	@Autowired
 	private TestService testServ;
 	@Autowired
@@ -41,10 +41,10 @@ public class UtenteControl {
 	@Autowired
 	private DomandaService domServ;
 
-	public UtenteControl(UtenteService utServ, SalvataggioService salvataggioRep, TestService testServ) {
+	public UtenteControl(UtenteService utServ, SalvataggioService salvServ, TestService testServ) {
 		super();
 		this.utServ = utServ;
-		this.salvataggioServ = salvataggioRep;
+		this.salvServ = salvServ;
 		this.testServ = testServ;
 	}
 
@@ -102,26 +102,52 @@ public class UtenteControl {
 					return "redirect:/error?descrizione= " + error;
 
 				} else {
-					utServ.save(user);
-					userSession.setAttribute("userSession", user);
-					List<Domanda> questionario = domServ.findByIdTest(4);
+					
+					List<Domanda> questionario = domServ.findByIdTest(0);
 
-					ArrayList<String> risposte = new ArrayList<>();
-					for (int i = 0; i < domServ.findByIdTest(4).size(); i++) {
-						risposte.add(request.getParameter("valore" + questionario.get(i).getId_domanda()));
+					//System.out.println(questionario);
+					
+					/*
+					 * ArrayList<String> risposte = new ArrayList<>(); for (int i = 0; i
+					 * <questionario.size(); i++) { risposte.add(request.getParameter("valore" +
+					 * questionario.get(i).getId_domanda()));
+					 * System.out.println("Risposte che ha messo l'utente " +
+					 * request.getParameter("valore" + questionario.get(i).getId_domanda())); }
+					 * System.out.println("utente che sto salvando le cose: " +user.getEmail());
+					 */
+					
+					
+					for(Domanda q : questionario) {
+						
+						Salvataggio s = new Salvataggio();
+						s.setEmail_utente(user.getEmail());
+						s.setId_test(0);
+						s.setId_domanda(q.getId_domanda());
+						String risp = request.getParameter("valore" + q.getId_domanda());
+						if(risp.equals("Mai")) {
+							s.setId_risposta(1);
+						} else if (risp.equals("Raramente")) {
+							s.setId_risposta(2);
+						}else if (risp.equals("Spesso")) {
+							s.setId_risposta(3);
+						}else if (risp.equals("Sempre")) {
+							s.setId_risposta(4);
+						} else if (risp.equals("Si")) {
+							s.setId_risposta(1);
+						} else if (risp.equals("No")) {
+							s.setId_risposta(2);
+						}
 
+						
+						s.setRisposta_corretta("0");
+						s.setRisposta_utente(risp);
+						s.setTesto_domanda(q.getTesto());
+					
+						salvServ.save(s);
+						System.out.println("salvataggio : " + s.toString());
 					}
-					System.out.println(user.getEmail());
-					Salvataggio s = new Salvataggio();
-					s.setEmail_utente(user.getEmail());
-					s.setId_test(4);
-					int ultimo = salvataggioServ.findAllSalvataggio().size() + 1;
-					for (int i = 0; i < risposte.size(); i++) {
-						/* s.setId_salvataggio(ultimo + i); */
-						s.setId_risposta(Integer.parseInt(risposte.get(i)));
-						System.out.println(s);
-						salvataggioServ.save(s);
-					}
+					
+				
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -141,7 +167,9 @@ public class UtenteControl {
 			model.addAttribute("descrizione", descrizione);
 			return "redirect:/error";
 		}
-
+		user.setLivello("Nessuno");
+		utServ.save(user);
+		userSession.setAttribute("userSession", user);
 		return "redirect:/profilo";
 	}
 

@@ -45,19 +45,15 @@
 
 
 			<div th:if="${!session.isEmpty()}">
-
 				<p th:text="'Hai completato con successo il test: ' + ${session.userSession.livello}"></p>
-
-				<p> Torna alla Home.</p>
-			</div>
+		
 
 			<div>
+				<br>
 				<p> Qui sotto troverai una panoramica sull'andamento del test</p>
-
 				<br>
 				<p> Le domande a cui hai risposto correttamente: </p>
-
-
+				<br>
 				<table>
 					<tr>
 						<td>Domanda</td>
@@ -100,7 +96,7 @@
 
 
 			</div>
-
+	</div>
 
 		</form>
 

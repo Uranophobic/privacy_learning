@@ -84,7 +84,7 @@ CREATE TABLE `domanda` (
   `risposta2` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
   `risposta3` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
   `risposta4` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
-  `risposta_corretta` int DEFAULT NULL COMMENT 'può valere da 1 a 4 ',
+  `risposta_corretta` int,
   `id_test` int NOT NULL COMMENT 'id test in cui compare la domanda',
   PRIMARY KEY (`id_domanda`) USING BTREE,
   KEY `FK_domanda_test` (`id_test`) USING BTREE,
