@@ -61,7 +61,26 @@ public class UtenteControl {
 	}
 
 	@GetMapping("/profilo")
-	public String profilo(Model model) {
+	public String profilo(@ModelAttribute("user") Utente user, HttpServletRequest request,
+			HttpServletResponse response, Model model, HttpSession userSession) throws Exception {
+		
+		System.out.println("user " + user.getEmail());
+		
+		Utente u = utServ.findUtenteByEmail(user.getEmail());
+		System.out.println("utente trovato" +  u.toString());
+		if (u != null) {
+			if (u.getPercentuale() != 0) {
+				int diff = 100 - u.getPercentuale();
+				model.addAttribute("perc", u.getPercentuale());
+				model.addAttribute("diff", diff);
+				System.out.println("sono nel profilo di utente control");
+				System.out.println("differenza: " + diff);
+				System.out.println("percentuale: " + u.getPercentuale());
+			}
+			
+		userSession.setAttribute("userSession", u);
+		}
+		
 		return "profilo";
 
 	}
@@ -122,17 +141,6 @@ public class UtenteControl {
 				} else {
 
 					List<Domanda> questionario = domServ.findByIdTest(0);
-
-					// System.out.println(questionario);
-
-					/*
-					 * ArrayList<String> risposte = new ArrayList<>(); for (int i = 0; i
-					 * <questionario.size(); i++) { risposte.add(request.getParameter("valore" +
-					 * questionario.get(i).getId_domanda()));
-					 * System.out.println("Risposte che ha messo l'utente " +
-					 * request.getParameter("valore" + questionario.get(i).getId_domanda())); }
-					 * System.out.println("utente che sto salvando le cose: " +user.getEmail());
-					 */
 
 					for (Domanda q : questionario) {
 
@@ -223,7 +231,13 @@ public class UtenteControl {
 			}
 			try {
 				user = utServ.findUtenteByEmailAndPassword(email, pwd);
+				
 				if (user != null) {
+					if (user.getPercentuale() != 0) {
+						int diff = 100 - user.getPercentuale();
+						model.addAttribute("perc", user.getPercentuale());
+						model.addAttribute("diff", diff);
+					}
 					userSession.setAttribute("userSession", user);
 					return "redirect:/profilo";
 				} else {

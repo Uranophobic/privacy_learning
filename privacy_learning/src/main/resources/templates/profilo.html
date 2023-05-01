@@ -54,22 +54,18 @@
 				<legend>Il tuo progresso</legend>
 				<div th:switch="${session.userSession.livello}">
 					<div th:case="'Nessuno'">
-
-
-						<p> non hai ancora effettuato nessun test, Per sbloccare questa parte
-							effettua il test valutativo sulla privacy
-
+						<!-- qui sarebbe meglio mettere direttamente il pulsante al test -->
+						<p> Non hai ancora effettuato nessun test. <br>
+							Per sbloccare questa parte effettua il test valutativo sulla privacy presente sulla <a class="link" href="/homepage">homepage</a>
 						</p>
-
+						<br>
 					</div>
+
 					<div th:case="'null'">
-
-
-						<p> non hai ancora effettuato nessun test, Per sbloccare questa parte
-							effettua il test valutativo sulla privacy
-
+						<p> Non hai ancora effettuato nessun test. <br>
+							Per sbloccare questa parte effettua il test valutativo sulla privacy presente sulla <a class="link" href="/homepage">homepage</a>
 						</p>
-
+						<br>
 					</div>
 
 					<div th:case="'Base'">
@@ -82,15 +78,19 @@
 							th:href="@{/test/{email} (email=${session.userSession.email})}">Risultato ultimo test
 							effettuato</a>
 
-<!-- grafico a torta poi lo aggiusto
-	<p th:text="'PERCENTUALE: ' + ${perc}"></p>
-<p th:text="'DIFFERENZA: ' + ${diff}"></p>
+	<!-- grafico a torta -->
+					<p th:text="'PERCENTUALE: ' + ${session.userSession.percentuale}"></p>
+						
 						<canvas id="myChart" style="width: 100%; max-width: 600px"></canvas>
 
-						<script>
-							var xValues = ["Studiati",
-								"Da Studiare"];
-							var yValues = [89, 11]; // qui bisognerà mettere la percentuale di ogni utente 
+						<script th:inline="javascript">
+
+							/*<![CDATA[*/
+							var perc = /*[[${session.userSession.percentuale}]]*/ 'default';
+							var diff = 100 - /*[[${session.userSession.percentuale}]]*/ 'default';
+							/*]]>*/
+							var xValues = ["Studiati", "Da Studiare"];
+							var yValues = [perc, diff]; // qui bisognerà mettere la percentuale di ogni utente 
 							var barColors = ["#b91d47", //i colori delle due sezioni
 								"#00aba9"];
 
@@ -111,7 +111,8 @@
 										}
 									}
 								});
-						</script>-->
+						</script>		
+					
 
 					</div>
 
@@ -124,6 +125,43 @@
 						<a type="submit" class="button"
 							th:href="@{/test/{email} (email=${session.userSession.email})}">Risultato ultimo test
 							effettuato</a>
+							
+							
+					<!-- grafico a torta -->
+					<p th:text="'PERCENTUALE: ' + ${session.userSession.percentuale}"></p>
+						
+						<canvas id="myChart" style="width: 100%; max-width: 600px"></canvas>
+
+						<script th:inline="javascript">
+
+							/*<![CDATA[*/
+							var perc = /*[[${session.userSession.percentuale}]]*/ 'default';
+							var diff = 100 - /*[[${session.userSession.percentuale}]]*/ 'default';
+							/*]]>*/
+							var xValues = ["Studiati", "Da Studiare"];
+							var yValues = [perc, diff]; // qui bisognerà mettere la percentuale di ogni utente 
+							var barColors = ["#b91d47", //i colori delle due sezioni
+								"#00aba9"];
+
+							new Chart(
+								"myChart",
+								{
+									type: "doughnut",
+									data: {
+										labels: xValues,
+										datasets: [{
+											backgroundColor: barColors,
+											data: yValues
+										}]
+									},
+									options: {
+										title: {
+											display: true,
+										}
+									}
+								});
+						</script>		
+					
 
 					</div>
 
@@ -136,6 +174,42 @@
 						<a type="submit" class="button"
 							th:href="@{/test/{email} (email=${session.userSession.email})}">Risultato ultimo test
 							effettuato</a>
+							
+					<!-- grafico a torta -->
+					<p th:text="'PERCENTUALE: ' + ${session.userSession.percentuale}"></p>
+						
+						<canvas id="myChart" style="width: 100%; max-width: 600px"></canvas>
+
+						<script th:inline="javascript">
+
+							/*<![CDATA[*/
+							var perc = /*[[${session.userSession.percentuale}]]*/ 'default';
+							var diff = 100 - /*[[${session.userSession.percentuale}]]*/ 'default';
+							/*]]>*/
+							var xValues = ["Studiati", "Da Studiare"];
+							var yValues = [perc, diff]; // qui bisognerà mettere la percentuale di ogni utente 
+							var barColors = ["#b91d47", //i colori delle due sezioni
+								"#00aba9"];
+
+							new Chart(
+								"myChart",
+								{
+									type: "doughnut",
+									data: {
+										labels: xValues,
+										datasets: [{
+											backgroundColor: barColors,
+											data: yValues
+										}]
+									},
+									options: {
+										title: {
+											display: true,
+										}
+									}
+								});
+						</script>		
+					
 					</div>
 				</div>
 			</fieldset>

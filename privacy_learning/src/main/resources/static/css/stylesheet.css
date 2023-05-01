@@ -898,14 +898,18 @@ input:focus {
 	margin-left: 5px;
 }
 
-
+.link{
+	color: red;
+	font-weight: 600;
+	text-decoration: underline;
+}
 
 /**********************************************************ADMIN****************************************************************************/
 .titAdmin{
 	color: black;
 	text-align: center;
 	font-size: 20px;
-}
+} 
 
 .boxArg{
 	width: 75%;
