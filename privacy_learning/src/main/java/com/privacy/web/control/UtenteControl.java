@@ -125,7 +125,7 @@ public class UtenteControl {
 			SimpleDateFormat dtf = new SimpleDateFormat("yyyy/MM/dd");
 			Date today = Calendar.getInstance().getTime();
 			try {
-				if (dtf.format(today).compareTo(request.getParameter("dataNascita")) >= 0) {
+				if (dtf.format(today).compareTo(request.getParameter("dataNascita")) <= 0) {
 					String descrizione = "La data inserita è invalida";
 					model.addAttribute("descrizione", descrizione);
 					return "redirect:/users/reg?error=" + descrizione;
@@ -279,29 +279,45 @@ public class UtenteControl {
 		HttpServletResponse response, Model model, HttpSession userSession) throws Exception {
 		
 		
-		System.out.println("user " + user.getEmail());
+	//	System.out.println("user " + user.getEmail());
 
 		Utente u = utServ.findUtenteByEmail(user.getEmail());
-		System.out.println("utente trovato" + u.toString());
-		
+	//	System.out.println("utente trovato" + u.toString());
+		 if (Check.checkName(request.getParameter("nome")) &&
+				  Check.checkSurname(request.getParameter("cognome")) && 
+				  Check.checkPwd(request.getParameter("password"))) {
 		u.setCognome(request.getParameter("cognome"));
 		u.setNome(request.getParameter("nome"));
 		u.setPassword(request.getParameter("password"));
-		u.setDataNascita(request.getParameter("dataNascita"));
+		
+		SimpleDateFormat dtf = new SimpleDateFormat("yyyy/MM/dd");
+		Date today = Calendar.getInstance().getTime();
+			if (dtf.format(today).compareTo(request.getParameter("dataNascita")) <= 0) {
+				String descrizione = "La data inserita è invalida";
+				model.addAttribute("descrizione", descrizione);
+				return "redirect:/users/reg?error=" + descrizione;
+			} else {
+				u.setDataNascita(request.getParameter("dataNascita"));
+			}
+		//u.setDataNascita(request.getParameter("dataNascita"));
 
 
-		if (u.getPercentuale() != 0) {
-				int diff = 100 - u.getPercentuale();
-				model.addAttribute("perc", u.getPercentuale());
-				model.addAttribute("diff", diff);
-				System.out.println("sono nel profilo di utente control");
-				System.out.println("differenza: " + diff);
-				System.out.println("percentuale: " + u.getPercentuale());
-		}
+	//	if (u.getPercentuale() != 0) {
+	//			int diff = 100 - u.getPercentuale();
+	//			model.addAttribute("perc", u.getPercentuale());
+	//			model.addAttribute("diff", diff);
+		//		System.out.println("sono nel profilo di utente control");
+		//		System.out.println("differenza: " + diff);
+		//		System.out.println("percentuale: " + u.getPercentuale());
+		} else {
+				String descrizione = "Siamo spiacenti si è verificato un errore con la registrazione. Riprova!";
+				model.addAttribute("descrizione", descrizione);
+				return "redirect:/error?error="+descrizione;
+			}
 		utServ.save(u);
 		userSession.setAttribute("userSession", u);
 		
-		System.out.println("utente modifiche" + u.toString());
+		//System.out.println("utente modifiche" + u.toString());
 		return "redirect:/profilo";
 	}
 
@@ -314,10 +330,13 @@ public class UtenteControl {
 	/*
 	 * @PostMapping("/modificaUtente/{email}") public String
 	 * updateUtente(@PathVariable String email, @ModelAttribute("utente") Utente u,
-	 * Model model, HttpSession userSession) { if (Check.checkName(u.getNome()) &&
-	 * Check.checkSurname(u.getCognome()) && Check.checkEmail(u.getEmail())) {
+	 * Model model, HttpSession userSession) { 
+	 * if (Check.checkName(u.getNome()) &&
+	 * Check.checkSurname(u.getCognome()) && 
+	 * Check.checkEmail(u.getEmail())) {
 	 * 
-	 * Utente ut = utServ.findUtenteByEmail(email); ut.setNome(u.getNome());
+	 * Utente ut = utServ.findUtenteByEmail(email); 
+	 * ut.setNome(u.getNome());
 	 * ut.setCognome(u.getCognome()); ut.setEmail(u.getEmail());
 	 * ut.setPassword(u.getPassword()); utServ.deleteById(email);
 	 * 

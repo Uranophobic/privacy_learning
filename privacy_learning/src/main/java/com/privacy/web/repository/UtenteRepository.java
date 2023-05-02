@@ -16,5 +16,7 @@ public interface UtenteRepository extends CrudRepository<Utente, String> {
 
 	@Query(value = "Delete Utente u FROM Utente u WHERE u.email=?1", nativeQuery = true)
 	public void deleteByEmail(String email);
-
+	
+	@Query(value = "Update u FROM Utente u WHERE u.email=?1", nativeQuery = true)
+	public void updateByEmail(String email);
 }

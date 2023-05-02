@@ -43,13 +43,13 @@
 			
 			<div> <!--SECONDA COLONNA: contiene le infomrazioni MODIFICATE -->	
 				<label> Password:</label>
-				<input  type="text" name="password">
+				<input  type="text" name="password" required>
 				<label> Nome:</label>
-				<input  type="text" name="nome">
+				<input  type="text" name="nome" required>
 				<label> Cognome:</label>
-				<input  type="text" name="cognome">
+				<input  type="text" name="cognome" required>
 				<label> Data di nascita:</label>
-				<input  type="text" name="dataNascita">
+				<input  type="date" name="dataNascita" required>
 			</div>
 			<button> Torna indietro</button>
 			<button type="submit" th:formaction="@{/users/modifica/{email} (email=${session.userSession.email})}" formmethod="post">Conferma le modifiche</button>

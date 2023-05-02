@@ -17,4 +17,5 @@ public interface UtenteService {
 	Utente login(String email, String password) throws SQLException;
 	Utente findUtenteByEmailAndPassword(String email, String password);
 	void deleteById(String email);
+	void updateByEmail(String email);
 }

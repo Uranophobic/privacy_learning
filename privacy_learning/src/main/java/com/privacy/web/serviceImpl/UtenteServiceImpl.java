@@ -61,4 +61,10 @@ public class UtenteServiceImpl implements UtenteService {
 		utenteRep.deleteById(email);
 	}
 
+	@Override
+	public void updateByEmail(String email) {
+		utenteRep.updateByEmail(email);
+		
+	}
+
 }
