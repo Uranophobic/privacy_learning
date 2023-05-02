@@ -1,31 +1,64 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="ISO-8859-1">
-<script type="text/javascript" src="../js/ConvalidazioneCampi.js"></script>
-<link rel="stylesheet" href="/css/stylesheet.css">
-<link rel="icon" type="image/png" href="img/logo.png" />
-<title>Privacy Literacy</title>
+	<meta charset="ISO-8859-1">
+	<script type="text/javascript" src="../js/ConvalidazioneCampi.js"></script>
+	<link rel="stylesheet" href="/css/stylesheet.css">
+	<link rel="icon" type="image/png" href="img/logo.png" />
+	<title>Privacy Literacy</title>
 </head>
+
 <body>
 	<div th:insert="~{fragments/header::header}"></div>
 	<br>
-	<div class="container-home">
-		<th:block th:if="${utente.getEmail()} == ${session.userSession.email}">
-			<h1>QUESTA PAGINA VISUALIZZA IL FORM PER MODIFICARE L' UTENTE <a th:text="${utente.getEmail()}"></a></h1>
-			<form th:action="@{/modificaUtente/{email} (id=${utente.email})}" th:object="${utente}" method="post">
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<p class="titolo">Modifica il tuo profilo personale</p>
 
+	<div class="background">
 
-				<a type="submit" class="button"	th:href="@{/users/modificaUtente/{email} (id=${utente.email})}"> Modifica </a>
+		<form th:action="@{/users/modifica}" th:object="${user}" method="POST">
+			<div th:if="${session.isEmpty()}">
+				<p> devi prima loggarti. </p>
+			</div>
+			<div th:if="${!session.isEmpty()}">
+				<p th:text="'Modifica delle informazioni personali di ' + ${session.userSession.email}"></p>
+			</div>
+			<!--TABELLA A DUE COLONNE -->
+			<div> 
+			<div> <!--PRIMA COLONNA: contiene le infomrazioni dell'utente -->	
+				<label> Password:</label>
+				<input th:value="${session.userSession.password}" readonly>
+				<label> Nome:</label>
+				<input th:value="${session.userSession.nome}" readonly>
+				<label> Cognome:</label>
+				<input th:value="${session.userSession.cognome}" readonly>
+				<label> Data di nascita:</label>
+				<input th:value="${session.userSession.dataNascita}" readonly>
+			</div>
+			
+			<div> <!--SECONDA COLONNA: contiene le infomrazioni MODIFICATE -->	
+				<label> Password:</label>
+				<input  type="text" name="password">
+				<label> Nome:</label>
+				<input  type="text" name="nome">
+				<label> Cognome:</label>
+				<input  type="text" name="cognome">
+				<label> Data di nascita:</label>
+				<input  type="text" name="dataNascita">
+			</div>
+			<button> Torna indietro</button>
+			<button type="submit" th:formaction="@{/users/modifica/{email} (email=${session.userSession.email})}" formmethod="post">Conferma le modifiche</button>
 
-			</form>
-			<a type="submit" class="button" th:href="@{/profilo}"> Annulla </a>
-		</th:block>
-
-		<th:block th:if="${utente.getEmail()} != ${session.userSession.email}">
-			<h1>NON HAI L'AUTORIZZAZIONE PER MODIFICARE QUESTO UTENTE</h1>
-		</th:block>
+			</div>
+		</form>
 
 	</div>
+
 </body>
+
 </html>
