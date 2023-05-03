@@ -285,7 +285,7 @@ public class UtenteControl {
 		 */
 
 		
-		//conttrollo che il campo non sia vuoto, perchè se è vuoto vuol dire che l'utente non vuole cambiarlo
+		//controllo che il campo non sia vuoto, perchè se è vuoto vuol dire che l'utente non vuole cambiarlo
 		
 		if (!request.getParameter("cognome").equals("")) {
 			u.setCognome(request.getParameter("cognome"));
