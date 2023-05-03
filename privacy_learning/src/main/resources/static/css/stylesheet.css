@@ -19,22 +19,6 @@
 	box-sizing: border-box;
 }
 
-/** {*/
-/*  */
-/*  outline: none;*/
-/*}*/
-
-
-/*.back button {*/
-/*    padding: 15px;*/
-/*    text-decoration: none;*/
-/*    margin-top: 50px;*/
-/*    font-size: 30px;*/
-/*    font-family: -webkit-pictograph;*/
-/*    border-radius: 1rem;*/
-/*    background-color: #c5e4fa;*/
-/*}*/
-
 /**********************************************************HEADER****************************************************************************/
 a {
 	text-decoration: none;
@@ -63,10 +47,8 @@ body {
 
 .container {
 	border-radius: 4px;
-	/* height: 130px; */
 	width: 100%;
 	display: flex;
-	/* scroll-behavior: smooth; */
 	background-color: #FFFFFF;
 	padding: 0 30px;
 	margin-bottom: 30px;
@@ -108,8 +90,6 @@ body {
 	margin-right: 20px;
 }
 
-
-
 .titolo {
 	width: 50%;
 	margin: auto;
@@ -146,7 +126,6 @@ body {
 	width: 50%;
 	margin: auto;
 }
-
 
 .search-bar {
 	display: flex;
@@ -207,7 +186,6 @@ body {
 	text-align: center;
 }
 
-
 @media (max-width: 480px) {
 	body {
 		padding: 0;
@@ -227,7 +205,6 @@ body {
 	}
 }
 
-
 @media screen and (max-width: 930px) {
 	.left-side {
 		text-align: center;
@@ -235,15 +212,11 @@ body {
 	}
 }
 
-
 @media screen and (max-width: 930px) {
 	.container {
 		position: fixed;
 	}
 }
-
-
-
 
 [data-sld="1"] .container,
 [data-sld="1"] .header {
@@ -261,16 +234,12 @@ body {
 }
 
 /**********************************************************HOMEPAGE****************************************************************************/
-
 .container-home {
 	border-radius: 4px;
-	/* scroll-behavior: smooth; */
 	background-color: white;
 	padding: 0 30px;
 	margin-bottom: 30px;
 	width: auto;
-	/* position: relative; */
-	/* display: block; */
 	margin-top: 125px;
 }
 
@@ -283,12 +252,9 @@ body {
 	background-color: #D7D6D6;
 	padding: 20px;
 	border-radius: 5px;
-	/* padding: 0; */
-	/* padding-top: 0; */
 	margin-bottom: 20px;
 	margin: auto;
 }
-
 
 .container-sezioni fieldset {
 	width: 25%;
@@ -301,7 +267,6 @@ body {
 	width: 50%;
 	text-align: center;
 	font-size: 25px;
-	/* border-bottom: 1px solid; */
 	border-bottom: 1px solid rgba(44, 45, 42, 0.25);
 }
 
@@ -319,10 +284,6 @@ body {
 	margin-top: 5px;
 }
 
-/*.box-titolo{*/
-/*	margin-top:25px;*/
-/*}*/
-
 .background {
 	background-color: #D7D6D6;
 	border-radius: 5px;
@@ -332,7 +293,6 @@ body {
 }
 
 .altro {
-	/* float: right; */
 	right: 0;
 	width: 50%;
 	margin: auto;
@@ -351,7 +311,6 @@ body {
 	color: #2c2d2a;
 	text-align: center;
 	font-size: 25px;
-	/* border-bottom: 1px solid; */
 	border-bottom: 1px solid rgba(44, 45, 42, 0.25);
 }
 
@@ -390,28 +349,18 @@ body {
 	background-color: #45779C;
 	border: none;
 	border-radius: 5px;
-	/* width: 250px; */
-	/* margin: 53px; */
 	font-size: 16px;
 	color: white;
 	font-weight: bold;
-	/* position: absolute; */
-	/* bottom: 0; */
 }
 
 /**********************************************************LOGIN****************************************************************************/
 
 .container-login {
 	border-radius: 4px;
-	/* scroll-behavior: smooth; */
 	background-color: white;
 	padding: 0 30px;
-	/* margin-bottom: 30px; */
-	/* width: 50%; */
-	/* position: relative; */
-	/* display: block; */
 	margin-top: 125px;
-	/* margin: auto; */
 }
 
 .text-login {
@@ -423,14 +372,12 @@ body {
 }
 
 .titolo-login {
-	/* width: 50%; */
 	margin: auto;
 	text-align: center;
 	padding: 10px;
 	color: #45779C;
 	font-size: 25px;
 	font-weight: 600;
-	/* margin-top: 20px; */
 	padding: 20px;
 }
 
@@ -511,17 +458,11 @@ input:focus {
 	float: right;
 }
 
-
-
 .form-signin {
-	/* max-width: 380px; */
 	padding: 15px 35px 45px;
-	/* margin: 0 auto; */
 	background-color: white;
-	/* border: 1px solid rgba(0,0,0,0.1); */
 	border-radius: 4px;
 }
-
 
 .form-control {
 	position: relative;
@@ -542,80 +483,12 @@ input:focus {
 	font-size: 16px;
 }
 
-
 #text-style {
 	color: red;
 	font-weight: bold;
 }
 
-/*REGISTRAZIONE*/
-
-/*.reg-block h1 {*/
-/*    position: relative;*/
-/*    text-align: center;*/
-/*    margin-top: 90px;*/
-/*    font-size: 70px;*/
-/*    z-index: 1;*/
-/*}*/
-
-/*.form {*/
-/*    text-align: center;*/
-/*    width: 90%;*/
-/*    margin-left: 5%;*/
-/*    margin-right: 5%;*/
-/*}*/
-
-/*.form input {*/
-/*    width: 60%;*/
-/*    margin: 25px 5% 25px 5%;*/
-/*    text-align: center;*/
-/*    font-size: 30px;*/
-/*    font-family: -webkit-pictograph;*/
-/*    height: 40px;*/
-/*    color: #1E1E24; Raisin Black*/
-/*    border: none;*/
-/*    border-bottom: 2px solid;*/
-/*    background-color: rgba(0, 0, 0, .0);*/
-/*}*/
-
-/*.form input::placeholder {*/
-/*    color: #1E1E24;*/
-/*}*/
-
-/*.form-button {*/
-/*    text-align: center;*/
-/*    width: 90%;*/
-/*    margin-left: 5%;*/
-/*    margin-right: 5%;*/
-/*}*/
-
-/*.form-button input {*/
-/*    width: 190px;*/
-/*    height: 45px;*/
-/*    font-size: 28px;*/
-/*    font-family: -webkit-pictograph;*/
-/*    color: black;*/
-/*    background-color: white;*/
-/*    margin-top: 20px;*/
-/*    border-radius: 10px;*/
-/*}*/
-
-/*.text-reg {*/
-/*	margin: auto;*/
-/*	width: 100%;*/
-/*}*/
-
-/*.input-reg {*/
-/*	 width: 50%; */
-/*	margin: auto;*/
-/*	text-align: center;*/
-/*	 align-items: center; */
-/*	 align-self: center; */
-/*}*/
-
 /**********************************************************REGISTRAZIONE****************************************************************************/
-
-
 .corpoReg {
 	display: flex;
 	align-items: center;
@@ -640,13 +513,10 @@ input:focus {
 
 .spaceradio {
 	display: inline-flex;
-	/* margin: 5px; */
 	font-weight: 300;
 }
 
 .spaceradio p {
-	/* padding: 5px; */
-	/* margin: 5px; */
 	margin-left: 5px;
 	margin-right: 5px;
 	padding-left: 5px;
@@ -676,7 +546,6 @@ input:focus {
 }
 
 .form-outer .form .page .title {
-	/* text-align: left; */
 	font-size: 25px;
 	font-weight: 500;
 	text-align: center;
@@ -684,27 +553,15 @@ input:focus {
 
 .form-outer .form .page .field {
 	height: 50px;
-	/* width: 400px; */
-	/* margin: 35px 0; */
 	position: relative;
 	display: flex;
 }
-
-/*.form-outer .form .page .field .label {
-	position: absolute;
-	top: -30px;
-	/*font-weight: 500;*/
-/*width: 100%;
-	/* margin: ; 
-	display: flex;
-}*/
 
 .idDomanda,
 .domanda {
 	font-weight: 400;
 	font-size: 16px;
 	padding: 5px;
-
 }
 
 .label {
@@ -713,8 +570,6 @@ input:focus {
 
 .box-domande {
 	padding: 5px;
-	/* margin: 5px; */
-
 }
 
 .field2 {
@@ -866,10 +721,14 @@ input:focus {
 	color: #fff;
 }
 
-/**********************************************************PROFILO****************************************************************************/
+/**********************************************************PROFILO************************************************************************/
 .box-profilo {
 	display: flex;
 	width: 100%;
+}
+
+.field-progresso{
+	height: 400px;
 }
 
 .personal-info {
@@ -878,6 +737,8 @@ input:focus {
 
 .personal-info fieldset {
 	width: 50%;
+	margin: auto;
+	height:400px;
 }
 
 .personal-info label {
@@ -904,6 +765,38 @@ input:focus {
 	text-decoration: underline;
 }
 
+/**** MODIFICA PROFILO ****/
+.sez-button {
+	width: 22%;
+	margin-top: 20px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.sez-button button {
+	background-color: #45779C;
+	border: none;
+	border-radius: 4px;
+	font-size: 15px;
+	color: white;
+	font-weight: bold;
+}
+
+.p-mod{
+	margin: auto;
+width: 50%;
+text-align: center;
+}
+
+.but-mod {
+	position: absolute;
+	/* float: left; */
+	bottom: 0;
+	/* margin: auto; */
+	margin-left: auto;
+	margin-right: auto;
+
+}
 /**********************************************************ADMIN****************************************************************************/
 .titAdmin{
 	color: black;
@@ -924,9 +817,6 @@ padding: 10px;
 }
 
 .buttonArg{
-	/* width: auto; */
 	margin: auto;
-	/* align-content: center; */
 	display: table;
-
 }

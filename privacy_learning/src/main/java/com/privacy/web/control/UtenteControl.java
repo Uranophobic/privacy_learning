@@ -267,7 +267,6 @@ public class UtenteControl {
 	}
 
 	/*----------------------------------MODIFICA------------------------------------------*/
-
 	@GetMapping("/modifica")
 	public String modifica(Model model) {
 // mi serve solo per aprire modifica utente 
@@ -276,82 +275,56 @@ public class UtenteControl {
 
 	@PostMapping("/modifica/{email}")
 	public String updateUser(@ModelAttribute("user") Utente user, HttpServletRequest request,
-		HttpServletResponse response, Model model, HttpSession userSession) throws Exception {
-		
-		
-	//	System.out.println("user " + user.getEmail());
+			HttpServletResponse response, Model model, HttpSession userSession) throws Exception {
 
 		Utente u = utServ.findUtenteByEmail(user.getEmail());
-	//	System.out.println("utente trovato" + u.toString());
-		 if (Check.checkName(request.getParameter("nome")) &&
-				  Check.checkSurname(request.getParameter("cognome")) && 
-				  Check.checkPwd(request.getParameter("password"))) {
-		u.setCognome(request.getParameter("cognome"));
-		u.setNome(request.getParameter("nome"));
-		u.setPassword(request.getParameter("password"));
+		/*
+		 * if (Check.checkName(request.getParameter("nome")) &&
+		 * Check.checkSurname(request.getParameter("cognome")) &&
+		 * Check.checkPwd(request.getParameter("password"))) {
+		 */
+
 		
+		//conttrollo che il campo non sia vuoto, perchè se è vuoto vuol dire che l'utente non vuole cambiarlo
+		
+		if (!request.getParameter("cognome").equals("")) {
+			u.setCognome(request.getParameter("cognome"));
+		}
+
+		if (!request.getParameter("nome").equals("")) {
+			u.setNome(request.getParameter("nome"));
+		}
+
+		if (!request.getParameter("password").equals("")) {
+			u.setPassword(request.getParameter("password"));
+		}
+
 		SimpleDateFormat dtf = new SimpleDateFormat("yyyy/MM/dd");
 		Date today = Calendar.getInstance().getTime();
-			if (dtf.format(today).compareTo(request.getParameter("dataNascita")) <= 0) {
-				String descrizione = "La data inserita è invalida";
-				model.addAttribute("descrizione", descrizione);
-				return "redirect:/users/reg?error=" + descrizione;
-			} else {
+		if (dtf.format(today).compareTo(request.getParameter("dataNascita")) <= 0) {
+			String descrizione = "La data inserita è invalida";
+			model.addAttribute("descrizione", descrizione);
+			return "redirect:/users/reg?error=" + descrizione;
+		} else {
+			if (!request.getParameter("dataNascita").equals("")) {
 				u.setDataNascita(request.getParameter("dataNascita"));
 			}
-		//u.setDataNascita(request.getParameter("dataNascita"));
 
+		}
 
-	//	if (u.getPercentuale() != 0) {
-	//			int diff = 100 - u.getPercentuale();
-	//			model.addAttribute("perc", u.getPercentuale());
-	//			model.addAttribute("diff", diff);
-		//		System.out.println("sono nel profilo di utente control");
-		//		System.out.println("differenza: " + diff);
-		//		System.out.println("percentuale: " + u.getPercentuale());
-		} else {
-				String descrizione = "Siamo spiacenti si è verificato un errore con la registrazione. Riprova!";
-				model.addAttribute("descrizione", descrizione);
-				return "redirect:/error?error="+descrizione;
-			}
+		/*
+		 * } else { String descrizione =
+		 * "Siamo spiacenti si è verificato un errore con la registrazione. Riprova!";
+		 * model.addAttribute("descrizione", descrizione); return
+		 * "redirect:/error?error="+descrizione; }
+		 */
+
 		utServ.save(u);
 		userSession.setAttribute("userSession", u);
-		
-		//System.out.println("utente modifiche" + u.toString());
+
 		return "redirect:/profilo";
 	}
 
-	/*
-	 * @GetMapping("/fixedUtente/{email}") public String editArgomento(@PathVariable
-	 * String email, Model model) { model.addAttribute("utente",
-	 * utServ.findUtenteByEmail(email)); return "editUtente"; }
-	 */
-
-	/*
-	 * @PostMapping("/modificaUtente/{email}") public String
-	 * updateUtente(@PathVariable String email, @ModelAttribute("utente") Utente u,
-	 * Model model, HttpSession userSession) { 
-	 * if (Check.checkName(u.getNome()) &&
-	 * Check.checkSurname(u.getCognome()) && 
-	 * Check.checkEmail(u.getEmail())) {
-	 * 
-	 * Utente ut = utServ.findUtenteByEmail(email); 
-	 * ut.setNome(u.getNome());
-	 * ut.setCognome(u.getCognome()); ut.setEmail(u.getEmail());
-	 * ut.setPassword(u.getPassword()); utServ.deleteById(email);
-	 * 
-	 * try { if (utServ.existsById(ut.getEmail())) { String error =
-	 * "Esiste già un utente con questa e-mail"; model.addAttribute("descrizione",
-	 * error); return "redirect:/error?descrizione= " + error;
-	 * 
-	 * } else { utServ.save(ut); userSession.setAttribute("userSession", ut); } }
-	 * catch (Exception e) { e.printStackTrace(); }
-	 * 
-	 * } else { String descrizione =
-	 * "Siamo spiacenti si è verificato un errore con la registrazione. Riprova!";
-	 * model.addAttribute("descrizione", descrizione); return "redirect:/error"; }
-	 * return "redirect:/profilo"; }
-	 */
 	/*------------------------------------METODI INTERNI-------------------------------*/
 	// Metodo che prende solo la prima parte delle domande del questionario utente
 	public static List<Domanda> split(List<Domanda> list) {

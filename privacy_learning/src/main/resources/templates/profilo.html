@@ -44,14 +44,14 @@
 						<label>Data di nascita:</label>
 						<p th:text="${session.userSession.dataNascita}" class="title"></p>
 					</div>
-					<div>
+					<div class="but-mod">
 						<a type="submit" class="button" th:href="@{/users/modifica}"> MODIFICA LE TUE INFORMAZIONI</a>
 					<!--	<a type="submit" class="button"
 							th:href="@{/users/fixedUtente/{email} (email=${session.userSession.email})}"> Modifica </a>-->
 					</div>
 				</fieldset>
 			</div>
-			<fieldset>
+			<fieldset class="field-progresso">
 				<legend>Il tuo progresso</legend>
 				<div th:switch="${session.userSession.livello}">
 					<div th:case="'Nessuno'">

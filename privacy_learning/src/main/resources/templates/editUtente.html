@@ -19,45 +19,69 @@
 	<br>
 	<p class="titolo">Modifica il tuo profilo personale</p>
 
-	<div class="background">
-
-		<form th:action="@{/users/modifica}" th:object="${user}" method="POST">
-			<div th:if="${session.isEmpty()}">
-				<p> devi prima loggarti. </p>
-			</div>
+	<form th:action="@{/users/modifica}" th:object="${user}" method="POST">
+		
+		<div class="background">
 			<div th:if="${!session.isEmpty()}">
-				<p th:text="'Modifica delle informazioni personali di ' + ${session.userSession.email}"></p>
-			</div>
-			<!--TABELLA A DUE COLONNE -->
-			<div> 
-			<div> <!--PRIMA COLONNA: contiene le infomrazioni dell'utente -->	
-				<label> Password:</label>
-				<input th:value="${session.userSession.password}" readonly>
-				<label> Nome:</label>
-				<input th:value="${session.userSession.nome}" readonly>
-				<label> Cognome:</label>
-				<input th:value="${session.userSession.cognome}" readonly>
-				<label> Data di nascita:</label>
-				<input th:value="${session.userSession.dataNascita}" readonly>
-			</div>
-			
-			<div> <!--SECONDA COLONNA: contiene le infomrazioni MODIFICATE -->	
-				<label> Password:</label>
-				<input  type="text" name="password" required>
-				<label> Nome:</label>
-				<input  type="text" name="nome" required>
-				<label> Cognome:</label>
-				<input  type="text" name="cognome" required>
-				<label> Data di nascita:</label>
-				<input  type="date" name="dataNascita" required>
-			</div>
-			<button> Torna indietro</button>
-			<button type="submit" th:formaction="@{/users/modifica/{email} (email=${session.userSession.email})}" formmethod="post">Conferma le modifiche</button>
+			<p class="p-mod" th:text="'Modifica delle informazioni personali di ' + ${session.userSession.email}"></p>
+		</div>
+			<div class="box-profilo">
+
+				<div class="personal-info">
+					
+					<fieldset>
+					<legend>Informazioni personali</legend>
+					<label> Password:</label>
+					<br>
+					<input th:value="${session.userSession.password}" readonly>
+					<br>
+					<label> Nome:</label>
+					<br>
+					<input th:value="${session.userSession.nome}" readonly>
+					<br>
+					<label> Cognome:</label>
+					<input th:value="${session.userSession.cognome}" readonly>
+					<br>
+					<label> Data di nascita:</label>
+					<input th:value="${session.userSession.dataNascita}" readonly>
+					<br>
+					</fieldset>
+				</div>
+
+	
+
+				<div class="personal-info">
+					
+					<fieldset>
+						<legend>Sovrascrivi i campi che vuoi modificare</legend>
+					<label> Password:</label>
+					<br>
+					<input type="text" name="password">
+					<br>
+					<label> Nome:</label>
+					<br>
+					<input type="text" name="nome">
+					<br>
+					<label> Cognome:</label>
+					<br>
+					<input type="text" name="cognome">
+					<br>
+					<label> Data di nascita:</label>
+					<br>
+					<input type="date" name="dataNascita">
+					<br>
+					</fieldset>
+				</div>
+				
 
 			</div>
-		</form>
 
-	</div>
+		
+		<div class="sez-button">
+		<button> Torna indietro</button>
+				<button  type="submit" th:formaction="@{/users/modifica/{email} (email=${session.userSession.email})}"
+					formmethod="post">Conferma le modifiche</button></div></div>
+	</form>
 
 </body>
 
