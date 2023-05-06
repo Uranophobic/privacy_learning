@@ -65,10 +65,10 @@ public class AmministratoreControl {
 		return "createFavola";
 	}
 
-	@GetMapping("/createDomanda")
-	public String addDomanda(Model model) {
+	@GetMapping("/createDomanda/{id}")
+	public String addDomanda(@PathVariable int id ,Model model) {
 		model.addAttribute("metainfo", metaServ.findAll());
-		model.addAttribute("test", testServ.findAllTest());
+		model.addAttribute("idTest", id);
 		return "createDomanda";
 	}
 
@@ -169,11 +169,10 @@ public class AmministratoreControl {
 		return "redirect:/favole/leggi-una-favola";
 	}
 
-	@PostMapping("/addDomanda")
-	public String createDomanda(@ModelAttribute("domanda") Domanda dom, HttpServletRequest request,
+	@PostMapping("/addDomanda/{id}")
+	public String createDomanda(@PathVariable int id, @ModelAttribute("domanda") Domanda dom, HttpServletRequest request,
 			HttpServletResponse response, Model model) {
 		Domanda d = new Domanda();
-		int id = Integer.parseInt(request.getParameter("idtest"));
 		d.setId_test(id);
 		d.setMeta_info(request.getParameter("metainfo"));
 		d.setTesto(request.getParameter("testo"));

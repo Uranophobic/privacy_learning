@@ -44,6 +44,15 @@ public class TestControl {
 	@Autowired
 	ProgressoService progServ;
 
+	
+	@GetMapping("/test/viewTest/{id}")
+	public String VisualizzaTest(@PathVariable int id, Model model) {
+		//restituisco la lista di domande in base al test
+		model.addAttribute("domande", domServ.findByIdTest(id));
+		model.addAttribute("idTest", id);
+		//model.addAttribute("numDomande", domServ.countDomandeByIdTest())
+		return "allDomande";
+	}
 	/* ALESSIA */
 	// pagina test dalla homepage
 	@GetMapping("/test")
@@ -187,6 +196,7 @@ public class TestControl {
 																		// ha studiato ma almeno inizio a settarlo
 																		// perchè ho tutto quello che mi serve
 							p.setEmail_utente(u.getEmail());
+
 							p.setArg_dastudiare(domanda.getMeta_info());
 							progServ.save(p);
 							argDaStudiare.add(domanda.getMeta_info());
@@ -255,7 +265,8 @@ public class TestControl {
 
 		ArrayList<Salvataggio> rispCorrette = new ArrayList<>();
 		ArrayList<Salvataggio> rispInCorrette = new ArrayList<>();
-
+		ArrayList<String> metaSugg= new ArrayList<>();
+		ProgressoStudio p= new ProgressoStudio();
 		// questo for mi serve per vedere di nuovo quante domande ha fatto bene l'utente
 		// perchè cosi posso fare il pulsante nel profilo "risultati ultimo test"
 		for (i = 0; i < rispTest.size(); i++) {
@@ -264,7 +275,8 @@ public class TestControl {
 					if (rispTest.get(i).getId_risposta() == dom.getRisposta_corretta()) {
 						rispCorrette.add(rispTest.get(i)); // e me lo salvo nelle risposte corrette
 					} else {
-						rispInCorrette.add(rispTest.get(i)); // altrimenti nelle risposte non corrette
+						rispInCorrette.add(rispTest.get(i)); // altrimenti nelle risposte non corrette	
+						metaSugg.add(dom.getMeta_info());
 					}
 				}
 			}

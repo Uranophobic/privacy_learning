@@ -19,6 +19,10 @@
 			<a th:href="@{/article/leggi-un-articolo}">Articoli &amp; News</a>
 			<a th:href="@{/favole/leggi-una-favola}">Favole</a>
 			<a th:href="@{/argomenti/studia-con-noi}">Studia con noi</a>
+			<a th:href="@{/test}">Test</a>
+			<th:block th:if="${!session.isEmpty()} and (${session.userSession.email.equals('admin@gmail.com')})">
+			<a th:href="@{/users/all}">Utenti</a>
+			</th:block>
 		</div>
 		</div>
 		<!-- cambiamo il tasto login con l'omino del profilo solo dopo che l'utente ha effettuato l'accesso-->

@@ -10,11 +10,20 @@
 	<title>Privacy Literacy - Registrazione</title>
 </head>
 <body>
-	<div th:insert="fragments/header::header"></div>
+	<div th:insert="~{fragments/header::header}"></div>
 	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<div class="background">
+	<div th:if="${!session.isEmpty()} and ${session.userSession.email.equals('admin@gmail.com')}">
+	<div class="box-titolo">
+				<div class="titolo">lista degli utenti</div>
+			</div>
 	<div class="utentelist" >
-		
-		<h2 > lista degli utenti </h2>
 		
 		<table >
 			<thead>
@@ -32,7 +41,7 @@
 				
 			</thead>
 			<tbody >
-			<tr th:each="user : ${utenti}" >
+			<tr th:each="user : ${allUtenti}" >
 				<td th:text="${user.nome}">nome</td> 
 				<td th:text="${user.cognome}">cognome</td> 
 				<td th:text="${user.email}">email</td>
@@ -46,7 +55,11 @@
 			</tr>
 			</tbody>
 		</table>
-		
+		</div>
+		</div>
+		<div th:if="${session.isEmpty()} or ${!session.userSession.email.equals('admin@gmail.com')}">
+		NON HAI L'AUTORIZZAZIONE PER VISUALIZZARE QUESTA PAGINA
+		</div>
 		
 	</div>
 </body>

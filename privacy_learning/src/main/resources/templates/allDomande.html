@@ -5,12 +5,18 @@
 <head>
 	<meta charset="ISO-8859-1">
 	<script type="text/javascript" src="../js/ConvalidazioneCampi.js"></script>
-	<link rel="stylesheet" href="../css/stylesheet.css">
+	<link rel="stylesheet" href="/css/stylesheet.css">
 	<link rel="icon" type="image/png" href="img/logo.png" />
 	<title>Privacy Literacy - Registrazione</title>
+	<style type="text/css">
+	table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+	</style>
 </head>
 <body>
-	<div th:insert="fragments/header::header"></div>
+	<div th:insert="~{fragments/header::header}"></div>
 	<br>
 	<br>
 	<br>
@@ -18,6 +24,8 @@
 	<br>
 	<br>
 	<br>
+	<div class="background">
+	<div th:if="${!session.isEmpty()} and ${session.userSession.email.equals('admin@gmail.com')}">
 	<div class="utentelist" >
 		
 		<h2 >Lista di tutte le domande del test: </h2>
@@ -33,16 +41,16 @@
 				<th > Risposta 3</th>
 				<th > Risposta 4</th>
 				<th > Risposta corretta</th>
+				<th> Azione </th>
 				</tr>
 				
 				
 				<!-- AL MOMENTO NON LO METTO IL CONTROLLO DELLA SESSIONE DELL'ADMIN PERCHè DEVO PRIMA VEDERE SE FUNZIONA-->
 				<!--th:if="${!session.isEmpty()} and ${session.userSession.email.equals('admin@gmail.com')}" -->
 			</thead>
-			<tbody> <a type="button"  class="button" th:href="@{/admin/createDomanda}"> Aggiungi </a>
-			<tr th:each="dom : ${domande}" >
-				
-					
+			<tbody>
+				 <a type="button" class="button" th:href="@{/admin/createDomanda/{id} (id=${idTest})}"> Aggiungi </a>	
+				<tr th:each="dom : ${domande}" >
 				<td th:text="${dom.id_domanda}">nome</td> 
 				<td th:text="${dom.testo}">cognome</td> 
 				<td th:text="${dom.meta_info}">email</td>
@@ -50,13 +58,19 @@
 				<td th:text="${dom.risposta2}">percentuale</td>
 				<td th:text="${dom.risposta3}">livello</td> 
 				<td th:text="${dom.risposta4}">livello</td> 
-				<td th:text="${dom.risposta_corretta}">livello</td> 
+				<td th:text="${dom.risposta_corretta}">livello</td>
+				<td>  <a type="button" class="button" th:href="@{/admin/deleteDomanda/{id}(id=${dom.id_domanda})}"> Elimina </a> 
+				 <a type="button" class="button" th:href="@{/admin/fixedDomanda/{id}(id=${dom.id_domanda})}"> Modifica </a>
+				</td>
 				
 				
 			</tr>
 			</tbody>
 		</table>
-		
-		
+		</div>
+		</div>
+		<div th:if="${session.isEmpty()} or ${!session.userSession.email.equals('admin@gmail.com')}">
+		NON HAI L'AUTORIZZAZIOINE PER ACCEDERE A QUESTA PAGINA
+		</div>
 	</div>
 </body>

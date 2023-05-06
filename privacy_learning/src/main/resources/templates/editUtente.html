@@ -80,6 +80,7 @@
 		<div class="sez-button">
 		<!-- con a al posto di button esce la mano piuttosto che il cursore. ho inserito il riferimento perchè dava errore -->
 		<button type="submit" th:formaction="@{/profilo}" formmethod="get"> Torna indietro </button>
+		<br>
 				<button  type="submit" th:formaction="@{/users/modifica/{email} (email=${session.userSession.email})}"
 					formmethod="post">Conferma le modifiche</button></div></div>
 	</form>

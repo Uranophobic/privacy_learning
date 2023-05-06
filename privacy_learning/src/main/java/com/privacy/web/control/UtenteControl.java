@@ -56,7 +56,7 @@ public class UtenteControl {
 	@GetMapping("/all") // tutti gli utenti
 	public String listUser(Model model) {
 
-		model.addAttribute("utenti", utServ.findAll());
+		model.addAttribute("allUtenti", utServ.findAll());
 		return "ListaAllUser";
 	}
 
@@ -206,6 +206,12 @@ public class UtenteControl {
 		return "redirect:/homepage";
 	}
 
+	@GetMapping("/allUser")
+	public String allUser(Model model) {
+		model.addAttribute("allUtenti", utServ.findAll());
+		return "utenti";
+	}
+	
 	// metodo che inoltra alla pagina privacy
 	@GetMapping("/privacy")
 	public String privacy(Model model) {
