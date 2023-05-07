@@ -329,20 +329,21 @@ public class AmministratoreControl {
 	}
 
 	// ----------------DOMANDA
-	@GetMapping("/fixedDomanda/{id}")
-	public String editDomanda(@PathVariable int id, Model model) {
+	@GetMapping("/fixedDomanda/{id}/{test}")
+	public String editDomanda(@PathVariable int id,@PathVariable int test, Model model) {
 		model.addAttribute("domanda", domServ.findById(id));
 		model.addAttribute("metainfo", metaServ.findAll());
 		model.addAttribute("test", testServ.findAllTest());
+		model.addAttribute("idTest", test);
 		return "editDomanda";
 	}
 
-	@PostMapping("/modificaDomanda/{id}")
-	public String updateFavola(@PathVariable int id, @ModelAttribute("domanda") Domanda d, Model model) {
+	@PostMapping("/modificaDomanda/{id}/{test}")
+	public String updateDomanda(@PathVariable int id, @PathVariable int test, @ModelAttribute("domanda") Domanda d, Model model) {
 		Domanda domExist = domServ.findById(id);
 
 		domExist.setId_domanda(d.getId_domanda());
-		domExist.setId_test(d.getId_test());
+		domExist.setId_test(test);
 		domExist.setMeta_info(d.getMeta_info());
 		domExist.setTesto(d.getTesto());
 		domExist.setRisposta1(d.getRisposta1());

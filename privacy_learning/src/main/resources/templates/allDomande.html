@@ -60,7 +60,7 @@
 				<td th:text="${dom.risposta4}">livello</td> 
 				<td th:text="${dom.risposta_corretta}">livello</td>
 				<td>  <a type="button" class="button" th:href="@{/admin/deleteDomanda/{id}(id=${dom.id_domanda})}"> Elimina </a> 
-				 <a type="button" class="button" th:href="@{/admin/fixedDomanda/{id}(id=${dom.id_domanda})}"> Modifica </a>
+				 <a type="button" class="button" th:href="@{/admin/fixedDomanda/{id}/{test} (id=${dom.id_domanda}, test=${dom.id_test})}"> Modifica </a>
 				</td>
 				
 				
