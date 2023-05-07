@@ -20,5 +20,15 @@ public class MetaInfoServiceImpl implements MetaInfoService{
 		// TODO Auto-generated method stub
 		return (List<MetaInfo>) metaRep.findAll();
 	}
+
+	@Override
+	public void save(MetaInfo m) {
+		metaRep.save(m);
+	}
+
+	@Override
+	public void delete(String meta) {
+		metaRep.deleteById(meta);
+	}
 	
 }

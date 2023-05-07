@@ -29,4 +29,10 @@ public class MetaInfoControl {
 		return mov; ///boh
 		
 	}
+	
+	@GetMapping("/all")
+	public String all(Model model) {
+		model.addAttribute("metainfo",metaServ.findAll());
+		return "metaView";
+	}
 }

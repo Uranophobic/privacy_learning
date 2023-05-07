@@ -139,7 +139,7 @@ public class UtenteControl {
 					return "redirect:/error?descrizione= " + error;
 
 				} else {
-
+					
 					List<Domanda> questionario = domServ.findByIdTest(0);
 
 					for (Domanda q : questionario) {
@@ -166,9 +166,13 @@ public class UtenteControl {
 						s.setRisposta_corretta("0");
 						s.setRisposta_utente(risp);
 						s.setTesto_domanda(q.getTesto());
-
+						
+						//prima di salvare le risposte devo salvare l'utente altrimenti non lo trova nel database
+						user.setLivello("Nessuno");
+						utServ.save(user);
+						
 						salvServ.save(s);
-						System.out.println("salvataggio : " + s.toString());
+						//System.out.println("salvataggio : " + s.toString());
 					}
 
 				}
@@ -190,8 +194,6 @@ public class UtenteControl {
 			model.addAttribute("descrizione", descrizione);
 			return "redirect:/error";
 		}
-		user.setLivello("Nessuno");
-		utServ.save(user);
 		userSession.setAttribute("userSession", user);
 		return "redirect:/profilo";
 	}

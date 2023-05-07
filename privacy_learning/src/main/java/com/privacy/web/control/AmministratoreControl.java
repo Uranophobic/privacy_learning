@@ -14,6 +14,7 @@ import com.privacy.web.model.ArgomentoStudio;
 import com.privacy.web.model.Articolo;
 import com.privacy.web.model.Domanda;
 import com.privacy.web.model.Favola;
+import com.privacy.web.model.MetaInfo;
 import com.privacy.web.repository.DomandaRepository;
 import com.privacy.web.service.ArgomentoStudioService;
 import com.privacy.web.service.ArticoloService;
@@ -78,7 +79,16 @@ public class AmministratoreControl {
 		model.addAttribute("domande", domRep.findAll());
 		return "allDomande";
 	}
-
+	
+	@GetMapping("/createMeta")
+	public String addMeta(Model model, HttpServletRequest request) {
+		MetaInfo m= new MetaInfo();
+			m.setKeyword(request.getParameter("addmeta"));
+			if(!m.getKeyword().isEmpty()) {
+			metaServ.save(m);
+		}
+		return "redirect: /metainfo/all";
+	}
 //-----------------------METODI POST
 	@PostMapping("/addArticolo")
 	public String createArticolo(@ModelAttribute("articolo") Articolo a, HttpServletRequest request,
@@ -219,6 +229,12 @@ public class AmministratoreControl {
 	public String eliminaDomanda(@PathVariable int id, Model model) {
 		domServ.deleteById(id);
 		return "redirect:/admin/AllDomande";
+	}
+	
+	@GetMapping("/deleteMeta/{id}")
+	public String eliminaMeta(@PathVariable String id, Model model) {
+		metaServ.delete(id);
+		return "redirect:/metainfo/all";
 	}
 	/*-----------------------------------MODIFICA--------------------------------------------*/
 

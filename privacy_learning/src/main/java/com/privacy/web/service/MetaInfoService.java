@@ -9,4 +9,6 @@ import com.privacy.web.model.MetaInfo;
 @Service
 public interface MetaInfoService {
 	public List<MetaInfo> findAll();
+	public void save(MetaInfo m);
+	public void delete(String meta);
 }
