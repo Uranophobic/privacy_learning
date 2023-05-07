@@ -30,11 +30,7 @@
 	<br>
 	<br>
 	<br>
-	<br>
-	<br>
-	<div class="utentelist">
-
-
+	<div class="background">
 		<form th:action="@{/test/{email}}" th:object="${testuser}" method="POST">
 
 			<div th:if="${session.isEmpty()}">
@@ -44,17 +40,15 @@
 			</div>
 
 
-			<div th:if="${!session.isEmpty()}">
-				<p th:text="'Hai completato con successo il test: ' + ${session.userSession.livello}"></p>
-		
-
-			<div>
+			<div class="risultati" th:if="${!session.isEmpty()}">
+				<p class="titolo"> I tuoi risultati </p>
+				<p>Hai completato con il test: <span th:text="${session.userSession.livello}"></span></p>
+				<p> Hai ottenuto una percentuale del: <span th:text="' '+${perc} + '%'"></span></p>
+				<p> Ecco una panoramica sull'andamento del test che hai appena effettuato. </p>
 				<br>
-				<p> Qui sotto troverai una panoramica sull'andamento del test</p>
+				<p> Le domande a cui hai <span style="color: green"> risposto correttamente:</span> </p>
 				<br>
-				<p> Le domande a cui hai risposto correttamente: </p>
-				<br>
-				<table>
+				<table style="border: 2px solid green">
 					<tr>
 						<td>Domanda</td>
 						<td>Risposta Corretta</td>
@@ -75,18 +69,16 @@
 
 
 				<br>
-				<p> Le domande a cui hai NON risposto correttamente: </p>
-				<table>
+				<p> Le domande a cui <span style="color:red;">NON hai risposto correttamente:</span> </p>
+				<table style="border: 2px solid red">
 					<tr>
 						<td>Domanda</td>
-						<td>Risposta Corretta</td>
 						<td>Risposta Utente</td>
 					</tr>
 					<th:block th:each="s: ${rispInCorrette}">
 						<tr>
 
 							<td th:text="${s.testo_domanda}"></td>
-							<td th:text="${s.risposta_corretta}"></td>
 							<td th:text="${s.risposta_utente}"></td>
 						</tr>
 					</th:block>
@@ -95,11 +87,11 @@
 
 
 
+
 			</div>
-	</div>
 
 		</form>
-
+	</div>
 </body>
 
 </html>

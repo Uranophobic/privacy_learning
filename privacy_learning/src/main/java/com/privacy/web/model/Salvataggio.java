@@ -23,7 +23,7 @@ public class Salvataggio {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_salvataggio; // auto
 	
-@Column(name = "email_utente")
+	@Column(name = "email_utente")
 	private String email_utente;
 
 	@Column(name = "id_test")
@@ -43,5 +43,8 @@ public class Salvataggio {
 	
 	@Column(name = "testo_domanda")
 	private String testo_domanda;
+	
+	@Column(name = "meta_info")
+	private String meta_info;
 
 }

@@ -57,8 +57,7 @@ table, th, td {
 				th:if="${!session.isEmpty()} and ${!session.userSession.email.equals('admin@gmail.com')}">
 
 				<!--<p th:text="${session.userSession.email ='admin@gmail.com'}"></p>-->
-				<p
-					th:text="'Il tuo attuale livello è: ' + ${session.userSession.livello}"></p>
+				<p>Il tuo attuale livello è: <span style="color:green; font-size: 18px; font-weight: bold;" th:text=" ${session.userSession.livello}"></span></p>
 
 				<!-- A seconda del livello dell'utente visualizza le domande -->
 				<div th:switch="${session.userSession.livello}">

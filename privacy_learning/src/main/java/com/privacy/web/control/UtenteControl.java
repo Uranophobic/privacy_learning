@@ -20,6 +20,7 @@ import com.privacy.web.model.Articolo;
 import com.privacy.web.model.Domanda;
 import com.privacy.web.model.Salvataggio;
 import com.privacy.web.model.Utente;
+import com.privacy.web.model.MetaInfo;
 import com.privacy.web.utils.Check;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -60,30 +61,35 @@ public class UtenteControl {
 		return "ListaAllUser";
 	}
 
-	@GetMapping("/profilo")
-	public String profilo(@ModelAttribute("user") Utente user, HttpServletRequest request, HttpServletResponse response,
-			Model model, HttpSession userSession) throws Exception {
-
-		System.out.println("user " + user.getEmail());
-
-		Utente u = utServ.findUtenteByEmail(user.getEmail());
-		System.out.println("utente trovato" + u.toString());
-		if (u != null) {
-			if (u.getPercentuale() != 0) {
-				int diff = 100 - u.getPercentuale();
-				model.addAttribute("perc", u.getPercentuale());
-				model.addAttribute("diff", diff);
-				System.out.println("sono nel profilo di utente control");
-				System.out.println("differenza: " + diff);
-				System.out.println("percentuale: " + u.getPercentuale());
-			}
-
-			userSession.setAttribute("userSession", u);
-		}
-
-		return "profilo";
-
-	}
+	/*
+	 * @GetMapping("/profilo") public String profilo(@ModelAttribute("user") Utente
+	 * user, HttpServletRequest request, HttpServletResponse response, Model model,
+	 * HttpSession userSession) throws Exception {
+	 * 
+	 * System.out.println("user " + user.getEmail());
+	 * 
+	 * Utente u = utServ.findUtenteByEmail(user.getEmail());
+	 * System.out.println("utente trovato" + u.toString()); if (u != null) { if
+	 * (u.getPercentuale() != 0) { int diff = 100 - u.getPercentuale();
+	 * model.addAttribute("perc", u.getPercentuale()); model.addAttribute("diff",
+	 * diff); System.out.println("sono nel profilo di utente control");
+	 * System.out.println("differenza: " + diff); System.out.println("percentuale: "
+	 * + u.getPercentuale()); }
+	 * 
+	 * if(!u.getLivello().equals("Nessuno")) { ArrayList<String> argDaStudiare = new
+	 * ArrayList<>(); List<Salvataggio> allSave =
+	 * salvServ.findByEmail(u.getEmail()); for(int i=0; i<allSave.size(); i++) {
+	 * if(!allSave.get(i).getRisposta_utente().equals(allSave.get(i).
+	 * getRisposta_corretta())) { argDaStudiare.add(allSave.get(i).getMeta_info());
+	 * System.out.println("ARGOMENTI DENTRO AL PROFILO"+ argDaStudiare); } }
+	 * model.addAttribute("argDaStudiare", argDaStudiare); }
+	 * 
+	 * userSession.setAttribute("userSession", u); }
+	 * 
+	 * return "profilo";
+	 * 
+	 * }
+	 */
 
 	/*--------REGISTRAZIONE--------*/
 	// metodo che crea un nuovo utente
@@ -139,6 +145,9 @@ public class UtenteControl {
 					return "redirect:/error?descrizione= " + error;
 
 				} else {
+					//prima di salvare le risposte devo salvare l'utente altrimenti non lo trova nel database
+					user.setLivello("Nessuno");
+					utServ.save(user);
 					
 					List<Domanda> questionario = domServ.findByIdTest(0);
 
@@ -166,13 +175,9 @@ public class UtenteControl {
 						s.setRisposta_corretta("0");
 						s.setRisposta_utente(risp);
 						s.setTesto_domanda(q.getTesto());
-						
-						//prima di salvare le risposte devo salvare l'utente altrimenti non lo trova nel database
-						user.setLivello("Nessuno");
-						utServ.save(user);
-						
+
 						salvServ.save(s);
-						//System.out.println("salvataggio : " + s.toString());
+						System.out.println("salvataggio : " + s.toString());
 					}
 
 				}
@@ -194,8 +199,11 @@ public class UtenteControl {
 			model.addAttribute("descrizione", descrizione);
 			return "redirect:/error";
 		}
+		/*
+		 * user.setLivello("Nessuno"); utServ.save(user);
+		 */
 		userSession.setAttribute("userSession", user);
-		return "redirect:/profilo";
+		return "profilo";
 	}
 
 	@PostMapping("/all")
@@ -213,7 +221,7 @@ public class UtenteControl {
 		model.addAttribute("allUtenti", utServ.findAll());
 		return "utenti";
 	}
-	
+
 	// metodo che inoltra alla pagina privacy
 	@GetMapping("/privacy")
 	public String privacy(Model model) {
@@ -221,7 +229,7 @@ public class UtenteControl {
 	}
 
 	/*-----------------------------------LOGIN------------------------------------------*/
-	@PostMapping("/login")
+	@PostMapping("/profilo")
 	public String sessioneUtente(@ModelAttribute("user") Utente user, HttpServletRequest request,
 			HttpServletResponse response, Model model, HttpSession userSession) throws Exception {
 
@@ -240,14 +248,38 @@ public class UtenteControl {
 			try {
 				user = utServ.findUtenteByEmailAndPassword(email, pwd);
 
-				if (user != null) {
+				if (user != null) { // qui è tutto ok
+
+					// devi settare la percentuale
 					if (user.getPercentuale() != 0) {
 						int diff = 100 - user.getPercentuale();
 						model.addAttribute("perc", user.getPercentuale());
 						model.addAttribute("diff", diff);
 					}
+
+					// la sessione
 					userSession.setAttribute("userSession", user);
-					return "redirect:/profilo";
+
+					// ed eventuali argomenti da studare
+					ArrayList<String> argDaStudiare = new ArrayList<>();
+
+					if (!user.getLivello().equals("Nessuno")) {
+
+						List<Salvataggio> allSave = salvServ.findByEmail(user.getEmail()); // tutti i salvataggi
+																							// dell'utente
+						for (int i = 0; i < allSave.size(); i++) {
+							if (!allSave.get(i).getRisposta_utente().equals(allSave.get(i).getRisposta_corretta())) {
+								argDaStudiare.add(allSave.get(i).getMeta_info());
+								///System.out.println("ARGOMENTI DENTRO AL PROFILO" + argDaStudiare);
+							}
+						}
+
+						// bisogna eliminare i duplicati da argomenti da studiare 
+
+					}
+					model.addAttribute("argDaStudiare", argDaStudiare);
+					return "profilo";
+
 				} else {
 					response.getWriter().write("4: utente non valido");
 					String error = "Email o password errata";
@@ -292,9 +324,9 @@ public class UtenteControl {
 		 * Check.checkPwd(request.getParameter("password"))) {
 		 */
 
-		
-		//controllo che il campo non sia vuoto, perchè se è vuoto vuol dire che l'utente non vuole cambiarlo
-		
+		// controllo che il campo non sia vuoto, perchè se è vuoto vuol dire che
+		// l'utente non vuole cambiarlo
+
 		if (!request.getParameter("cognome").equals("")) {
 			u.setCognome(request.getParameter("cognome"));
 		}

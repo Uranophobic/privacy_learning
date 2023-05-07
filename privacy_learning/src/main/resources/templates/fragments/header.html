@@ -19,11 +19,9 @@
 			<a th:href="@{/article/leggi-un-articolo}">Articoli &amp; News</a>
 			<a th:href="@{/favole/leggi-una-favola}">Favole</a>
 			<a th:href="@{/argomenti/studia-con-noi}">Studia con noi</a>
-			<a th:if="${session.isEmpty()}" th:href="@{/login}">Test</a>
-			<a th:if="${!session.isEmpty()}" th:href="@{/test}">Test</a>
+			<a th:href="@{/test}">Test</a>
 			<th:block th:if="${!session.isEmpty()} and (${session.userSession.email.equals('admin@gmail.com')})">
 			<a th:href="@{/users/all}">Utenti</a>
-			<a th:href="@{/metainfo/all}"> MetaInfo </a>
 			</th:block>
 		</div>
 		</div>
@@ -39,7 +37,7 @@
 			<th:block th:unless="${session.isEmpty()}"> 
 		 <div  class="pulsanti">
 			<div class="login">
-			<a class="button" type="submit" th:href="@{/profilo}"> Profilo </a>
+			<a class="button" type="submit" th:href="@{/profilo/{email} (email=${session.userSession.email})}"> Profilo </a>
 			</div>
 			<div class="login">
 			<a class="button" type="submit" th:href="@{/users/logout}"> LOGOUT </a>

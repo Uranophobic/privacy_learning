@@ -154,6 +154,10 @@ public class TestControl {
 			} else {
 				System.out.println("syso di prova: il valore è vuoto" + idRispCorretta);
 			}
+			
+			// mi salvo anche la meta info della domanda (mi servirà in futuro per capire quale 
+			// argomento deve studiare l'utente
+			s.setMeta_info(domTest.get(i).getMeta_info());
 			salvServ.save(s);
 			// System.out.println("SALVATAGGIO CREATO: " + s.toString());
 		}
@@ -172,29 +176,27 @@ public class TestControl {
 		// questo for mi serve per vedere quante domande ha sbagliato l'utente nella
 		// pagina risultati
 		for (int i = 0; i < rispSalvate.size(); i++) {
-			for (Domanda domanda : domTest) { // mi scorrro anche le domande
-				if (rispSalvate.get(i).getId_test() == Integer.parseInt(livello)) { // mi prendo le risposte solo del
-																					// test appena fatto
-					if (rispSalvate.get(i).getId_domanda() == domanda.getId_domanda()) { // se l'id della domanda nel
-																							// salvataggi è uguale ad un
-																							// id all'interno delle
-																							// domande che prima ho
-																							// preso dal db
-						if (rispSalvate.get(i).getId_risposta() == domanda.getRisposta_corretta()) { // allora vado a
-																										// controllare
-																										// se la
-																										// risposta
-																										// salvata è
-																										// uguale a
-																										// quella
-																										// corretta
-							rispCorrette.add(rispSalvate.get(i)); // e me lo salvo nelle risposte corrette
+			
+			// mi scorrro anche le domande DEL TEST
+			for (Domanda domanda : domTest) { 
+				
+				// mi prendo le risposte solo del test appena fatto
+				if (rispSalvate.get(i).getId_test() == Integer.parseInt(livello)) {
+					
+					// se l'id della domanda nel salvataggio è uguale ad un id all'interno delle domande che prima ho preso dal db 
+					// (sicuramente lo sarà però è necessario per capire a quale domanda mi sto riferendo)
+					if (rispSalvate.get(i).getId_domanda() == domanda.getId_domanda()) { 
+						
+						// allora vado a controllare se la risposta salvata è uguale a quellacorretta 
+						if (rispSalvate.get(i).getId_risposta() == domanda.getRisposta_corretta()) { 
+							// e me lo salvo nelle risposte corrette
+							rispCorrette.add(rispSalvate.get(i)); 
 						} else {
-							rispInCorrette.add(rispSalvate.get(i)); // altrimenti nelle risposte non corrette
-
-							ProgressoStudio p = new ProgressoStudio(); // mi salvo subito il progresso (anche se qui non
-																		// ha studiato ma almeno inizio a settarlo
-																		// perchè ho tutto quello che mi serve
+							// altrimenti nelle risposte non corrette
+							rispInCorrette.add(rispSalvate.get(i)); 
+							
+							// mi salvo subito il progresso (anche se qui non ha studiato ma almeno inizio a settarlo perchè ho tutto quello che mi serve
+							ProgressoStudio p = new ProgressoStudio(); 
 							p.setEmail_utente(u.getEmail());
 
 							p.setArg_dastudiare(domanda.getMeta_info());
@@ -223,7 +225,7 @@ public class TestControl {
 		userSession.setAttribute("userSession", u);
 
 		// mi devo passare gli argomenti da studiare
-		model.addAttribute("argDaStuidiare", argDaStudiare);
+		model.addAttribute("argDaStudiare", argDaStudiare);
 
 		// mi passo tutte le risposte che l'utente ha sbagliato ed ha fatto bene
 		model.addAttribute("rispCorrette", rispCorrette);
@@ -249,14 +251,8 @@ public class TestControl {
 	public String risultati(@ModelAttribute("testuser") Domanda d, @PathVariable String email,
 			HttpServletRequest request, HttpServletResponse response, Model model, HttpSession userSession)
 			throws Exception {
-
-		System.out.println("sono nel get: " + email);
-
 		Utente u = new Utente();
 		u = utServ.findUtenteByEmail(email);
-
-		// setto la sessione
-		userSession.setAttribute("userSession", u);
 
 		List<Salvataggio> rispTest = new ArrayList<>(); // risposte ultimo tewst che ha fatto l'utente
 		rispTest = salvServ.findByMaxIdTest(email);
@@ -267,6 +263,7 @@ public class TestControl {
 		ArrayList<Salvataggio> rispInCorrette = new ArrayList<>();
 		ArrayList<String> metaSugg= new ArrayList<>();
 		ProgressoStudio p= new ProgressoStudio();
+		
 		// questo for mi serve per vedere di nuovo quante domande ha fatto bene l'utente
 		// perchè cosi posso fare il pulsante nel profilo "risultati ultimo test"
 		for (i = 0; i < rispTest.size(); i++) {

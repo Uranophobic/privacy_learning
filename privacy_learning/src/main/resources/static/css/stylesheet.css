@@ -5,7 +5,7 @@
 
 * {
 	margin: 0;
-/*	padding: 0; */
+	/*	padding: 0; */
 	outline: none;
 	font-family: 'Poppins', sans-serif;
 	--body-color: #2c2d2a;
@@ -34,7 +34,7 @@ h3 {
 body {
 	font-family: 'Poppins', sans-serif;
 	background-color: #FFFFFF;
-	padding: 10px; 
+	padding: 10px;
 	color: var(--body-color);
 	margin: 0;
 }
@@ -245,7 +245,7 @@ body {
 
 .container-sezioni {
 	display: flex;
-	width: 80%;
+	width: 100%;
 	font-size: 15px;
 	top: 0;
 	left: 0;
@@ -288,7 +288,7 @@ body {
 	background-color: #D7D6D6;
 	border-radius: 5px;
 	margin: auto;
-	width: 80%;
+	width: 65%;
 	padding: 20px;
 }
 
@@ -724,25 +724,44 @@ input:focus {
 /**********************************************************PROFILO************************************************************************/
 .box-profilo {
 	display: flex;
-	width: 100%;
+	width: auto;
 }
 
-.field-progresso{
-	height: 400px;
+.background2 {
+	background-color: #D7D6D6;
+	border-radius: 5px;
+	margin: auto;
+	width: 65%;
+	padding: 20px;
+	display: grid;
+	grid-template-columns: 50% 50%;
+	height: 700px;
+	overflow: scroll;
+}
+
+
+.background2 legend {
+	font-weight: bold;
+	font-size: 20px;
+	color: #45779C;
+}
+
+.personal-progress {
+	width: 95%;
+	margin: auto;
 }
 
 .personal-info {
-	width: 50%;
+	width: 95%;
+	margin: auto;
+	margin-bottom: 20px;
 }
 
-.personal-info fieldset {
-	width: 50%;
-	margin: auto;
-	height:400px;
-}
 
 .personal-info label {
 	font-weight: bold;
+	padding: 5px;
+	width: 50%;
 }
 
 .progresso {
@@ -750,19 +769,64 @@ input:focus {
 }
 
 .infoUtente {
-	display: inline-flex;
+	display: flex;
+	width: 55%;
+	padding: 5px;
+}
+
+
+.infoUtente p {
+	margin-left: 10px;
+	padding: 5px;
+	border-bottom: 1px solid black;
+	padding-bottom: 0;
+}
+
+
+.infoUtente2 {
+	display: flex;
 	width: 100%;
 	padding: 5px;
 }
 
-.infoUtente p {
-	margin-left: 5px;
+.infoUtente2 label {
+	width: 42%;
+	padding: 4px;
 }
 
-.link{
+.infoUtente2 p {
+	color: green;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.link {
 	color: red;
 	font-weight: 600;
 	text-decoration: underline;
+}
+
+.parg {
+	margin-left: 9px;
+}
+
+.tab-arg td th {
+  border: none;
+}
+.prova{
+width:90%;
+}
+.tab-arg {
+  width: 100%;
+
+}
+
+/** grafico a torta **/
+#myChart {
+	width: 100%;
+	max-width: 450px;
+	display: block;
+	margin: auto;
 }
 
 /**** MODIFICA PROFILO ****/
@@ -782,41 +846,53 @@ input:focus {
 	font-weight: bold;
 }
 
-.p-mod{
+.p-mod {
 	margin: auto;
-width: 50%;
-text-align: center;
+	width: 50%;
+	text-align: center;
 }
 
 .but-mod {
-	position: absolute;
-	/* float: left; */
-	bottom: 0;
-	/* margin: auto; */
-	margin-left: auto;
-	margin-right: auto;
-
+	/* position: relative; */
+	/* width: 30%; */
+	margin: auto;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	/* display: inlin; */
+	/* align-content: center; */
+	width: 50%;
 }
+
+/**********************************************************pagina dei risultati*****************************************************************/
+
+.risultati span {
+	font-size: 18px;
+	color: #45779C;
+	font-weight: 600;
+}
+
 /**********************************************************ADMIN****************************************************************************/
-.titAdmin{
+.titAdmin {
 	color: black;
 	text-align: center;
 	font-size: 20px;
-} 
-
-.boxArg{
-	width: 75%;
-margin: auto;
-padding: 10px;
 }
 
-.boxArg input, select, textarea{
+.boxArg {
+	width: 75%;
+	margin: auto;
+	padding: 10px;
+}
+
+.boxArg input,
+select,
+textarea {
 	padding: 5px;
 	margin: 15px;
 	font-size: 16px;
 }
 
-.buttonArg{
+.buttonArg {
 	margin: auto;
 	display: table;
 }

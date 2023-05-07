@@ -16,11 +16,14 @@
 	<br>
 	<br>
 	<br>
-	<br>
 	<p class="titolo">Benvenuto sul tuo profilo personale</p>
 
-	<div class="background">
-		<div class="box-profilo">
+	<div class="background2">
+
+
+		<div class="colonna">
+
+			<!-- primo box con dati personali-->
 			<div class="personal-info">
 				<fieldset>
 					<legend>Informazioni personali</legend>
@@ -46,244 +49,144 @@
 					</div>
 					<div class="but-mod">
 						<a type="submit" class="button" th:href="@{/users/modifica}"> MODIFICA LE TUE INFORMAZIONI</a>
-					<!--	<a type="submit" class="button"
-							th:href="@{/users/fixedUtente/{email} (email=${session.userSession.email})}"> Modifica </a>-->
 					</div>
 				</fieldset>
 			</div>
-			<fieldset class="field-progresso">
-				<legend>Il tuo progresso</legend>
-				<div th:switch="${session.userSession.livello}">
-					<div th:case="'Nessuno'">
-						<!-- qui sarebbe meglio mettere direttamente il pulsante al test -->
-						<p> Non hai ancora effettuato nessun test. <br>
-							Per sbloccare questa parte effettua il test valutativo sulla privacy presente sulla <a class="link" href="/homepage">homepage</a>
-						</p>
+
+
+			<!-- secondo box con dati personali del risultato test-->
+			<div class="personal-progress">
+				<fieldset>
+					<legend>Il tuo risultato</legend>
+					<div th:switch="${session.userSession.livello}">
+						<div th:case="'Nessuno'">
+							<!-- qui sarebbe meglio mettere direttamente il pulsante al test -->
+							<p> Non hai ancora effettuato nessun test. <br>
+								Per sbloccare questa parte effettua il test valutativo sulla privacy presente sulla <a
+									class="link" href="/homepage">homepage</a>
+							</p>
+							<br>
+						</div>
+
+						<div th:case="'null'">
+							<p> Non hai ancora effettuato nessun test. <br>
+								Per sbloccare questa parte effettua il test valutativo sulla privacy presente sulla <a
+									class="link" href="/homepage">homepage</a>
+							</p>
+							<br>
+						</div>
+					</div>
+					<div
+						th:if="${session.userSession.livello} eq 'Base' or ${session.userSession.livello} eq 'Medio' or ${session.userSession.livello} eq 'Alto'">
+						<div class="infoUtente2">
+							<label>Livello utlimo test effettuato:</label>
+							<p th:text="${session.userSession.livello}"></p>
+						</div>
+
+						<p class="parg"> Per controllare di nuovo i tuoi risultati clicca qui sotto: </p>
 						<br>
-					</div>
-
-					<div th:case="'null'">
-						<p> Non hai ancora effettuato nessun test. <br>
-							Per sbloccare questa parte effettua il test valutativo sulla privacy presente sulla <a class="link" href="/homepage">homepage</a>
-						</p>
-						<br>
-					</div>
-
-					<div th:case="'Base'">
-						<div class="infoUtente">
-							<label>Livello utlimo test effettuato:</label>
-							<p th:text="${session.userSession.livello}" class="title"></p>
-						</div>
-						<p> per controllare di nuovo i tuoi risultati clicca qui sotto</p>
-						<a type="submit" class="button"
-							th:href="@{/test/{email} (email=${session.userSession.email})}">Risultato ultimo test
-							effettuato</a>
-
-	<!-- grafico a torta -->
-					<p th:text="'PERCENTUALE: ' + ${session.userSession.percentuale}"></p>
-						
-						<canvas id="myChart" style="width: 100%; max-width: 600px"></canvas>
-
-						<script th:inline="javascript">
-
-							/*<![CDATA[*/
-							var perc = /*[[${session.userSession.percentuale}]]*/ 'default';
-							var diff = 100 - /*[[${session.userSession.percentuale}]]*/ 'default';
-							/*]]>*/
-							var xValues = ["Studiati", "Da Studiare"];
-							var yValues = [perc, diff]; // qui bisognerà mettere la percentuale di ogni utente 
-							var barColors = ["#b91d47", //i colori delle due sezioni
-								"#00aba9"];
-
-							new Chart(
-								"myChart",
-								{
-									type: "doughnut",
-									data: {
-										labels: xValues,
-										datasets: [{
-											backgroundColor: barColors,
-											data: yValues
-										}]
-									},
-									options: {
-										title: {
-											display: true,
-										}
-									}
-								});
-						</script>		
-					
-
-					</div>
-
-					<div th:case="'Medio'">
-						<div class="infoUtente">
-							<label>Livello utlimo test effettuato:</label>
-							<p th:text="${session.userSession.livello}" class="title"></p>
-						</div>
-						<p> per controllare di nuovo i tuoi risultati clicca qui sotto</p>
-						<a type="submit" class="button"
-							th:href="@{/test/{email} (email=${session.userSession.email})}">Risultato ultimo test
-							effettuato</a>
-							
-							
-					<!-- grafico a torta -->
-					<p th:text="'PERCENTUALE: ' + ${session.userSession.percentuale}"></p>
-						
-						<canvas id="myChart" style="width: 100%; max-width: 600px"></canvas>
-
-						<script th:inline="javascript">
-
-							/*<![CDATA[*/
-							var perc = /*[[${session.userSession.percentuale}]]*/ 'default';
-							var diff = 100 - /*[[${session.userSession.percentuale}]]*/ 'default';
-							/*]]>*/
-							var xValues = ["Studiati", "Da Studiare"];
-							var yValues = [perc, diff]; // qui bisognerà mettere la percentuale di ogni utente 
-							var barColors = ["#b91d47", //i colori delle due sezioni
-								"#00aba9"];
-
-							new Chart(
-								"myChart",
-								{
-									type: "doughnut",
-									data: {
-										labels: xValues,
-										datasets: [{
-											backgroundColor: barColors,
-											data: yValues
-										}]
-									},
-									options: {
-										title: {
-											display: true,
-										}
-									}
-								});
-						</script>		
-					
-
-					</div>
-
-					<div th:case="'Alto'">
-						<div class="infoUtente">
-							<label>Livello utlimo test effettuato:</label>
-							<p th:text="${session.userSession.livello}" class="title"></p>
-						</div>
-						<p> per controllare di nuovo i tuoi risultati clicca qui sotto</p>
-						<a type="submit" class="button"
-							th:href="@{/test/{email} (email=${session.userSession.email})}">Risultato ultimo test
-							effettuato</a>
-							
-					<!-- grafico a torta -->
-					<p th:text="'PERCENTUALE: ' + ${session.userSession.percentuale}"></p>
-						
-						<canvas id="myChart" style="width: 100%; max-width: 600px"></canvas>
-
-						<script th:inline="javascript">
-
-							/*<![CDATA[*/
-							var perc = /*[[${session.userSession.percentuale}]]*/ 'default';
-							var diff = 100 - /*[[${session.userSession.percentuale}]]*/ 'default';
-							/*]]>*/
-							var xValues = ["Studiati", "Da Studiare"];
-							var yValues = [perc, diff]; // qui bisognerà mettere la percentuale di ogni utente 
-							var barColors = ["#b91d47", //i colori delle due sezioni
-								"#00aba9"];
-
-							new Chart(
-								"myChart",
-								{
-									type: "doughnut",
-									data: {
-										labels: xValues,
-										datasets: [{
-											backgroundColor: barColors,
-											data: yValues
-										}]
-									},
-									options: {
-										title: {
-											display: true,
-										}
-									}
-								});
-						</script>		
-					
-					</div>
-				</div>
-			</fieldset>
-
-		</div>
-	</div>
-
-	<!--<section class="section">
-		<div class="container">
-			<div class="columns is-mobile">
-
-
-
-				<div class="tile is-ancestor">
-					<div class="tile is-vertical is-8">
-						<div class="tile">
-							<div class="column">
-								1
-								<div class="tile is-parent is-vertical">
-									<article class="tile is-child notification is-primary">
-
-										<p th:text="${session.userSession.email}" class="title">
-											Infomrazioni personali</p>
-										<p th:text="${session.userSession.password}" class="title">
-											Infomrazioni personali</p>
-										<p th:text="${session.userSession.nome}" class="title">
-											Infomrazioni personali</p>
-										<p th:text="${session.userSession.cognome}" class="title">
-											Infomrazioni personali</p>
-										<p th:text="${session.userSession.dataNascita}" class="title">
-											Infomrazioni personali</p>
-
-
-
-										<p class="subtitle">Nome e Cognome</p>
-										<p class="subtitle">Email e Password Censurata</p>
-										<p class="subtitle">Data Nascita</p>
-										<p class="subtitle">Info questionario</p>
-									</article>
-
-								</div>
-							</div>
-
-							<div class="column">
-								2
-								<div class="tile is-parent">
-									<article class="tile is-child notification is-info">
-										<p class="title">Il tuo progresso personale</p>
-										<p class="subtitle">Argomento 1: da studiare</p>
-										<p class="subtitle">Argomento 2: studiato</p>
-										<p class="subtitle">Argomento 3: da studiare</p>
-
-
-
-										 GRAFICO A TORTA 
-
-
-
-
-
-
-
-									</article>
-								</div>
-							</div>
+						<div class="but-mod">
+							<a type="submit" class="button"
+								th:href="@{/test/{email} (email=${session.userSession.email})}">Risultato ultimo test
+								effettuato</a>
 						</div>
 					</div>
-				</div>
 
+
+				</fieldset>
 			</div>
 
 		</div>
-	</section>-->
+
+		<!-- terzo box con dati personali del cproprio progresso di studio -->
+		<div class="colonna">
+			<div class="personal-info">
+				<fieldset>
+					<legend>Il tuo progresso</legend>
+
+					<div th:switch="${session.userSession.livello}">
+						<div th:case="'Nessuno'">
+							<!-- qui sarebbe meglio mettere direttamente il pulsante al test -->
+							<p> Non hai ancora effettuato nessun test. <br>
+								Per sbloccare questa parte effettua il test valutativo sulla privacy presente sulla <a
+									class="link" href="/homepage">homepage</a>
+							</p>
+							<br>
+						</div>
+
+						<div th:case="'null'">
+							<p> Non hai ancora effettuato nessun test. <br>
+								Per sbloccare questa parte effettua il test valutativo sulla privacy presente sulla <a
+									class="link" href="/homepage">homepage</a>
+							</p>
+							<br>
+						</div>
+					</div>
+					<div
+						th:if="${session.userSession.livello} eq 'Base' or ${session.userSession.livello} eq 'Medio' or ${session.userSession.livello} eq 'Alto'">
+						<!-- grafico a torta -->
+						<p class="parg" th:text="'Percentuale: ' + ${session.userSession.percentuale} + '%'"></p>
+
+						<canvas id="myChart"></canvas>
+
+						<script th:inline="javascript">
+
+							/*<![CDATA[*/
+							var perc = /*[[${session.userSession.percentuale}]]*/ 'default';
+							var diff = 100 - /*[[${session.userSession.percentuale}]]*/ 'default';
+							/*]]>*/
+							var xValues = ["Studiati", "Da Studiare"];
+							var yValues = [perc, diff]; // qui bisognerà mettere la percentuale di ogni utente 
+							var barColors = ["#b91d47", //i colori delle due sezioni
+								"#00aba9"];
+
+							new Chart(
+								"myChart",
+								{
+									type: "doughnut",
+									data: {
+										labels: xValues,
+										datasets: [{
+											backgroundColor: barColors,
+											data: yValues
+										}]
+									},
+									options: {
+										title: {
+											display: true,
+										}
+									}
+								});
+						</script>
+
+						<p> Questi sono gli argomenti che hai sbagliato nell'ultimo test che hai effettuato: </p>
+
+						<table class="tab-arg">
+							<tr>
+								<th class="prova"></th>
+								<th></th>
+							</tr>
+							
+						<th:block th:each="s: ${argDaStudiare}">
+							<tr>
+								<td><p th:text="${s}"></p></td>
+								<td><input type="checkbox"></td> <!-- qui va fatto il controllo sul db (ARG STUDIATO: SI? okk allora esce checkked-->
+							</tr>	
+						</th:block>
+						</table>
+
+						
+
+					</div>
+
+				</fieldset>
+
+			</div>
+		</div>
+	</div>
+	</div>
+
+
 </body>
 
 </html>

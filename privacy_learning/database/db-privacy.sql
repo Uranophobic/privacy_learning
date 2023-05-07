@@ -199,15 +199,12 @@ DROP TABLE IF EXISTS `progresso_studio`;
 CREATE TABLE `progresso_studio` (
   `id_progresso` int NOT NULL AUTO_INCREMENT,
   `email_utente` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `meta_info` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `arg_studiati` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `arg_dastudiare` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`id_progresso`) USING BTREE,
   KEY `FK_progresso_studio_utente` (`email_utente`),
-  KEY `FK_progresso_studio_meta_info` (`meta_info`),
-  CONSTRAINT `FK_progresso_studio_meta_info` FOREIGN KEY (`meta_info`) REFERENCES `meta_info` (`keyword`),
   CONSTRAINT `FK_progresso_studio_utente` FOREIGN KEY (`email_utente`) REFERENCES `utente` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -232,17 +229,20 @@ CREATE TABLE `salvataggio_risposte` (
   `id_test` int NOT NULL,
   `id_domanda` int NOT NULL,
   `id_risposta` int NOT NULL,
-  `risposta_corretta` varchar(250) COLLATE utf8mb4_general_ci DEFAULT '',
-  `risposta_utente` varchar(250) COLLATE utf8mb4_general_ci DEFAULT '',
-  `testo_domanda` varchar(250) COLLATE utf8mb4_general_ci DEFAULT '',
+  `risposta_corretta` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '',
+  `risposta_utente` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '',
+  `testo_domanda` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '',
+  `meta_info` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_salvataggio`),
   KEY `FK_salvataggio_risposte_utente` (`email_utente`),
   KEY `FK_salvataggio_risposte_test` (`id_test`),
   KEY `FK_salvataggio_risposte_domanda` (`id_domanda`),
+  KEY `FK_salvataggio_meta_info` (`meta_info`),
+  CONSTRAINT `FK_salvataggio_meta_info` FOREIGN KEY (`meta_info`) REFERENCES `meta_info` (`keyword`),
   CONSTRAINT `FK_salvataggio_risposte_domanda` FOREIGN KEY (`id_domanda`) REFERENCES `domanda` (`id_domanda`),
   CONSTRAINT `FK_salvataggio_risposte_test` FOREIGN KEY (`id_test`) REFERENCES `test` (`id_test`),
   CONSTRAINT `FK_salvataggio_risposte_utente` FOREIGN KEY (`email_utente`) REFERENCES `utente` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -251,7 +251,6 @@ CREATE TABLE `salvataggio_risposte` (
 
 LOCK TABLES `salvataggio_risposte` WRITE;
 /*!40000 ALTER TABLE `salvataggio_risposte` DISABLE KEYS */;
-INSERT INTO `salvataggio_risposte` VALUES (1,'wwewe@gmail.com',0,1,0,'0','mai','Quanto usi il computer? '),(2,'wwewe@gmail.com',0,2,0,'0','raramente','Quanto usi i social?'),(3,'wwewe@gmail.com',0,3,0,'0','spesso','Quanto ne sai di privacy?'),(4,'wwewe@gmail.com',0,4,0,'0','sempre','Quanto sei preoccupato della tua privacy nella tua quotidianità?'),(5,'wwewe@gmail.com',0,5,0,'0','spesso','Quanto sei preoccupato della tua privacy nell’utilizzo della tecnologia?'),(6,'wwewe@gmail.com',0,6,0,'0','mai','Quanto ne sai dei possibili attacchi?'),(7,'wwewe@gmail.com',0,7,0,'0','raramente','In caso di furto sapresti risolvere il problema?'),(8,'wwewe@gmail.com',0,8,0,'0','spesso','Quanto utilizzi strumenti di protezione quanto navighi su internet? (autenticazione a due fattori, pec, spid, ecc..)'),(9,'wwewe@gmail.com',0,9,0,'0','sempre','Quanto ti senti esperto in relazione alla problematica della tua privacy?'),(10,'wwewe@gmail.com',0,10,0,'0','no','Sei mai stato vittima di un attacco ai dati sensibili? ');
 /*!40000 ALTER TABLE `salvataggio_risposte` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -304,7 +303,7 @@ CREATE TABLE `utente` (
 
 LOCK TABLES `utente` WRITE;
 /*!40000 ALTER TABLE `utente` DISABLE KEYS */;
-INSERT INTO `utente` VALUES ('admin@gmail.com','admin','Admin','Admin','24/10/1996',0,'Nessuno'),('ale@gmail.com','ale123','Ale','Cri','31/01/1996',53,'Base'),('anto@gmail.com','123','Antonella','Crispo','31/01/1996',50,'Base'),('asdfdfg@gmail.com','assaas','asasdsda','sadd','3212-02-12',0,NULL),('carla@gmail.com','carl','Carla','Car','12/4/1997',55,'Base'),('carlos@gmail.com','carlo','Carlo','Carli','12/4/1987',45,'Base'),('ferd@gmail.com','f789','Fer','Doe','31/10/1995',100,'Alto'),('ferdi@gmail.com','fer789','Ferdi','Done','31/10/1985',50,'Medio'),('wwewe@gmail.com','sdsdds','sdsds','qfsddfdf','2322-03-12',0,'Nessuno');
+INSERT INTO `utente` VALUES ('admin@gmail.com','admin','Admin','Admin','24/10/1996',0,'Nessuno'),('ale@gmail.com','ale123','a','a','1996-01-31',0,'Nessuno'),('anto@gmail.com','123','Antonella','Crispo','31/01/1996',50,'Base'),('carlos@gmail.com','carlo','Carlo','Carli','12/4/1987',45,'Base'),('ferd@gmail.com','f789','Fer','Doe','31/10/1995',100,'Alto'),('poi@gmail.com','poi','ppoi','pi','1211-11-12',6,'Base'),('prova@gmail.com','prova','prova','prova','2000-05-16',0,'Nessuno');
 /*!40000 ALTER TABLE `utente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -325,4 +324,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-27 12:51:02
+-- Dump completed on 2023-05-07 21:36:36

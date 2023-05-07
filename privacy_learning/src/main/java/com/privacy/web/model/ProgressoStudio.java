@@ -22,9 +22,6 @@ public class ProgressoStudio {
 	
 	@Column(name = "email_utente")
 	private String email_utente;
-	
-	@Column(name = "meta_info") ///ma a che serve??
-	private String meta_info;
 
 	@Column(name = "arg_studiati")
 	private String arg_studiati;
