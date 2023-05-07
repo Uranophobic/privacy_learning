@@ -48,11 +48,12 @@
 						<p th:text="${session.userSession.dataNascita}" class="title"></p>
 					</div>
 					<div class="but-mod">
-						<a type="submit" class="button" th:href="@{/users/modifica}"> MODIFICA LE TUE INFORMAZIONI</a>
+						<a type="submit" class="button" th:href="@{/users/modifica}"> MODIFICA </a>
 					</div>
 				</fieldset>
 			</div>
-
+			
+			<th:block th:if="${!session.isEmpty()} and ${!session.userSession.email.equals('admin@gmail.com')}">
 
 			<!-- secondo box con dati personali del risultato test-->
 			<div class="personal-progress">
@@ -87,16 +88,17 @@
 						<br>
 						<div class="but-mod">
 							<a type="submit" class="button"
-								th:href="@{/test/{email} (email=${session.userSession.email})}">Risultato ultimo test
-								effettuato</a>
+								th:href="@{/test/{email} (email=${session.userSession.email})}"> Risultato
+								</a>
 						</div>
 					</div>
 
 
 				</fieldset>
 			</div>
-
+</th:block>
 		</div>
+<th:block th:if="${!session.isEmpty()} and ${!session.userSession.email.equals('admin@gmail.com')}">
 
 		<!-- terzo box con dati personali del cproprio progresso di studio -->
 		<div class="colonna">
@@ -184,8 +186,7 @@
 			</div>
 		</div>
 	</div>
-	</div>
-
+			</th:block>
 
 </body>
 

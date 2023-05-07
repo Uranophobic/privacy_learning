@@ -57,13 +57,13 @@ table, th, td {
 				th:if="${!session.isEmpty()} and ${!session.userSession.email.equals('admin@gmail.com')}">
 
 				<!--<p th:text="${session.userSession.email ='admin@gmail.com'}"></p>-->
-				<p>Il tuo attuale livello è: <span style="color:green; font-size: 18px; font-weight: bold;" th:text=" ${session.userSession.livello}"></span></p>
+				<p>Il tuo attuale livello &Egrave;: <span style="color:green; font-size: 18px; font-weight: bold;" th:text=" ${session.userSession.livello}"></span></p>
 
 				<!-- A seconda del livello dell'utente visualizza le domande -->
-				<div th:switch="${session.userSession.livello}">
+				<div>
 
 					<!--Test Base -->
-					<div th:case="'Nessuno'">
+					<div th:if="${session.userSession.livello} == 'Nessuno' or (${session.userSession.livello} == 'Base' and ${session.userSession.percentuale} < 80)">
 
 						<ol class="domande">
 							<th:block th:each="d: ${domBase}">
@@ -95,7 +95,7 @@ table, th, td {
 					</div>
 
 					<!--Test Medio -->
-					<div th:case="'Base'">
+					<div th:if="(${session.userSession.livello} == 'Base' and ${session.userSession.percentuale} >= 80) or (${session.userSession.livello} == 'Medio' and ${session.userSession.percentuale} < 80)">
 						<ol class="domande">
 							<th:block th:each="d: ${domMedio}">
 								<li><p th:text="${d.testo}"></p>
@@ -119,14 +119,14 @@ table, th, td {
 											th:value="4" required>
 										<p th:text="${d.risposta4}"></p>
 									</div></li>
-								<th:block>
+									</th:block>
 						</ol>
 
 					</div>
 
 
 					<!--Test Alto -->
-					<div th:case="'Medio'">
+					<div th:if="(${session.userSession.livello} == 'Medio' and ${session.userSession.percentuale} >= 80) or (${session.userSession.livello} == 'Alto' and ${session.userSession.percentuale} < 80)" >
 						<ol class="domande">
 							<th:block th:each="d: ${domAlto}">
 								<li><p th:text="${d.testo}"></p>

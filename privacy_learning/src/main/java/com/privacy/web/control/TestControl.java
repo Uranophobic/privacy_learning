@@ -18,7 +18,6 @@ import com.privacy.web.model.Utente;
 import com.privacy.web.service.DomandaService;
 import com.privacy.web.service.ProgressoService;
 import com.privacy.web.service.SalvataggioService;
-import com.privacy.web.service.SuggerimentoService;
 import com.privacy.web.service.TestService;
 import com.privacy.web.service.UtenteService;
 
@@ -39,8 +38,6 @@ public class TestControl {
 	UtenteService utServ;
 	@Autowired
 	TestService testServ;
-	@Autowired
-	SuggerimentoService sugServ;
 	@Autowired
 	ProgressoService progServ;
 
@@ -152,7 +149,7 @@ public class TestControl {
 					s.setRisposta_corretta(domTest.get(i).getRisposta4());
 				}
 			} else {
-				System.out.println("syso di prova: il valore è vuoto" + idRispCorretta);
+			//	System.out.println("syso di prova: il valore è vuoto" + idRispCorretta);
 			}
 			
 			// mi salvo anche la meta info della domanda (mi servirà in futuro per capire quale 
@@ -194,16 +191,20 @@ public class TestControl {
 						} else {
 							// altrimenti nelle risposte non corrette
 							rispInCorrette.add(rispSalvate.get(i)); 
-							
+							//controllo che il progresso non sia già esistente
+							ProgressoStudio prog= progServ.findByEmailAndArgomento(u.getEmail(), domanda.getMeta_info());
+							if(prog==null) {
 							// mi salvo subito il progresso (anche se qui non ha studiato ma almeno inizio a settarlo perchè ho tutto quello che mi serve
-							ProgressoStudio p = new ProgressoStudio(); 
-							p.setEmail_utente(u.getEmail());
-
-							p.setArg_dastudiare(domanda.getMeta_info());
-							progServ.save(p);
-							argDaStudiare.add(domanda.getMeta_info());
-							// System.out.println("PROGRESSO STUDIO SALVATO:" + p.toString());
-
+								ProgressoStudio p = new ProgressoStudio(); 
+								p.setEmail_utente(u.getEmail());
+								p.setArg_dastudiare(domanda.getMeta_info());
+								progServ.save(p);
+								argDaStudiare.add(domanda.getMeta_info());
+							} else if(prog!=null && prog.getArg_studiati()!=null) {
+								prog.setArg_studiati(null);
+								progServ.save(prog);
+								argDaStudiare.add(domanda.getMeta_info());
+							}
 						}
 					}
 				}
@@ -223,9 +224,10 @@ public class TestControl {
 
 		// mi devo aggiornare la sessione dell'utente
 		userSession.setAttribute("userSession", u);
+		System.out.println(argDaStudiare);
 
 		// mi devo passare gli argomenti da studiare
-		model.addAttribute("argDaStudiare", argDaStudiare);
+		model.addAttribute("argDaStudiare", progServ.findByEmail(u.getEmail()));
 
 		// mi passo tutte le risposte che l'utente ha sbagliato ed ha fatto bene
 		model.addAttribute("rispCorrette", rispCorrette);

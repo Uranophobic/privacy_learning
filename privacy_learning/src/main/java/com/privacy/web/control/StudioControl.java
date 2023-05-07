@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.privacy.web.service.SuggerimentoService;
+import com.privacy.web.service.ProgressoService;
 
 @Controller
 @RequestMapping("/studio")
 public class StudioControl {
 	@Autowired
-	SuggerimentoService suggServ;
+	ProgressoService suggServ;
 	
 	@GetMapping("/allSuggeriti/{email}")
 	public String tuttiSuggerimenti(@PathVariable String email, Model model) {

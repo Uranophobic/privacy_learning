@@ -9,8 +9,12 @@
 <style>
 
 table, th, td {
-  border: 1px solid black;
+ border: 1px solid black;
   border-collapse: collapse;
+  padding-top: 4%;
+  margin-left: 40%;
+  width:25%;
+padding-bottom: 4%;
 }
 </style>
 </head>
@@ -23,8 +27,12 @@ table, th, td {
 				<div class="box-titolo">
 					<div class="titolo">Tutte le meta</div>
 				</div>
-				
-			 <br>
+				<br>
+			 <div>
+				<input value="inserisci la meta da aggiungere"> 
+			 <a type="button" class="button" th:href="@{/admin/createMeta}"> Aggiungi </a>
+			 </div>
+			 
 			 <div>
 				<table>
 						<thead>
@@ -42,10 +50,7 @@ table, th, td {
 						</tbody>
 					</table>
 				</div>
-				<div>
-				<input value="inserisci la meta da aggiungere"> 
-			 <a type="button" class="button" th:href="@{/admin/createMeta}"> Aggiungi </a>
-			 </div>
+				
 			</div>
 	</div>
 </body>

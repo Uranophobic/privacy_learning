@@ -26,4 +26,14 @@ public class ProgressoStudioImpl implements ProgressoService {
 		return progRep.findByEmail(email);
 	}
 
+	@Override
+	public ProgressoStudio findByEmailAndArgomento(String email, String m) {
+		return progRep.findByEmailAndArgomento(email, m);
+	}
+
+	@Override
+	public List<ProgressoStudio> findAllByEmail(String email) {
+		return progRep.findAllByEmail(email);
+	}
+
 }
