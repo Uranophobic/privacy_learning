@@ -13,6 +13,9 @@
 table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
+  padding: 5px;
+  margin-left: 30%;
+  width: 30%;
 }
 
 .domande {
@@ -55,10 +58,6 @@ table, th, td {
 			<!-- Controllo sessione non vuota -->
 			<div
 				th:if="${!session.isEmpty()} and ${!session.userSession.email.equals('admin@gmail.com')}">
-
-				<!--<p th:text="${session.userSession.email ='admin@gmail.com'}"></p>-->
-				<p>Il tuo attuale livello &Egrave;: <span style="color:green; font-size: 18px; font-weight: bold;" th:text=" ${session.userSession.livello}"></span></p>
-
 				<!-- A seconda del livello dell'utente visualizza le domande -->
 				<div>
 
@@ -164,8 +163,7 @@ table, th, td {
 			</div>
 			<th:block
 				th:if=" ${!session.isEmpty()} and ${session.userSession.email.equals('admin@gmail.com')}">
-		Lista di tutti i test esistenti, bottone di modifica e borrone per la creazione di nuove domande
-		<div class="background">
+				<div class="background">
 					<table>
 						<thead>
 							<tr>
