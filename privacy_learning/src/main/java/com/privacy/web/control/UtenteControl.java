@@ -362,7 +362,7 @@ public class UtenteControl {
 		utServ.save(u);
 		userSession.setAttribute("userSession", u);
 
-		return "redirect:/profilo";
+		return "redirect:/profilo/{email}";
 	}
 
 	/*------------------------------------METODI INTERNI-------------------------------*/

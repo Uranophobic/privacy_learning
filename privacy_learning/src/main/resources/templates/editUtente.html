@@ -4,7 +4,7 @@
 <head>
 	<meta charset="ISO-8859-1">
 	<script type="text/javascript" src="../js/ConvalidazioneCampi.js"></script>
-	<link rel="stylesheet" href="/css/stylesheet.css">
+	<link rel="stylesheet" href="../css/stylesheet.css">
 	<link rel="icon" type="image/png" href="img/logo.png" />
 	<title>Privacy Literacy</title>
 </head>
@@ -78,7 +78,7 @@
 
 		
 		<div class="sez-button">
-		<!-- con a al posto di button esce la mano piuttosto che il cursore. ho inserito il riferimento perchè dava errore -->
+		<!-- con a al posto di button esce la mano piuttosto che il cursore. ho inserito il riferimento perchï¿½ dava errore -->
 		<a class=button type="submit" th:href="@{/profilo/{email} (email= ${session.userSession.email})}" formmethod="get"> Torna indietro </a>
 		<br>
 				<button  type="submit" th:formaction="@{/users/modifica/{email} (email=${session.userSession.email})}"

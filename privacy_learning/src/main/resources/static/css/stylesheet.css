@@ -493,13 +493,12 @@ input:focus {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	min-height: 100vh;
-	background: grey;
+	min-height: 75vh;
 }
 
 .containerReg {
 	width: 600px;
-	background-color: #fff;
+	background-color: #D7D6D6;;
 	border-radius: 5px;
 	padding: 25px 20px 0px 20px;
 }
