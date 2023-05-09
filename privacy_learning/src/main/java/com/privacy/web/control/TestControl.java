@@ -103,8 +103,13 @@ public class TestControl {
 			u.setLivello("Alto");
 		}
 		
-		
-		
+		//elimino i vecchi salvataggi cosi si resetta anche la percentuale
+		List<Salvataggio> allS = salvServ.findByEmail(u.getEmail());
+		if(allS.size()>0) {
+			for(int i=0; i<allS.size(); i++) {
+				salvServ.delete(allS.get(i));
+			}
+		}
 		
 		// lo trasformo in int
 		int id = Integer.parseInt(livello);
@@ -175,7 +180,7 @@ public class TestControl {
 		// ora vado a vedere effettivamente quante cose ha sbagliato l'utente
 		ArrayList<Salvataggio> rispCorrette = new ArrayList<>();
 		ArrayList<Salvataggio> rispInCorrette = new ArrayList<>();
-		ArrayList<String> argDaStudiare = new ArrayList<>(); // questa è una prova potrei anche non usarlo
+	///	ArrayList<String> argDaStudiare = new ArrayList<>(); // questa è una prova potrei anche non usarlo
 		int perc = 0;
 
 		/// mi prendo tutte le risposte salvate dell'utente (che ho letteralmente
@@ -212,11 +217,11 @@ public class TestControl {
 								p.setEmail_utente(u.getEmail());
 								p.setArg_dastudiare(domanda.getMeta_info());
 								progServ.save(p);
-								argDaStudiare.add(domanda.getMeta_info());
+							//	argDaStudiare.add(domanda.getMeta_info());
 							} else if(prog!=null && prog.getArg_studiati()!=null) {
 								prog.setArg_studiati(null);
 								progServ.save(prog);
-								argDaStudiare.add(domanda.getMeta_info());
+							//	argDaStudiare.add(domanda.getMeta_info());
 							}
 						}
 					}
@@ -277,7 +282,7 @@ public class TestControl {
 		ArrayList<Salvataggio> rispCorrette = new ArrayList<>();
 		ArrayList<Salvataggio> rispInCorrette = new ArrayList<>();
 		ArrayList<String> metaSugg= new ArrayList<>();
-		ProgressoStudio p= new ProgressoStudio();
+		//ProgressoStudio p= new ProgressoStudio();
 		
 		// questo for mi serve per vedere di nuovo quante domande ha fatto bene l'utente
 		// perchè cosi posso fare il pulsante nel profilo "risultati ultimo test"

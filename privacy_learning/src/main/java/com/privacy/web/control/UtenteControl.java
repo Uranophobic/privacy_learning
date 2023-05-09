@@ -145,10 +145,11 @@ public class UtenteControl {
 					return "redirect:/error?descrizione= " + error;
 
 				} else {
-					//prima di salvare le risposte devo salvare l'utente altrimenti non lo trova nel database
+					// prima di salvare le risposte devo salvare l'utente altrimenti non lo trova
+					// nel database
 					user.setLivello("Nessuno");
 					utServ.save(user);
-					
+
 					List<Domanda> questionario = domServ.findByIdTest(0);
 
 					for (Domanda q : questionario) {
@@ -177,7 +178,7 @@ public class UtenteControl {
 						s.setTesto_domanda(q.getTesto());
 						s.setMeta_info(q.getMeta_info());
 						salvServ.save(s);
-						//System.out.println("salvataggio : " + s.toString());
+						// System.out.println("salvataggio : " + s.toString());
 					}
 
 				}
@@ -268,10 +269,12 @@ public class UtenteControl {
 						List<Salvataggio> allSave = salvServ.findByEmail(user.getEmail()); // tutti i salvataggi
 																							// dell'utente
 						for (int i = 0; i < allSave.size(); i++) {
-							if (!allSave.get(i).getRisposta_utente().equals(allSave.get(i).getRisposta_corretta())) {
-								argDaStudiare.add(allSave.get(i).getMeta_info());
-								///System.out.println("ARGOMENTI DENTRO AL PROFILO" + argDaStudiare);
-							}
+							if(!allSave.get(i).getMeta_info().equals("Questionario")) {							
+								if (!allSave.get(i).getRisposta_utente().equals(allSave.get(i).getRisposta_corretta())) {
+									argDaStudiare.add(allSave.get(i).getMeta_info());
+									///System.out.println("ARGOMENTI DENTRO AL PROFILO" + argDaStudiare);
+									}
+								}
 						}
 
 						// bisogna eliminare i duplicati da argomenti da studiare 

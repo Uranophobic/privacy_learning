@@ -52,6 +52,15 @@ public class SalvataggioServiceImpl implements SalvataggioService {
 		return salRep.findByMaxIdTest(email_utente);
 	}
 
+	@Override
+	public void delete(Salvataggio s) {
+		// TODO Auto-generated method stub
+		salRep.delete(s);
+	}
+
+
+
+	
 	
  
 

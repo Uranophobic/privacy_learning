@@ -30,4 +30,6 @@ public interface SalvataggioRepository  extends CrudRepository<Salvataggio,Integ
 	
 	@Query( value="	SELECT * FROM salvataggio_risposte s  WHERE  s.email_utente= ?1 and id_test = ( SELECT max(id_test) FROM salvataggio_risposte )", nativeQuery = true)
 	List<Salvataggio> findByMaxIdTest(String email_utente);
+	
+	void delete(Salvataggio s);
 }
