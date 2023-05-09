@@ -3,6 +3,8 @@
 <head>
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="../css/stylesheet.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+<link rel="stylesheet" href="https://www.ionos.it/digitalguide/path/to/font-awesome/css/font-awesome.min.css"> 
 <title>Insert title here</title>
 </head>
 <body th:fragment="header">
@@ -39,17 +41,17 @@
 			<th:block th:unless="${session.isEmpty()}"> 
 		 <div  class="pulsanti">
 			<div class="login">
-			<a class="button" type="submit" th:href="@{/profilo/{email} (email=${session.userSession.email})}"> Profilo </a>
+			<a class="icon" type="submit" th:href="@{/profilo/{email} (email=${session.userSession.email})}"> <img src="https://img.icons8.com/small/36/null/user.png"/> </a>
 			</div>
 			<div class="login">
-			<a class="button" type="submit" th:href="@{/users/logout}"> LOGOUT </a>
+			<a class="icon" type="submit" th:href="@{/users/logout}"> <img src="https://img.icons8.com/small/36/null/exit.png"/></a>
 			</div> 
 			</div>
 			</th:block>
 		
-		<div class="search-bar">
+		<!--<div class="search-bar">
   			<input type="text" placeholder="Cerca...">
- 		</div>
+ 		</div>-->
 		</div>
 	</div>
 </div>
