@@ -66,6 +66,21 @@ public class TestControl {
 		return "test";
 	}
 
+	@GetMapping("/test3")
+	public String test2(Model model) {
+		List<Test> test = testServ.findAllTest();
+		List<Domanda> domBase = domServ.findByIdTest(1);
+		List<Domanda> domMedio = domServ.findByIdTest(2);
+		List<Domanda> domAlto = domServ.findByIdTest(3);
+		/* System.out.println(testServ.findAllTest()); */
+		model.addAttribute("domBase", domBase);
+		model.addAttribute("domMedio", domMedio);
+		model.addAttribute("domAlto", domAlto);
+		model.addAttribute("test", test);
+		return "test3";
+	}
+	
+	
 	/* ALESSIA */
 	@PostMapping("/test/{email}")
 	public String saveRisp(@ModelAttribute("testuser") Domanda d, @PathVariable String email,
@@ -76,10 +91,10 @@ public class TestControl {
 
 		Utente u = new Utente();
 		u = utServ.findUtenteByEmail(email);
-System.out.println("utente dentro save risp test control" + u);
+		//System.out.println("utente dentro save risp test control" + u);
 		String livello = u.getLivello();
 
-		System.out.println("livello: " + livello);
+		//System.out.println("livello: " + livello);
 
 		// faccio ogni possibile controllo per capire in che livello siamo
 		/*
@@ -108,12 +123,12 @@ System.out.println("utente dentro save risp test control" + u);
 		
 		// lo trasformo in int
 		int id = Integer.parseInt(livello);
-		System.out.println("livello dopo if : " + livello);
+		//System.out.println("livello dopo if : " + livello);
 
 		// cerco tute le domande di quel livello
 		List<Domanda> domTest = domServ.findByIdTest(id);
 
-		System.out.println("ECCO LE DOMANDE: " + domTest.size());
+		//System.out.println("ECCO LE DOMANDE: " + domTest.size());
 		/// mi vado a salvare tutte le risposte che ha dato l'utente
 
 		for (int i = 0; i < domTest.size(); i++) {
@@ -121,15 +136,15 @@ System.out.println("utente dentro save risp test control" + u);
 			s.setEmail_utente(u.getEmail());
 			s.setId_test(id);
 
-			System.out.println("Id della domanda: " + domTest.get(i).getId_domanda());
+			//System.out.println("Id della domanda: " + domTest.get(i).getId_domanda());
 			s.setId_domanda(domTest.get(i).getId_domanda());
-			System.out.println("Id della risposta: " +Integer.parseInt(request.getParameter("valore" + domTest.get(i).getId_domanda())) );
+			//System.out.println("Id della risposta: " +Integer.parseInt(request.getParameter("valore" + domTest.get(i).getId_domanda())) );
 			s.setTesto_domanda(domTest.get(i).getTesto());
 
 			// mi prendo l'id della risposta scelta dall'utente
 			int idRisp = Integer.parseInt(request.getParameter("valore" + domTest.get(i).getId_domanda()));
 			s.setId_risposta(idRisp);
-			System.out.println("idRisp: " + idRisp);
+			//System.out.println("idRisp: " + idRisp);
 			
 			// dopo di che mi vado a vedere se è la rispsota 1, 2, 3 oppure la 4 e me la
 			// setto
@@ -149,7 +164,7 @@ System.out.println("utente dentro save risp test control" + u);
 			// e risposta)
 			
 			String idRispCorretta = String.valueOf(domTest.get(i).getRisposta_corretta()).toString();
-			 System.out.println("idRisposta corretta:" + idRispCorretta);
+			// System.out.println("idRisposta corretta:" + idRispCorretta);
 			 
 			if (!idRispCorretta.equals("")) { // se risp corretta non è vuoto allora succede questo
 				if (idRispCorretta.equals("1")) {
@@ -162,14 +177,14 @@ System.out.println("utente dentro save risp test control" + u);
 					s.setRisposta_corretta(domTest.get(i).getRisposta4());
 				}
 			} else {
-				System.out.println("syso di prova: il valore è vuoto" + idRispCorretta);
+				//System.out.println("syso di prova: il valore è vuoto" + idRispCorretta);
 			}
 			
 			// mi salvo anche la meta info della domanda (mi servirà in futuro per capire quale 
 			// argomento deve studiare l'utente
 			s.setMeta_info(domTest.get(i).getMeta_info());
 			salvServ.save(s);
-			System.out.println("SALVATAGGIO CREATO: " + s.toString());
+			//System.out.println("SALVATAGGIO CREATO: " + s.toString());
 		}
 
 		// ora vado a vedere effettivamente quante cose ha sbagliato l'utente
@@ -181,7 +196,7 @@ System.out.println("utente dentro save risp test control" + u);
 		/// mi prendo tutte le risposte salvate dell'utente (che ho letteralmente
 		/// salvato prima)
 		List<Salvataggio> rispSalvate = salvServ.findByEmail(email);
-		System.out.println("Risposte salvate" + rispSalvate);
+		//System.out.println("Risposte salvate" + rispSalvate);
 
 		// questo for mi serve per vedere quante domande ha sbagliato l'utente nella
 		// pagina risultati
@@ -224,12 +239,12 @@ System.out.println("utente dentro save risp test control" + u);
 			}
 		}
 
-		System.out.println("Numero di risposte corrette: " + rispCorrette.size());
-		System.out.println("Numero di risposte INcorrette: " + rispInCorrette.size());
+		//System.out.println("Numero di risposte corrette: " + rispCorrette.size());
+		//System.out.println("Numero di risposte INcorrette: " + rispInCorrette.size());
 
 		perc = (100 * rispCorrette.size()) / domTest.size();
 
-		System.out.println("Percentuale di risposte giuste dell'utente: " + perc + "%");
+		//System.out.println("Percentuale di risposte giuste dell'utente: " + perc + "%");
 
 		// mi salvo l'utente e aggiorno la sessione
 		u.setPercentuale(perc);
@@ -238,8 +253,8 @@ System.out.println("utente dentro save risp test control" + u);
 		// mi devo aggiornare la sessione dell'utente
 		userSession.setAttribute("userSession", u);
 		
-		System.out.println("TUTTI gli argomenti da studiare:"+ argDaStudiare);
-
+		//System.out.println("TUTTI gli argomenti da studiare:"+ argDaStudiare);
+		//
 		// mi devo passare gli argomenti da studiare
 		model.addAttribute("argDaStudiare", progServ.findByEmail(u.getEmail()));
 
@@ -259,12 +274,12 @@ System.out.println("utente dentro save risp test control" + u);
 	public String risultati(@ModelAttribute("testuser") Domanda d, @PathVariable String email,
 			HttpServletRequest request, HttpServletResponse response, Model model, HttpSession userSession)
 			throws Exception {
-		System.out.println("email: " + email);
+		//System.out.println("email: " + email);
 
 		Utente u = new Utente();
 		u = utServ.findUtenteByEmail(email);
 		
-		System.out.println("utente dentro metodo risultati" + u);
+		//System.out.println("utente dentro metodo risultati" + u);
 
 		
 
@@ -306,8 +321,8 @@ System.out.println("utente dentro save risp test control" + u);
 			int diff = 100 - perc;
 			model.addAttribute("perc", perc);
 			model.addAttribute("diff", diff);
-			System.out.println("differenza: " + diff);
-			System.out.println("percentuale: " + perc);
+			//System.out.println("differenza: " + diff);
+			////System.out.println("percentuale: " + perc);
 			
 		}
 
