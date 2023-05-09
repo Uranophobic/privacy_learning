@@ -249,26 +249,19 @@ body {
 	font-size: 15px;
 	top: 0;
 	left: 0;
-	background-color: #D7D6D6;
+	/* background-color: turquoise; */
 	padding: 20px;
 	border-radius: 5px;
 	margin-bottom: 20px;
 	margin: auto;
 }
-
 .container-sezioni fieldset {
 	width: 25%;
 	margin: auto;
 	text-align: center;
 }
 
-.testo {
-	color: #2c2d2a;
-	width: 50%;
-	text-align: center;
-	font-size: 25px;
-	border-bottom: 1px solid rgba(44, 45, 42, 0.25);
-}
+
 
 .testo p {
 	font-size: 18px;
@@ -285,11 +278,12 @@ body {
 }
 
 .background {
-	background-color: #D7D6D6;
+	/* background-color: #D7D6D6; */
 	border-radius: 5px;
 	margin: auto;
 	width: 65%;
 	padding: 20px;
+	border: 1px solid turquoise;
 }
 
 .altro {
@@ -309,9 +303,10 @@ body {
 
 .testo {
 	color: #2c2d2a;
-	text-align: center;
+
 	font-size: 25px;
-	border-bottom: 1px solid rgba(44, 45, 42, 0.25);
+	width:50%;
+
 }
 
 .testo-articolo p {
