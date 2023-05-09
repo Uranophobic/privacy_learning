@@ -66,21 +66,6 @@ public class TestControl {
 		return "test";
 	}
 
-	@GetMapping("/test3")
-	public String test2(Model model) {
-		List<Test> test = testServ.findAllTest();
-		List<Domanda> domBase = domServ.findByIdTest(1);
-		List<Domanda> domMedio = domServ.findByIdTest(2);
-		List<Domanda> domAlto = domServ.findByIdTest(3);
-		/* System.out.println(testServ.findAllTest()); */
-		model.addAttribute("domBase", domBase);
-		model.addAttribute("domMedio", domMedio);
-		model.addAttribute("domAlto", domAlto);
-		model.addAttribute("test", test);
-		return "test3";
-	}
-	
-	
 	/* ALESSIA */
 	@PostMapping("/test/{email}")
 	public String saveRisp(@ModelAttribute("testuser") Domanda d, @PathVariable String email,

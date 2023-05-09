@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
 	<meta charset="ISO-8859-1">
@@ -20,14 +20,15 @@
 		}
 
 		section hr {
-	width: 75%;
-	border-color: turquoise;
-	margin: auto;
-	/* margin-bottom: 28px; */
-	margin-bottom: 25px;
-	/* margin-top: 15px; */
-	margin-top: 25px;
-}
+			width: 75%;
+			border-color: turquoise;
+			margin: auto;
+			/* margin-bottom: 28px; */
+			margin-bottom: 25px;
+			/* margin-top: 15px; */
+			margin-top: 25px;
+		}
+
 		section .progressionBar {
 			display: flex;
 			height: auto;
@@ -70,11 +71,11 @@
 		}
 
 		section .formArea {
-	display: block;
-	height: auto;
-	padding: 20px 10%;
-	margin-bottom: 25px;
-}
+			display: block;
+			height: auto;
+			padding: 20px 10%;
+			margin-bottom: 25px;
+		}
 
 		section .formArea div div.fields {
 			display: grid;
@@ -122,20 +123,20 @@
 		}
 
 		section .formArea div div.button2 div div {
-	width: 45px;
-	height: 45px;
-	background-color: turquoise;
-	/* border: none; */
-	border-radius: 50%;
-	font-size: 20px;
-	cursor: pointer;
-	align-content: center;
-	display: grid;
-}
+			width: 45px;
+			height: 45px;
+			background-color: turquoise;
+			/* border: none; */
+			border-radius: 50%;
+			font-size: 20px;
+			cursor: pointer;
+			align-content: center;
+			display: grid;
+		}
 
 		section .formArea div div.button2 div div i {
 			color: white;
-			margin:auto;
+			margin: auto;
 
 		}
 
@@ -158,11 +159,12 @@
 			width: 30%;
 		}
 
-	.domande {
-	width: 75%;
-	margin: auto;
-	font-size: 18px;
-}
+		.domande {
+			width: 75%;
+			margin: auto;
+			font-size: 18px;
+		}
+
 		.domande li {
 			margin: 20px;
 			padding: 5px;
@@ -202,21 +204,21 @@
 			font-size: 25px;
 			border-bottom: 1px solid turquoise;
 		}
-		
-		.intro-testo {
-	display: block;
-	height: auto;
-	padding: 20px 10%;
-	margin-bottom: 25px;
-	width: 80%;
-	margin: auto;
-	text-align: justify;
-}
 
-.no-style{
-	border: none;
-background: white;
-}
+		.intro-testo {
+			display: block;
+			height: auto;
+			padding: 20px 10%;
+			margin-bottom: 25px;
+			width: 80%;
+			margin: auto;
+			text-align: justify;
+		}
+
+		.no-style {
+			border: none;
+			background: white;
+		}
 	</style>
 
 </head>
@@ -228,335 +230,383 @@ background: white;
 	<br>
 	<br>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<form th:action="@{/test}" th:object="${testuser}" method="POST">
-	<!-- Controllo sessione vuota -->
-	<div th:if="${session.isEmpty()}">
-		<!-- Se la sessione è vuota vuol dire che non è stato fatto l'accesso  quindi non può fare il test  -->
-		<p>Per poter accedere a questa sezione effettua prima il login</p>
-		<div class="login">
-			<a type="submit" class="button" th:href="@{/login}"> LOGIN </a>
+	<form th:action="@{/test}" th:object="${testuser}" method="POST">
+		<!-- Controllo sessione vuota -->
+		<div th:if="${session.isEmpty()}">
+			<!-- Se la sessione è vuota vuol dire che non è stato fatto l'accesso  quindi non può fare il test  -->
+			<p>Per poter accedere a questa sezione effettua prima il login</p>
+			<div class="login">
+				<a type="submit" class="button" th:href="@{/login}"> LOGIN </a>
+			</div>
 		</div>
-	</div>
 
-	<!-- Controllo sessione non vuota -->
-	<div th:if="${!session.isEmpty()} and ${!session.userSession.email.equals('admin@gmail.com')}">
-
+		<!-- Controllo sessione non vuota -->
+		<div th:if="${!session.isEmpty()} and ${!session.userSession.email.equals('admin@gmail.com')}">
 
 
-		<!-- A seconda del livello dell'utente visualizza le domande -->
-		<section>
-			<div class="titolo">Test</div>
 
-			<div class="progressionBar">
-				<div id="step1" class="step active">
-					<p>Introduzione</p>
-				</div>
-				<div id="step2" class="step">
-					<p>Fase uno</p>
-				</div>
-				<div id="step3" class="step">
-					<p>Fase due</p>
-				</div>
-			</div>
+			<!-- A seconda del livello dell'utente visualizza le domande -->
+			<section>
+				<div class="titolo">Test</div>
 
-			<div class="formArea">
-				<!-- prime 5 domande-->
-				<div id="createAccount">
-					<p>
-					<div class="intro-tit">Introduzione al test privacy</div>
-					<div class="intro-testo"> Benvenut* <scan th:text="${session.userSession.nome} + ' '+${session.userSession.cognome}"></scan> questa è 
-					la sezione del test della privacy. 
-					<br>
-					Il test è formato da 3 livelli: 
-					<ol>
-						<li>Base: prevede una conoscenza base, è un livello accessibile a tutti, anche a bambini ed adolescenti.</li>
-						<li>Medio: è un livello in cui le domande hanno un grado di difficoltà maggiore</li>
-						<li>Alto: è un livello che richiede una conoscenza più elevata e maggior consapevolezza. </li>
-					</ol>
-					<br>
-					Durante lo svolgimento del test risponderai a delle brevi domande che abbracciano un po' tutti gli argomenti
-					portanti della privacy. Ogni volta che risponderai correttamente ad una domanda riceverai un punto, nel caso 
-					in cui invece sbaglierai la risposta questo non avrà alcun effetto. 
-					<br>
-					Una volta completato il test visualizzerai una pagina che ti mostrerà l'andamento ed il risultato del tuo test. 
-					
-					Potrai avanzare di livello di difficoltà del test solo se al livello precendente avrai totalizzato un totale di 80%
-					di risposte giuste. 
-					<br>
-					Non preoccuparti! Nel caso in cui non dovessi totalizzare una percentuale di almeno 80% correremo noi in tuo aiuto. 
-					Troverai sul tuo profilo personale una serie di suggerimenti per migliorare le tue conoscenze sugli ambiti in cui sei 
-					risultato più carente nel test. Dopo aver studiato potrai riprovare il test, tutte le volte che vuoi!
-					<br>
-					<br>
-					Tutto chiaro? 
-					<br>
-					Appena ti sentirai pronto per cominciare il test clicca sulla freccia in basso a destra.
-					<br>
+				<div class="progressionBar">
+					<div id="step1" class="step active">
+						<p>Introduzione</p>
 					</div>
-					<hr>
-					</p>
-					<div class="button2">
-						<div id="buttonStep1" class="back"></div>
-						<div id="buttonStep1Next" class="next">
-							<div><i class="fa fa-arrow-right"></i></div>
-						</div>
+					<div id="step2" class="step">
+						<p>Fase uno</p>
+					</div>
+					<div id="step3" class="step">
+						<p>Fase due</p>
 					</div>
 				</div>
 
-				<!--Test Base -->
-				<div th:if="${session.userSession.livello} == 'Nessuno' or (${session.userSession.livello} == 'Base' and ${session.userSession.percentuale} < 80)">
-
-				<!-- domanda da 5 a 10 -->
-				<div id="personalInfo">
-					<ol class="domande" start="1">
-						<th:block th:each="d, domStat: ${domBase}">
-							<div th:if="${domStat.count<=7}" th:remove="tag">
-								<li>
-									<p th:text="${d.testo}"></p>
-									<div class="risposte">
-										<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="1" required>
-										<p th:text="${d.risposta1}"></p>
-									</div>
-									<div class="risposte">
-										<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="2" required>
-										<p th:text="${d.risposta2}"></p>
-									</div>
-									<div class="risposte">
-										<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="3" required>
-										<p th:text="${d.risposta3}"></p>
-									</div>
-									<div class="risposte">
-										<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="4" required>
-										<p th:text="${d.risposta4}"></p>
-									</div>
+				<div class="formArea">
+					<!-- prime 5 domande-->
+					<div id="createAccount">
+						<p>
+						<div class="intro-tit">Introduzione al test privacy</div>
+						<div class="intro-testo"> Benvenut* <scan
+								th:text="${session.userSession.nome} + ' '+${session.userSession.cognome}"></scan>
+							questa è
+							la sezione del test della privacy.
+							<br>
+							Il test è formato da 3 livelli:
+							<ol>
+								<li>Base: prevede una conoscenza base, è un livello accessibile a tutti, anche a bambini
+									ed adolescenti.</li>
+								<li>Medio: è un livello in cui le domande hanno un grado di difficoltà maggiore</li>
+								<li>Alto: è un livello che richiede una conoscenza più elevata e maggior consapevolezza.
 								</li>
-								<hr>
-							</div>
-						</th:block>
-					</ol>
+							</ol>
+							<br>
+							Durante lo svolgimento del test risponderai a delle brevi domande che abbracciano un po'
+							tutti gli argomenti
+							portanti della privacy. Ogni volta che risponderai correttamente ad una domanda riceverai un
+							punto, nel caso
+							in cui invece sbaglierai la risposta questo non avrà alcun effetto.
+							<br>
+							Una volta completato il test visualizzerai una pagina che ti mostrerà l'andamento ed il
+							risultato del tuo test.
 
-
-
-					<div class="button2">
-						<div id="buttonStep2Back" class="back">
-							<div><i class="fa fa-arrow-left"></i></div>
+							Potrai avanzare di livello di difficoltà del test solo se al livello precendente avrai
+							totalizzato un totale di 80%
+							di risposte giuste.
+							<br>
+							Non preoccuparti! Nel caso in cui non dovessi totalizzare una percentuale di almeno 80%
+							correremo noi in tuo aiuto.
+							Troverai sul tuo profilo personale una serie di suggerimenti per migliorare le tue
+							conoscenze sugli ambiti in cui sei
+							risultato più carente nel test. Dopo aver studiato potrai riprovare il test, tutte le volte
+							che vuoi!
+							<br>
+							<br>
+							Tutto chiaro?
+							<br>
+							Appena ti sentirai pronto per cominciare il test clicca sulla freccia in basso a destra.
+							<br>
 						</div>
-						<div id="buttonStep2Next" class="next">
-							<div><i class="fa fa-arrow-right"></i></div>
+						<hr>
+						</p>
+						<div class="button2">
+							<div id="buttonStep1" class="back"></div>
+							<div id="buttonStep1Next" class="next">
+								<div><i class="fa fa-arrow-right"></i></div>
+							</div>
 						</div>
 					</div>
-				</div>
 
-				<!-- domande da 11 a 15-->
-				<div id="professionalInfo">
-					<ol class="domande" start="8">
-						<th:block th:each="d, domStat: ${domBase}">
-							<div th:if="${domStat.count>7 }" th:remove="tag">
-								<li>
-									<p th:text="${d.testo}"></p>
-									<div class="risposte">
-										<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="1" required>
-										<p th:text="${d.risposta1}"></p>
+					<!--Test Base -->
+					<div
+						th:if="${session.userSession.livello} == 'Nessuno' or (${session.userSession.livello} == 'Base' and ${session.userSession.percentuale} < 80)">
+
+						<!-- domanda da 1 a 7 -->
+						<div id="personalInfo">
+							<ol class="domande" start="1">
+								<th:block th:each="d, domStat: ${domBase}">
+									<div th:if="${domStat.count<=7}" th:remove="tag">
+										<li>
+											<p th:text="${d.testo}"></p>
+											<div class="risposte">
+												<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="1"
+													required>
+												<p th:text="${d.risposta1}"></p>
+											</div>
+											<div class="risposte">
+												<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="2"
+													required>
+												<p th:text="${d.risposta2}"></p>
+											</div>
+											<div class="risposte">
+												<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="3"
+													required>
+												<p th:text="${d.risposta3}"></p>
+											</div>
+											<div class="risposte">
+												<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="4"
+													required>
+												<p th:text="${d.risposta4}"></p>
+											</div>
+										</li>
+										<hr>
 									</div>
-									<div class="risposte">
-										<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="2" required>
-										<p th:text="${d.risposta2}"></p>
-									</div>
-									<div class="risposte">
-										<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="3" required>
-										<p th:text="${d.risposta3}"></p>
-									</div>
-									<div class="risposte">
-										<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="4" required>
-										<p th:text="${d.risposta4}"></p>
-									</div>
-								</li>
-								<hr>
+								</th:block>
+							</ol>
+
+
+
+							<div class="button2">
+								<div id="buttonStep2Back" class="back">
+									<div><i class="fa fa-arrow-left"></i></div>
+								</div>
+								<div id="buttonStep2Next" class="next">
+									<div><i class="fa fa-arrow-right"></i></div>
+								</div>
 							</div>
-						</th:block>
-					</ol>
-
-					<div class="button2">
-						<div id="buttonStep3Back" class="back">
-							<div><i class="fa fa-arrow-left"></i></div>
 						</div>
-						<div id="buttonStep3Next" class="next">
-							<div><i class="fa fa-check"></i></div>
+
+						<!-- domande da 8 a 15-->
+						<div id="professionalInfo">
+							<ol class="domande" start="8">
+								<th:block th:each="d, domStat: ${domBase}">
+									<div th:if="${domStat.count>7 }" th:remove="tag">
+										<li>
+											<p th:text="${d.testo}"></p>
+											<div class="risposte">
+												<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="1"
+													required>
+												<p th:text="${d.risposta1}"></p>
+											</div>
+											<div class="risposte">
+												<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="2"
+													required>
+												<p th:text="${d.risposta2}"></p>
+											</div>
+											<div class="risposte">
+												<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="3"
+													required>
+												<p th:text="${d.risposta3}"></p>
+											</div>
+											<div class="risposte">
+												<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="4"
+													required>
+												<p th:text="${d.risposta4}"></p>
+											</div>
+										</li>
+										<hr>
+									</div>
+								</th:block>
+							</ol>
+
+								<div class="button2">
+								<div id="buttonStep3Back" class="back">
+									<div><i class="fa fa-arrow-left"></i></div>
+								</div>
+								<div id="buttonStep3Next" class="next">
+									<button type="submit" class="no-style"
+										th:formaction="@{/test/{email} (email=${session.userSession.email})}"
+										formmethod="post">
+										<div><i class="fa fa-check"></i></div>
+								</div></button>
+							</div>
 						</div>
 					</div>
-				</div>
-			</div>
-			
-			<!--Test Medio -->
-					<div th:if="(${session.userSession.livello} == 'Base' and ${session.userSession.percentuale} >= 80) or (${session.userSession.livello} == 'Medio' and ${session.userSession.percentuale} < 80)">
-<!-- domanda da 5 a 10 -->
-				<div id="personalInfo">
-					<ol class="domande" start="1">
-						<th:block th:each="d, domStat: ${domMedio}">
-							<div th:if="${domStat.count<=7}" th:remove="tag">
-								<li>
-									<p th:text="${d.testo}"></p>
-									<div class="risposte">
-										<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="1" required>
-										<p th:text="${d.risposta1}"></p>
+
+					<!--Test Medio -->
+					<div
+						th:if="(${session.userSession.livello} == 'Base' and ${session.userSession.percentuale} >= 80) or (${session.userSession.livello} == 'Medio' and ${session.userSession.percentuale} < 80)">
+						<!-- domanda da 1 a 7 -->
+						<div id="personalInfo">
+							<ol class="domande" start="1">
+								<th:block th:each="d, domStat: ${domMedio}">
+									<div th:if="${domStat.count<=7}" th:remove="tag">
+										<li>
+											<p th:text="${d.testo}"></p>
+											<div class="risposte">
+												<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="1"
+													required>
+												<p th:text="${d.risposta1}"></p>
+											</div>
+											<div class="risposte">
+												<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="2"
+													required>
+												<p th:text="${d.risposta2}"></p>
+											</div>
+											<div class="risposte">
+												<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="3"
+													required>
+												<p th:text="${d.risposta3}"></p>
+											</div>
+											<div class="risposte">
+												<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="4"
+													required>
+												<p th:text="${d.risposta4}"></p>
+											</div>
+										</li>
+										<hr>
 									</div>
-									<div class="risposte">
-										<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="2" required>
-										<p th:text="${d.risposta2}"></p>
-									</div>
-									<div class="risposte">
-										<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="3" required>
-										<p th:text="${d.risposta3}"></p>
-									</div>
-									<div class="risposte">
-										<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="4" required>
-										<p th:text="${d.risposta4}"></p>
-									</div>
-								</li>
-								<hr>
+								</th:block>
+							</ol>
+
+
+
+							<div class="button2">
+								<div id="buttonStep2Back" class="back">
+									<div><i class="fa fa-arrow-left"></i></div>
+								</div>
+								<div id="buttonStep2Next" class="next">
+									<div><i class="fa fa-arrow-right"></i></div>
+								</div>
 							</div>
-						</th:block>
-					</ol>
-
-
-
-					<div class="button2">
-						<div id="buttonStep2Back" class="back">
-							<div><i class="fa fa-arrow-left"></i></div>
 						</div>
-						<div id="buttonStep2Next" class="next">
-							<div><i class="fa fa-arrow-right"></i></div>
+
+						<!-- domande da 8 a 15-->
+						<div id="professionalInfo">
+							<ol class="domande" start="8">
+								<th:block th:each="d, domStat: ${domMedio}">
+									<div th:if="${domStat.count>7 }" th:remove="tag">
+										<li>
+											<p th:text="${d.testo}"></p>
+											<div class="risposte">
+												<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="1"
+													required>
+												<p th:text="${d.risposta1}"></p>
+											</div>
+											<div class="risposte">
+												<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="2"
+													required>
+												<p th:text="${d.risposta2}"></p>
+											</div>
+											<div class="risposte">
+												<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="3"
+													required>
+												<p th:text="${d.risposta3}"></p>
+											</div>
+											<div class="risposte">
+												<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="4"
+													required>
+												<p th:text="${d.risposta4}"></p>
+											</div>
+										</li>
+										<hr>
+									</div>
+								</th:block>
+							</ol>
+
+								<div class="button2">
+								<div id="buttonStep3Back" class="back">
+									<div><i class="fa fa-arrow-left"></i></div>
+								</div>
+								<div id="buttonStep3Next" class="next">
+									<button type="submit" class="no-style"
+										th:formaction="@{/test/{email} (email=${session.userSession.email})}"
+										formmethod="post">
+										<div><i class="fa fa-check"></i></div>
+								</div></button>
+							</div>
 						</div>
 					</div>
-				</div>
 
-				<!-- domande da 11 a 15-->
-				<div id="professionalInfo">
-					<ol class="domande" start="8">
-						<th:block th:each="d, domStat: ${domMedio}">
-							<div th:if="${domStat.count>7 }" th:remove="tag">
-								<li>
-									<p th:text="${d.testo}"></p>
-									<div class="risposte">
-										<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="1" required>
-										<p th:text="${d.risposta1}"></p>
+
+					<!--Test Alto -->
+					<div
+						th:if="(${session.userSession.livello} == 'Medio' and ${session.userSession.percentuale} >= 80) or (${session.userSession.livello} == 'Alto' and ${session.userSession.percentuale} < 80)">
+						<!-- domanda da 1 a 7 -->
+						<div id="personalInfo">
+							<ol class="domande" start="1">
+								<th:block th:each="d, domStat: ${domAlto}">
+									<div th:if="${domStat.count<=7}" th:remove="tag">
+										<li>
+											<p th:text="${d.testo}"></p>
+											<div class="risposte">
+												<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="1"
+													required>
+												<p th:text="${d.risposta1}"></p>
+											</div>
+											<div class="risposte">
+												<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="2"
+													required>
+												<p th:text="${d.risposta2}"></p>
+											</div>
+											<div class="risposte">
+												<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="3"
+													required>
+												<p th:text="${d.risposta3}"></p>
+											</div>
+											<div class="risposte">
+												<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="4"
+													required>
+												<p th:text="${d.risposta4}"></p>
+											</div>
+										</li>
+										<hr>
 									</div>
-									<div class="risposte">
-										<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="2" required>
-										<p th:text="${d.risposta2}"></p>
-									</div>
-									<div class="risposte">
-										<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="3" required>
-										<p th:text="${d.risposta3}"></p>
-									</div>
-									<div class="risposte">
-										<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="4" required>
-										<p th:text="${d.risposta4}"></p>
-									</div>
-								</li>
-								<hr>
+								</th:block>
+							</ol>
+
+
+
+								<div class="button2">
+								<div id="buttonStep3Back" class="back">
+									<div><i class="fa fa-arrow-left"></i></div>
+								</div>
+								<div id="buttonStep3Next" class="next">
+									<button type="submit" class="no-style"
+										th:formaction="@{/test/{email} (email=${session.userSession.email})}"
+										formmethod="post">
+										<div><i class="fa fa-check"></i></div>
+								</div></button>
 							</div>
-						</th:block>
-					</ol>
-
-					<div class="button2">
-						<div id="buttonStep3Back" class="back">
-							<div><i class="fa fa-arrow-left"></i></div>
 						</div>
-						<div id="buttonStep3Next" class="next">
-							<div><i class="fa fa-check"></i></div>
+
+						<!-- domande da 8 a 15-->
+						<div id="professionalInfo">
+							<ol class="domande" start="8">
+								<th:block th:each="d, domStat: ${domAlto}">
+									<div th:if="${domStat.count>7 }" th:remove="tag">
+										<li>
+											<p th:text="${d.testo}"></p>
+											<div class="risposte">
+												<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="1"
+													required>
+												<p th:text="${d.risposta1}"></p>
+											</div>
+											<div class="risposte">
+												<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="2"
+													required>
+												<p th:text="${d.risposta2}"></p>
+											</div>
+											<div class="risposte">
+												<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="3"
+													required>
+												<p th:text="${d.risposta3}"></p>
+											</div>
+											<div class="risposte">
+												<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="4"
+													required>
+												<p th:text="${d.risposta4}"></p>
+											</div>
+										</li>
+										<hr>
+									</div>
+								</th:block>
+							</ol>
+
+							<div class="button2">
+								<div id="buttonStep3Back" class="back">
+									<div><i class="fa fa-arrow-left"></i></div>
+								</div>
+								<div id="buttonStep3Next" class="next">
+									<button type="submit" class="no-style"
+										th:formaction="@{/test/{email} (email=${session.userSession.email})}"
+										formmethod="post">
+										<div><i class="fa fa-check"></i></div>
+								</div></button>
+							</div>
 						</div>
 					</div>
-				</div>
-				</div>
-				
-				
-				<!--Test Alto -->
-					<div th:if="(${session.userSession.livello} == 'Medio' and ${session.userSession.percentuale} >= 80) or (${session.userSession.livello} == 'Alto' and ${session.userSession.percentuale} < 80)" >
-						<!-- domanda da 5 a 10 -->
-				<div id="personalInfo">
-					<ol class="domande" start="1">
-						<th:block th:each="d, domStat: ${domAlto}">
-							<div th:if="${domStat.count<=7}" th:remove="tag">
-								<li>
-									<p th:text="${d.testo}"></p>
-									<div class="risposte">
-										<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="1" required>
-										<p th:text="${d.risposta1}"></p>
-									</div>
-									<div class="risposte">
-										<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="2" required>
-										<p th:text="${d.risposta2}"></p>
-									</div>
-									<div class="risposte">
-										<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="3" required>
-										<p th:text="${d.risposta3}"></p>
-									</div>
-									<div class="risposte">
-										<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="4" required>
-										<p th:text="${d.risposta4}"></p>
-									</div>
-								</li>
-								<hr>
-							</div>
-						</th:block>
-					</ol>
-
-
-
-					<div class="button2">
-						<div id="buttonStep2Back" class="back">
-							<div><i class="fa fa-arrow-left"></i></div>
-						</div>
-						<div id="buttonStep2Next" class="next">
-							<div><i class="fa fa-arrow-right"></i></div>
-						</div>
-					</div>
-				</div>
-
-				<!-- domande da 11 a 15-->
-				<div id="professionalInfo">
-					<ol class="domande" start="8">
-						<th:block th:each="d, domStat: ${domAlto}">
-							<div th:if="${domStat.count>7 }" th:remove="tag">
-								<li>
-									<p th:text="${d.testo}"></p>
-									<div class="risposte">
-										<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="1" required>
-										<p th:text="${d.risposta1}"></p>
-									</div>
-									<div class="risposte">
-										<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="2" required>
-										<p th:text="${d.risposta2}"></p>
-									</div>
-									<div class="risposte">
-										<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="3" required>
-										<p th:text="${d.risposta3}"></p>
-									</div>
-									<div class="risposte">
-										<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="4" required>
-										<p th:text="${d.risposta4}"></p>
-									</div>
-								</li>
-								<hr>
-							</div>
-						</th:block>
-					</ol>
-
-					<div class="button2">
-						<div id="buttonStep3Back" class="back">
-							<div><i class="fa fa-arrow-left"></i></div>
-						</div>
-						<div id="buttonStep3Next" class="next">
-					<button type="submit" class="no-style"
-					th:formaction="@{/test/{email} (email=${session.userSession.email})}"
-					formmethod="post">	<div><i class="fa fa-check"></i></div>
-						</div></button>	
-					</div>
-				</div>
-				</div>
-		</section>
-	</div>
+			</section>
+		</div>
 	</form>
 	<script>
 		document.getElementById('buttonStep1Next').onclick = function (e) {

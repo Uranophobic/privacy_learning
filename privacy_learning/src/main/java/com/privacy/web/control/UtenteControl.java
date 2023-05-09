@@ -175,9 +175,9 @@ public class UtenteControl {
 						s.setRisposta_corretta("0");
 						s.setRisposta_utente(risp);
 						s.setTesto_domanda(q.getTesto());
-
+						s.setMeta_info(q.getMeta_info());
 						salvServ.save(s);
-						System.out.println("salvataggio : " + s.toString());
+						//System.out.println("salvataggio : " + s.toString());
 					}
 
 				}
