@@ -15,8 +15,7 @@
 	<br>
 	<br>
 	<br>
-	<br>
-	<br>
+<br>
 	<p class="titolo">Modifica il tuo profilo personale</p>
 
 	<form th:action="@{/users/modifica}" th:object="${user}" method="POST">
@@ -27,7 +26,7 @@
 		</div>
 			<div class="box-profilo">
 
-				<div class="personal-info">
+				<div class="personal-info-mod">
 					
 					<fieldset>
 					<legend>Informazioni personali</legend>
@@ -40,17 +39,19 @@
 					<input th:value="${session.userSession.nome}" readonly>
 					<br>
 					<label> Cognome:</label>
+					<br>
 					<input th:value="${session.userSession.cognome}" readonly>
 					<br>
 					<label> Data di nascita:</label>
-					<input th:value="${session.userSession.dataNascita}" readonly>
+					<br>
+					<input th:value="${session.userSession.dataNascita}" type="date" readonly>
 					<br>
 					</fieldset>
 				</div>
 
 	
 
-				<div class="personal-info">
+				<div class="personal-info-mod">
 					
 					<fieldset>
 						<legend>Sovrascrivi i campi che vuoi modificare</legend>
@@ -72,17 +73,17 @@
 					<br>
 					</fieldset>
 				</div>
-				
 
 			</div>
-
-		
-		<div class="sez-button">
+				
+<div class="sez-button">
 		<!-- con a al posto di button esce la mano piuttosto che il cursore. ho inserito il riferimento perch� dava errore -->
 		<a class=button type="submit" th:href="@{/profilo/{email} (email= ${session.userSession.email})}" formmethod="get"> Torna indietro </a>
 		<br>
 				<button  type="submit" th:formaction="@{/users/modifica/{email} (email=${session.userSession.email})}"
-					formmethod="post">Conferma le modifiche</button></div></div>
+					formmethod="post">Conferma le modifiche</button></div>
+		
+		</div>
 	</form>
 
 </body>

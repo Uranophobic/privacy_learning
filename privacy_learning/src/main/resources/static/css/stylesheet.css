@@ -825,10 +825,11 @@ width:90%;
 
 /**** MODIFICA PROFILO ****/
 .sez-button {
-	width: 22%;
+	width: 100%;
 	margin-top: 20px;
 	margin-right: auto;
 	margin-left: auto;
+	display: flex;
 }
 
 .sez-button button {
@@ -838,6 +839,13 @@ width:90%;
 	font-size: 15px;
 	color: white;
 	font-weight: bold;
+	margin-right: 30px;
+	margin-left: 5px;
+}
+
+.sez-button a{
+	  margin-left: auto;
+  margin-right: 10px;
 }
 
 .p-mod {
@@ -857,6 +865,17 @@ width:90%;
 	width: 50%;
 }
 
+.personal-info-mod {
+	width: 45%;
+	margin: auto;
+	margin-bottom: 20px;
+	/* height: 164px; */
+}
+
+
+.personal-info-mod fieldset{
+	height: 250px;
+}
 /**********************************************************pagina dei risultati*****************************************************************/
 
 .risultati span {
