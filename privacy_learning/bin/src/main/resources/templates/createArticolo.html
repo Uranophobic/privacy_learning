@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../css/stylesheet.css">
+<title>Privacy Literacy</title>
+</head>
+
+<body>
+	<div th:insert="~{fragments/header::header}"></div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<form th:action="@{/studia-con-noi}" th:object="${argomento}" method="POST">
+	<div class="box-titolo">
+				<p class="titAdmin">CREA UN NUOVO ARGOMENTO</p>
+	</div>
+	
+	<div class="background">
+		
+		<div class="boxArg">
+		
+		<fieldset><legend>Titolo*</legend>
+			<input type="text" name="titolo" placeholder="Inserisci il titolo dell'articolo"  maxlength="60" min="2" required="required">
+		</fieldset>
+		<fieldset><legend>Meta-Info*</legend>
+			<select name="metainfo" id="metainfo" required="required">
+				<th:block th:each="meta : ${metainfo}">
+				 <option th:value="${meta.keyword}" th:text="${meta.keyword}"></option></th:block>
+			</select>
+		</fieldset>
+		<fieldset><legend>Link-Video</legend>
+			<input type="text" name="link" placeholder="Inscrisci il link del video dell'articolo (FACOLTATIVO)">
+		</fieldset>
+		</div>
+		<div class="buttonArg">
+			<button class="button" type="submit" formaction="/admin/addArticolo" formmethod="post">Conferma</button>
+		</div>
+	</div>
+</form>	
+	
+</body>
+</html>

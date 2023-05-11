@@ -95,7 +95,7 @@ body {
 	margin: auto;
 	text-align: center;
 	padding: 10px;
-	color: #5082D7;
+	color: #45779C;
 	font-size: 25px;
 	font-weight: 600;
 }
@@ -154,7 +154,7 @@ body {
 
 .button {
 	padding: 5px;
-	background-color: #5082D7;
+	background-color: #45779C;
 	border: none;
 	border-radius: 4px;
 	width: 150px;
@@ -284,7 +284,7 @@ body {
 	margin: auto;
 	width: 65%;
 	padding: 20px;
-	border: 1px solid #F8C01B;
+	border: 1px solid turquoise;
 }
 
 .altro {
@@ -342,346 +342,13 @@ body {
 
 .button-test {
 	padding: 10px;
-	background-color: #5082D7;
+	background-color: #45779C;
 	border: none;
 	border-radius: 5px;
 	font-size: 16px;
 	color: white;
 	font-weight: bold;
 }
-
-
-/* Common style */
-
-		.grid figure {
-			position: relative;
-			/* float: left; */
-			overflow: hidden;
-			/* margin: 10px 1%; */
-			/* min-width: 300px; */
-			/* max-width: 480px; */
-			/* max-height: 360px; */
-			width: 100%;
-			background: #3085a3;
-			text-align: center;
-			cursor: pointer;
-			/* margin: 10px; */
-			/* padding: 16px; */
-		}
-
-		.grid figure img {
-			position: relative;
-			display: block;
-			min-height: 100%;
-			max-width: 100%;
-			opacity: 0.5;
-		}
-
-		.grid figure figcaption {
-			/* padding: 9em; */
-			color: #fff;
-			text-transform: uppercase;
-			/* font-size: 1.25em; */
-			-webkit-backface-visibility: hidden;
-			backface-visibility: hidden;
-		}
-
-		.grid figure figcaption::before,
-		.grid figure figcaption::after {
-			pointer-events: none;
-		}
-
-		.grid figure figcaption,
-		.grid figure figcaption>a {
-			position: absolute;
-			top: 0;
-			/* left: 0; */
-			width: 100%;
-			height: 100%;
-		}
-
-		/* Anchor will cover the whole item by default */
-
-		/* For some effects it will show as a button */
-
-		.grid figure figcaption>a {
-
-			text-indent: 200%;
-			white-space: nowrap;
-			font-size: 0;
-			opacity: 0;
-		}
-
-		.grid figure h2 {
-			/* word-spacing: -0.15em; */
-			/* font-weight: 300; */
-			font-size: 16px;
-		}
-
-		.grid figure h2 span {
-			font-weight: 800;
-		}
-
-		.grid figure h2,
-		.grid figure p {
-			margin: 0;
-		}
-
-		.grid figure p {
-			letter-spacing: 1px;
-			font-size: 68.5%;
-			/* font-size: bold; */
-			/* font-weight: bold; */
-			background: white;
-			opacity: 0.5;
-			color: black;
-		}
-
-		/* Individual effects */
-
-		/*---------------*/
-		/***** Lily *****/
-		/*---------------*/
-
-		figure.effect-lily img {
-			-webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
-			transition: opacity 0.35s, transform 0.35s;
-			-webkit-transform: scale(1.15);
-			transform: scale(1.15);
-		}
-
-		figure.effect-lily figcaption {
-			text-align: left;
-		}
-
-		figure.effect-lily figcaption>div {
-			position: absolute;
-			bottom: 0;
-			left: 0;
-			padding: 2em;
-			width: 100%;
-			height: 50%;
-		}
-
-		figure.effect-lily h2,
-		figure.effect-lily p {
-			position: absolute;
-			left: 0;
-			bottom: 0;
-			padding: 3em;
-			-webkit-transform: translate3d(0, 40px, 0);
-			transform: translate3d(0, 40px, 0);
-			width: 100%;
-			/* margin: auto; */
-			text-align: center;
-		}
-
-		figure.effect-lily h2 {
-			padding-left: 3em;
-			padding-bottom: 12em;
-		}
-
-		figure.effect-lily h2 {
-			-webkit-transition: -webkit-transform 0.35s;
-			transition: transform 0.35s;
-		}
-
-		figure.effect-lily p {
-			/* color: rgba(255, 255, 255, 0.8); */
-			opacity: 0;
-			-webkit-transition: opacity 0.2s, -webkit-transform 0.35s;
-			transition: opacity 0.2s, transform 0.35s;
-		}
-
-		figure.effect-lily:hover img,
-		figure.effect-lily:hover p {
-			opacity: 1;
-		}
-
-		figure.effect-lily:hover img,
-		figure.effect-lily:hover h2,
-		figure.effect-lily:hover p {
-			-webkit-transform: translate3d(0, 0, 0);
-			transform: translate3d(0, 0, 0);
-		}
-
-		figure.effect-lily:hover p {
-			-webkit-transition-delay: 0.05s;
-			transition-delay: 0.05s;
-			-webkit-transition-duration: 0.35s;
-			transition-duration: 0.35s;
-		}
-
-		
-		.tab-fav {
-
-			display: grid;
-			/* width: 105%; */
-			grid-template-columns: 33% 33% 33%;
-
-		}
-		
-		.tab-fav fieldset{
-			margin:10px;
-		}
-
-		.grid {
-			margin: 10px;
-		}
-		
-		.vedi-altro{
-	
-	float: right;
-	margin: 5px;
-
-		}
-
-		/*a,
-	a:hover,
-	a:focus,
-	a:active {
-		text-decoration: none;
-		outline: none;
-	}
-
-	a,
-	a:active,
-	a:focus {
-		color: #6f6f6f;
-		text-decoration: none;
-		transition-timing-function: ease-in-out;
-		-ms-transition-timing-function: ease-in-out;
-		-moz-transition-timing-function: ease-in-out;
-		-webkit-transition-timing-function: ease-in-out;
-		-o-transition-timing-function: ease-in-out;
-		transition-duration: .2s;
-		-ms-transition-duration: .2s;
-		-moz-transition-duration: .2s;
-		-webkit-transition-duration: .2s;
-		-o-transition-duration: .2s;
-	}
-
-	ul {
-		margin: 0;
-		padding: 0;
-		list-style: none;
-	}
-
-	img {
-		max-width: 100%;
-		height: auto;
-	}
-*/
-		.section_title {
-			margin-bottom: 40px;
-		}
-
-		.section_title h2 {
-			color: #333333;
-			font-size: 25px;
-			font-weight: 700;
-			letter-spacing: 1.8px;
-			text-transform: uppercase;
-			text-align: center;
-			margin: auto;
-			margin-bottom: 15px;
-			margin-top: 15px;
-		}
-
-		.brand_border {
-			display: flex;
-
-		}
-
-		.riga {
-			color: #F8C01B;
-			background: #F8C01B;
-			border: 0;
-			height: 2px;
-			width: 45%;
-			margin: auto;
-		}
-
-		.brand_border bi-file-text-fill {
-			font-size: 14px;
-			color: #000000;
-		}
-
-
-		.section_title p {
-			color: #333333;
-			font-size: 14px;
-			line-height: 25px;
-			padding: 14px 0;
-			/* margin: auto; */
-			text-align: center;
-		}
-
-		.choose_us .section_title {
-			margin-top: 45px;
-		}
-
-		#service .single_service {
-			padding: 32px;
-			box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-			margin-bottom: 50px;
-		}
-
-		#service .single_service:hover {
-			box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.4);
-		}
-
-		#service .icon {
-			border: 1px solid #666;
-			border-radius: 5%;
-			color: #333333;
-			/* line-height: 65px; */
-			overflow: hidden;
-			text-align: center;
-			text-decoration: none;
-			width: 200px;
-			padding: 5px;
-		}
-
-		#service .single_service .single_service-left {
-			padding-right: 25px;
-		}
-
-		.single_service-heading {
-			font-size: 18px;
-			font-weight: 700;
-			text-transform: uppercase;
-			color: #000;
-		}
-
-		.single_service-body p {
-			font-size: 15px;
-			line-height: 25px;
-		}
-
-		.single_service-left {
-			display: table-cell;
-			vertical-align: top;
-		}
-
-		.single_service-body {
-			color: #333333;
-			display: table-cell;
-			vertical-align: top;
-		}
-
-		.hvr-curl-top-right {
-			display: inline-block;
-			vertical-align: middle;
-			-webkit-transform: perspective(1px) translateZ(0);
-			transform: perspective(1px) translateZ(0);
-			box-shadow: 0 0 1px transparent;
-			position: relative;
-		}
-
-		#service .single_service:hover {
-			background: #F8C01B none repeat scroll 0 0;
-		}
 
 /**********************************************************LOGIN****************************************************************************/
 
@@ -704,7 +371,7 @@ body {
 	margin: auto;
 	text-align: center;
 	padding: 10px;
-	color: #5082D7;
+	color: #45779C;
 	font-size: 25px;
 	font-weight: 600;
 	padding: 20px;
@@ -767,16 +434,28 @@ input:focus {
 	border-radius: 10px;
 }
 
-.p-log {
-	margin: 5px;
-	/* padding: 3px; */
-	margin-right: 20px;
-	margin-left: 20px;
-	text-align: center;
-	font-size: 18px;
+.rigaSx {
+	height: 1px;
+	background: rgba(0, 0, 0, .2);
+	width: 35%;
+	margin: auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	float: left;
 }
-.form-signin {
 
+.rigaDx {
+	height: 1px;
+	background: rgba(0, 0, 0, .2);
+	width: 35%;
+	margin: auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	float: right;
+}
+
+.form-signin {
+	padding: 15px 35px 45px;
 	background-color: white;
 	border-radius: 4px;
 }
@@ -925,7 +604,7 @@ input:focus {
 }
 
 .form-outer .form .page .field button:hover {
-	background-color: #5082D7;
+	background-color: #45779C;
 }
 
 .form-outer .form .page .field .btns button {
@@ -960,7 +639,7 @@ input:focus {
 }
 
 .progress-bar .step p.active {
-	color: #5082D7;
+	color: #45779C;
 }
 
 .progress-bar .step .bullet {
@@ -977,8 +656,8 @@ input:focus {
 }
 
 .progress-bar .step .bullet.active {
-	border-color: #5082D7;
-	background: #5082D7;
+	border-color: #45779C;
+	background: #45779C;
 }
 
 .progress-bar .step:last-child .bullet::before,
@@ -998,7 +677,7 @@ input:focus {
 }
 
 .progress-bar .step .bullet.active::after {
-	background-color: #5082D7;
+	background-color: #45779C;
 	transform: scaleX(0);
 	transform-origin: left;
 	animation: animate 0.3s linear forwards;
@@ -1059,7 +738,7 @@ input:focus {
 .background2 legend {
 	font-weight: bold;
 	font-size: 20px;
-	color: #5082D7;
+	color: #45779C;
 }
 
 .personal-progress {
@@ -1155,7 +834,7 @@ width:90%;
 }
 
 .sez-button button {
-	background-color: #5082D7;
+	background-color: #45779C;
 	border: none;
 	border-radius: 4px;
 	font-size: 15px;
@@ -1202,7 +881,7 @@ width:90%;
 
 .risultati span {
 	font-size: 18px;
-	color: #5082D7;
+	color: #45779C;
 	font-weight: 600;
 }
 

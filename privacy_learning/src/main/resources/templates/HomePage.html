@@ -2,20 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="css/stylesheet.css">
-<title>Privacy Literacy</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="css/stylesheet.css">
+
+
+
+	<title>Privacy Literacy</title>
+
 </head>
 
 <body>
 	<div th:insert="~{fragments/header::header}"></div>
 	<br>
-	
+
 	<div class="container-home">
-		
-		
+
+
 		<th:block th:if="${session.isEmpty()}">
-			
+
 			<div class="background">
 				<div class="container-sezioni">
 					<!-- sezione benvenuto (senza login) -->
@@ -28,23 +32,23 @@
 								compila il tuo primo questionario ></a>
 						</p>
 					</div>
-					
+
 					<div class="image-box">
 						<img class="image1" th:src="@{/images/questionario.webp}" alt="">
 					</div>
 				</div>
-				</div>
-		
+			</div>
+
 		</th:block>
-		
-<br>			
-	<!-- <th:block th:if="${!(session.userSession.email.equals('admin@gmail.com'))}"> -->
+
+		<br>
+		<!-- <th:block th:if="${!(session.userSession.email.equals('admin@gmail.com'))}"> -->
 		<div class="background">
 			<!-- sezione test privacy (senza login) -->
 			<div class="box-titolo">
 				<div class="titolo">Quanto ne sai di privacy?</div>
 			</div>
-			
+
 			<div class="container-sezioni">
 				<div class="testo">
 					Mettiti alla prova! <br>
@@ -55,10 +59,10 @@
 					</p>
 					<!-- far riferimento al login è logout, altrimenti far riferimento alla pagina test -->
 					<th:block th:if="${session.isEmpty()}">
-					<a th:href="@{/login}" class="button-test">Compila il tuo primo test</a>
+						<a th:href="@{/login}" class="button-test">Compila il tuo primo test</a>
 					</th:block>
 					<th:block th:if="${!session.isEmpty()}">
-					<a th:href="@{/test}" class="button-test">Compila il tuo primo test</a>
+						<a th:href="@{/test}" class="button-test">Compila il tuo primo test</a>
 					</th:block>
 				</div>
 
@@ -66,12 +70,65 @@
 					<img class="image2" th:src="@{/images/test-home.png}" alt="">
 				</div>
 			</div>
-			
+
 		</div>
-	<!--  </th:block> -->
-<br>	
-		<div class="background">
-			<!-- sezione argomenti(senza login) -->
+		<!--  </th:block> -->
+		<br>
+
+		<!-- sezione argomenti(senza login) -->
+
+
+		<section id="service">
+			<div class="background">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="section_title text-center">
+							<h2>A R G O M E N T I</h2>
+							<div class="brand_border">
+								<hr class="riga">
+								<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+									class="bi bi-file-text-fill" viewBox="0 0 16 16">
+									<path
+										d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM5 4h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zM5 8h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1zm0 2h3a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1z" />
+								</svg>
+								<hr class="riga">
+							</div>
+							<p>Puoi scegliere fra una vastità di argomenti da leggere e studiare per approfondire le tue
+								conoscenze. Puoi scegliere fra una vastità di argomenti da leggere e studiare per
+								approfondire le tue
+								conoscenze. Puoi scegliere fra una vastità di argomenti da leggere e studiare per
+								approfondire le tue
+								conoscenze. <br></p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<!--START SINGLE SERVICE AREA-->
+					<th:block th:each="arg : ${argomentiView}" th:if="${arg.getId_studio()>(argomentiView.size()-3)}">
+						<div class="col-md-6 col-lg-4 col-sm-12">
+							<a th:href="@{/argomenti/argomentoView/{id}(id=${arg.id_studio})}">
+								<div class="single_service hvr-curl-top-right">
+									<div class="single_service-left">
+										<div class="icon">
+											<scan th:text="${arg.meta_info}"></scan>
+										</div>
+									</div>
+									<div class="single_service-body">
+										<h4 class="single_service-heading" th:text="${arg.titolo}">Nome</h4>
+										<p th:text="${arg.getDescrizione().substring(0,200).concat('...')}">Testo
+											dell'argomento</p>
+									</div>
+								</div>
+							</a>
+						</div><!--/END SINGLE SERVICE AREA-->
+					</th:block>
+				</div>
+			</div>
+		</section><!--/END SERVICE AREA-->
+
+
+		<!--<div class="background">
+			
 
 			<div class="box-titolo">
 				<div class="titolo">
@@ -101,73 +158,189 @@
 				<a th:href="@{/argomenti/studia-con-noi}">Vedi altro ></a>
 			</p>
 			<br>
-		</div>
+		</div>-->
 
-<br>
+		<br>
+
 		<div class="background">
 			<!-- sezione favole (senza login) -->
+			<section>
+
+				<div class="row">
+					<div class="col-md-12">
+						<div class="section_title text-center">
+							<h2>F A V O L E </h2>
+							<div class="brand_border">
+								<hr class="riga">
+								<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+									class="bi bi-balloon-heart" viewBox="0 0 16 16">
+									<path fill-rule="evenodd"
+										d="m8 2.42-.717-.737c-1.13-1.161-3.243-.777-4.01.72-.35.685-.451 1.707.236 3.062C4.16 6.753 5.52 8.32 8 10.042c2.479-1.723 3.839-3.29 4.491-4.577.687-1.355.587-2.377.236-3.061-.767-1.498-2.88-1.882-4.01-.721L8 2.42Zm-.49 8.5c-10.78-7.44-3-13.155.359-10.063.045.041.089.084.132.129.043-.045.087-.088.132-.129 3.36-3.092 11.137 2.624.357 10.063l.235.468a.25.25 0 1 1-.448.224l-.008-.017c.008.11.02.202.037.29.054.27.161.488.419 1.003.288.578.235 1.15.076 1.629-.157.469-.422.867-.588 1.115l-.004.007a.25.25 0 1 1-.416-.278c.168-.252.4-.6.533-1.003.133-.396.163-.824-.049-1.246l-.013-.028c-.24-.48-.38-.758-.448-1.102a3.177 3.177 0 0 1-.052-.45l-.04.08a.25.25 0 1 1-.447-.224l.235-.468ZM6.013 2.06c-.649-.18-1.483.083-1.85.798-.131.258-.245.689-.08 1.335.063.244.414.198.487-.043.21-.697.627-1.447 1.359-1.692.217-.073.304-.337.084-.398Z" />
+								</svg>
+								<hr class="riga">
+							</div>
+							<p>Leggi una bella favola al tuo bambino. Puoi scegliere fra una vastità di argomenti da
+								leggere e studiare per
+								approfondire le tue
+								conoscenze. Puoi scegliere fra una vastità di argomenti da leggere e studiare per
+								approfondire le tue
+								conoscenze. <br></p>
+						</div>
+					</div>
+				</div>
+
+
+				<div>
+					<!--START SINGLE SERVICE AREA-->
+					<div class="tab-fav">
+						<th:block th:each="favola : ${tutteFavole}"
+							th:if="${favola.getId_favola() > tutteFavole.size()-3}">
+
+							<div class="grid">
+								<figure class="effect-lily">
+									<img th:src="${favola.image_path}" alt="img9">
+									<figcaption>
+										<h2 th:text="${favola.titolofavola}">Titolo Favola</h2>
+										<p th:text="${favola.getTestofavola().substring(0,80).concat('...')}">Contenuto
+											favola</p>
+										<a th:href="@{/favole/favolaView/{id}(id=${favola.id_favola})}">View more</a>
+									</figcaption>
+								</figure>
+							</div>
+
+						</th:block>
+					</div>
+				</div>
+
+			</section>
+		</div>
+
+
+		<!--<div class="background">
+			
 			<div class="box-titolo">
 				<div class="titolo">
 					Insegna l'importanza della privacy<br> anche ai più piccoli
 				</div>
 			</div>
-		
+
 			<div class="container-sezioni">
-				<th:block th:each="favola : ${tutteFavole}"
-					th:if="${favola.getId_favola() > tutteFavole.size()-3}">
+				<th:block th:each="favola : ${tutteFavole}" th:if="${favola.getId_favola() > tutteFavole.size()-3}">
 					<fieldset>
 						<legend th:text="${favola.meta_info}">Meta-Info</legend>
 						<div class="box-argomento">
-							<h3 style="font-family: 'Tempus Sans ITC'; color: purple;"
-								th:text="${favola.titolofavola}">Titolo Favola</h3>
+							<h3 style="font-family: 'Tempus Sans ITC'; color: purple;" th:text="${favola.titolofavola}">
+								Titolo Favola</h3>
 							<p style="font-family: 'Segoe Print'; font-size: x-small;"
 								th:text="${favola.getTestofavola().substring(0,200).concat('...')}">
 								Contenuto piccolo della favola</p>
 						</div>
-						<a class="button" type="submit" th:href="@{/favole/favolaView/{id}(id=${favola.id_favola})}">Continua</a>
+						<a class="button" type="submit"
+							th:href="@{/favole/favolaView/{id}(id=${favola.id_favola})}">Continua</a>
 					</fieldset>
 				</th:block>
 			</div>
-			
+
 			<br>
 			<p class="altro">
 				<a href="/favole/leggi-una-favola">Vedi altro ></a>
 			</p>
 			<br>
 
-		</div>
-<br>
+		</div>-->
+		<br>
+
+
+		<!-- sezione articili (senza login) -->
+
 		<div class="background">
-			<!-- sezione a (senza login) -->
-			
+			<!-- sezione favole (senza login) -->
+			<section>
+
+				<div class="row">
+					<div class="col-md-12">
+						<div class="section_title text-center">
+							<h2>A R T I C O L I</h2>
+							<div class="brand_border">
+								<hr class="riga">
+								<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+									class="bi bi-newspaper" viewBox="0 0 16 16">
+									<path
+										d="M0 2.5A1.5 1.5 0 0 1 1.5 1h11A1.5 1.5 0 0 1 14 2.5v10.528c0 .3-.05.654-.238.972h.738a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 1 1 0v9a1.5 1.5 0 0 1-1.5 1.5H1.497A1.497 1.497 0 0 1 0 13.5v-11zM12 14c.37 0 .654-.211.853-.441.092-.106.147-.279.147-.531V2.5a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0-.5.5v11c0 .278.223.5.497.5H12z" />
+									<path
+										d="M2 3h10v2H2V3zm0 3h4v3H2V6zm0 4h4v1H2v-1zm0 2h4v1H2v-1zm5-6h2v1H7V6zm3 0h2v1h-2V6zM7 8h2v1H7V8zm3 0h2v1h-2V8zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1z" />
+								</svg>
+								<hr class="riga">
+							</div>
+							<p>Articoli e attualità del mondo, notizie interessanti per tenerti aggiornato.
+								Puoi scegliere fra una vastità di argomenti da
+								leggere e studiare per
+								approfondire le tue
+								conoscenze. Puoi scegliere fra una vastità di argomenti da leggere e studiare per
+								approfondire le tue
+								conoscenze. <br></p>
+						</div>
+					</div>
+				</div>
+
+
+				<div>
+					<!--START SINGLE SERVICE AREA-->
+					<div class="tab-fav">
+						<th:block th:each="art : ${tuttiArticoli}"
+							th:if="${art.getId_articolo() > (tuttiArticoli.size()-3)}">
+
+
+							<fieldset>
+								<legend th:text="${art.getMetaInfo()}"></legend>
+								<h2 th:text="${art.getTitolo()}">Titolo Favola</h2>
+							
+								<a style="color: blue;" th:href="${art.getLink()}" th:value="${art.getLink()}">Contenuto articolo</a>
+								
+
+							</fieldset>
+
+						</th:block>
+					</div>
+					<a class="vedi-altro"th:href="@{/article/leggi-un-articolo}">Vedi altro ></a>
+				</div>
+
+			</section>
+		</div>
+
+
+
+
+		<!--<div class="background">
+			 sezione articili (senza login) 
+
 			<div class="box-titolo">
 				<div class="titolo">
 					Articoli di attualità, <br> notizie nel mondo
 				</div>
 			</div>
-			
+
 			<div class="container-sezioni">
-				<th:block th:each="art : ${tuttiArticoli}"
-					th:if="${art.getId_articolo() > (tuttiArticoli.size()-3)}">
+				<th:block th:each="art : ${tuttiArticoli}" th:if="${art.getId_articolo() > (tuttiArticoli.size()-3)}">
 					<div class="box-articolo">
 						<div class="testo-articolo">
 							<br>
 							<h3 th:text="${art.getTitolo()}">Titolo articolo</h3>
 							<p th:text="${art.getMetaInfo()}">metainfo</p>
-							<br> <a target="_blank" style="color: blue;"
-								th:href="${art.getLink()}" th:value="${art.getLink()}">Contenuto
+							<br> <a target="_blank" style="color: blue;" th:href="${art.getLink()}"
+								th:value="${art.getLink()}">Contenuto
 								articolo</a>
 						</div>
 					</div>
 				</th:block>
 			</div>
-			
+
 			<p class="altro">
 				<a th:href="@{/article/leggi-un-articolo}">Vedi altro ></a>
 			</p>
 			<br>
 		</div>
-
+-->
 	</div>
 	<!--  <div th:insert="fragments/footer::footer"></div>  DEVO ANCORA CREARLO -->
 </body>

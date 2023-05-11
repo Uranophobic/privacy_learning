@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<script type="text/javascript" src="../js/ConvalidazioneCampi.js"></script>
+	<link rel="stylesheet" href="../css/stylesheet.css">
+	<link rel="icon" type="image/png" href="img/logo.png" />
+	<title>Privacy Literacy</title>
+</head>
+
+<body>
+	<div th:insert="~{fragments/header::header}"></div>
+	<br>
+	<br>
+	<br>
+	<br>
+<br>
+	<p class="titolo">Modifica il tuo profilo personale</p>
+
+	<form th:action="@{/users/modifica}" th:object="${user}" method="POST">
+		
+		<div class="background">
+			<div th:if="${!session.isEmpty()}">
+			<p class="p-mod" th:text="'Modifica delle informazioni personali di ' + ${session.userSession.email}"></p>
+		</div>
+			<div class="box-profilo">
+
+				<div class="personal-info-mod">
+					
+					<fieldset>
+					<legend>Informazioni personali</legend>
+					<label> Password:</label>
+					<br>
+					<input th:value="${session.userSession.password}" readonly>
+					<br>
+					<label> Nome:</label>
+					<br>
+					<input th:value="${session.userSession.nome}" readonly>
+					<br>
+					<label> Cognome:</label>
+					<br>
+					<input th:value="${session.userSession.cognome}" readonly>
+					<br>
+					<label> Data di nascita:</label>
+					<br>
+					<input th:value="${session.userSession.dataNascita}" type="date" readonly>
+					<br>
+					</fieldset>
+				</div>
+
+	
+
+				<div class="personal-info-mod">
+					
+					<fieldset>
+						<legend>Sovrascrivi i campi che vuoi modificare</legend>
+					<label> Password:</label>
+					<br>
+					<input type="text" name="password">
+					<br>
+					<label> Nome:</label>
+					<br>
+					<input type="text" name="nome">
+					<br>
+					<label> Cognome:</label>
+					<br>
+					<input type="text" name="cognome">
+					<br>
+					<label> Data di nascita:</label>
+					<br>
+					<input type="date" name="dataNascita">
+					<br>
+					</fieldset>
+				</div>
+
+			</div>
+				
+<div class="sez-button">
+		<!-- con a al posto di button esce la mano piuttosto che il cursore. ho inserito il riferimento perch� dava errore -->
+		<a class=button type="submit" th:href="@{/profilo/{email} (email= ${session.userSession.email})}" formmethod="get"> Torna indietro </a>
+		<br>
+				<button  type="submit" th:formaction="@{/users/modifica/{email} (email=${session.userSession.email})}"
+					formmethod="post">Conferma le modifiche</button></div>
+		
+		</div>
+	</form>
+
+</body>
+
+</html>

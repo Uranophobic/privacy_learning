@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="/css/stylesheet.css">
+	<title>Privacy Literacy</title>
+</head>
+
+<body>
+	<div th:insert="~{fragments/header::header}"></div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<div th:insert="~{fragments/header::header}"></div>
+	<th:block th:if="${!session.isEmpty()} and (${session.userSession.email.equals('admin@gmail.com')})">
+<form th:action="@{/all-domande}" th:object="${domanda}" method="POST">
+	<div class="box-titolo">
+				<p class="titAdmin">CREA una nuova domanda</p>
+	</div>
+	
+
+			<div class="background">
+
+				<div class="boxArg">
+
+					<fieldset>
+						<legend>Testo*</legend>
+						<input type="text" name="testo" placeholder="Inserisci il testo della domanda"
+							required="required">
+					</fieldset>
+					<fieldset>
+						<legend>Meta-Info*</legend>
+						<select name="metainfo" id="metainfo" required="required">
+							<th:block th:each="meta : ${metainfo}">
+								<option th:value="${meta.keyword}" th:text="${meta.keyword}"></option>
+							</th:block>
+						</select>
+					</fieldset>
+					<fieldset>
+						<legend>Risposta 1:</legend>
+						<input type="text" name="risposta1" placeholder="Inscrisci la prima risposta">
+					</fieldset>
+					<fieldset>
+						<legend>Risposta 2:</legend>
+						<input type="text" name="risposta2" placeholder="Inscrisci la seconda risposta">
+					</fieldset>
+					<fieldset>
+						<legend>Risposta 3:</legend>
+						<input type="text" name="risposta3" placeholder="Inscrisci la terza risposta">
+					</fieldset>
+					<fieldset>
+						<legend>Risposta 4:</legend>
+						<input type="text" name="risposta4" placeholder="Inscrisci la quarta risposta">
+					</fieldset>
+					<fieldset>
+						<legend>Inserisci l'indice della risposta corretta(Da 1 a 4):</legend>
+						<input type="text" name="rispostaCorr" placeholder="Inscrisci l'indice della risposta corretta">
+					</fieldset>
+					<!-- vanno stampati tutti i tipi di test in una specie di tabellina come se fosse una leggenda -->
+				<!--	<fieldset>
+						<legend>Inserisci l'indice del test a cui appartiene la domanda(Da 1 a 3):</legend>
+					
+						 una specie di leggenda per l'amministratore 
+						<table style="width:100%">
+							<tr>
+								<th>Test Base</th>
+								<th>Test Medio</th>
+								<th>Test Alto</th>
+							</tr>
+							<tr>
+								<th:block th:each="t : ${test}">
+								<td><p th:text="${t.id_test}"></p></td>
+								</th:block>
+							</tr>
+							<tr>
+							<td><p th:text="${t.tipo}"></td>
+								<td><p th:text="${t.tipo}"></td>
+								<td><p th:text="${t.tipo}"></td>
+							</tr>
+						</table>
+-->
+
+					<!--	<select name="idtest" id="test" required="required">
+							<th:block th:each="t : ${test}">
+								<option th:value="${t.id_test}" th:text="${t.tipo_test}"></option>
+							
+						</select>-->
+					</fieldset>
+				</div>
+
+			
+				<div class="buttonArg">
+					<button class="button" type="submit" formaction="/admin/addDomanda/{id} (id=${dom.id_domanda})" formmethod="post">Conferma</button>
+				</div>
+			<!--  	<a type="submit" class="button" th:href="@{/test/viewTest/{id} (id=${dom.id_test})"> Annulla </a>-->
+			</div>
+
+
+
+		</form>
+
+
+	</th:block>
+	<th:block th:if="${session.isEmpty()} or ${!session.userSession.email.equals('admin@gmail.com')}">
+	 NON HAI L'AUTORIZZAZIONE PER POTER ACCEDERE A QUESTA PAGINA
+	</th:block>
+</body>
+
+</html>

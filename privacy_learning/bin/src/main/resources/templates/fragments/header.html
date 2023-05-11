@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" href="../css/stylesheet.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+<link rel="stylesheet" href="https://www.ionos.it/digitalguide/path/to/font-awesome/css/font-awesome.min.css"> 
+<title>Insert title here</title>
+</head>
+<body th:fragment="header">
+<div class="container">
+	<div class="header">
+		<div class="logo-container">	
+		<a th:href="@{/homepage}"><img class="logo" th:src="@{/images/logobuono.png}" alt="logo"></a>
+		</div>
+		
+		<div class="center-container">
+		<div class="titolo"> PRIVACY FOR YOU </div>
+		<div class="header-menu">
+			<a th:href="@{/homepage}">Home</a>
+			<a th:href="@{/article/leggi-un-articolo}">Articoli &amp; News</a>
+			<a th:href="@{/favole/leggi-una-favola}">Favole</a>
+			<a th:href="@{/argomenti/studia-con-noi}">Studia con noi</a>
+			<a th:if="${session.isEmpty()}" th:href="@{/login}">Test</a>
+			<a th:if="${!session.isEmpty()}" th:href="@{/test}">Test</a>
+			<th:block th:if="${!session.isEmpty()} and (${session.userSession.email.equals('admin@gmail.com')})">
+			<a th:href="@{/users/all}">Utenti</a>
+			<a th:href="@{/metainfo/all}"> MetaInfo </a>
+			</th:block>
+		</div>
+		</div>
+		<!-- cambiamo il tasto login con l'omino del profilo solo dopo che l'utente ha effettuato l'accesso-->
+		<div class="header-icons">
+		 <th:block th:if="${session.isEmpty()}"> 
+	 	<div class="login"><a type="submit" class="button" th:href="@{/login}"> LOGIN </a></div>  
+			<div class="login">
+				<!-- 	<a href="login"><img th:src="@{images/login.png}" alt="login" width=60px height=60px></a>  -->
+				</div>
+		</th:block>
+		
+			<th:block th:unless="${session.isEmpty()}"> 
+		 <div  class="pulsanti">
+			<div class="login">
+			<a class="icon" type="submit" th:href="@{/profilo/{email} (email=${session.userSession.email})}"> <img src="https://img.icons8.com/small/36/null/user.png"/> </a>
+			</div>
+			<div class="login">
+			<a class="icon" type="submit" th:href="@{/users/logout}"> <img src="https://img.icons8.com/small/36/null/exit.png"/></a>
+			</div> 
+			</div>
+			</th:block>
+		
+		<!--<div class="search-bar">
+  			<input type="text" placeholder="Cerca...">
+ 		</div>-->
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

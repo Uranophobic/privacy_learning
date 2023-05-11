@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<script type="text/javascript" src="../js/ConvalidazioneCampi.js"></script>
+<link rel="stylesheet" href="/css/stylesheet.css">
+<link rel="icon" type="image/png" href="img/logo.png" />
+<title>Privacy Literacy - Login</title>
+</head>
+<body>
+	<div th:insert="~{fragments/header::header}"></div>
+	<br>
+	<div class="container-home">
+			<!-- CONTROLLO CHE L'UTENTE SIA ADMIN -->
+	<th:block th:if="${!session.isEmpty()} and (${session.userSession.email.equals('admin@gmail.com')})">
+		<h1>QUESTA PAGINA VISUALIZZA IL FORM PER MODIFICARE L' ARTICOLO</h1>
+		<form
+			th:action="@{/modificaArticolo/{id} (id=${articolo.id_articolo})}"
+			th:object="${articolo}" method="post">
+
+			<fieldset>
+				<div class="testo-articolo">
+					<table>
+						<tr>
+							<th>TITOLO:</th>
+							<th><input th:value="${articolo.getTitolo()}"></th>
+						</tr>
+						<tr>
+							<th>meta info:</th>
+							<th><select name="metainfo" id="metainfo" required="required">
+								<option selected="selected" disabled="disabled" th:value="${articolo.getMetaInfo()}" th:text="${articolo.getMetaInfo()}"></option>
+									<th:block th:each="meta : ${metainfo}">
+										<option th:value="${meta.keyword}" th:text="${meta.keyword}"></option>
+										</th:block>
+							</select></th>
+						</tr>
+						<tr>
+							<th>link:</th>
+							<th><input style="color: blue;"
+								th:href="${articolo.getLink()}" th:value="${articolo.getLink()}"></th>
+						</tr>
+					</table>
+				</div>
+			</fieldset>
+			<a type="submit" class="button" th:href="@{/admin/modificaArticolo/{id} (id=${articolo.id_articolo})}"> Modifica </a>
+			<a type="submit" class="button" th:href="@{/article/leggi-un-articolo}"> Annulla </a>
+		</form>
+</th:block>
+	
+	<!-- SE NON SI TRATTA DELL' UTENTE ADMIN -->
+			<th:block th:if="${session.isEmpty()} or ${!(session.userSession.email.equals('admin@gmail.com'))}">
+			<h1>NON HAI L'AUTORIZZAZIONE PER MODIFICARE QUESTO UTENTE</h1>
+		</th:block>
+	</div>
+</body>
+</html>

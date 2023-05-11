@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<link rel="stylesheet" href="../css/stylesheet.css">
+	<title>Privacy Literacy</title>
+</head>
+
+<body>
+	<div th:insert="~{fragments/header::header}"></div>
+	<br>
+	<div class="container-home">
+		<div class="box-titolo">
+			<div class="titolo">Studia con noi</div>
+		</div>
+		<div class="background">
+
+			<a type="button" th:if="${!session.isEmpty()} and ${session.userSession.email.equals('admin@gmail.com')}"
+				class="button" th:href="@{/admin/creaArg}"> Aggiungi </a>
+
+			<br>
+			<!-- CONTROLLO SE L'UTENTE SIA ADMIN -->
+			<th:block th:if="${!session.isEmpty()} and ${session.userSession.email.equals('admin@gmail.com')}"
+				th:each="arg : ${argomentiView}">
+				<fieldset>
+					<legend th:text="${arg.meta_info}">Meta-Info</legend>
+					<div class="box-argomento">
+						<h3 th:text="${arg.titolo}">Titolo Argomento</h3>
+						<p th:text="${arg.getDescrizione().substring(0,200).concat('...')}">contenuto</p>
+					</div>
+					<a class="button" type="submit"
+						th:href="@{/argomenti/argomentoView/{id}(id=${arg.id_studio})}">Continua</a>
+					<a class=button th:href="@{/admin/fixedArgomento/{id}(id=${arg.getId_studio()})}">Modifica</a>
+					<a class=button th:href="@{/admin/deleteArgomento/{id}(id=${arg.getId_studio()})}">Elimina</a>
+				</fieldset>
+			</th:block>
+			<!--  ALTRIMENTI -->
+			<th:block th:if="${session.isEmpty()} or ${!(session.userSession.email.equals('admin@gmail.com'))}">
+				<div class="grid-container">
+					<th:block th:each="arg : ${argomentiView}">
+						<div class="grid-item">
+							<fieldset>
+								<legend th:text="${arg.meta_info}">Meta-Info</legend>
+								<div class="box-argomento">
+									<h3 th:text="${arg.titolo}">Titolo Argomento</h3>
+									<p th:text="${arg.getDescrizione().substring(0,200).concat('...')}">contenuto</p>
+								</div>
+								<a class="button" type="submit"
+									th:href="@{/argomenti/argomentoView/{id}(id=${arg.id_studio})}">Continua</a>
+							</fieldset>
+						</div>
+					</th:block>
+				</div>
+			</th:block>
+		</div>
+	</div>
+
+</body>
+
+</html>

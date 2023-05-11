@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<script type="text/javascript" src="../js/ConvalidazioneCampi.js"></script>
+<link rel="stylesheet" href="/css/stylesheet.css">
+<link rel="icon" type="image/png" href="img/logo.png"/>
+<title>Privacy Literacy - Login</title>
+<style>
+
+table, th, td {
+ border: 1px solid black;
+  border-collapse: collapse;
+  padding: 5px;
+  margin-left: 40%;
+  width:25%;
+
+}
+</style>
+</head>
+<body>
+	 <div th:insert="~{fragments/header::header}"></div>
+<br>
+	<div class="container-home">
+			<div class="background">
+			
+				<div class="box-titolo">
+					<div class="titolo">Tutte le meta</div>
+				</div>
+				<br>
+			 <div>
+				<input value="inserisci la meta da aggiungere"> 
+			 <a type="button" class="button" th:href="@{/admin/createMeta}"> Aggiungi </a>
+			 </div>
+			 
+			 <div>
+				<table>
+						<thead>
+							<tr>
+								<th>nome Meta</th>
+								<th>azione</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="m : ${metainfo}">
+								<td th:text="${m.keyword}">nome</td>
+								<td><a style="align-content: center;" target="_blank" th:href="@{/admin/deleteMeta/{id}(id=${m.keyword})}" class="button"> Elimina </a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				
+			</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" href="../css/stylesheet.css">
+<title>Privacy Literacy</title>
+</head>
+
+<body>
+	<div th:insert="~{fragments/header::header}"></div>
+	<br>
+	<div class="container-home">
+		<div class="box-titolo">
+				<div class="titolo">Curiosit&agrave; e Novit&agrave;</div>
+			</div>
+	 <a class="button" th:if="${!session.isEmpty()} and ${session.userSession.email.equals('admin@gmail.com')}"  th:href="@{/admin/createArticolo}"> Aggiungi </a>
+		<div class="background">
+		<br>
+			<!-- CONTROLLO SE L'UTENTE SIA ADMIN -->
+			<th:block
+				th:if="${!session.isEmpty()} and (${session.userSession.email.equals('admin@gmail.com')})" th:each="art : ${tuttiArticoli}">
+				<fieldset style="margin:2% 15% 2% 15%;">
+					<div class="testo-articolo">
+						<br>
+						<h3 th:text="${art.getTitolo()}">Titolo articolo</h3>
+						<p th:text="${art.getMetaInfo()}">metainfo</p>
+						<br> <a target="_blank" style="color: blue;"
+							th:href="${art.getLink()}" th:value="${art.getLink()}">Contenuto
+							articolo</a>
+							<br> <br>
+							<a class=button th:href="@{/admin/fixedArticolo/{id}(id=${art.getId_articolo()})}">Modifica</a>
+							<a class=button th:href="@{/admin/deleteArticolo/{id}(id=${art.getId_articolo()})}">Elimina</a>
+					</div>
+				</fieldset>
+			</th:block>
+
+			<!--  ALTRIMENTI -->
+			<th:block
+				th:if="${session.isEmpty()} or ${!(session.userSession.email.equals('admin@gmail.com'))}">
+				<div class="grid-container">
+					<th:block th:each="art : ${tuttiArticoli}">
+						<div class="grid-item">
+							<fieldset>
+								<div class="testo-articolo">
+									<br>
+									<h3 th:text="${art.getTitolo()}">Titolo articolo</h3>
+									<p th:text="${art.getMetaInfo()}">metainfo</p>
+									<br> <a target="_blank" style="color: blue;"
+										th:href="${art.getLink()}" th:value="${art.getLink()}">Contenuto
+										articolo</a>
+								</div>
+							</fieldset>
+						</div>
+					</th:block>
+				</div>
+			</th:block>
+		</div>
+	</div>
+</body>
+</html>

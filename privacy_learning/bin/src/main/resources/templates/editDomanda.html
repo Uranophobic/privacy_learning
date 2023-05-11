@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<script type="text/javascript" src="../js/ConvalidazioneCampi.js"></script>
+<link rel="stylesheet" href="/css/stylesheet.css">
+<link rel="icon" type="image/png" href="img/logo.png" />
+<title>Privacy Literacy - Login</title>
+</head>
+<body>
+	<div th:insert="~{fragments/header::header}"></div>
+	<br>
+	<div class="container-home">
+		<div class="background">
+			<!-- CONTROLLO CHE L'UTENTE SIA ADMIN -->
+			<th:block
+				th:if="${!session.isEmpty()} and (${session.userSession.email.equals('admin@gmail.com')})">
+
+				<form
+					th:action="@{/modificaDomanda/{id} (id=${domanda.id_domanda})}"
+					th:object="${domanda}" method="post">
+					<div class="box-profilo">
+						<fieldset class="personal-info">
+							<div >
+
+
+								<legend>Informazioni personali</legend>
+								<label> id:</label> 
+								<input th:value="${domanda.id_domanda}" readonly> 
+								<br> 
+								<label> domanda:</label> 
+								<input th:value="${domanda.testo}" readonly>
+								<br>
+								<label> meta info:</label> 
+								<input	th:value="${domanda.meta_info}" readonly> 
+								<br> 
+								<label>	risposta 1:</label> 
+								<input th:value="${domanda.risposta1}" readonly>
+								<br> 
+								<label> risposta 2:</label> 
+								<input	th:value="${domanda.risposta2}" readonly> 
+								<br> 
+								<label> risposta 3:</label> 
+								<input th:value="${domanda.risposta3}" readonly>
+								<br> 
+								<label> risposta 4:</label> 
+								<input	th:value="${domanda.risposta4}" readonly> 
+								<br> 
+								<label>	risposta esatta:</label> 
+								<input th:value="${domanda.risposta_corretta}"	readonly>
+							</div>
+						</fieldset>
+
+
+
+						<fieldset class="personal-info">
+							<div >
+								<legend>Sovrascrivi i campi che vuoi modificare</legend>
+								<label> Domanda:</label> <input type="text" name="testo">
+								<br> 
+								<label> risposta 1:</label> 
+								<input type="text" name="risposta1"> 
+								<br> 
+								<label> risposta 2:</label>
+								<input type="text" name="risposta2"> 
+								<br> 
+								<label>	risposta 3:</label> 
+								<input type="text" name="risposta3"> 
+								<br>
+								<label> risposta 4:</label> 
+								<input type="text" name="risposta4">
+								<br> 
+								<label> risposta corretta:</label> 
+								<input type="text" name="risposta_esatta"> 
+								<br> <label> meta-info:</label>
+									<select name="metainfo" id="metainfo" required="required">
+									<th:block th:each="meta : ${metainfo}">
+										<option th:value="${meta.keyword}" th:text="${meta.keyword}"></option>
+									</th:block>
+								</select> <br>
+
+							</div>
+						</fieldset>
+					</div>
+					<div class="sez-button">
+						<a type="submit" class="button"
+							th:href="@{/admin/modificaDomanda/{id}/{test} (id=${domanda.id_domanda}, test=${domanda.id_test})}">
+							Modifica </a> <a type="submit" class="button" th:href="@{/test}">Annulla
+						</a>
+					</div>
+				</form>
+			</th:block>
+
+			<!-- SE NON SI TRATTA DELL' UTENTE ADMIN -->
+			<th:block
+				th:if="${session.isEmpty()} or ${!(session.userSession.email.equals('admin@gmail.com'))}">
+				<h1> NON HAI L'AUTORIZZAZIONE PER MODIFICARE QUESTO UTENTE</h1>
+			</th:block>
+		</div>
+	</div>
+</body>
+</html>

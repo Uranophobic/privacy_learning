@@ -262,7 +262,8 @@
 				</div>
 
 				<div class="formArea">
-					<div id="intro">
+					<!-- prime 5 domande-->
+					<div id="createAccount">
 						<p>
 						<div class="intro-tit">Introduzione al test privacy</div>
 						<div class="intro-testo"> Benvenut* <scan
@@ -612,7 +613,7 @@
 			document.getElementById('step1').classList.remove('active');
 			document.getElementById('step1').classList.add('completed');
 			document.getElementById('step2').classList.add('active');
-			document.getElementById('intro').style.display = 'none';
+			document.getElementById('createAccount').style.display = 'none';
 			document.getElementById('personalInfo').style.display = 'block';
 		}
 
@@ -621,7 +622,7 @@
 			document.getElementById('step2').classList.remove('completed');
 			document.getElementById('step1').classList.add('active');
 			document.getElementById('personalInfo').style.display = 'none';
-			document.getElementById('intro').style.display = 'block';
+			document.getElementById('createAccount').style.display = 'block';
 		}
 
 		document.getElementById('buttonStep2Next').onclick = function (e) {

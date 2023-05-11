@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http//www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<script type="text/javascript" src="../js/ConvalidazioneCampi.js"></script>
+	<link rel="stylesheet" href="../css/stylesheet.css">
+	<link rel="icon" type="image/png" href="img/logo.png" />
+	<title>Privacy Literacy - Registrazione</title>
+</head>
+
+<body>
+<div th:insert="~{fragments/header::header}"></div>
+	<br>
+	<div class="utentelist">
+
+		<h2 th:text="#{title.list}"> lista degli utenti </h2>
+
+		<table>
+			<thead>
+				<tr>
+					<th> nome</th>
+					<th> cognome</th>
+					<th> email</th>
+					<th> password</th>
+					<th> data</th>
+
+				</tr>
+
+
+			</thead>
+			<tbody>
+				<tr th:each="user : ${allUtenti}">
+					<td th:text="${user.nome}">nome</td>
+					<td th:text="${user.cognome}">cognome</td>
+					<td th:text="${user.email}">email</td>
+					<td th:text="${user.password}">password</td>
+					<td th:text="${user.dataNascita}"></td>
+
+				</tr>
+			</tbody>
+		</table>
+
+
+	</div>
+</body>

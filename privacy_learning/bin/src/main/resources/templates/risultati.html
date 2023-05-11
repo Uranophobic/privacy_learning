@@ -42,7 +42,7 @@
 
 			<div class="risultati" th:if="${!session.isEmpty()}">
 				<p class="titolo"> I tuoi risultati </p>
-				<p>Hai completato il test: <span th:text="${session.userSession.livello}"></span></p>
+				<p>Hai completato con il test: <span th:text="${session.userSession.livello}"></span></p>
 				<p> Hai ottenuto una percentuale del: <span th:text="' '+${perc} + '%'"></span></p>
 				<p> Ecco una panoramica sull'andamento del test che hai appena effettuato. </p>
 				<br>

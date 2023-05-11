@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Hello Bulma!</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+	<link rel="stylesheet" href="css/pie.css">
+</head>
+<style>
+	.tile.is-8 {
+		flex: none;
+		width: 100%;
+	}
+</style>
+
+<body>
+	<!--	<div th:insert="fragments/header::header"></div>-->
+	<br>
+
+	<section class="section">
+		<div class="container">
+			<div class="columns is-mobile">
+
+
+
+				<div class="tile is-ancestor">
+					<div class="tile is-vertical is-8">
+						<div class="tile">
+							<div class="column">1
+								<div class="tile is-parent is-vertical">
+									<article class="tile is-child notification is-primary">
+										<p class="title"> Infomrazioni personali </p>
+										<p class="subtitle">Nome e Cognome</p>
+										<p class="subtitle">Email e Password Censurata </p>
+										<p class="subtitle">Data Nascita </p>
+										<p class="subtitle">Info questionario </p>
+									</article>
+
+								</div>
+							</div>
+
+							<div class="column">2
+								<div class="tile is-parent">
+									<article class="tile is-child notification is-info">
+										<p class="title">Il tuo progresso personale</p>
+										<p class="subtitle">Argomento 1: da studiare</p>
+										<p class="subtitle">Argomento 2: studiato </p>
+										<p class="subtitle">Argomento 3: da studiare</p>
+
+
+										
+										<!-- GRAFICO A TORTA -->
+
+
+										<canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+
+										<script>
+											var xValues = ["Studiati", "Da Studiare"];
+											var yValues = [89, 11];  // qui bisognerà mettere la percentuale di ogni utente 
+											var barColors = [
+												"#b91d47",  //i colori delle due sezioni
+												"#00aba9"
+											];
+
+											new Chart("myChart", {
+												type: "doughnut",
+												data: {
+													labels: xValues,  
+													datasets: [{
+														backgroundColor: barColors,
+														data: yValues
+													}]
+												},
+												options: {
+													title: {
+														display: true,
+													}
+												}
+											});
+										</script>
+
+
+
+
+
+									</article>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+	</section>
+</body>
+
+</html>

@@ -36,12 +36,11 @@ public class HomeControl {
 	@Autowired
 	private ArgomentoStudioService argRep;
 
-//	@GetMapping("/prova")
-//	public String prova(Model model) {
-//		model.addAttribute("allUtenti", utServ.findAll());
-//		System.out.println(utServ.findAll());
-//		return "niente";
-//	}
+	@GetMapping("/prova")
+	public String prova(Model model) {
+
+		return "prova";
+	}
 
 	@GetMapping("/login")
 	public String login(Model model) {

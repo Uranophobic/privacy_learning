@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http//www.thymeleaf.org">
+
+
+<head>
+	<meta charset="ISO-8859-1">
+	<script type="text/javascript" src="../js/ConvalidazioneCampi.js"></script>
+	<link rel="stylesheet" href="../css/stylesheet.css">
+	<link rel="icon" type="image/png" href="img/logo.png" />
+	<title>Privacy Literacy - Registrazione</title>
+	<style type="text/css">
+	table,th,td{
+	border: 1px solid black;
+  border-collapse: collapse;
+  padding-top: 4%;
+  margin: center;
+  width:25%;
+  padding-bottom: 4%;
+}
+	</style>
+</head>
+<body>
+	<div th:insert="~{fragments/header::header}"></div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<div class="background">
+	<div th:if="${!session.isEmpty()} and ${session.userSession.email.equals('admin@gmail.com')}">
+	<div class="box-titolo">
+				<div class="titolo">lista degli utenti</div>
+			</div>
+	<div class="utentelist" >
+		
+		<table >
+			<thead>
+				<tr>
+				<th > nome</th>
+				<th > cognome</th>
+				<th > email</th>
+				<th > data</th>
+				<th > percentuale</th>
+				<th > livello</th>
+				<th > azioni</th>
+				<!-- livello, punteggio vogliamo metterlo? vogliamo inserire anche "azioni" dove ci saranno bottoni per modificare ed eliminare l'utente?-->
+				</tr>
+				
+				
+			</thead>
+			<tbody >
+			<tr th:each="user : ${allUtenti}" >
+				<td th:text="${user.nome}">nome</td> 
+				<td th:text="${user.cognome}">cognome</td> 
+				<td th:text="${user.email}">email</td>
+				<td th:text="${user.dataNascita}">data di nascita</td> 
+				<td th:text="${user.percentuale}">percentuale</td>
+				<td th:text="${user.livello}">livello</td> 
+				<td >
+				<a style="align-content: center;" th:href="@{/users/delete/{id}(id=${user.email})}" class="button"> Elimina </a>
+				</td>
+				
+			</tr>
+			</tbody>
+		</table>
+		</div>
+		</div>
+		<div th:if="${session.isEmpty()} or ${!session.userSession.email.equals('admin@gmail.com')}">
+		NON HAI L'AUTORIZZAZIONE PER VISUALIZZARE QUESTA PAGINA
+		</div>
+		
+	</div>
+</body>
