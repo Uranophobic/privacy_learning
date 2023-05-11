@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import com.privacy.web.model.ProgressoStudio;
-import com.privacy.web.model.Salvataggio;
 
 public interface ProgressoRepository  extends CrudRepository<ProgressoStudio,Integer>{
 	

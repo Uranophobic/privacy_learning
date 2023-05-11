@@ -42,17 +42,20 @@
 				<div class="grid-container">
 					<th:block th:each="favola : ${tutteFavole}">
 						<div class="grid-item">
+						
 							<fieldset>
 								<legend th:text="${favola.meta_info}">Meta-Info</legend>
-								<div class="box-argomento">
-									<h3 style="font-family: 'Tempus Sans ITC'; color: purple;"
-										th:text="${favola.titolofavola}">Titolo Favola</h3>
+								<div class="box-argomento grid">
+								<figure class="effect-lily">
+									<img th:src="${favola.image_path}" alt="img9">
+									<figcaption>
+									<h2 th:text="${favola.titolofavola}">Titolo Favola</h2>
 									<p style="font-family: 'Segoe Print'; font-size: x-small;"
 										th:text="${favola.getTestofavola().substring(0,200).concat('...')}">
 										Contenuto piccolo della favola</p>
 								</div>
 								<a class="button" type="submit" th:href="@{/favole/favolaView/{id}(id=${favola.id_favola})}">Continua</a>
-							</fieldset>
+						</fieldset>
 						</div>
 					</th:block>
 				</div>
