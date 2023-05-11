@@ -9,20 +9,23 @@
 <style type="text/css">
 .imgback{
 background-image: url([[${favola.image_path}]]);
-/*opacity: 0.6;*/
 }
 fieldset{
 padding:1% 3% 1% 3%; 
 margin:1% 10% 1% 10%;
 background: white;
 opacity: 1;
-}</style>
+}
+legend{ 
+background-color: #ffffb3;
+}
+</style>
 </head>
-<body>
+<body class=imgback>
 	 <div th:insert="~{fragments/header::header}"></div>
 <br>
-	<div class="container-home">
-			<div class="background imgback">
+	<div class="container-home imgback">
+			<div class="background ">
 				<div class="box-titolo" style="background-color: white;">
 					<div class="titolo" style="font-family: 'Tempus Sans ITC'; color: purple;" th:text="${favola.getTitolofavola()}">
 						argomento</div>
