@@ -19,6 +19,7 @@ public class MetaInfoControl {
 	@Autowired
 	public MetaInfoService metaServ;
 	
+	@SuppressWarnings("null")
 	@GetMapping ("/all-meta")
 	public List<ModelAndView> tutte (Model model) {
 		List<ModelAndView> mov = null;

@@ -265,48 +265,27 @@
 					<div id="intro">
 						<p>
 						<div class="intro-tit">Introduzione al test privacy</div>
-						<div class="intro-testo"> Benvenut* <scan
-								th:text="${session.userSession.nome} + ' '+${session.userSession.cognome}"></scan>
-							questa è
-							la sezione del test della privacy.
+						<div class="intro-testo"> Benvenut* <scan th:text="${session.userSession.nome} + ' '+${session.userSession.cognome}"></scan>
+							nella sezione del test sulla privacy.
 							<br>
-							Il test è formato da 3 livelli:
+							Il test verr&agrave; suddiviso in 3 livelli:
 							<ol>
-								<li>Base: prevede una conoscenza base, è un livello accessibile a tutti, anche a bambini
-									ed adolescenti.</li>
-								<li>Medio: è un livello in cui le domande hanno un grado di difficoltà maggiore</li>
-								<li>Alto: è un livello che richiede una conoscenza più elevata e maggior consapevolezza.
-								</li>
+								<li>Base: questo livello &egrave; accessibile a tutti, anche a bambini ed adolescenti e prevede domande a conoscenza di base.</li>
+								<li>Medio: questo livello prevede domande con un grado di difficolt&agrave; maggiore.</li>
+								<li>Alto: questo livello richiede una conoscenza pi&ugrave; elevata e maggiore consapevolezza.</li>
 							</ol>
 							<br>
-							Durante lo svolgimento del test risponderai a delle brevi domande che abbracciano un po'
-							tutti gli argomenti
-							portanti della privacy. Ogni volta che risponderai correttamente ad una domanda riceverai un
-							punto, nel caso
-							in cui invece sbaglierai la risposta questo non avrà alcun effetto.
+							Durante il test, risponderai a brevi domande che coprono i principali argomenti della privacy. Ogni volta che risponderai correttamente ad una domanda, guadagnerai un punto. Se risponderai in modo errato, non avrai alcuna penalit&agrave;.
 							<br>
-							Una volta completato il test visualizzerai una pagina che ti mostrerà l'andamento ed il
-							risultato del tuo test.
-
-							Potrai avanzare di livello di difficoltà del test solo se al livello precendente avrai
-							totalizzato un totale di 80%
-							di risposte giuste.
-							<br>
-							Non preoccuparti! Nel caso in cui non dovessi totalizzare una percentuale di almeno 80%
-							correremo noi in tuo aiuto.
-							Troverai sul tuo profilo personale una serie di suggerimenti per migliorare le tue
-							conoscenze sugli ambiti in cui sei
-							risultato più carente nel test. Dopo aver studiato potrai riprovare il test, tutte le volte
-							che vuoi!
+							Una volta completato il test, potrai visualizzare i risultati e verificare se hai raggiunto il punteggio minimo del 80% per avanzare al livello successivo. Se non raggiungerai questo obiettivo, non preoccuparti! Ti forniremo dei suggerimenti per migliorare le tue conoscenze sui punti in cui hai ottenuto risultati inferiori. Dopo aver studiato, potrai riprovare il test tutte le volte che vuoi.
 							<br>
 							<br>
-							Tutto chiaro?
+							Hai capito tutto?
 							<br>
-							Appena ti sentirai pronto per cominciare il test clicca sulla freccia in basso a destra.
-							<br>
+							Se s&igrave;, sei pronto per iniziare il test. Clicca sulla freccia in basso a destra per iniziare.<br>
 						</div>
 						<hr>
-						</p>
+					</p>
 						<div class="button2">
 							<div id="buttonStep1" class="back"></div>
 							<div id="buttonStep1Next" class="next">
@@ -644,6 +623,31 @@
 			alert('Test Completato Con Successo! ')
 		}
 	</script>
+	<th:block
+				th:if=" ${!session.isEmpty()} and ${session.userSession.email.equals('admin@gmail.com')}">
+				<div class="background">
+					<table>
+						<thead>
+							<tr>
+								<th>id</th>
+								<th>tipo Test</th>
+								<th>azioni</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="t : ${test}">
+								<td th:text="${t.id_test}">id</td>
+								<td th:text="${t.tipo_test}">tipo test</td>
+								<td><a th:href="@{/test/viewTest/{id}(id=${t.id_test})}"
+									class="button"> Apri </a> <th:block th:if="${t.id_test} > 3">
+										<a th:href="@{/test/delete/{id}(id=${t.id_test})}"
+											class="button"> Elimina </a>
+									</th:block></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</th:block>
 </body>
 
 </html>
