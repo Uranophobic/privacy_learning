@@ -108,6 +108,7 @@
 	<th:block th:if="${session.isEmpty()} or ${!session.userSession.email.equals('admin@gmail.com')}">
 	 NON HAI L'AUTORIZZAZIONE PER POTER ACCEDERE A QUESTA PAGINA
 	</th:block>
+	<div th:insert="fragments/footer::footer"></div>
 </body>
 
 </html>

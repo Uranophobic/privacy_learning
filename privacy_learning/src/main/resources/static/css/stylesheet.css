@@ -5,8 +5,8 @@
 
 * {
 	
-	/* margin: 0;
- */	/*	padding: 0; */
+	 margin: 0;
+	/*	padding: 0; */
 	outline: none;
 	font-family: 'Poppins', sans-serif;
 	--body-color: #2c2d2a;
@@ -816,16 +816,18 @@ input:focus {
 
 .containerReg {
 	width: 600px;
-	background-color: #D7D6D6;;
+	background-color: white;
 	border-radius: 5px;
 	padding: 25px 20px 0px 20px;
+	border: 1px solid #F8C01B;
 }
 
 .titReg {
 	font-size: 35px;
 	font-weight: 600;
-	margin: 0 0 30px 0;
+	margin: 0;
 	text-align: center;
+	color: #5082D7;
 }
 
 .spaceradio {
@@ -915,7 +917,7 @@ input:focus {
 	margin-top: -20px;
 	border: none;
 	border-radius: 5px;
-	background-color: grey;
+	background-color: #6E8BC0;
 	color: #fff;
 	font-size: 18px;
 	font-weight: 600;
@@ -924,7 +926,6 @@ input:focus {
 	cursor: pointer;
 	transition: .4s ease;
 }
-
 .form-outer .form .page .field button:hover {
 	background-color: #5082D7;
 }
@@ -944,7 +945,7 @@ input:focus {
 
 .containerReg .progress-bar {
 	display: flex;
-	margin: 40px 0;
+	margin: 25px 0;
 }
 
 .containerReg .progress-bar .step {
@@ -1027,7 +1028,7 @@ input:focus {
 .progress-bar .step .check {
 	position: absolute;
 	left: 50%;
-	top: 70%;
+	top: 77%;
 	font-size: 15px;
 	transform: translate(-50%, -50%);
 	display: none;
@@ -1461,7 +1462,7 @@ color: blue;}
 
 
 /**************** footer ************/
-.footer{
+footer{
 	margin-top: 30px;
 	border-top: 2px solid #F8C01B;
 	background:white;
@@ -1473,6 +1474,15 @@ color: blue;}
 	font-size: 15px;
 	
 }
+
+footer p{
+
+	text-align: center;
+	font-size: 18px;
+	font-weight: 300;
+	margin: 30px;
+}
+
 /**********************************************************ADMIN****************************************************************************/
 .titAdmin {
 	color: black;
