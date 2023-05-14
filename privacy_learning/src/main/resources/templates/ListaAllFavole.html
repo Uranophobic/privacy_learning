@@ -10,15 +10,13 @@
 <body>
 	<div th:insert="~{fragments/header::header}"></div>
 <br>
-<br>
-	<br>
-<br><br>
+		
+	 <a type="button" th:if="${!session.isEmpty()} and ${session.userSession.email.equals('admin@gmail.com')}" class="button" th:href="@{/admin/createFavola}"> Aggiungi </a>
+		<div class="background">
 		<div class="box-titolo">
 				<div class="titolo">Favole</div>
 			</div>
-	 <a type="button" th:if="${!session.isEmpty()} and ${session.userSession.email.equals('admin@gmail.com')}" class="button" th:href="@{/admin/createFavola}"> Aggiungi </a>
-		<div class="background">
-		<br>
+
 			<!-- CONTROLLO SE L'UTENTE SIA ADMIN -->
 			<th:block th:if="${!session.isEmpty()} and ${session.userSession.email.equals('admin@gmail.com')}" th:each="favola : ${tutteFavole}">
 				<fieldset>
@@ -42,8 +40,8 @@
 				<div class="grid-container">
 					<th:block th:each="favola : ${tutteFavole}">
 						<div class="grid-item">
+								<div class="grid-favole">
 						
-							<fieldset>
 								<legend th:text="${favola.meta_info}">Meta-Info</legend>
 								<div class="box-argomento grid">
 								<figure class="effect-lily">
@@ -55,7 +53,7 @@
 										Contenuto piccolo della favola</p>
 								</div>
 								<a class="button" type="submit" th:href="@{/favole/favolaView/{id}(id=${favola.id_favola})}">Continua</a>
-						</fieldset>
+			</div>
 						</div>
 					</th:block>
 				</div>

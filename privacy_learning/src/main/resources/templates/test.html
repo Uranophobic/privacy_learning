@@ -5,231 +5,16 @@
 	<meta charset="ISO-8859-1">
 	<link rel="stylesheet" href="../css/stylesheet.css">
 	<link rel="icon" type="image/png" href="img/logo.png" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<title>Privacy Literacy - Test</title>
 
-	<style>
-		section {
-			min-height: 400px;
-			padding: 20px;
-		}
-
-		section .title {
-			display: block;
-			text-align: center;
-			margin-bottom: 40px;
-		}
-
-		section hr {
-			width: 75%;
-			border-color: turquoise;
-			margin: auto;
-			/* margin-bottom: 28px; */
-			margin-bottom: 25px;
-			/* margin-top: 15px; */
-			margin-top: 25px;
-		}
-
-		section .progressionBar {
-			display: flex;
-			height: auto;
-			padding: 0 10%;
-		}
-
-		section .progressionBar .step {
-			height: auto;
-			width: 33%;
-			text-align: center;
-			padding: 10px 0;
-			margin: 0 10px;
-			border-radius: 10px;
-		}
-
-		section .progressionBar .step p {
-			margin: 0;
-			font-size: 18px;
-		}
-
-		section .progressionBar .step.active {
-			background-color: turquoise;
-		}
-
-		section .progressionBar .step.active p {
-			margin: 0;
-			color: white;
-		}
-
-		section .progressionBar .step.completed {
-			background-color: turquoise;
-			opacity: 0.5;
-		}
-
-		section .formArea {
-			display: block;
-			height: auto;
-			padding: 20px 10%;
-
-		}
-
-		section .formArea {
-			display: block;
-			height: auto;
-			padding: 20px 10%;
-			margin-bottom: 25px;
-		}
-
-		section .formArea div div.fields {
-			display: grid;
-			width: 60%;
-			margin: 30px 20%;
-		}
-
-		section .formArea div div.fields label {
-			text-align: left;
-			padding-left: 10px;
-			color: turquoise;
-		}
-
-		section .formArea div div.fields input {
-			border: 0;
-			border-bottom: 1px solid grey;
-			margin-top: 15px;
-			padding-left: 10px;
-			padding-bottom: 5px;
-			outline: none;
-		}
-
-		section .formArea div div.fields input:focus {
-			border-bottom: 2px solid turquoise;
-		}
-
-		section .formArea div div.button2 {
-			display: flex;
-			width: 60%;
-			margin: 0 20%;
-		}
-
-		section .formArea div div.button2 .back {
-			display: flex;
-			justify-content: flex-start;
-		}
-
-		section .formArea div div.button2 .next {
-			display: flex;
-			justify-content: flex-end;
-		}
-
-		section .formArea div div.button2 div {
-			width: 50%;
-		}
-
-		section .formArea div div.button2 div div {
-			width: 45px;
-			height: 45px;
-			background-color: turquoise;
-			/* border: none; */
-			border-radius: 50%;
-			font-size: 20px;
-			cursor: pointer;
-			align-content: center;
-			display: grid;
-		}
-
-		section .formArea div div.button2 div div i {
-			color: white;
-			margin: auto;
-
-		}
-
-		section .formArea div#personalInfo {
-			display: none;
-		}
-
-		section .formArea div#professionalInfo {
-			display: none;
-		}
-
-
-		table,
-		th,
-		td {
-			border: 1px solid black;
-			border-collapse: collapse;
-			padding: 5px;
-			margin-left: 30%;
-			width: 30%;
-		}
-
-		.domande {
-			width: 75%;
-			margin: auto;
-			font-size: 18px;
-		}
-
-		.domande li {
-			margin: 20px;
-			padding: 5px;
-		}
-
-		.risposte {
-			display: grid;
-			grid-template-columns: 5% 80%;
-			/* grid-gap: 10px; */
-		}
-
-		.risposte input {
-			width: 40%;
-		}
-
-		.risposte p {
-			margin: 5px;
-			/* text-align: center; */
-			font-size: 16px;
-		}
-
-		.boxRisposte {
-			display: grid;
-			grid-template-columns: 50% 50%;
-			grid-gap: 15px;
-			width: 80%;
-			margin: auto;
-			grid-row-gap: 20px;
-			margin-top: 20px;
-			margin-bottom: 20px;
-		}
-
-
-		.intro-tit {
-			color: #2c2d2a;
-			text-align: center;
-			font-size: 25px;
-			border-bottom: 1px solid turquoise;
-		}
-
-		.intro-testo {
-			display: block;
-			height: auto;
-			padding: 20px 10%;
-			margin-bottom: 25px;
-			width: 80%;
-			margin: auto;
-			text-align: justify;
-		}
-
-		.no-style {
-			border: none;
-			background: white;
-		}
-	</style>
+	
 
 </head>
 
 <body>
 	<div th:insert="~{fragments/header::header}"></div>
-	<br>
-	<br>
-	<br>
-	<br>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<br>
 	<form th:action="@{/test}" th:object="${testuser}" method="POST">
 		<!-- Controllo sessione vuota -->
 		<div th:if="${session.isEmpty()}">
@@ -247,9 +32,11 @@
 
 			<!-- A seconda del livello dell'utente visualizza le domande -->
 			<section>
-				<div class="titolo">Test</div>
+				
 
-				<div class="progressionBar">
+			
+
+				<div class="formArea">	<div class="titolo">Test</div><div class="progressionBar">
 					<div id="step1" class="step active">
 						<p>Introduzione</p>
 					</div>
@@ -260,8 +47,6 @@
 						<p>Fase due</p>
 					</div>
 				</div>
-
-				<div class="formArea">
 					<div id="intro">
 						<p>
 						<div class="intro-tit">Introduzione al test privacy</div>
@@ -285,7 +70,7 @@
 							Se s&igrave;, sei pronto per iniziare il test. Clicca sulla freccia in basso a destra per iniziare.<br>
 						</div>
 						<hr>
-					</p>
+				
 						<div class="button2">
 							<div id="buttonStep1" class="back"></div>
 							<div id="buttonStep1Next" class="next">
@@ -303,7 +88,7 @@
 							<ol class="domande" start="1">
 								<th:block th:each="d, domStat: ${domBase}">
 									<div th:if="${domStat.count<=7}" th:remove="tag">
-										<li>
+										
 											<p th:text="${d.testo}"></p>
 											<div class="risposte">
 												<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="1"
@@ -325,7 +110,7 @@
 													required>
 												<p th:text="${d.risposta4}"></p>
 											</div>
-										</li>
+										
 										<hr>
 									</div>
 								</th:block>
@@ -348,7 +133,7 @@
 							<ol class="domande" start="8">
 								<th:block th:each="d, domStat: ${domBase}">
 									<div th:if="${domStat.count>7 }" th:remove="tag">
-										<li>
+										
 											<p th:text="${d.testo}"></p>
 											<div class="risposte">
 												<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="1"
@@ -370,7 +155,7 @@
 													required>
 												<p th:text="${d.risposta4}"></p>
 											</div>
-										</li>
+										
 										<hr>
 									</div>
 								</th:block>
@@ -384,8 +169,8 @@
 									<button type="submit" class="no-style"
 										th:formaction="@{/test/{email} (email=${session.userSession.email})}"
 										formmethod="post">
-										<div><i class="fa fa-check"></i></div>
-								</div></button>
+										<div><i class="fa fa-check"></i></div></button>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -479,8 +264,8 @@
 									<button type="submit" class="no-style"
 										th:formaction="@{/test/{email} (email=${session.userSession.email})}"
 										formmethod="post">
-										<div><i class="fa fa-check"></i></div>
-								</div></button>
+										<div><i class="fa fa-check"></i></div></button>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -532,8 +317,8 @@
 									<button type="submit" class="no-style"
 										th:formaction="@{/test/{email} (email=${session.userSession.email})}"
 										formmethod="post">
-										<div><i class="fa fa-check"></i></div>
-								</div></button>
+										<div><i class="fa fa-check"></i></div></button>
+								</div>
 							</div>
 						</div>
 
@@ -542,7 +327,7 @@
 							<ol class="domande" start="8">
 								<th:block th:each="d, domStat: ${domAlto}">
 									<div th:if="${domStat.count>7 }" th:remove="tag">
-										<li>
+										
 											<p th:text="${d.testo}"></p>
 											<div class="risposte">
 												<input type="radio" th:name="'valore'+${d.id_domanda}" th:value="1"
@@ -564,7 +349,7 @@
 													required>
 												<p th:text="${d.risposta4}"></p>
 											</div>
-										</li>
+									
 										<hr>
 									</div>
 								</th:block>
@@ -578,10 +363,11 @@
 									<button type="submit" class="no-style"
 										th:formaction="@{/test/{email} (email=${session.userSession.email})}"
 										formmethod="post">
-										<div><i class="fa fa-check"></i></div>
-								</div></button>
+										<div><i class="fa fa-check"></i></div></button>
+								</div>
 							</div>
 						</div>
+					</div>
 					</div>
 			</section>
 		</div>

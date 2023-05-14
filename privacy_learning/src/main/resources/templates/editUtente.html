@@ -12,15 +12,11 @@
 <body>
 	<div th:insert="~{fragments/header::header}"></div>
 	<br>
-	<br>
-	<br>
-	<br>
-<br>
-	<p class="titolo">Modifica il tuo profilo personale</p>
+
 
 	<form th:action="@{/users/modifica}" th:object="${user}" method="POST">
 		
-		<div class="background">
+		<div class="background">	<p class="titolo">Modifica il tuo profilo personale</p>
 			<div th:if="${!session.isEmpty()}">
 			<p class="p-mod" th:text="'Modifica delle informazioni personali di ' + ${session.userSession.email}"></p>
 		</div>

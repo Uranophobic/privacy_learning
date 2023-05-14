@@ -8,27 +8,9 @@
 	<title>Privacy Literacy - Login</title>
 </head>
 <!-- pagina test dalla homepage -->
-<style>
-	table,
-	th,
-	td {
-		border: 1px solid black;
-	}
-
-	table {
-
-		width: 80%;
-		margin: 25px;
-
-	}
-</style>
 
 <body>
 	<div th:insert="fragments/header::header"></div>
-	<br>
-	<br>
-	<br>
-	<br>
 	<br>
 	<div class="background">
 		<form th:action="@{/test/{email}}" th:object="${testuser}" method="POST">
