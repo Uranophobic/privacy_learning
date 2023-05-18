@@ -45,14 +45,17 @@
 								<legend th:text="${favola.meta_info}">Meta-Info</legend>
 								<div class="box-argomento grid">
 								<figure class="effect-lily">
-									<img th:src="${favola.image_path}" alt="img9">
+									<img th:src="${favola.image_path}" alt="img9"  width="450" height="250">
 									<figcaption>
 									<h2 th:text="${favola.titolofavola}">Titolo Favola</h2>
 									<p style="font-family: 'Segoe Print'; font-size: x-small;"
 										th:text="${favola.getTestofavola().substring(0,200).concat('...')}">
 										Contenuto piccolo della favola</p>
+										</figcaption>
+								</figure>
 								</div>
-								<a class="button" type="submit" th:href="@{/favole/favolaView/{id}(id=${favola.id_favola})}">Continua</a>
+								
+								<a class="button" style="color: white;" type="submit" th:href="@{/favole/favolaView/{id}(id=${favola.id_favola})}">Continua</a>
 			</div>
 						</div>
 					</th:block>
