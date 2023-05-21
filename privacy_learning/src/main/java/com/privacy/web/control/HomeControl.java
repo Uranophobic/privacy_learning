@@ -16,6 +16,7 @@ import com.privacy.web.model.Utente;
 import com.privacy.web.service.ArgomentoStudioService;
 import com.privacy.web.service.ArticoloService;
 import com.privacy.web.service.FavolaService;
+import com.privacy.web.service.ProgressoService;
 import com.privacy.web.service.SalvataggioService;
 import com.privacy.web.service.UtenteService;
 
@@ -35,6 +36,8 @@ public class HomeControl {
 	private SalvataggioService salvServ;
 	@Autowired
 	private ArgomentoStudioService argRep;
+	@Autowired
+	private ProgressoService progServ;
 
 	@GetMapping("/prova")
 	public String prova(Model model) {
@@ -73,35 +76,25 @@ public class HomeControl {
 		System.out.println(email);
 		Utente u = utServ.findUtenteByEmail(email);
 
-		// devi settare la percentuale
-		if (u.getPercentuale() != 0) {
-			int diff = 100 - u.getPercentuale();
-			model.addAttribute("perc", u.getPercentuale());
-			model.addAttribute("diff", diff);
-		}
+		if (u != null) { // qui è tutto ok
 
-		// la sessione
-		userSession.setAttribute("userSession", u);
+			// devi settare la percentuale
+			if (u.getPercentuale() != 0) {
+				int diff = 100 - u.getPercentuale();
+				model.addAttribute("perc", u.getPercentuale());
+				model.addAttribute("diff", diff);
+			}
+
+			// la sessione
+			userSession.setAttribute("userSession", u);
+		
+		}
+		
+		
 
 		// ed eventuali argomenti da studare
 
-		List<Salvataggio> allSave = salvServ.findByEmail(email); // tutti i salvataggi dell'utente
-		ArrayList<String> argDaStudiare = new ArrayList<>();
-
-		if (!u.getLivello().equals("Nessuno")) {
-			for (int i = 0; i < allSave.size(); i++) {
-				if (!allSave.get(i).getRisposta_utente().equals(allSave.get(i).getRisposta_corretta())) {
-					argDaStudiare.add(allSave.get(i).getMeta_info());
-				}
-			}
-
-			// bisogna eliminare i duplicati da argomenti da studiare
-			// MA NON SO COME SI FA
-
-		}
-		model.addAttribute("argDaStudiare", argDaStudiare);
-
+		model.addAttribute("argDaStudiare", progServ.findByEmail(u.getEmail()));
 		return "profilo";
-
 	}
 }

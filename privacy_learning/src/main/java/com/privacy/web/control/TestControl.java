@@ -50,6 +50,8 @@ public class TestControl {
 		//model.addAttribute("numDomande", domServ.countDomandeByIdTest())
 		return "allDomande";
 	}
+	
+	
 	/* ALESSIA */
 	// pagina test dalla homepage
 	@GetMapping("/test")
@@ -92,13 +94,13 @@ public class TestControl {
 		 */
 
 		
-		if(livello.equals("Nessuno") || (livello.equals("Base") && u.getPercentuale()<=80) ) {
+		if(livello.equals("Nessuno") || (livello.equals("Base") && u.getPercentuale()<80) ) {
 			livello="1";
 			u.setLivello("Base");
-		} else if (livello.equals("Base") || (livello.equals("Medio") && u.getPercentuale()<=80)) {
+		} else if (livello.equals("Base") || (livello.equals("Medio") && u.getPercentuale()<80)) {
 			livello="2";
 			u.setLivello("Medio");
-		} else if (livello.equals("Medio") || (livello.equals("Alto") && u.getPercentuale()<=80)) {
+		} else if (livello.equals("Medio") || (livello.equals("Alto") && u.getPercentuale()<80)) {
 			livello="3";
 			u.setLivello("Alto");
 		}

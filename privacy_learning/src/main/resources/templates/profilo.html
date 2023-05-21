@@ -157,7 +157,7 @@
 									}
 								});
 						</script>
-
+<br>
 						<p> Questi sono gli argomenti che hai sbagliato nell'ultimo test che hai effettuato: </p>
 
 						<table class="tab-arg">
@@ -168,7 +168,7 @@
 							
 						<th:block th:each="s: ${argDaStudiare}">
 							<tr>
-								<td><p th:text="${s}"></p></td>
+								<td><p th:text="${s.arg_dastudiare}"></p></td>
 								<td><input type="checkbox"></td> <!-- qui va fatto il controllo sul db (ARG STUDIATO: SI? okk allora esce checkked-->
 							</tr>	
 						</th:block>

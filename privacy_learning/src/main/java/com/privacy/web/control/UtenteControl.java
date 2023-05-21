@@ -29,6 +29,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.Data;
 
 import com.privacy.web.service.DomandaService;
+import com.privacy.web.service.ProgressoService;
 import com.privacy.web.service.SalvataggioService;
 import com.privacy.web.service.TestService;
 import com.privacy.web.service.UtenteService;
@@ -45,7 +46,9 @@ public class UtenteControl {
 	private UtenteService utServ;
 	@Autowired
 	private DomandaService domServ;
-
+	@Autowired
+	private ProgressoService progServ;
+	
 	public UtenteControl(UtenteService utServ, SalvataggioService salvServ, TestService testServ) {
 		super();
 		this.utServ = utServ;
@@ -262,25 +265,24 @@ public class UtenteControl {
 					userSession.setAttribute("userSession", user);
 
 					// ed eventuali argomenti da studare
-					ArrayList<String> argDaStudiare = new ArrayList<>();
+					//ArrayList<String> argDaStudiare = new ArrayList<>();
 
-					if (!user.getLivello().equals("Nessuno")) {
-
-						List<Salvataggio> allSave = salvServ.findByEmail(user.getEmail()); // tutti i salvataggi
-																							// dell'utente
-						for (int i = 0; i < allSave.size(); i++) {
-							if(!allSave.get(i).getMeta_info().equals("Questionario")) {							
-								if (!allSave.get(i).getRisposta_utente().equals(allSave.get(i).getRisposta_corretta())) {
-									argDaStudiare.add(allSave.get(i).getMeta_info());
-									///System.out.println("ARGOMENTI DENTRO AL PROFILO" + argDaStudiare);
-									}
-								}
-						}
-
-						// bisogna eliminare i duplicati da argomenti da studiare 
-
-					}
-					model.addAttribute("argDaStudiare", argDaStudiare);
+					/*
+					 * if (!user.getLivello().equals("Nessuno")) {
+					 * 
+					 * List<Salvataggio> allSave = salvServ.findByEmail(user.getEmail()); // tutti i
+					 * salvataggi // dell'utente for (int i = 0; i < allSave.size(); i++) {
+					 * if(!allSave.get(i).getMeta_info().equals("Questionario")) { if
+					 * (!allSave.get(i).getRisposta_utente().equals(allSave.get(i).
+					 * getRisposta_corretta())) {
+					 * //argDaStudiare.add(allSave.get(i).getMeta_info());
+					 * ///System.out.println("ARGOMENTI DENTRO AL PROFILO" + argDaStudiare); } } }
+					 * 
+					 * // bisogna eliminare i duplicati da argomenti da studiare
+					 * 
+					 * }
+					 */
+					model.addAttribute("argDaStudiare", progServ.findByEmail(user.getEmail()));
 					return "profilo";
 
 				} else {
