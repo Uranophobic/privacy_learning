@@ -1,9 +1,76 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="ISO-8859-1">
-<link rel="stylesheet" href="../css/stylesheet.css">
-<title>Privacy Literacy</title>
+	<meta charset="ISO-8859-1">
+	<link rel="stylesheet" href="../css/stylesheet.css">
+	<script src="https://cdn.embedly.com/widgets/platform.js"></script>
+	<script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
+	<title>Privacy Literacy</title>
+	<style>
+		.riga2 {
+
+			color: #F8C01B;
+			background: #F8C01B;
+			border: 0;
+			height: 2px;
+			width: 60%;
+			margin: auto;
+
+		}
+
+		.hashtag {
+			display: flex;
+			margin-top: 15px;
+			margin-bottom: 15px;
+			padding: 10px;
+			background: rgba(248, 192, 27, 0.4);
+			width: fit-content;
+			border-radius: 30px;
+
+		}
+
+		.meta-info {
+			padding-left: 5px;
+			font-size: 12px;
+		}
+		
+		.grid-container li {
+			list-style-type: none;
+		}
+		
+#barra-ricerca {
+	box-sizing: border-box;
+	border: 2px solid #ccc;
+	border-radius: 20px;
+	font-size: 16px;
+	background-color: white;
+	background-image: url('searchicon.png');
+	background-position: 10px 10px;
+	background-repeat: no-repeat;
+	padding: 12px 20px 12px 40px;
+	-webkit-transition: width 0.4s ease-in-out;
+	transition: width 0.4s ease-in-out;
+	margin-left: 10px;
+	height: 35px;
+}
+		#barra-ricerca:focus{
+			width: 85%;}
+			
+.search-button {
+	padding: 5px;
+	background-color: #5082D7;
+	border: none;
+	border-radius: 20px;
+	width: 40px;
+	/* height: 25px; */
+	font-size: 15px;
+	color: white;
+	font-weight: bold;
+	height: 40px;
+	margin-left: 50px;
+}
+	</style>
 </head>
 
 <body>
@@ -11,53 +78,103 @@
 
 	<br>
 
-	<a class="button"
-		th:if="${!session.isEmpty()} and ${session.userSession.email.equals('admin@gmail.com')}"
+	<a class="button" th:if="${!session.isEmpty()} and ${session.userSession.email.equals('admin@gmail.com')}"
 		th:href="@{/admin/createArticolo}"> Aggiungi </a>
-	<div class="background">
+	<div class="background3">
 		<div class="box-titolo">
 			<div class="titolo">Curiosit&agrave; e Novit&agrave;</div>
 		</div>
 		<br>
 		<!-- CONTROLLO SE L'UTENTE SIA ADMIN -->
-		<th:block
-			th:if="${!session.isEmpty()} and (${session.userSession.email.equals('admin@gmail.com')})"
+		<th:block th:if="${!session.isEmpty()} and (${session.userSession.email.equals('admin@gmail.com')})"
 			th:each="art : ${tuttiArticoli}">
 
 			<div class="testo-articolo">
 				<br>
 				<h3 th:text="${art.getTitolo()}">Titolo articolo</h3>
 				<p th:text="${art.getMetaInfo()}">metainfo</p>
-				<br> <a target="_blank" style="color: blue;"
-					th:href="${art.getLink()}" th:value="${art.getLink()}">Contenuto
+				<br> <a target="_blank" style="color: blue;" th:href="${art.getLink()}"
+					th:value="${art.getLink()}">Contenuto
 					articolo</a> <br> <br> <a class=button
 					th:href="@{/admin/fixedArticolo/{id}(id=${art.getId_articolo()})}">Modifica</a>
-				<a class=button
-					th:href="@{/admin/deleteArticolo/{id}(id=${art.getId_articolo()})}">Elimina</a>
+				<a class=button th:href="@{/admin/deleteArticolo/{id}(id=${art.getId_articolo()})}">Elimina</a>
 			</div>
 
 		</th:block>
 
 		<!--  ALTRIMENTI -->
-		<th:block
-			th:if="${session.isEmpty()} or ${!(session.userSession.email.equals('admin@gmail.com'))}">
-			<div class="grid-container">
-				<th:block th:each="art : ${tuttiArticoli}">
-					<div class="grid-item">
+
+		<th:block th:if="${session.isEmpty()} or ${!(session.userSession.email.equals('admin@gmail.com'))}">
+
+<button class="search-button" onclick="ricerca()" ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+</svg></button>
+			<input type="text" id="barra-ricerca" placeholder="Digita un hashtag">
+			
+			<ul id="elenco">
+
+				<div class="grid-container">
+					<th:block th:each="art : ${tuttiArticoli}">
+					<li>	<div class="grid-item">
+
+							<div class="titolo" th:text="${art.getTitolo()}">titolo
+								argomento</div>
+							<hr class="riga2">
+							<div class="hashtag">
+
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+									class="bi bi-bookmarks" viewBox="0 0 16 16">
+									<path
+										d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4zm2-1a1 1 0 0 0-1 1v10.566l3.723-2.482a.5.5 0 0 1 .554 0L11 14.566V4a1 1 0 0 0-1-1H4z" />
+									<path
+										d="M4.268 1H12a1 1 0 0 1 1 1v11.768l.223.148A.5.5 0 0 0 14 13.5V2a2 2 0 0 0-2-2H6a2 2 0 0 0-1.732 1z" />
+								</svg>
+								<p> </p>
+							<p class="meta-info" th:text="'#' + ${art.getMetaInfo()}"></p>
+
+							</div>
+
+							<!-- anteprima dei link -->
+							<a th:href="${art.getLink()}" class="embedly-card" data-card-controls="1">
+							<a th:text="${art.getLink()}" th:href="${art.getLink()}"></a>
 
 
-						<h4 th:text="${art.getTitolo()} + ' (' + ${art.getMetaInfo()} + ') '"></h4>
-					</div>
-					<div class="grid-item">
-						<p><a th:text="${art.getLink()}"></a></p>
-					</div>
+
+						</div></li>	
 
 
-				</th:block>
-			</div>
+
+					</th:block>
+				</div>
+</ul>
+		</th:block>
 	</div>
-	</th:block>
-	</div>
-<div th:insert="fragments/footer::footer"></div>
+	<script>
+  function ricerca() {
+  var input; 
+  var filtro;
+  var lista;
+  var voci;
+  var x;
+  var i;
+  var testo;
+    input = document.getElementById("barra-ricerca");
+    filtro = input.value.toUpperCase();
+    lista = document.getElementById("elenco");
+    
+    voci = lista.getElementsByTagName("li");
+    for (i = 0; i < voci.length; i++) {
+      x = lista.getElementsByTagName("li")[i];
+      testo = x.textContent || x.innerText;
+      if (testo.toUpperCase().indexOf(filtro) > -1) {
+        voci[i].style.display = "";
+      } else {
+        voci[i].style.display = "none";
+      }
+    }
+  }
+</script>
+	<div th:insert="fragments/footer::footer"></div>
 </body>
+
 </html>

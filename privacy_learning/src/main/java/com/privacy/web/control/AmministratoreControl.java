@@ -22,6 +22,7 @@ import com.privacy.web.service.DomandaService;
 import com.privacy.web.service.FavolaService;
 import com.privacy.web.service.MetaInfoService;
 import com.privacy.web.service.TestService;
+import com.privacy.web.service.UtenteService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -31,23 +32,48 @@ import jakarta.servlet.http.HttpServletResponse;
 public class AmministratoreControl {
 
 	@Autowired
-	ArticoloService artServ;
+	private ArticoloService artServ;
 	@Autowired
-	ArgomentoStudioService argServ;
+	private ArgomentoStudioService argServ;
 	@Autowired
-	FavolaService favServ;
+	private FavolaService favServ;
 	@Autowired
-	MetaInfoService metaServ;
+	private MetaInfoService metaServ;
 	@Autowired
-	DomandaService domServ;
+	private DomandaService domServ;
 	@Autowired
-	TestService testServ;
+	private TestService testServ;
+	@Autowired
+	private UtenteService utServ;
+	@Autowired
+	private DomandaRepository domRep;
 
-	@Autowired
-	DomandaRepository domRep;
-
+	
+	/*-----------------------------------ALL--------------------------------------------*/
+	@GetMapping("/all-domande")
+	public String domande(Model model) {
+		model.addAttribute("domande", domRep.findAll());
+		return "allDomande";
+	}
+	
+	// metodo che prende la lista di tutti gli utenti e restituisce la view
+	@GetMapping("/lista-utenti") // tutti gli utenti
+	public String listUser(Model model) {
+		model.addAttribute("allUtenti", utServ.findAll());
+		return "ListaAllUser";
+	}
+	
+	@GetMapping("/lista-meta_info")
+	public String all(Model model) {
+		model.addAttribute("metainfo",metaServ.findAll());
+		return "metaView";
+	}
+	
+	
+	// aggiungere tutti i test 
+	//info generali per l'admin 
 	/*-----------------------------------CREAZIONE--------------------------------------------*/
-//-----------------------METODI GET
+
 	@GetMapping("/createArticolo")
 	public String addArticolo(Model model) {
 		model.addAttribute("metainfo", metaServ.findAll());
@@ -71,14 +97,7 @@ public class AmministratoreControl {
 		model.addAttribute("metainfo", metaServ.findAll());
 		model.addAttribute("idTest", id);
 		return "createDomanda";
-	}
-
-	/* provvisorio */
-	@GetMapping("/all-domande")
-	public String domande(Model model) {
-		model.addAttribute("domande", domRep.findAll());
-		return "allDomande";
-	}
+	}	
 	
 	@GetMapping("/createMeta")
 	public String addMeta(Model model, HttpServletRequest request) {
@@ -89,7 +108,8 @@ public class AmministratoreControl {
 		}
 		return "redirect: /metainfo/all";
 	}
-//-----------------------METODI POST
+
+
 	@PostMapping("/addArticolo")
 	public String createArticolo(@ModelAttribute("articolo") Articolo a, HttpServletRequest request,
 			HttpServletResponse response, Model model) {

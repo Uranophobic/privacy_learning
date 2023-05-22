@@ -56,63 +56,18 @@ public class UtenteControl {
 		this.testServ = testServ;
 	}
 
-	// metodo che prende la lista di tutti gli utenti e restituisce la view
-	@GetMapping("/all") // tutti gli utenti
-	public String listUser(Model model) {
 
-		model.addAttribute("allUtenti", utServ.findAll());
-		return "ListaAllUser";
-	}
 
-	/*
-	 * @GetMapping("/profilo") public String profilo(@ModelAttribute("user") Utente
-	 * user, HttpServletRequest request, HttpServletResponse response, Model model,
-	 * HttpSession userSession) throws Exception {
-	 * 
-	 * System.out.println("user " + user.getEmail());
-	 * 
-	 * Utente u = utServ.findUtenteByEmail(user.getEmail());
-	 * System.out.println("utente trovato" + u.toString()); if (u != null) { if
-	 * (u.getPercentuale() != 0) { int diff = 100 - u.getPercentuale();
-	 * model.addAttribute("perc", u.getPercentuale()); model.addAttribute("diff",
-	 * diff); System.out.println("sono nel profilo di utente control");
-	 * System.out.println("differenza: " + diff); System.out.println("percentuale: "
-	 * + u.getPercentuale()); }
-	 * 
-	 * if(!u.getLivello().equals("Nessuno")) { ArrayList<String> argDaStudiare = new
-	 * ArrayList<>(); List<Salvataggio> allSave =
-	 * salvServ.findByEmail(u.getEmail()); for(int i=0; i<allSave.size(); i++) {
-	 * if(!allSave.get(i).getRisposta_utente().equals(allSave.get(i).
-	 * getRisposta_corretta())) { argDaStudiare.add(allSave.get(i).getMeta_info());
-	 * System.out.println("ARGOMENTI DENTRO AL PROFILO"+ argDaStudiare); } }
-	 * model.addAttribute("argDaStudiare", argDaStudiare); }
-	 * 
-	 * userSession.setAttribute("userSession", u); }
-	 * 
-	 * return "profilo";
-	 * 
-	 * }
-	 */
 
 	/*--------REGISTRAZIONE--------*/
 	// metodo che crea un nuovo utente
-	@GetMapping("/registrazione")
-	public String newUser(Model model) {
 
-		// crea un nuovo utente
-		Utente user = new Utente();
-		model.addAttribute("user", user);
-		return "create_user";
-	}
 
-	@GetMapping("/reg") // qui ci dovrebbe andasre il link della registrazioe ma non sono sicura
+	@GetMapping("/registrazione") // qui ci dovrebbe andasre il link della registrazioe ma non sono sicura
 	public String prova(Model model) {
 		List<Domanda> questionario = domServ.findByIdTest(0);
 		List<Domanda> prima = split(questionario);
 		List<Domanda> seconda = split2(questionario);
-
-		// System.out.println(prima);
-		// System.out.println(seconda);
 
 		Utente user = new Utente();
 
@@ -122,7 +77,7 @@ public class UtenteControl {
 		return "registrazione";
 	}
 
-	@PostMapping("/reg")
+	@PostMapping("/registrazione")
 	public String provarisposte(@ModelAttribute("user") Utente user, HttpServletRequest request,
 			HttpServletResponse response, Model model, HttpSession userSession) throws Exception {
 		if (Check.checkName(request.getParameter("nome")) && Check.checkSurname(request.getParameter("cognome"))
@@ -181,7 +136,6 @@ public class UtenteControl {
 						s.setTesto_domanda(q.getTesto());
 						s.setMeta_info(q.getMeta_info());
 						salvServ.save(s);
-						// System.out.println("salvataggio : " + s.toString());
 					}
 
 				}
@@ -203,9 +157,6 @@ public class UtenteControl {
 			model.addAttribute("descrizione", descrizione);
 			return "redirect:/error";
 		}
-		/*
-		 * user.setLivello("Nessuno"); utServ.save(user);
-		 */
 		userSession.setAttribute("userSession", user);
 		return "profilo";
 	}
@@ -232,7 +183,7 @@ public class UtenteControl {
 		return "privacy";
 	}
 
-	/*-----------------------------------LOGIN------------------------------------------*/
+	/*-----------------------------------PROFILO------------------------------------------*/
 	@PostMapping("/profilo")
 	public String sessioneUtente(@ModelAttribute("user") Utente user, HttpServletRequest request,
 			HttpServletResponse response, Model model, HttpSession userSession) throws Exception {
@@ -265,23 +216,6 @@ public class UtenteControl {
 					userSession.setAttribute("userSession", user);
 
 					// ed eventuali argomenti da studare
-					//ArrayList<String> argDaStudiare = new ArrayList<>();
-
-					/*
-					 * if (!user.getLivello().equals("Nessuno")) {
-					 * 
-					 * List<Salvataggio> allSave = salvServ.findByEmail(user.getEmail()); // tutti i
-					 * salvataggi // dell'utente for (int i = 0; i < allSave.size(); i++) {
-					 * if(!allSave.get(i).getMeta_info().equals("Questionario")) { if
-					 * (!allSave.get(i).getRisposta_utente().equals(allSave.get(i).
-					 * getRisposta_corretta())) {
-					 * //argDaStudiare.add(allSave.get(i).getMeta_info());
-					 * ///System.out.println("ARGOMENTI DENTRO AL PROFILO" + argDaStudiare); } } }
-					 * 
-					 * // bisogna eliminare i duplicati da argomenti da studiare
-					 * 
-					 * }
-					 */
 					model.addAttribute("argDaStudiare", progServ.findByEmail(user.getEmail()));
 					return "profilo";
 
@@ -299,19 +233,8 @@ public class UtenteControl {
 		return "redirect:/login?errorDesc=" + error;
 	}
 
-	@GetMapping("/delete/{id}") //// ??????? (commento di alessia) non credo che questo debba stare qui
-	public String eliminaUtente(@PathVariable String id, Model model) {
-		utServ.deleteById(id);
-		return "redirect:/users/all";
-	}
 
-	@GetMapping("/logout")
-	public String logout(HttpSession session) {
-		session.invalidate();
-		return "redirect:/homepage";
-	}
 
-	/*----------------------------------MODIFICA------------------------------------------*/
 	@GetMapping("/modifica")
 	public String modifica(Model model) {
 // mi serve solo per aprire modifica utente 
@@ -323,11 +246,7 @@ public class UtenteControl {
 			HttpServletResponse response, Model model, HttpSession userSession) throws Exception {
 
 		Utente u = utServ.findUtenteByEmail(user.getEmail());
-		/*
-		 * if (Check.checkName(request.getParameter("nome")) &&
-		 * Check.checkSurname(request.getParameter("cognome")) &&
-		 * Check.checkPwd(request.getParameter("password"))) {
-		 */
+		
 
 		// controllo che il campo non sia vuoto, perchè se è vuoto vuol dire che
 		// l'utente non vuole cambiarlo
@@ -357,19 +276,25 @@ public class UtenteControl {
 
 		}
 
-		/*
-		 * } else { String descrizione =
-		 * "Siamo spiacenti si è verificato un errore con la registrazione. Riprova!";
-		 * model.addAttribute("descrizione", descrizione); return
-		 * "redirect:/error?error="+descrizione; }
-		 */
-
 		utServ.save(u);
 		userSession.setAttribute("userSession", u);
 
 		return "redirect:/profilo/{email}";
 	}
 
+	
+	@GetMapping("/delete/{id}") //// ??????? (commento di alessia) non credo che questo debba stare qui
+	public String eliminaUtente(@PathVariable String id, Model model) {
+		utServ.deleteById(id);
+		return "redirect:/users/all";
+	}
+
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/homepage";
+	}
+	
 	/*------------------------------------METODI INTERNI-------------------------------*/
 	// Metodo che prende solo la prima parte delle domande del questionario utente
 	public static List<Domanda> split(List<Domanda> list) {

@@ -5,6 +5,18 @@
 	<meta charset="ISO-8859-1">
 	<link rel="stylesheet" href="../css/stylesheet.css">
 	<title>Privacy Literacy</title>
+	<style>
+		.button-continua{
+margin-top: 15px;
+	margin: auto;
+	align-content: center;
+	display: flex;
+	/* text-align: center; */
+	justify-content: center;
+	color: white !important;
+
+		}
+	</style>
 </head>
 
 <body>
@@ -34,6 +46,7 @@
 					<a class=button th:href="@{/admin/deleteArgomento/{id}(id=${arg.getId_studio()})}">Elimina</a>
 				</fieldset>
 			</th:block>
+			
 			<!--  ALTRIMENTI -->
 			<th:block th:if="${session.isEmpty()} or ${!(session.userSession.email.equals('admin@gmail.com'))}">
 				<div class="grid-container">
@@ -45,9 +58,10 @@
 									<h3 th:text="${arg.titolo}">Titolo Argomento</h3>
 									<p th:text="${arg.getDescrizione().substring(0,150).concat('...')}">contenuto</p>
 								</div>
-								<a class="button" type="submit"
+								<a class="button-continua" type="submit"
 									th:href="@{/argomenti/argomentoView/{id}(id=${arg.id_studio})}">Continua</a>
 							</fieldset>
+								
 						</div>
 					</th:block>
 				</div>
