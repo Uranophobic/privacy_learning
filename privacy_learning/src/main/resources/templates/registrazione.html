@@ -130,12 +130,12 @@
 
 								<th:block th:each="dom : ${questionario1}">
 									<div class="box-domande">
-										
+
 										<div class="label">
 											<p class="idDomanda" th:text="${dom.id_domanda} + ')'"></p>
 											<p class="domanda" th:text="${dom.testo}"></p>
 										</div>
-									
+
 										<div class="spaceradio">
 											<input type="radio" th:name="'valore'+${dom.id_domanda}" id="mai"
 												value="mai" placeholder="perniente" required />
@@ -156,7 +156,7 @@
 												value="sempre" placeholder="tanto" required />
 											<p th:text="${dom.risposta4}"></p>
 										</div>
-							
+
 									</div>
 								</th:block>
 

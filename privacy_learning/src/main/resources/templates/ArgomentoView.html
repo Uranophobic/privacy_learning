@@ -5,72 +5,7 @@
 	<meta charset="ISO-8859-1">
 	<link rel="stylesheet" href="/css/stylesheet.css">
 	<link rel="icon" type="image/png" href="img/logo.png" />
-	<title>Privacy Literacy - Login</title>
-	<style>
-		.grid-visual {
-			display: grid;
-			grid-template-columns: 20% 60% 20%;
-			color:white;
-		}
-		
-		.riga2{
-		
-	color: #F8C01B;
-	background: #F8C01B;
-	border: 0;
-	height: 2px;
-	width: 60%;
-	margin: auto;
-
-		}
-		
-		.box-argomento{
-		
-
-	text-align: justify;
-	text-justify: inter-word;
-
-		}
-		
-		.freccia a {
-	color: white !important;
-	text-align: center;
-	font-size: 52px;
-	display: block;
-}
-		
-		.meta-info{
-		
-	width: auto;
-
-		}
-		.riga2 {
-
-			color: #F8C01B;
-			background: #F8C01B;
-			border: 0;
-			height: 2px;
-			width: 60%;
-			margin: auto;
-
-		}
-
-		.hashtag {
-			display: flex;
-			margin-top: 15px;
-			margin-bottom: 15px;
-			padding: 10px;
-			background: rgba(248, 192, 27, 0.4);
-			width: fit-content;
-			border-radius: 30px;
-
-		}
-
-		.meta-info {
-			padding-left: 5px;
-			font-size: 12px;
-		}
-	</style>
+	<title>Privacy Literacy - Studia un argomento</title>
 </head>
 
 <body>
@@ -81,31 +16,32 @@
 
 		<div class="titolo" th:text="${argomento.titolo}">titolo
 			argomento</div>
-			<hr class="riga2">
-<br>
+		<hr class="riga2">
+		<br>
 		<div class="grid-visual">
-			<div class="freccia" >
-				<a  type="submit" th:if="${argomento.id_studio}>1" th:href="@{/argomenti/argomentoView/{id}(id=${argomento.id_studio}-1)}"> 
+			<div class="freccia">
+				<a type="submit" th:if="${argomento.id_studio}>1"
+					th:href="@{/argomenti/argomentoView/{id}(id=${argomento.id_studio}-1)}">
 					< </a>
 			</div>
-			
+
 			<div> <!-- contenuto -->
-				
-							<div class="hashtag">
 
-								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-									class="bi bi-bookmarks" viewBox="0 0 16 16">
-									<path
-										d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4zm2-1a1 1 0 0 0-1 1v10.566l3.723-2.482a.5.5 0 0 1 .554 0L11 14.566V4a1 1 0 0 0-1-1H4z" />
-									<path
-										d="M4.268 1H12a1 1 0 0 1 1 1v11.768l.223.148A.5.5 0 0 0 14 13.5V2a2 2 0 0 0-2-2H6a2 2 0 0 0-1.732 1z" />
-								</svg>
-								<p> </p>
-							<p class="meta-info" th:text="'#'+${argomento.meta_info}"></p>
+				<div class="hashtag">
 
-							</div>
-<br>
-				<div class="box-argomento">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+						class="bi bi-bookmarks" viewBox="0 0 16 16">
+						<path
+							d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4zm2-1a1 1 0 0 0-1 1v10.566l3.723-2.482a.5.5 0 0 1 .554 0L11 14.566V4a1 1 0 0 0-1-1H4z" />
+						<path
+							d="M4.268 1H12a1 1 0 0 1 1 1v11.768l.223.148A.5.5 0 0 0 14 13.5V2a2 2 0 0 0-2-2H6a2 2 0 0 0-1.732 1z" />
+					</svg>
+					<p> </p>
+					<p class="meta-info" th:text="'#'+${argomento.meta_info}"></p>
+
+				</div>
+				<br>
+				<div class="container-argomento">
 					<p th:text="${argomento.descrizione}">contenuto</p>
 				</div>
 
@@ -119,8 +55,9 @@
 					</fieldset>
 				</th:block>
 			</div>
-			<div class="freccia" >
-				<a type="submit" th:if="${argomento.id_studio}< ${ultimoId}" th:href="@{/argomenti/argomentoView/{id}(id=${argomento.id_studio}+1)}"> > </a>
+			<div class="freccia">
+				<a type="submit" th:if="${argomento.id_studio}< ${ultimoId}"
+					th:href="@{/argomenti/argomentoView/{id}(id=${argomento.id_studio}+1)}"> > </a>
 			</div>
 		</div>
 	</div>

@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="ISO-8859-1">
-<script type="text/javascript" src="../js/ConvalidazioneCampi.js"></script>
-<link rel="stylesheet" href="/css/stylesheet.css">
-<link rel="icon" type="image/png" href="img/logo.png" />
-<title>Privacy Literacy - Login</title>
+	<meta charset="ISO-8859-1">
+	<script type="text/javascript" src="../js/ConvalidazioneCampi.js"></script>
+	<link rel="stylesheet" href="/css/stylesheet.css">
+	<link rel="icon" type="image/png" href="img/logo.png" />
+	<title>Privacy Literacy - Login</title>
 </head>
+
 <body>
 	<div th:insert="~{fragments/header::header}"></div>
 	<br>
@@ -15,29 +17,31 @@
 			<ol>
 				<th:block th:each="dom : ${domande}">
 					<div class="box-domande">
-					
+
 						<div class="label">
-						<li> <p class="domanda" th:text="${dom.testo}"></p></li>
+							<li>
+								<p class="domanda" th:text="${dom.testo}"></p>
+							</li>
 						</div>
 
 						<div>
-							<input type="radio" th:name="'valore'+${dom.id_domanda}" id=""
-								value="" placeholder="" required />
+							<input type="radio" th:name="'valore'+${dom.id_domanda}" id="" value="" placeholder=""
+								required />
 							<p th:text="${dom.risposta1}"></p>
 						</div>
 						<div>
-							<input type="radio" th:name="'valore'+${dom.id_domanda}"
-								id="" value="" placeholder="" required />
+							<input type="radio" th:name="'valore'+${dom.id_domanda}" id="" value="" placeholder=""
+								required />
 							<p th:text="${dom.risposta2}"></p>
 						</div>
 						<div>
-							<input type="radio" th:name="'valore'+${dom.id_domanda}"
-								id="" value="" placeholder="" required />
+							<input type="radio" th:name="'valore'+${dom.id_domanda}" id="" value="" placeholder=""
+								required />
 							<p th:text="${dom.risposta3}"></p>
 						</div>
 						<div>
-							<input type="radio" th:name="'valore'+${dom.id_domanda}"
-								id="" value="" placeholder="" required />
+							<input type="radio" th:name="'valore'+${dom.id_domanda}" id="" value="" placeholder=""
+								required />
 							<p th:text="${dom.risposta4}"></p>
 						</div>
 					</div>
@@ -48,4 +52,5 @@
 	</div>
 	<div th:insert="fragments/footer::footer"></div>
 </body>
+
 </html>

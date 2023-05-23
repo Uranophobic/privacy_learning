@@ -12,48 +12,48 @@
 <body>
 	<div th:insert="~{fragments/header::header}"></div>
 
-<br>
-		<!-- sezione test privacy (senza login) -->
-		
-		<div class="background">
+	<br>
+	<!-- sezione test privacy (senza login) -->
+
+	<div class="background">
 		<div class="box-titolo">
 			<div class="titolo-login">Accedi al portale della privacy</div>
 		</div>
-			<div class="container-sezioni">
-				<div class="text-login">
-					<img class="image3" th:src="@{/images/image-login.jpg}" alt="logo">
+		<div class="container-sezioni">
+			<div class="text-login">
+				<img class="image3" th:src="@{/images/image-login.jpg}" alt="logo">
 
-					<form th:action="@{/users/session}" th:object="${user}" method="POST" modelAttribute="user"
-						class="form-signin">
-<br>
-						<div class="input-login">
-							<input type="text" class="form-control" id="email" name="email" placeholder="Email"
-								autofocus="autofocus" required="required" onkeyup="checkEmail()" /><br>
-
-							<input type="password" class="form-control" id="password" name="password"
-								placeholder="Password" required="required" onkeyup="checkPassword()" />
-
-
-						</div>
-						<div class="components-button">
-							<button class="button" type="submit" formaction="/users/profilo" formmethod="post"
-								autofocus> Accedi </button>
-						</div>
-
-					
-						<br>
-					</form>
+				<form th:action="@{/users/session}" th:object="${user}" method="POST" modelAttribute="user"
+					class="form-signin">
 					<br>
+					<div class="input-login">
+						<input type="text" class="form-control" id="email" name="email" placeholder="Email"
+							autofocus="autofocus" required="required" onkeyup="checkEmail()" /><br>
+
+						<input type="password" class="form-control" id="password" name="password" placeholder="Password"
+							required="required" onkeyup="checkPassword()" />
+
+
+					</div>
+					<div class="components-button">
+						<button class="button" type="submit" formaction="/users/profilo" formmethod="post" autofocus>
+							Accedi </button>
+					</div>
+
+
 					<br>
+				</form>
+				<br>
+				<br>
 				<div class="brand_border">
-								<hr class="riga">
-								<p class="p-log"> oppure </p>
-								<hr class="riga">
-							</div>
+					<hr class="riga">
+					<p class="p-log"> oppure </p>
+					<hr class="riga">
+				</div>
 				<br>
 				<br>
 				<br>
-				<p class="p-log">Clicca qui per <a  id="text-style" href="/users/registrazione">registrarti </a></p>
+				<p class="p-log">Clicca qui per <a id="text-style" href="/users/registrazione">registrarti </a></p>
 
 
 
@@ -65,7 +65,7 @@
 	</div>
 	</div>
 
-<div th:insert="fragments/footer::footer"></div>
+	<div th:insert="fragments/footer::footer"></div>
 </body>
 
 </html>

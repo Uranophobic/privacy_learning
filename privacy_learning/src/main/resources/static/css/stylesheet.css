@@ -562,42 +562,6 @@ figure.effect-lily:hover p {
 
 }
 
-/*a,
-	a:hover,
-	a:focus,
-	a:active {
-		text-decoration: none;
-		outline: none;
-	}
-
-	a,
-	a:active,
-	a:focus {
-		color: #6f6f6f;
-		text-decoration: none;
-		transition-timing-function: ease-in-out;
-		-ms-transition-timing-function: ease-in-out;
-		-moz-transition-timing-function: ease-in-out;
-		-webkit-transition-timing-function: ease-in-out;
-		-o-transition-timing-function: ease-in-out;
-		transition-duration: .2s;
-		-ms-transition-duration: .2s;
-		-moz-transition-duration: .2s;
-		-webkit-transition-duration: .2s;
-		-o-transition-duration: .2s;
-	}
-
-	ul {
-		margin: 0;
-		padding: 0;
-		list-style: none;
-	}
-
-	img {
-		max-width: 100%;
-		height: auto;
-	}
-*/
 .section_title {
 	margin-bottom: 40px;
 }
@@ -1062,6 +1026,7 @@ input:focus {
 	transform: translate(-50%, -50%);
 	display: none;
 }
+
 .progress-bar .step .check.active {
 	display: block;
 	color: #fff;
@@ -1171,6 +1136,31 @@ input:focus {
 
 }
 
+.hashtag {
+			display: flex;
+			margin-top: 15px;
+			margin-bottom: 15px;
+			padding: 10px;
+			background: rgba(248, 192, 27, 0.4);
+			width: fit-content;
+			border-radius: 30px;
+
+		}
+
+
+
+		input[type=checkbox] {
+
+			width: 20px;
+			height: 20px;
+
+		}
+
+		.parg span {
+			font-size: 25px;
+			font-weight: bold;
+		}
+
 /** grafico a torta **/
 #myChart {
 	width: 100%;
@@ -1180,9 +1170,9 @@ input:focus {
 	color: white;
 }
 
-.background-grafico{
+.background-grafico {
 	height: 250px;
-	background: rgba(255,255,255,0.7);
+	background: rgba(255, 255, 255, 0.7);
 	margin: auto;
 
 }
@@ -1276,11 +1266,7 @@ input:focus {
 }
 
 /**********************************************************TEST****************************************************************************/
-/* section {
-			min-height: 400px;
-			padding: 20px;
-		}
- */
+
 section .title {
 	display: block;
 	text-align: center;
@@ -1330,8 +1316,6 @@ section .progressionBar .step.completed {
 	background-color: #84A7E3;
 	opacity: 0.5;
 }
-
-
 
 section .formArea {
 	display: block;
@@ -1417,17 +1401,6 @@ section .formArea div#professionalInfo {
 	display: none;
 }
 
-
-/* 	table,
-		th,
-		td {
-			border: 1px solid black;
-			border-collapse: collapse;
-			padding: 5px;
-			margin-left: 30%;
-			width: 30%;
-		}
- */
 .domande {
 	width: 75%;
 	margin: auto;
@@ -1490,12 +1463,83 @@ section .formArea div#professionalInfo {
 	background: white;
 }
 
-
-
 /********************* all argomenti *********************/
-.box-argomento{
+.riga2 {
+
+			color: #F8C01B;
+			background: #F8C01B;
+			border: 0;
+			height: 2px;
+			width: 60%;
+			margin: auto;
+
+		}
+
+		.hashtag {
+			display: flex;
+			margin-top: 15px;
+			margin-bottom: 15px;
+			padding: 10px;
+			background: rgba(248, 192, 27, 0.4);
+			width: fit-content;
+			border-radius: 30px;
+
+		}
+
+		.meta-info {
+			padding-left: 5px;
+			font-size: 12px;
+		}
+
+		.grid-container li {
+			list-style-type: none;
+		}
+
+		#barra-ricerca {
+			box-sizing: border-box;
+			border: 2px solid #ccc;
+			border-radius: 20px;
+			font-size: 16px;
+			background-color: white;
+			background-image: url('searchicon.png');
+			background-position: 10px 10px;
+			background-repeat: no-repeat;
+			padding: 12px 20px 12px 40px;
+			-webkit-transition: width 0.4s ease-in-out;
+			transition: width 0.4s ease-in-out;
+			margin-left: 10px;
+			height: 35px;
+		}
+
+		#barra-ricerca:focus {
+			width: 85%;
+		}
+
+		.search-button {
+			padding: 5px;
+			background-color: #5082D7;
+			border: none;
+			border-radius: 20px;
+			width: 40px;
+			/* height: 25px; */
+			font-size: 15px;
+			color: white;
+			font-weight: bold;
+			height: 40px;
+			margin-left: 50px;
+		}
+
+		.link {
+			text-decoration: underline;
+			font-size: 18px;
+			color: blue;
+		}
+
+
+.box-argomento {
 	height: 150px;
 }
+
 .box-continua {
 	/* display: inline-flex; */
 	/* margin-top: 15px; */
@@ -1507,7 +1551,8 @@ section .formArea div#professionalInfo {
 	color: white !important;
 	/* height: 77px; */
 }
-.arrow-continua{
+
+.arrow-continua {
 
 	margin-top: 4px;
 	margin-left: 10px;
@@ -1543,6 +1588,43 @@ section .formArea div#professionalInfo {
 	height: auto;
 }
 
+
+/****** ARGOMENTO **********/
+	.grid-visual {
+			display: grid;
+			grid-template-columns: 20% 60% 20%;
+			color:white;
+		}
+		
+		.riga2{
+		
+	color: #F8C01B;
+	background: #F8C01B;
+	border: 0;
+	height: 2px;
+	width: 60%;
+	margin: auto;
+
+		}
+		
+		.container-argomento{
+		
+
+	text-align: justify;
+	text-justify: inter-word;
+
+		}
+		
+		.freccia a {
+	color: white !important;
+	text-align: center;
+	font-size: 52px;
+	display: block;
+}
+		
+	
+
+	
 /**************** footer ************/
 footer {
 	margin-top: 30px;
