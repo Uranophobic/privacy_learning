@@ -995,8 +995,8 @@ input:focus {
 }
 
 .progress-bar .step .bullet {
-	height: 25px;
-	width: 25px;
+	height: 30px;
+	width: 30px;
 	border: 2px solid #000;
 	border-radius: 50%;
 	display: inline-block;
@@ -1057,12 +1057,11 @@ input:focus {
 .progress-bar .step .check {
 	position: absolute;
 	left: 50%;
-	top: 77%;
-	font-size: 15px;
+	top: 70%;
+	font-size: 16px;
 	transform: translate(-50%, -50%);
 	display: none;
 }
-
 .progress-bar .step .check.active {
 	display: block;
 	color: #fff;
@@ -1178,6 +1177,14 @@ input:focus {
 	max-width: 450px;
 	display: block;
 	margin: auto;
+	color: white;
+}
+
+.background-grafico{
+	height: 250px;
+	background: rgba(255,255,255,0.7);
+	margin: auto;
+
 }
 
 /**** MODIFICA PROFILO ****/
@@ -1486,14 +1493,34 @@ section .formArea div#professionalInfo {
 
 
 /********************* all argomenti *********************/
-.grid-item a {
-	text-decoration: underline;
-	color: blue;
+.box-argomento{
+	height: 150px;
+}
+.box-continua {
+	/* display: inline-flex; */
+	/* margin-top: 15px; */
+	margin: auto;
+	align-content: center;
+	display: flex;
+	/* text-align: center; */
+	justify-content: center;
+	color: white !important;
+	/* height: 77px; */
+}
+.arrow-continua{
+
+	margin-top: 4px;
+	margin-left: 10px;
 }
 
+.link2 {
+	text-decoration: underline;
+	font-size: 25px;
+	color: wheat;
+}
 
 .grid-item fieldset {
-	height: 200px;
+	height: 250px;
 	color: white;
 }
 
@@ -1527,7 +1554,9 @@ footer {
 	flex-shrink: 0;
 	font-weight: 600;
 	font-size: 15px;
+	position: absolute;
 
+	display: block;
 }
 
 footer p {

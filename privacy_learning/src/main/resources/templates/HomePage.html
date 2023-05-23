@@ -42,7 +42,7 @@
 		</th:block>
 
 		<br>
-		<!-- <th:block th:if="${!(session.userSession.email.equals('admin@gmail.com'))}"> -->
+	
 		<div class="background">
 			<!-- sezione test privacy (senza login) -->
 			<div class="box-titolo">
@@ -63,7 +63,7 @@
 							primo test</a>
 					</th:block>
 					<th:block th:if="${!session.isEmpty()}">
-						<button th:href="@{/test}" class="button-test">Compila il tuo primo test</button>
+						<a th:href="@{/test}" class="button-test">Compila il tuo primo test</a>
 					</th:block>
 				</div>
 

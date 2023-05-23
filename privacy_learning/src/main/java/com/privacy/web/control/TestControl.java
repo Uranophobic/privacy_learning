@@ -174,13 +174,11 @@ public class TestControl {
 		ArrayList<Salvataggio> rispInCorrette = new ArrayList<>();
 		int perc = 0;
 
-		/// mi prendo tutte le risposte salvate dell'utente (che ho letteralmente
-		/// salvato prima)
+		/// mi prendo tutte le risposte salvate dell'utente (che ho letteralmente salvato prima)
 		List<Salvataggio> rispSalvate = salvServ.findByEmail(email);
-		// System.out.println("Risposte salvate" + rispSalvate);
 
-		// questo for mi serve per vedere quante domande ha sbagliato l'utente nella
-		// pagina risultati
+
+		// questo for mi serve per vedere quante domande ha sbagliato l'utente nella pagina risultati
 		for (int i = 0; i < rispSalvate.size(); i++) {
 
 			// mi scorrro anche le domande DEL TEST

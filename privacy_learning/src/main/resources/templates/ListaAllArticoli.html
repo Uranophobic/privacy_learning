@@ -70,6 +70,12 @@
 	height: 40px;
 	margin-left: 50px;
 }
+
+.link{
+	text-decoration: underline;
+font-size: 18px;
+color:blue;
+}
 	</style>
 </head>
 
@@ -135,8 +141,8 @@
 							</div>
 
 							<!-- anteprima dei link -->
-							<a th:href="${art.getLink()}" class="embedly-card" data-card-controls="1">
-							<a th:text="${art.getLink()}" th:href="${art.getLink()}"></a>
+							<a th:href="${art.getLink()}" class="embedly-card link" data-card-controls="1">
+							<a  class="link" th:text="${art.getLink()}" th:href="${art.getLink()}"></a>
 
 
 

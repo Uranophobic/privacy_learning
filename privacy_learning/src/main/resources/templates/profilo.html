@@ -6,6 +6,32 @@
 	<link rel="stylesheet" href="../css/stylesheet.css">
 	<title>Privacy Literacy</title>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+	<style>
+		.hashtag {
+			display: flex;
+			margin-top: 15px;
+			margin-bottom: 15px;
+			padding: 10px;
+			background: rgba(248, 192, 27, 0.4);
+			width: fit-content;
+			border-radius: 30px;
+
+		}
+
+
+
+		input[type=checkbox] {
+
+			width: 20px;
+			height: 20px;
+
+		}
+
+		.parg span {
+			font-size: 25px;
+			font-weight: bold;
+		}
+	</style>
 </head>
 
 
@@ -49,142 +75,185 @@
 					</div>
 				</fieldset>
 			</div>
-			
+
 			<th:block th:if="${!session.isEmpty()} and ${!session.userSession.email.equals('admin@gmail.com')}">
 
-			<!-- secondo box con dati personali del risultato test-->
-			<div class="personal-progress">
-				<fieldset>
-					<legend>Il tuo risultato</legend>
-					<div th:switch="${session.userSession.livello}">
-						<div th:case="'Nessuno'">
-							<!-- qui sarebbe meglio mettere direttamente il pulsante al test -->
-							<p> Non hai ancora effettuato nessun test. <br>
-								Per sbloccare questa parte effettua il test valutativo sulla privacy presente sulla <a
-									class="link" href="/homepage">homepage</a>
-							</p>
-							<br>
-						</div>
+				<!-- secondo box con dati personali del risultato test-->
+				<div class="personal-progress">
+					<fieldset>
+						<legend>Il tuo risultato</legend>
+						<div th:switch="${session.userSession.livello}">
+							<div th:case="'Nessuno'">
+								<!-- qui sarebbe meglio mettere direttamente il pulsante al test -->
+								<p> Non hai ancora effettuato nessun test. <br>
+									Per sbloccare questa parte effettua il test valutativo sulla privacy presente sulla
+									<a class="link" href="/homepage">homepage</a>
+								</p>
+								<br>
+							</div>
 
-						<div th:case="'null'">
-							<p> Non hai ancora effettuato nessun test. <br>
-								Per sbloccare questa parte effettua il test valutativo sulla privacy presente sulla <a
-									class="link" href="/homepage">homepage</a>
-							</p>
-							<br>
+							<div th:case="'null'">
+								<p> Non hai ancora effettuato nessun test. <br>
+									Per sbloccare questa parte effettua il test valutativo sulla privacy presente sulla
+									<a class="link" href="/homepage">homepage</a>
+								</p>
+								<br>
+							</div>
 						</div>
-					</div>
-					<div
-						th:if="${session.userSession.livello} eq 'Base' or ${session.userSession.livello} eq 'Medio' or ${session.userSession.livello} eq 'Alto'">
-						<div class="infoUtente2">
-							<label>Livello utlimo test effettuato:</label>
-							<p th:text="${session.userSession.livello}"></p>
-						</div>
+						<div
+							th:if="${session.userSession.livello} eq 'Base' or ${session.userSession.livello} eq 'Medio' or ${session.userSession.livello} eq 'Alto'">
+							<div class="infoUtente2">
+								<label>Livello utlimo test effettuato:</label>
+								<p th:text="${session.userSession.livello}"></p>
+							</div>
 
-						<p class="parg"> Per controllare di nuovo i tuoi risultati clicca qui sotto: </p>
-						<br>
-						<div class="but-mod">
-							<a type="submit" class="button"
-								th:href="@{/test/{email} (email=${session.userSession.email})}"> Risultato
+							<p class="parg"> Per controllare di nuovo i tuoi risultati clicca qui sotto: </p>
+							<br>
+							<div class="but-mod">
+								<a type="submit" class="button"
+									th:href="@{/test/{email} (email=${session.userSession.email})}"> Risultato
 								</a>
-						</div>
-					</div>
-
-
-				</fieldset>
-			</div>
-</th:block>
-		</div>
-<th:block th:if="${!session.isEmpty()} and ${!session.userSession.email.equals('admin@gmail.com')}">
-
-		<!-- terzo box con dati personali del cproprio progresso di studio -->
-		<div class="colonna">
-			<div class="personal-info">
-				<fieldset>
-					<legend>Il tuo progresso</legend>
-
-					<div th:switch="${session.userSession.livello}">
-						<div th:case="'Nessuno'">
-							<!-- qui sarebbe meglio mettere direttamente il pulsante al test -->
-							<p> Non hai ancora effettuato nessun test. <br>
-								Per sbloccare questa parte effettua il test valutativo sulla privacy presente sulla <a
-									class="link" href="/homepage">homepage</a>
-							</p>
-							<br>
+							</div>
 						</div>
 
-						<div th:case="'null'">
-							<p> Non hai ancora effettuato nessun test. <br>
-								Per sbloccare questa parte effettua il test valutativo sulla privacy presente sulla <a
-									class="link" href="/homepage">homepage</a>
-							</p>
-							<br>
-						</div>
-					</div>
-					<div
-						th:if="${session.userSession.livello} eq 'Base' or ${session.userSession.livello} eq 'Medio' or ${session.userSession.livello} eq 'Alto'">
-						<!-- grafico a torta -->
-						<p class="parg" th:text="'Percentuale: ' + ${session.userSession.percentuale} + '%'"></p>
 
-						<canvas id="myChart"></canvas>
-
-						<script th:inline="javascript">
-
-							/*<![CDATA[*/
-							var perc = /*[[${session.userSession.percentuale}]]*/ 'default';
-							var diff = 100 - /*[[${session.userSession.percentuale}]]*/ 'default';
-							/*]]>*/
-							var xValues = ["Studiati", "Da Studiare"];
-							var yValues = [perc, diff]; // qui bisognerà mettere la percentuale di ogni utente 
-							var barColors = ["#b91d47", //i colori delle due sezioni
-								"#00aba9"];
-
-							new Chart(
-								"myChart",
-								{
-									type: "doughnut",
-									data: {
-										labels: xValues,
-										datasets: [{
-											backgroundColor: barColors,
-											data: yValues
-										}]
-									},
-									options: {
-										title: {
-											display: true,
-										}
-									}
-								});
-						</script>
-<br>
-						<p> Questi sono gli argomenti che hai sbagliato nell'ultimo test che hai effettuato: </p>
-
-						<table class="tab-arg">
-							<tr>
-								<th class="prova"></th>
-								<th></th>
-							</tr>
-							
-						<th:block th:each="s: ${argDaStudiare}">
-							<tr>
-								<td><p th:text="${s.arg_dastudiare}"></p></td>
-								<td><input type="checkbox"></td> <!-- qui va fatto il controllo sul db (ARG STUDIATO: SI? okk allora esce checkked-->
-							</tr>	
-						</th:block>
-						</table>
-
-						
-
-					</div>
-
-				</fieldset>
-
-			</div>
-		</div>
-	</div>
+					</fieldset>
+				</div>
 			</th:block>
-<div th:insert="fragments/footer::footer"></div>
+		</div>
+
+
+		<!-- utente -->
+		<th:block th:if="${!session.isEmpty()} and ${!session.userSession.email.equals('admin@gmail.com')}">
+
+			<!-- terzo box con dati personali del cproprio progresso di studio -->
+			<div class="colonna">
+				<div class="personal-info">
+					<fieldset>
+						<legend>Il tuo progresso</legend>
+
+						<div th:switch="${session.userSession.livello}">
+							<div th:case="'Nessuno'">
+								<!-- qui sarebbe meglio mettere direttamente il pulsante al test -->
+								<p> Non hai ancora effettuato nessun test. <br>
+									Per sbloccare questa parte effettua il test valutativo sulla privacy presente sulla
+									<a class="link" href="/homepage">homepage</a>
+								</p>
+								<br>
+							</div>
+
+							<div th:case="'null'">
+								<p> Non hai ancora effettuato nessun test. <br>
+									Per sbloccare questa parte effettua il test valutativo sulla privacy presente sulla
+									<a class="link" href="/homepage">homepage</a>
+								</p>
+								<br>
+							</div>
+						</div>
+						<div
+							th:if="${session.userSession.livello} eq 'Base' or ${session.userSession.livello} eq 'Medio' or ${session.userSession.livello} eq 'Alto'">
+							<!-- percentuale -->
+							
+							<!-- percentuale rossa <40 -->
+								<th:block th:if="${session.userSession.percentuale}<40">
+									<p class="parg ">Ecco la percentuale che hai ottenuto nell'ultimo testo che hai effettuato:
+									<span class="parg" style="color: red"
+										th:text="${session.userSession.percentuale} + '%'"></span></p>
+									<p class="parg hashtag"> Devi studiare ancora un po' per miglliorare la tua
+										percentuale</p>
+										
+									<br>
+								</th:block>
+							
+		
+							<!-- percentuale gialla >40 -->
+								<th:block th:if="${session.userSession.percentuale}>40 and ${session.userSession.percentuale}<80">
+										<p class="parg ">Ecco la percentuale che hai ottenuto nell'ultimo testo che hai effettuato:
+										<span class="parg" style="color: yellow"
+										th:text="${session.userSession.percentuale} + '%'"></span></p>
+										<p class="parg hashtag"> Ti manca poco per raggiungere il tuo obiettivo, amplia la tua conoscenza studiando
+										gli argomenti riportati qui sotto</p>
+										<br>
+								</th:block>
+							
+							
+							<!-- percentuale verde>=80 -->
+								<th:block th:if="${session.userSession.percentuale}>=80">
+									<p class="parg ">Ecco la percentuale che hai ottenuto nell'ultimo testo che hai effettuato:
+										<span class="parg" style="color: green"
+										th:text="${session.userSession.percentuale} + '%'"></span></p>
+										<p class="parg hashtag"> Complimenti, hai dimostrato di avere una padronanza elevata degli argomenti!</p>
+										<br>
+								</th:block>
+							
+							
+		<!-- grafico a torta -->
+		<div class="background-grafico">
+			<canvas id="myChart"></canvas>
+
+			<script th:inline="javascript">
+
+				/*<![CDATA[*/
+				var perc = /*[[${session.userSession.percentuale}]]*/ 'default';
+				var diff = 100 - /*[[${session.userSession.percentuale}]]*/ 'default';
+				/*]]>*/
+				var xValues = ["Studiati", "Da Studiare"];
+				var yValues = [perc, diff]; // qui bisognerà mettere la percentuale di ogni utente 
+				var barColors = ["#b91d47", "#00aba9"];//i colori delle due sezioni
+
+				new Chart(
+					"myChart",
+					{
+						type: "doughnut",
+						data: {
+							labels: xValues,
+							datasets: [{
+								backgroundColor: barColors,
+								data: yValues
+							}]
+						},
+						options: {
+							title: {
+								display: true,
+
+							}
+						}
+					});
+			</script>
+		</div>
+		<br>
+		<p> Qui sotto ti riportiamo l'elenco degli argomenti che hai sbagliato nell'ultimo test che hai effettuato.<br>
+			Ti consigliamo di studiarli prima di ripetere il test. </p>
+
+		<table class="tab-arg">
+			<tr>
+				<th class="prova"></th>
+				<th></th>
+			</tr>
+
+			<th:block th:each="s: ${argDaStudiare}">
+				<tr>
+					<td>
+						<p th:text="${s.arg_dastudiare}"></p>
+					</td>
+					<td><input type="checkbox"></td>
+					<!-- qui va fatto il controllo sul db (ARG STUDIATO: SI? okk allora esce checkked-->
+				</tr>
+			</th:block>
+		</table>
+
+
+
+	</div>
+
+	</fieldset>
+
+	</div>
+	</div>
+
+	</th:block>
+	</div>
+	<div th:insert="fragments/footer::footer"></div>
 </body>
 
 </html>
