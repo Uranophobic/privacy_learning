@@ -56,4 +56,30 @@ public class ArgomentoStudioServiceImpl implements ArgomentoStudioService{
 		argRep.deleteById(id);
 	}
 
+	@Override
+	public List<ArgomentoStudio> findAllArgDaStudiare(String email) {
+		return argRep.findAllArgDaStudiare(email);
+	}
+
+	/*
+	 * @Override public List<ArgomentoStudio> findArgomentiNoStudy(String email) {
+	 * return argRep.findArgomentiNoStudy(email); }
+	 */
+
+	@Override
+	public ArgomentoStudio findArgomentoByTitolo(String titolo) {
+		return argRep.findArgomentoByTitolo(titolo);
+	}
+
+	@Override
+	public List<ArgomentoStudio> findArgomentoByMeta(String meta) {
+		return argRep.findArgomentoByMeta(meta);
+	}
+
+	@Override
+	public List<ArgomentoStudio> findArgomentiNoStudy(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -13,4 +13,8 @@ public interface ArgomentoStudioService {
 	void save(ArgomentoStudio a);
 	boolean existsByDescrizione(String descrizione);
 	boolean existsByLink(String link);
-}
+	List<ArgomentoStudio> findAllArgDaStudiare(String email);
+	List<ArgomentoStudio> findArgomentiNoStudy(String email); //da non studiare
+	ArgomentoStudio findArgomentoByTitolo(String titolo);
+	List<ArgomentoStudio> findArgomentoByMeta(String meta); //da non studiare
+	}

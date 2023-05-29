@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.privacy.web.model.ArgomentoStudio;
 import com.privacy.web.model.Domanda;
 import com.privacy.web.model.Salvataggio;
 import com.privacy.web.model.Test;
@@ -20,6 +21,7 @@ import com.privacy.web.service.ProgressoService;
 import com.privacy.web.service.SalvataggioService;
 import com.privacy.web.service.TestService;
 import com.privacy.web.service.UtenteService;
+import com.privacy.web.service.ArgomentoStudioService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -40,7 +42,9 @@ public class TestControl {
 	private TestService testServ;
 	@Autowired
 	private ProgressoService progServ;
-	
+	@Autowired
+	private ArgomentoStudioService argServ;
+
 	public TestControl(DomandaService domServ, SalvataggioService salvServ, UtenteService utServ, TestService testServ,
 			ProgressoService progServ) {
 		super();
@@ -50,7 +54,6 @@ public class TestControl {
 		this.testServ = testServ;
 		this.progServ = progServ;
 	}
-
 
 	@GetMapping("/test/viewTest/{id}")
 	public String VisualizzaTest(@PathVariable int id, Model model) {
@@ -88,9 +91,7 @@ public class TestControl {
 
 		// faccio ogni possibile controllo per capire in che livello siamo
 		/*
-		 * Nessuno -> 1 
-		 * Base -> 2 
-		 * Alto -> 3
+		 * Nessuno -> 1 Base -> 2 Alto -> 3
 		 * 
 		 */
 		if (livello.equals("Nessuno") || (livello.equals("Base") && u.getPercentuale() < 80)) {
@@ -174,11 +175,12 @@ public class TestControl {
 		ArrayList<Salvataggio> rispInCorrette = new ArrayList<>();
 		int perc = 0;
 
-		/// mi prendo tutte le risposte salvate dell'utente (che ho letteralmente salvato prima)
+		/// mi prendo tutte le risposte salvate dell'utente (che ho letteralmente
+		/// salvato prima)
 		List<Salvataggio> rispSalvate = salvServ.findByEmail(email);
 
-
-		// questo for mi serve per vedere quante domande ha sbagliato l'utente nella pagina risultati
+		// questo for mi serve per vedere quante domande ha sbagliato l'utente nella
+		// pagina risultati
 		for (int i = 0; i < rispSalvate.size(); i++) {
 
 			// mi scorrro anche le domande DEL TEST
@@ -200,19 +202,29 @@ public class TestControl {
 						} else {
 							// altrimenti nelle risposte non corrette
 							rispInCorrette.add(rispSalvate.get(i));
-							// controllo che il progresso non sia già esistente
-							ProgressoStudio prog = progServ.findByEmailAndArgomento(u.getEmail(),
-									domanda.getMeta_info());
-							if (prog == null) {
-								// mi salvo subito il progresso (anche se qui non ha studiato ma almeno inizio a
-								// settarlo perchè ho tutto quello che mi serve
-								ProgressoStudio p = new ProgressoStudio();
-								p.setEmail_utente(u.getEmail());
-								p.setArg_dastudiare(domanda.getMeta_info());
-								progServ.save(p);
-							} else if (prog != null && prog.getArg_studiato() != null) {
-								prog.setArg_studiato(null);
-								progServ.save(prog);
+
+							List<ArgomentoStudio> args = argServ.findArgomentoByMeta(domanda.getMeta_info());
+							for (int z = 0; z < args.size(); z++) {
+								//System.out.println("FIND ARG BY META" + args + "la meta è: " + domanda.getMeta_info());
+								// controllo che il progresso non sia già esistente con quel titolp
+								ProgressoStudio prog = progServ.findByEmailAndArgomento(u.getEmail(),
+										args.get(z).getTitolo());
+								if (prog == null) {
+									System.out.println(" fare un cazzo");
+									ProgressoStudio p = new ProgressoStudio();
+									p.setArg_dastudiare(args.get(z).getTitolo());
+									p.setArg_studiato(false);
+									p.setEmail_utente(email);
+									p.setMeta_info(args.get(z).getMeta_info());
+									////System.out.println("il progresso creato " + p);
+									progServ.save(p);
+
+								
+								} else if (prog != null) {
+									//System.out.println("non fare un cazzo");
+									prog.setArg_studiato(false);
+									progServ.save(prog);
+								}
 							}
 						}
 					}
@@ -228,8 +240,6 @@ public class TestControl {
 		// mi devo aggiornare la sessione dell'utente
 		userSession.setAttribute("userSession", u);
 
-		// System.out.println("TUTTI gli argomenti da studiare:"+ argDaStudiare);
-		//
 		// mi devo passare gli argomenti da studiare
 		model.addAttribute("argDaStudiare", progServ.findByEmail(u.getEmail()));
 
@@ -294,9 +304,5 @@ public class TestControl {
 
 		return "risultati";
 	}
-
-
-
-
 
 }

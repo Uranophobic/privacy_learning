@@ -18,7 +18,6 @@ public class ProgressoStudioImpl implements ProgressoService {
 	@Override
 	public void save(ProgressoStudio p) {
 		progRep.save(p);
-		
 	}
 
 	@Override
@@ -27,13 +26,15 @@ public class ProgressoStudioImpl implements ProgressoService {
 	}
 
 	@Override
-	public ProgressoStudio findByEmailAndArgomento(String email, String m) {
-		return progRep.findByEmailAndArgomento(email, m);
+	public ProgressoStudio findByEmailAndArgomento(String email, String arg_dastudiare) {
+		return progRep.findByEmailAndArgomento(email, arg_dastudiare);
 	}
 
-	@Override
-	public List<ProgressoStudio> findAllByEmail(String email) {
-		return progRep.findAllByEmail(email);
-	}
+	/*
+	 * @Override public ProgressoStudio findByTitolo(String titolo) {
+	 * 
+	 * return progRep.findByTitolo(titolo); }
+	 */
 
+	
 }

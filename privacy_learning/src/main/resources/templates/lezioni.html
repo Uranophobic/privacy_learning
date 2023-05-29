@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="/css/stylesheet.css">
+	<title>Privacy Literacy - Profilo</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+	<script src="js/gsap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/gsap.min.js"></script>
+	<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/DrawSVGPlugin3.min.js"></script>
+
+	<style>
+		.sottotitolo {
+			color: white;
+			padding: 5px;
+			margin-bottom: 15px;
+		}
+
+
+
+		section {
+			margin: 1em 0;
+			display: grid;
+			grid-template-columns: 30% 30% 30%;
+			/* grid-template-rows: 50% 50%; */
+			grid-column-gap: 50px;
+			grid-row-gap: 50px;
+		}
+
+		section h1 {
+			text-transform: uppercase;
+			color: white;
+		}
+
+		.dot-line {
+			border-color: #d3d3d3;
+			border-style: dashed;
+			margin-top: 50px;
+			margin-bottom: 50px;
+		}
+
+
+
+		main {
+			color: white;
+			height: fit-content;
+		}
+
+		.back-noborder {
+
+			/* background-color: white; */
+			/* border-radius: 5px; */
+			/* margin: auto; */
+			/* width: 65%; */
+			/* padding: 20px; */
+			/* border: 1px solid #F8C01B; */
+			display: block;
+			height: auto;
+			padding: 20px 5%;
+			margin-bottom: 25px;
+			/* background-color: rgba(255, 255, 255, 0.8); */
+			width: 70%;
+			margin: auto;
+			border: 5px;
+
+			border-radius: 5px;
+			height: auto;
+
+		}
+
+		/*Events*/
+		.sec-events>h1 {
+			margin-top: 1em;
+			color: white;
+		}
+
+		.sec-events article {
+			/* float: left; */
+			padding: 0 0.25em;
+			/* width: 30%; */
+			text-align: justify;
+			/* margin: 10px; */
+			/* margin-left: 5px; */
+			/* margin-right: 5px; */
+			/* display: grid; */
+			/* grid-template-columns: 30% 30% 30%; */
+			display: grid;
+		}
+
+		.sec-events article h1,
+		.sec-events article p {
+			display: block;
+			margin: 0.5em 0;
+			padding: 0.25em 1em;
+			font-size: 110%;
+		}
+
+		.sec-events article a {
+			float: right;
+			padding-right: 1em;
+		}
+
+		.sec-events article h1 {
+			font-weight: bold;
+
+		}
+
+		.link-arg {
+			font-size: 22px;
+			font-weight: bold;
+			/* border-bottom: ; */
+			text-decoration: underline;
+			color: white;
+		}
+
+		.meta-arg {
+			font-size: 18px;
+			font-weight: 300;
+			padding-left: 10px;
+			color: white;
+		}
+
+		.tab-lez {
+			width: 95%;
+			margin: auto;
+		}
+
+		.arg-stud {
+			font-size: 22px;
+			font-weight: 400;
+			background: rgba(255, 255, 255, 0.8);
+			/* border: ; */
+			border-radius: 30px;
+			padding-left: 10px;
+
+		}
+
+		svg.stepper-svg .circle-red ellipse {
+			fill: transparent;
+			stroke: darkred;
+			stroke-dasharray: 0, 5;
+			stroke-dashoffset: 150;
+			stroke-linecap: round;
+		}
+
+		svg.stepper-svg .circle ellipse {
+			fill: transparent;
+			stroke: green;
+			stroke-dasharray: 0, 5;
+			stroke-dashoffset: 150;
+			stroke-linecap: round;
+		}
+
+		svg.stepper-svg .icon path {
+			stroke: white;
+			fill: transparent;
+			fill-opacity: 0;
+		}
+
+		svg.stepper-svg .icon ellipse {
+			stroke: green;
+			fill: transparent;
+			fill-opacity: 0;
+		}
+
+		.stepper-label-wrapper {
+			display: flex;
+			align-items: center;
+		}
+
+		svg.stepper-line path {
+			fill: none;
+			fill-opacity: 0;
+			stroke: white;
+			stroke-width: 2;
+			stroke-linecap: round;
+			stroke-dasharray: 0, 5;
+		}
+		
+		
+	.col-feedback {
+	display: grid;
+	justify-content: center;
+	/* width: 53%; */
+	/* grid-template: auto; */
+	grid-template-columns: 100%;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+.col-feedback span{
+	margin:auto;
+}
+.col-feedback svg{
+	margin:auto;
+}
+	</style>
+</head>
+
+
+<body>
+	<div th:insert="~{fragments/header::header}"></div>
+	<br>
+
+
+
+	<div class="background">
+
+
+		<div class="wrapper">
+
+			<main role="main">
+				<h1>Le tue lezioni</h1>
+				<p class="sottotitolo"> Qui sotto sono riportarti gli argomenti che ti consigliamo di studiare per
+					migliorare il tuo
+					apprendimento. <br>
+					Studia questi argomenti prima di riprovare il test!</p>
+				<hr class="dot-line">
+
+				<table class="tab-lez">
+				
+						<th:block th:each="progress : ${allprog}">
+							<tr>
+
+								<td><a
+										th:href="@{/users/profilo/lezioni-private/{email}/{titolo}(titolo=${progress.arg_dastudiare}, email=${session.userSession.email})}">
+										<span class="link-arg" th:text="${progress.arg_dastudiare}"></span>
+										<span class="meta-arg" th:text="${progress.meta_info}"></span> </a>
+								</td>
+
+								<td>
+
+
+									<div th:switch="${progress.arg_studiato}">
+
+
+
+										<div class="col-feedback" th:case="true"><span >Studiato</span>
+											
+												<svg width="50" height="50" viewBox="0 0 50 50" version="1.1"
+													inkscape:version="0.91 r13725" sodipodi:docname="stepper-check.svg"
+													class="stepper-check stepper-svg">
+
+													<g inkscape:label="Circle" inkscape:groupmode="layer" class="circle"
+														transform="translate(0,-1002.3622)">
+														<ellipse
+															style="fill-rule:evenodd;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:0;"
+															cx="25" cy="1027.3622" rx="20" ry="20" />
+													</g>
+													<g inkscape:groupmode="layer" class="icon" inkscape:label="Icon">
+														<path
+															d="m 15.77846,27.984214 4.851159,4.815819 14.753084,-14.682399"
+															inkscape:connector-curvature="0" sodipodi:nodetypes="ccc" />
+													</g>
+												</svg>
+									
+										</div>
+
+
+
+										<div  class="col-feedback" th:case="false">
+											<span >Ancora non studiato</span>
+										
+
+												<svg width="50" height="50" viewBox="0 0 50 50" version="1.1"
+													inkscape:version="0.91 r13725" sodipodi:docname="stepper-check.svg"
+													class="stepper-check stepper-svg">
+
+													<g inkscape:label="Circle" inkscape:groupmode="layer"
+														class="circle-red" transform="translate(0,-1002.3622)">
+														<ellipse
+															style="fill-rule:evenodd;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:0;"
+															cx="25" cy="1027.3622" rx="20" ry="20" />
+													</g>
+													<g inkscape:groupmode="layer" class="icon" inkscape:label="Icon">
+														<path
+															style="stroke-dashoffset: 0px; stroke-dasharray: none; stroke: rgb(255, 255, 255);"
+															d="M15 15 35 35 M35 15 15 35"></path>
+													</g>
+											</div>
+									
+
+
+									</div>
+
+
+
+								</td>
+							</tr>
+						</th:block>
+					</th:block>
+				</table>
+
+
+
+
+			</main>
+		</div>
+
+
+
+
+
+
+
+
+	</div>
+
+	<br>
+	<!--	<div class="background">
+		<div class="grid-container">
+			<th:block th:each="arg : ${argNoStudy}">
+				<div class="grid-item">
+					<fieldset>
+						<legend th:text="${arg.meta_info}">Meta-Info</legend>
+						<div class="box-argomento">
+							<h3 th:text="${arg.titolo}">Titolo Argomento</h3>
+							<p th:text="${arg.getDescrizione().substring(0,150).concat('...')}">contenuto</p>
+						</div>
+						<div class="box-continua">
+							<a type="submit" class="link2"
+								th:href="@{/argomenti/argomentoView/{id}(id=${arg.id_studio})}">Continua </a><svg
+								xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+								class="bi bi-arrow-right arrow-continua" viewBox="0 0 16 16">
+								<path fill-rule="evenodd"
+									d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+							</svg>
+						</div>
+					</fieldset>
+
+				</div>
+			</th:block>
+		</div>
+	</div>-->
+	<script>
+		gsap.registerPlugin(DrawSVGPlugin);
+
+		var stepperCheck = gsap
+			.timeline()
+			.fromTo(
+				"svg.stepper-check .circle ellipse",
+				{
+					drawSVG: "0"
+				},
+				{
+					drawSVG: "0 100%",
+					duration: 0.7
+				},
+				0.1
+			)
+			.fromTo(
+				"svg.stepper-check .circle ellipse",
+				{
+					fill: "transparent"
+				},
+				{
+					fill: "green",
+					durantion: 1.5
+				}
+			)
+			.fromTo(
+				"svg.stepper-check .icon path",
+				{
+					drawSVG: 0,
+					stroke: "ffffff"
+				},
+				{
+					drawSVG: "0 100%",
+					duration: 1
+				}
+			);
+
+
+		var stepperCheck = gsap
+			.timeline()
+			.fromTo(
+				"svg.stepper-check .circle-red ellipse",
+				{
+					drawSVG: "0"
+				},
+				{
+					drawSVG: "0 100%",
+					duration: 0.7
+				},
+				0.1
+			)
+			.fromTo(
+				"svg.stepper-check .circle-red ellipse",
+				{
+					fill: "transparent"
+				},
+				{
+					fill: "darkred",
+					durantion: 1.5
+				}
+			)
+			.fromTo(
+				"svg.stepper-check .icon path",
+				{
+					drawSVG: 0,
+					stroke: "ffffff"
+				},
+				{
+					drawSVG: "0 100%",
+					duration: 1
+				}
+			);
+
+
+
+	</script>
+</body>
+
+</html>

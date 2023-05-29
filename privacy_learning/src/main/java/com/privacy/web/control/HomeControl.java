@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.privacy.web.model.ArgomentoStudio;
 import com.privacy.web.model.Salvataggio;
 import com.privacy.web.model.Utente;
 import com.privacy.web.service.ArgomentoStudioService;
@@ -35,14 +36,19 @@ public class HomeControl {
 	@Autowired
 	private SalvataggioService salvServ;
 	@Autowired
-	private ArgomentoStudioService argRep;
+	private ArgomentoStudioService argServ;
 	@Autowired
 	private ProgressoService progServ;
 
-	@GetMapping("/prova")
-	public String prova(Model model) {
-
-		return "prova";
+	
+	@GetMapping("/icon")
+	public String icon(Model model) {
+		return "icon-prove";
+	}
+	
+	@GetMapping("/scroll")
+	public String scroll(Model model) {
+		return "scrollpage";
 	}
 
 	@GetMapping("/login")
@@ -62,10 +68,10 @@ public class HomeControl {
 
 	@GetMapping("/homepage")
 	public String argomenti(Model model, HttpSession session) {
-		model.addAttribute("argomentiView", argRep.findAllArgomenti());
+		model.addAttribute("argomentiView", argServ.findAllArgomenti());
 		model.addAttribute("tutteFavole", favServ.findAllFavole());
 		model.addAttribute("tuttiArticoli", artServ.findAllArticoli());
-		// System.out.println(argRep.findAll());
+		// System.out.println(argServ.findAll());
 		return "HomePage";
 	}
 

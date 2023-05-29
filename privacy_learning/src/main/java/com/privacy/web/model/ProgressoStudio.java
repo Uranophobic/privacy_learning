@@ -23,9 +23,12 @@ public class ProgressoStudio {
 	private String email_utente;
 
 	@Column(name = "arg_studiato")
-	private String arg_studiato;
+	private boolean arg_studiato;
 
 	@Column(name = "arg_dastudiare")
 	private String arg_dastudiare;
+	
+	@Column(name = "meta_info")
+	private String meta_info;
 
 }

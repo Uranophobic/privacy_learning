@@ -17,7 +17,7 @@ public class StudioControl {
 	
 	@GetMapping("/allSuggeriti/{email}")
 	public String tuttiSuggerimenti(@PathVariable String email, Model model) {
-		model.addAttribute("suggeriti", suggServ.findAllByEmail(email));
+		model.addAttribute("suggeriti", suggServ.findByEmail(email));
 		return "SuggerimentiView";
 	}
 	

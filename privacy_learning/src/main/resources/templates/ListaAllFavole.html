@@ -11,14 +11,14 @@
 	<div th:insert="~{fragments/header::header}"></div>
 	<br>
 
-	<a type="button" th:if="${!session.isEmpty()} and ${session.userSession.email.equals('admin@gmail.com')}"
+	<!--	<a type="button" th:if="${!session.isEmpty()} and ${session.userSession.email.equals('admin@gmail.com')}"
 		class="button" th:href="@{/admin/createFavola}"> Aggiungi </a>
 	<div class="background">
 		<div class="box-titolo">
 			<div class="titolo">Favole</div>
 		</div>
 
-		<!-- CONTROLLO SE L'UTENTE SIA ADMIN -->
+		<!-- CONTROLLO SE L'UTENTE SIA ADMIN
 		<th:block th:if="${!session.isEmpty()} and ${session.userSession.email.equals('admin@gmail.com')}"
 			th:each="favola : ${tutteFavole}">
 			<fieldset>
@@ -39,8 +39,8 @@
 			</fieldset>
 		</th:block>
 
-		<!--  ALTRIMENTI -->
-		<th:block th:if="${session.isEmpty()} or ${!(session.userSession.email.equals('admin@gmail.com'))}">
+	  ALTRIMENTI -->
+		<!--<th:block th:if="${session.isEmpty()} or ${!(session.userSession.email.equals('admin@gmail.com'))}">
 			<div class="grid-container">
 				<th:block th:each="favola : ${tutteFavole}">
 					<div class="grid-item">
@@ -71,13 +71,86 @@
 							</div>
 						</a>
 
-						<!--		<a class="button" style="color: white;" type="submit"
-								th:href="@{/favole/favolaView/{id}(id=${favola.id_favola})}">Continua</a>-->
+								<a class="button" style="color: white;" type="submit"
+								th:href="@{/favole/favolaView/{id}(id=${favola.id_favola})}">Continua</a>
 					</div>
 
 				</th:block>
 			</div>
-		</th:block>
+		</th:block>-->
+	<style>
+
+ .absolute-bg {
+	 position: absolute;
+	 top: 0;
+	 left: 0;
+	 z-index: 0;
+	 height: 100%;
+	 width: 100%;
+	 background-position: 50%;
+	 background-repeat: no-repeat;
+	 background-size: cover;
+	 overflow: hidden;
+}
+ .home-mast {
+	 height: 100vh;
+}
+ .home-mast__container {
+	 display: flex;
+	 height: 100%;
+}
+ .home-mast__container > * {
+	 position: relative;
+	 flex-grow: 1;
+	 padding: 1em;
+	 transition: flex-grow 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+}
+ .home-mast__container > *:hover {
+	 flex-grow: 3;
+}
+
+ .img-favola:after {
+	 content: "";
+	 position: absolute;
+	 top: 0;
+	 left: 0;
+	 z-index: 0;
+	 height: 100%;
+	 width: 100%;
+	 background-color: #00a19b;
+	 opacity: 0;
+	 transition: opacity 0.4s ease-in-out;
+}
+
+ .img-favola:hover:after {
+	 opacity: 0.65;
+	 transition-delay: 0.6s;
+}
+
+ 
+	</style>	
+		<div class="titolo" >Che favola leggerai oggi?</div>
+		<hr class="riga2">
+		<br>
+		<section class="home-mast">
+  <div class="home-mast__container">
+    <div class="img-favola">
+      <div class="absolute-bg" style="background-image: url('https://source.unsplash.com/3IEZsaXmzzs/1500x1200');"></div>
+    </div>
+    <div class="img-favola">
+      <div class="absolute-bg" style="background-image: url('https://source.unsplash.com/BIZv8MWH00s/1500x1200');"></div>
+    </div>
+    <div class="img-favola">
+      <div class="absolute-bg" style="background-image: url('https://source.unsplash.com/z55CR_d0ayg/1500x1200');"></div>
+    </div>
+    <div class="img-favola">
+      <div class="absolute-bg" style="background-image: url('https://source.unsplash.com/-FgZlbzZ0R8/1500x1200');"></div>
+    </div>
+  </div>
+</section>
+
+		
+		
 
 
 	</div>

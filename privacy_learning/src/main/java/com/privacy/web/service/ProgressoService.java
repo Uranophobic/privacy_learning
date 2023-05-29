@@ -10,7 +10,7 @@ import com.privacy.web.model.ProgressoStudio;
 public interface ProgressoService {
 	
 	void save(ProgressoStudio p);
-	ProgressoStudio findByEmailAndArgomento(String email, String m);
-	List<ProgressoStudio> findAllByEmail(String email);
+	ProgressoStudio findByEmailAndArgomento(String email, String arg_dastudiare);
 	List<ProgressoStudio> findByEmail(String email);
+	///ProgressoStudio findByTitolo(String titolo);
 }

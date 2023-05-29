@@ -173,6 +173,7 @@ body {
 	font-size: 15px;
 	color: white;
 	font-weight: bold;
+	letter-spacing: 1px;
 }
 
 .button a {
@@ -1033,21 +1034,26 @@ input:focus {
 }
 
 /**********************************************************PROFILO************************************************************************/
-.box-profilo {
+/*.box-profilo {
 	display: flex;
 	width: auto;
 }
-
-.background2 {
-	/*background-color: rgba(255, 255, 255, 0.8);*/
+*/
+.bordo {
+	border: 1px solid #F8C01B;
 	border-radius: 5px !important;
 	margin: auto;
 	width: 65%;
 	padding: 20px;
+}
+
+.background2 {
+	/*background-color: rgba(255, 255, 255, 0.8);*/
+
 	display: grid;
 	grid-template-columns: 50% 50%;
 	height: auto;
-	border: 1px solid #F8C01B;
+
 }
 
 
@@ -1077,10 +1083,10 @@ input:focus {
 	width: 50%;
 }
 
-.progresso {
+/*.progresso {
 	width: 50%;
 }
-
+*/
 .infoUtente {
 	display: flex;
 	width: 55%;
@@ -1096,7 +1102,7 @@ input:focus {
 }
 
 
-.infoUtente2 {
+/*.infoUtente2 {
 	display: flex;
 	width: 100%;
 	padding: 5px;
@@ -1111,7 +1117,7 @@ input:focus {
 	color: green;
 	font-size: 20px;
 	font-weight: bold;
-}
+}*/
 
 .link {
 	color: red;
@@ -1123,43 +1129,43 @@ input:focus {
 	margin-left: 9px;
 }
 
-.tab-arg td th {
+/*.tab-arg td th {
 	border: none;
 }
-
-.prova {
+*/
+/*.prova {
 	width: 90%;
 }
-
-.tab-arg {
+*/
+/*tab-arg {
 	width: 100%;
+
+}*/
+
+.hashtag {
+	display: flex;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	padding: 10px;
+	background: rgba(248, 192, 27, 0.4);
+	width: fit-content;
+	border-radius: 30px;
 
 }
 
-.hashtag {
-			display: flex;
-			margin-top: 15px;
-			margin-bottom: 15px;
-			padding: 10px;
-			background: rgba(248, 192, 27, 0.4);
-			width: fit-content;
-			border-radius: 30px;
-
-		}
 
 
+/*input[type=checkbox] {
 
-		input[type=checkbox] {
+	width: 20px;
+	height: 20px;
 
-			width: 20px;
-			height: 20px;
+}*/
 
-		}
-
-		.parg span {
-			font-size: 25px;
-			font-weight: bold;
-		}
+.parg span {
+	font-size: 25px;
+	font-weight: bold;
+}
 
 /** grafico a torta **/
 #myChart {
@@ -1171,10 +1177,9 @@ input:focus {
 }
 
 .background-grafico {
-	height: 250px;
+	height: 260px;
 	background: rgba(255, 255, 255, 0.7);
 	margin: auto;
-
 }
 
 /**** MODIFICA PROFILO ****/
@@ -1209,14 +1214,14 @@ input:focus {
 }
 
 .but-mod {
-	/* position: relative; */
-	/* width: 30%; */
-	margin: auto;
+
 	margin-top: 15px;
 	margin-bottom: 15px;
-	/* display: inlin; */
-	/* align-content: center; */
-	width: 50%;
+
+	display: flex;
+
+	align-content: center;
+	justify-content: center;
 }
 
 .personal-info-mod {
@@ -1240,6 +1245,27 @@ input:focus {
 	color: white;
 	font-size: 25px;
 	font-weight: 600;
+}
+
+.progresso-box {
+
+	height: 555px;
+
+}
+
+/**riga dellle lezioni **/
+.row-lezioni {
+	width: 98%;
+	margin: auto;
+	/* margin-top: 30px; */
+	color: white;
+	padding: 10px;
+}
+
+.row-lezioni legend {
+	font-weight: bold;
+	font-size: 20px;
+	color: #5082D7;
 }
 
 /**********************************************************pagina dei risultati*****************************************************************/
@@ -1466,74 +1492,80 @@ section .formArea div#professionalInfo {
 /********************* all argomenti *********************/
 .riga2 {
 
-			color: #F8C01B;
-			background: #F8C01B;
-			border: 0;
-			height: 2px;
-			width: 60%;
-			margin: auto;
+	color: #F8C01B;
+	background: #F8C01B;
+	border: 0;
+	height: 2px;
+	width: 60%;
+	margin: auto;
 
-		}
+}
 
-		.hashtag {
-			display: flex;
-			margin-top: 15px;
-			margin-bottom: 15px;
-			padding: 10px;
-			background: rgba(248, 192, 27, 0.4);
-			width: fit-content;
-			border-radius: 30px;
+.hashtag {
+	display: flex;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	padding: 10px;
+	background: rgba(248, 192, 27, 0.4);
+	width: fit-content;
+	border-radius: 30px;
+	/* float: right; */
+	/* justify-items: center; */
+	/* align-self: center; */
+	/* align-content: center; */
+	margin: auto;
 
-		}
+	margin-top: 20px;
+}
+.meta-info {
+	padding-left: 5px;
+	font-size: 12px;
+	color: white;
+}
 
-		.meta-info {
-			padding-left: 5px;
-			font-size: 12px;
-		}
+.grid-container li {
+	list-style-type: none;
+}
 
-		.grid-container li {
-			list-style-type: none;
-		}
+#barra-ricerca {
+	box-sizing: border-box;
+	border: 2px solid #ccc;
+	border-radius: 20px;
+	font-size: 16px;
+	background-color: white;
+	background-image: url('searchicon.png');
+	background-position: 10px 10px;
+	background-repeat: no-repeat;
+	padding: 12px 20px 12px 40px;
+	-webkit-transition: width 0.4s ease-in-out;
+	transition: width 0.4s ease-in-out;
+	margin-left: 10px;
+	height: 35px;
+}
 
-		#barra-ricerca {
-			box-sizing: border-box;
-			border: 2px solid #ccc;
-			border-radius: 20px;
-			font-size: 16px;
-			background-color: white;
-			background-image: url('searchicon.png');
-			background-position: 10px 10px;
-			background-repeat: no-repeat;
-			padding: 12px 20px 12px 40px;
-			-webkit-transition: width 0.4s ease-in-out;
-			transition: width 0.4s ease-in-out;
-			margin-left: 10px;
-			height: 35px;
-		}
+#barra-ricerca:focus {
+	width: 85%;
+}
 
-		#barra-ricerca:focus {
-			width: 85%;
-		}
+.search-button {
+	padding: 5px;
+	background-color: #5082D7;
+	border: none;
+	border-radius: 20px;
+	width: 40px;
+	/* height: 25px; */
+	font-size: 15px;
+	color: white;
+	font-weight: bold;
+	height: 40px;
+	margin-left: 50px;
+}
 
-		.search-button {
-			padding: 5px;
-			background-color: #5082D7;
-			border: none;
-			border-radius: 20px;
-			width: 40px;
-			/* height: 25px; */
-			font-size: 15px;
-			color: white;
-			font-weight: bold;
-			height: 40px;
-			margin-left: 50px;
-		}
-
-		.link {
-			text-decoration: underline;
-			font-size: 18px;
-			color: blue;
-		}
+.link {
+	text-decoration: underline;
+	font-size: 18px;
+	color: blue;
+}
 
 
 .box-argomento {
@@ -1590,14 +1622,14 @@ section .formArea div#professionalInfo {
 
 
 /****** ARGOMENTO **********/
-	.grid-visual {
-			display: grid;
-			grid-template-columns: 20% 60% 20%;
-			color:white;
-		}
-		
-		.riga2{
-		
+.grid-visual {
+	display: grid;
+	grid-template-columns: 20% 60% 20%;
+	color: white;
+}
+
+.riga2 {
+
 	color: #F8C01B;
 	background: #F8C01B;
 	border: 0;
@@ -1605,31 +1637,31 @@ section .formArea div#professionalInfo {
 	width: 60%;
 	margin: auto;
 
-		}
-		
-		.container-argomento{
-		
+}
+
+.container-argomento {
+
 
 	text-align: justify;
 	text-justify: inter-word;
 
-		}
-		
-		.freccia a {
+}
+
+.freccia a {
 	color: white !important;
 	text-align: center;
 	font-size: 52px;
 	display: block;
 }
-		
-	
 
-	
+
+
+
 /**************** footer ************/
 footer {
 	margin-top: 30px;
 	border-top: 2px solid #F8C01B;
-	background: white;
+	background: #d9edf7;
 	height: 115px;
 	width: 100%;
 	white-space: nowrap;
@@ -1637,7 +1669,6 @@ footer {
 	font-weight: 600;
 	font-size: 15px;
 	position: absolute;
-
 	display: block;
 }
 

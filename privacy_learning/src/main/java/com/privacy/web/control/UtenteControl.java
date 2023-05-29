@@ -16,11 +16,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.privacy.web.model.ArgomentoStudio;
 import com.privacy.web.model.Articolo;
 import com.privacy.web.model.Domanda;
 import com.privacy.web.model.Salvataggio;
 import com.privacy.web.model.Utente;
 import com.privacy.web.model.MetaInfo;
+import com.privacy.web.model.ProgressoStudio;
 import com.privacy.web.utils.Check;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,6 +30,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.Data;
 
+import com.privacy.web.service.ArgomentoStudioService;
 import com.privacy.web.service.DomandaService;
 import com.privacy.web.service.ProgressoService;
 import com.privacy.web.service.SalvataggioService;
@@ -48,22 +51,12 @@ public class UtenteControl {
 	private DomandaService domServ;
 	@Autowired
 	private ProgressoService progServ;
-	
-	public UtenteControl(UtenteService utServ, SalvataggioService salvServ, TestService testServ) {
-		super();
-		this.utServ = utServ;
-		this.salvServ = salvServ;
-		this.testServ = testServ;
-	}
-
-
-
+	@Autowired
+	private ArgomentoStudioService argServ;
 
 	/*--------REGISTRAZIONE--------*/
-	// metodo che crea un nuovo utente
 
-
-	@GetMapping("/registrazione") // qui ci dovrebbe andasre il link della registrazioe ma non sono sicura
+	@GetMapping("/registrazione")
 	public String prova(Model model) {
 		List<Domanda> questionario = domServ.findByIdTest(0);
 		List<Domanda> prima = split(questionario);
@@ -103,15 +96,14 @@ public class UtenteControl {
 					return "redirect:/error?descrizione= " + error;
 
 				} else {
-					// prima di salvare le risposte devo salvare l'utente altrimenti non lo trova
-					// nel database
+					// salvo l'utente nel database
 					user.setLivello("Nessuno");
 					utServ.save(user);
 
 					List<Domanda> questionario = domServ.findByIdTest(0);
 
 					for (Domanda q : questionario) {
-
+						// mi salvo ogni risposta al questionario che ha dato
 						Salvataggio s = new Salvataggio();
 						s.setEmail_utente(user.getEmail());
 						s.setId_test(0);
@@ -130,7 +122,7 @@ public class UtenteControl {
 						} else if (risp.equals("No")) {
 							s.setId_risposta(2);
 						}
-
+						// mi salvo anche le info della domanda
 						s.setRisposta_corretta("0");
 						s.setRisposta_utente(risp);
 						s.setTesto_domanda(q.getTesto());
@@ -203,7 +195,7 @@ public class UtenteControl {
 			try {
 				user = utServ.findUtenteByEmailAndPassword(email, pwd);
 
-				if (user != null) { // qui è tutto ok
+				if (user != null) { // ok
 
 					// devi settare la percentuale
 					if (user.getPercentuale() != 0) {
@@ -233,11 +225,9 @@ public class UtenteControl {
 		return "redirect:/login?errorDesc=" + error;
 	}
 
-
-
 	@GetMapping("/modifica")
 	public String modifica(Model model) {
-// mi serve solo per aprire modifica utente 
+		// mi serve solo per aprire modifica utente
 		return "editUtente";
 	}
 
@@ -246,7 +236,6 @@ public class UtenteControl {
 			HttpServletResponse response, Model model, HttpSession userSession) throws Exception {
 
 		Utente u = utServ.findUtenteByEmail(user.getEmail());
-		
 
 		// controllo che il campo non sia vuoto, perchè se è vuoto vuol dire che
 		// l'utente non vuole cambiarlo
@@ -282,7 +271,82 @@ public class UtenteControl {
 		return "redirect:/profilo/{email}";
 	}
 
-	
+	/* pag lezioni */
+	@GetMapping("/profilo/lezioni-private/{email}")
+	public String lezioni(@PathVariable String email, @ModelAttribute("user") Utente user, HttpServletRequest request,
+			HttpServletResponse response, Model model, HttpSession userSession) throws Exception {
+
+		System.out.println("SONO NEL GET MAPPING DELLE LEZIONI");
+		Utente u = utServ.findUtenteByEmail(email);
+		
+		userSession.setAttribute("userSession", u);
+		System.out.println("utente sessione  " + userSession + " utnete " + u.toString());
+		 
+		List<ProgressoStudio> allprog = progServ.findByEmail(email);
+		model.addAttribute("allprog", allprog);
+		
+		/*
+		 * List<ArgomentoStudio> argDaStudiare =
+		 * argServ.findAllArgDaStudiare(email); model.addAttribute("argDaStudiare",
+		 * argDaStudiare); System.out.println("arg da studiare  utente " +
+		 * argDaStudiare); List<ProgressoStudio> progUtente =
+		 * progServ.findByEmail(email); model.addAttribute("progUtente", progUtente);
+		 * 
+		 * System.out.println(" aaaaaaaaaaaaaaaaaaaaaa prog utente " + progUtente);
+		 * 
+		 * List<ArgomentoStudio> argNoStudy = argServ.findArgomentiNoStudy(email);
+		 * model.addAttribute("argNoStudy", argNoStudy);
+		 */
+
+		return "lezioni";
+	}
+
+	/* pagina studio lezione */
+
+	@GetMapping("/profilo/lezioni-private/{email}/{titolo}")
+	public String progresso(@PathVariable String email, @PathVariable String titolo, @ModelAttribute("user") Utente user,
+			HttpServletRequest request, HttpServletResponse response, Model model, HttpSession userSession)
+			throws Exception {
+
+		Utente u = utServ.findUtenteByEmail(email);
+		userSession.setAttribute("userSession", u);
+
+		ArgomentoStudio arg = argServ.findArgomentoByTitolo(titolo);
+		model.addAttribute("arg", arg);
+
+		return "studiolezione";
+	}
+
+	@PostMapping("/profilo/lezioni-private/{email}/{titolo}")
+	public String lezione_studiata(Model model, @PathVariable String email, @PathVariable String titolo,
+			@ModelAttribute("user") Utente user, HttpServletRequest request, HttpServletResponse response,
+			HttpSession userSession) throws Exception {
+
+		//7System.out.println("prova prova sa sa " + email);
+		//System.out.println("email nel path:" + email);
+		//System.out.println("titolo nel path: " + titolo);
+
+		List<ProgressoStudio> prog = progServ.findByEmail(email);
+		//System.out.println("progressi utente" + prog);
+
+		ArgomentoStudio argStudiato = argServ.findArgomentoByTitolo(titolo);
+		model.addAttribute("arg", argStudiato);
+		//System.out.println("argo studiato" + argStudiato);
+
+		ProgressoStudio p = progServ.findByEmailAndArgomento(email, titolo);
+		p.setArg_studiato(true);
+		progServ.save(p);
+		
+		Utente u = utServ.findUtenteByEmail(email);
+		
+		userSession.setAttribute("userSession", u);
+		//System.out.println("utente sessione  POST " + userSession + " utnete " + u.toString());
+		 
+		List<ProgressoStudio> allprog = progServ.findByEmail(email);
+		model.addAttribute("allprog", allprog);
+		return "lezioni";
+	}
+
 	@GetMapping("/delete/{id}") //// ??????? (commento di alessia) non credo che questo debba stare qui
 	public String eliminaUtente(@PathVariable String id, Model model) {
 		utServ.deleteById(id);
@@ -294,7 +358,7 @@ public class UtenteControl {
 		session.invalidate();
 		return "redirect:/homepage";
 	}
-	
+
 	/*------------------------------------METODI INTERNI-------------------------------*/
 	// Metodo che prende solo la prima parte delle domande del questionario utente
 	public static List<Domanda> split(List<Domanda> list) {
